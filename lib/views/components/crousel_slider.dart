@@ -58,7 +58,7 @@ class _HomePageSliderState extends State<HomePageSlider> {
             controller: widget.pageController1,
             count: widget.banners.length,
             effect: WormEffect(
-              activeDotColor: AppColors.primarycolor,
+              activeDotColor: AppColors.primaryColor,
               dotColor: Colors.grey,
               dotHeight: 5.h,
               dotWidth: 5.w,

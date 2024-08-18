@@ -203,7 +203,7 @@ class AuthViewModel extends GetxController {
         onClosing: () {},
         builder: (context) => const Center(
           child: CircularProgressIndicator(
-            color: AppColors.primarycolor,
+            color: AppColors.primaryColor,
           ),
         ),
       ),

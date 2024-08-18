@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../utils/color_constant.dart';
-import '../../utils/image_constant.dart';
+import 'package:naemen/utils/color_constant.dart';
+import 'package:naemen/utils/image_constant.dart';
 
 // ignore: must_be_immutable
 class SearchBarWidget extends StatefulWidget {
@@ -23,8 +23,8 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: AppColors.SignupColor, width: 0.5),
-          color: AppColors.SearchfieldsColor,
+          border: Border.all(color: AppColors.signUpColor, width: 0.5),
+          color: AppColors.searchFieldsColor,
         ),
         child: TextFormField(
           style: TextStyle(color: Colors.white),
@@ -36,13 +36,13 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
             prefixIcon: Image.asset(ImageConstant.searchIcon),
             suffixIcon: const Icon(
               Icons.mic,
-              color: AppColors.primarycolor,
+              color: AppColors.primaryColor,
             ),
 
             hintText: widget.hinttexttitle,
             hintStyle: TextStyle(
                 fontWeight: FontWeight.w400,
-                color: AppColors.SignupColor,
+                color: AppColors.signUpColor,
                 fontSize: 12.sp,
                 fontStyle: FontStyle.italic),
           ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../Components/text_heading.dart';
-import '../utils/color_constant.dart';
+import '../../utils/color_constant.dart';
+import '../components/text_heading.dart';
 
 class ArtistPageSecond extends StatefulWidget {
   const ArtistPageSecond({super.key});
@@ -14,8 +14,9 @@ class ArtistPageSecond extends StatefulWidget {
 class _ArtistPageSecondState extends State<ArtistPageSecond> {
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      body: SafeArea(child: SingleChildScrollView(
+    return Scaffold(
+      body: SafeArea(
+          child: SingleChildScrollView(
         child: Column(
           children: [
             Row(
@@ -54,8 +55,8 @@ class _ArtistPageSecondState extends State<ArtistPageSecond> {
               height: 134.h,
               width: 340.w,
               decoration: BoxDecoration(
-                  color: AppColors.SearchfieldsColor,
-                  border: Border.all(color: AppColors.SignupColor),
+                  color: AppColors.searchFieldsColor,
+                  border: Border.all(color: AppColors.signUpColor),
                   borderRadius: BorderRadius.circular(16.r)),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -63,8 +64,7 @@ class _ArtistPageSecondState extends State<ArtistPageSecond> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Image.asset(
-                        "assets/images/artist_profileimage.png"),
+                    Image.asset("assets/images/artist_profileimage.png"),
                     SizedBox(
                       width: 10.w,
                     ),
@@ -84,7 +84,7 @@ class _ArtistPageSecondState extends State<ArtistPageSecond> {
                             Icon(
                               Icons.star,
                               size: 18,
-                              color: AppColors.primarycolor,
+                              color: AppColors.primaryColor,
                             ),
                             SizedBox(
                               width: 3.w,
@@ -113,7 +113,7 @@ class _ArtistPageSecondState extends State<ArtistPageSecond> {
                                 title: " nspirations Salons",
                                 fontweight: FontWeight.w600,
                                 fontsize: 12.sp,
-                                fontcolor: AppColors.primarycolor),
+                                fontcolor: AppColors.primaryColor),
                           ],
                         ),
                         SizedBox(
@@ -122,8 +122,7 @@ class _ArtistPageSecondState extends State<ArtistPageSecond> {
                         Row(
                           //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Image.asset(
-                                "assets/images/mark_Location.png"),
+                            Image.asset("assets/images/mark_Location.png"),
                             SizedBox(
                               width: 3.w,
                             ),
@@ -239,7 +238,7 @@ class _ArtistPageSecondState extends State<ArtistPageSecond> {
                 )
               ],
             ),
-        
+
             SizedBox(
               height: 15.h,
             ),
@@ -409,11 +408,11 @@ class _ArtistPageSecondState extends State<ArtistPageSecond> {
                 fontsize: 12.sp,
                 fontcolor: Colors.white),
             Container(
-             height: 767.h,
+              height: 767.h,
               width: 340.w,
               decoration: BoxDecoration(
-                  color: AppColors.SearchfieldsColor,
-                  border: Border.all(color: AppColors.SignupColor),
+                  color: AppColors.searchFieldsColor,
+                  border: Border.all(color: AppColors.signUpColor),
                   borderRadius: BorderRadius.circular(16.r)),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -431,12 +430,7 @@ class _ArtistPageSecondState extends State<ArtistPageSecond> {
                 ),
               ),
             )
-
-
-
           ],
-        
-        
         ),
       )),
     );

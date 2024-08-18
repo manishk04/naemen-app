@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:naemen/utils/color_constant.dart';
 
@@ -48,7 +47,7 @@ class _BottomBarViewState extends State<BottomBarView> {
         option: BubbleBarOptions(
           barStyle: BubbleBarStyle.horizontal,
           bubbleFillStyle: BubbleFillStyle.outlined,
-          inkColor: AppColors.primarycolor,
+          inkColor: AppColors.primaryColor,
           // bubbleFillStyle: BubbleFillStyle.outlined,
           opacity: 0.3,
         ),
@@ -57,26 +56,26 @@ class _BottomBarViewState extends State<BottomBarView> {
           BottomBarItem(
             icon: Icon(
               Icons.home,
-              color: selected == 0 ? AppColors.primarycolor : Colors.black,
+              color: selected == 0 ? AppColors.primaryColor : Colors.black,
             ),
             title: const Text(
               'Home',
-              style: TextStyle(color: AppColors.primarycolor),
+              style: TextStyle(color: AppColors.primaryColor),
             ),
-            // backgroundColor: AppColors.primarycolor,
+            // backgroundColor: AppColors.primaryColor,
           ),
           BottomBarItem(
             icon: const Icon(Icons.bookmark),
             title: const Text('Bookmark'),
-            backgroundColor: AppColors.primarycolor,
+            backgroundColor: AppColors.primaryColor,
           ),
           BottomBarItem(
             icon: const Icon(Icons.shopping_bag),
             title: const Text(
               'Bag',
-              style: TextStyle(color: AppColors.primarycolor),
+              style: TextStyle(color: AppColors.primaryColor),
             ),
-            backgroundColor: AppColors.primarycolor,
+            backgroundColor: AppColors.primaryColor,
           ),
         ],
         hasNotch: true,

@@ -18,11 +18,11 @@ class ReUsableRow extends StatelessWidget {
           height: 52.h,
           width: 108.w,
           child: Card(
-            color: AppColors.SearchfieldsColor,
+            color: AppColors.searchFieldsColor,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8.0),
               side: BorderSide(
-                color: AppColors.SignupColor, // Set the border color here
+                color: AppColors.signUpColor, // Set the border color here
                 width: 1.0, // Set the border width here
               ),
             ),
@@ -47,11 +47,11 @@ class ReUsableRow extends StatelessWidget {
           height: 52.h,
           width: 108.w,
           child: Card(
-            color: AppColors.SearchfieldsColor,
+            color: AppColors.searchFieldsColor,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8.0),
               side: const BorderSide(
-                color: AppColors.SignupColor,
+                color: AppColors.signUpColor,
                 width: 1.0,
               ),
             ),
@@ -76,11 +76,11 @@ class ReUsableRow extends StatelessWidget {
           height: 52.h,
           width: 108.w,
           child: Card(
-            color: AppColors.SearchfieldsColor,
+            color: AppColors.searchFieldsColor,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8.0),
               side: const BorderSide(
-                color: AppColors.SignupColor, // Set the border color here
+                color: AppColors.signUpColor, // Set the border color here
                 width: 1.0, // Set the border width here
               ),
             ),

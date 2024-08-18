@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -23,7 +25,7 @@ class CategoryPage extends StatelessWidget {
         child: AppBar(
           backgroundColor: Colors.black,
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back, color: AppColors.primarycolor),
+            icon: const Icon(Icons.arrow_back, color: AppColors.primaryColor),
             onPressed: () => Navigator.of(context).pop(),
           ),
           title: TextHeading(
@@ -43,7 +45,7 @@ class CategoryPage extends StatelessWidget {
               child: Column(
                 children: [
                   const Divider(
-                    color: AppColors.primarycolor,
+                    color: AppColors.primaryColor,
                   ),
                   SizedBox(
                     height: 10.h,
@@ -72,38 +74,53 @@ class CategoryPage extends StatelessWidget {
                               ),
                             );
                           },
-                          child: Container(
-                            height: 103.h,
-                            width: 103.w,
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                  color: AppColors.SignupColor, width: 0.5),
-                              borderRadius: BorderRadius.circular(16.r),
-                              color: AppColors.CategorycontainerColor,
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.network(
-                                  "${AppUrl.baseUrl}/${category.categoryImage}",
-                                  height: 50.h,
-                                  width: 50.w,
+                          child: Stack(
+                            children: [
+                              Container(
+                                height: 87.h,
+                                width: 165.w,
+                                decoration: BoxDecoration(
+                                    color: AppColors.searchFieldsColor,
+                                    borderRadius: BorderRadius.circular(10.r)),
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 10, top: 35),
+                                  child: TextHeading(
+                                    title:
+                                        languageViewModel.getSelectedLanguage ==
+                                                "English"
+                                            ? category.categoryTitle ?? "NA"
+                                            : category.categoryArb ?? "NA",
+                                    fontweight: FontWeight.w600,
+                                    fontsize: 14.sp,
+                                    fontcolor: AppColors.primaryColor,
+                                  ),
                                 ),
-                                SizedBox(
-                                  height: 10.h,
+                              ),
+                              Positioned(
+                                right: -8,
+                                top: 7.6,
+                                child: Transform.rotate(
+                                  angle: -pi / 10,
+                                  child: Container(
+                                    height: 72.h,
+                                    width: 80.w,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(10.r),
+                                          topRight: Radius.circular(10.r),
+                                          bottomLeft: Radius.circular(10.r),
+                                          bottomRight: Radius.circular(10.r)),
+                                      image: DecorationImage(
+                                        image: NetworkImage(
+                                            "${AppUrl.baseUrl}/${category.categoryImage}"),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                                TextHeading(
-                                  title:
-                                      languageViewModel.getSelectedLanguage ==
-                                              "English"
-                                          ? category.categoryTitle ?? "NA"
-                                          : category.categoryArb ?? "NA",
-                                  fontweight: FontWeight.w500,
-                                  fontsize: 12.sp,
-                                  fontcolor: Colors.white,
-                                )
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         );
                       },

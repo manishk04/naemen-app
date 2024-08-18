@@ -19,14 +19,14 @@ class SignUpView extends StatelessWidget {
           Container(
             height: double.infinity,
             width: double.infinity,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/images/bg_image.png"),
+                image: AssetImage("assets/images/sign up bg2.jpg"),
                 fit: BoxFit.cover,
               ),
             ),
           ),
-          Container(
+          SizedBox(
             height: double.infinity,
             width: double.infinity,
             child: Padding(
@@ -45,14 +45,14 @@ class SignUpView extends StatelessWidget {
                       title: "Sign up now",
                       fontweight: FontWeight.w700,
                       fontsize: 26.sp,
-                      fontcolor: AppColors.primarycolor,
+                      fontcolor: AppColors.primaryColor,
                     ),
                     SizedBox(height: 10.h),
                     TextHeading(
                       title: "Please sign up to continue our app",
                       fontweight: FontWeight.w400,
                       fontsize: 12.sp,
-                      fontcolor: AppColors.SignupColor,
+                      fontcolor: AppColors.signUpColor,
                     ),
                     SizedBox(height: 20.h),
                     Form(
@@ -69,7 +69,7 @@ class SignUpView extends StatelessWidget {
                               contentPadding: EdgeInsets.all(8),
                               hintText: "Enter full name",
                               hintStyle:
-                                  TextStyle(color: AppColors.SignupColor),
+                                  TextStyle(color: AppColors.signUpColor),
                               border: OutlineInputBorder(),
                               filled: true,
                               fillColor: Colors.black.withOpacity(0.8),
@@ -90,7 +90,7 @@ class SignUpView extends StatelessWidget {
                               contentPadding: EdgeInsets.all(8),
                               hintText: "Enter email",
                               hintStyle:
-                                  TextStyle(color: AppColors.SignupColor),
+                                  TextStyle(color: AppColors.signUpColor),
                               border: OutlineInputBorder(),
                               filled: true,
                               fillColor: Colors.black.withOpacity(0.8),
@@ -148,7 +148,7 @@ class SignUpView extends StatelessWidget {
                               contentPadding: EdgeInsets.all(8),
                               hintText: "Enter date of birth",
                               hintStyle:
-                                  TextStyle(color: AppColors.SignupColor),
+                                  TextStyle(color: AppColors.signUpColor),
                               border: OutlineInputBorder(),
                               filled: true,
                               fillColor: Colors.black.withOpacity(0.8),
@@ -183,7 +183,7 @@ class SignUpView extends StatelessWidget {
                                 contentPadding: EdgeInsets.all(8),
                                 hintText: 'Create password',
                                 hintStyle:
-                                    TextStyle(color: AppColors.SignupColor),
+                                    TextStyle(color: AppColors.signUpColor),
                                 suffixIcon: IconButton(
                                   onPressed:
                                       authViewModel.togglePasswordVisibility,
@@ -219,7 +219,7 @@ class SignUpView extends StatelessWidget {
                         height: 40.h,
                         width: 340.w,
                         decoration: BoxDecoration(
-                          color: AppColors.primarycolor,
+                          color: AppColors.primaryColor,
                           borderRadius: BorderRadius.circular(8.r),
                         ),
                         child: Center(
@@ -240,7 +240,7 @@ class SignUpView extends StatelessWidget {
                           title: "Already have an account?",
                           fontweight: FontWeight.w400,
                           fontsize: 12.sp,
-                          fontcolor: AppColors.SignupColor,
+                          fontcolor: AppColors.signUpColor,
                         ),
                         SizedBox(width: 3.w),
                         InkWell(
@@ -249,7 +249,7 @@ class SignUpView extends StatelessWidget {
                             title: "Sign in",
                             fontweight: FontWeight.w400,
                             fontsize: 12.sp,
-                            fontcolor: AppColors.primarycolor,
+                            fontcolor: AppColors.primaryColor,
                           ),
                         ),
                       ],

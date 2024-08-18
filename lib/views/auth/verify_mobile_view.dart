@@ -19,11 +19,11 @@ class VerifyMobileView extends StatelessWidget {
           Container(
               height: double.infinity,
               width: double.infinity,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage("assets/images/bg_image.png"),
+                      image: AssetImage("assets/images/sign up bg2.jpg"),
                       fit: BoxFit.cover))),
-          Container(
+          SizedBox(
             height: double.infinity,
             width: double.infinity,
             child: Padding(
@@ -46,7 +46,7 @@ class VerifyMobileView extends StatelessWidget {
                         title: "Verify Mobile",
                         fontweight: FontWeight.w700,
                         fontsize: 26.sp,
-                        fontcolor: AppColors.primarycolor),
+                        fontcolor: AppColors.primaryColor),
                     SizedBox(
                       height: 10.h,
                     ),
@@ -54,7 +54,7 @@ class VerifyMobileView extends StatelessWidget {
                         title: "Enter mobile number to continue our app",
                         fontweight: FontWeight.w400,
                         fontsize: 12.sp,
-                        fontcolor: AppColors.SignupColor),
+                        fontcolor: AppColors.signUpColor),
                     SizedBox(
                       height: 20.h,
                     ),
@@ -71,12 +71,12 @@ class VerifyMobileView extends StatelessWidget {
                               contentPadding: EdgeInsets.all(8),
                               hintText: "Enter mobile number",
                               hintStyle: TextStyle(
-                                  color: AppColors.SignupColor,
+                                  color: AppColors.signUpColor,
                                   fontWeight: FontWeight.w400),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(5.0),
                                 borderSide: const BorderSide(
-                                    color: AppColors.primarycolor, width: 1.0),
+                                    color: AppColors.primaryColor, width: 1.0),
                               ), //filled: true,
                               fillColor: Colors.black.withOpacity(0.8),
                             ),
@@ -107,7 +107,7 @@ class VerifyMobileView extends StatelessWidget {
                       () => authViewModel.getIsLoading
                           ? const Center(
                               child: CircularProgressIndicator(
-                                color: AppColors.primarycolor,
+                                color: AppColors.primaryColor,
                               ),
                             )
                           : InkWell(
@@ -116,7 +116,7 @@ class VerifyMobileView extends StatelessWidget {
                                 height: 40.h,
                                 width: 340.w,
                                 decoration: BoxDecoration(
-                                  color: AppColors.primarycolor,
+                                  color: AppColors.primaryColor,
                                   borderRadius: BorderRadius.circular(8.r),
                                 ),
                                 child: Center(
@@ -139,7 +139,7 @@ class VerifyMobileView extends StatelessWidget {
                         title: "Skip",
                         fontweight: FontWeight.w500,
                         fontsize: 14.sp,
-                        fontcolor: AppColors.primarycolor,
+                        fontcolor: AppColors.primaryColor,
                       ),
                     ),
                   ],

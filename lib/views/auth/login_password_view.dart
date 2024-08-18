@@ -21,7 +21,7 @@ class LoginPasswordView extends StatelessWidget {
             width: double.infinity,
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/images/bg_image.png"),
+                image: AssetImage("assets/images/sign up bg2.jpg"),
                 fit: BoxFit.cover,
               ),
             ),
@@ -49,7 +49,7 @@ class LoginPasswordView extends StatelessWidget {
                         title: "Enter Password",
                         fontweight: FontWeight.w700,
                         fontsize: 26.sp,
-                        fontcolor: AppColors.primarycolor),
+                        fontcolor: AppColors.primaryColor),
                     SizedBox(
                       height: 10.h,
                     ),
@@ -57,7 +57,7 @@ class LoginPasswordView extends StatelessWidget {
                         title: "Please enter password to continue our app",
                         fontweight: FontWeight.w400,
                         fontsize: 12.sp,
-                        fontcolor: AppColors.SignupColor),
+                        fontcolor: AppColors.signUpColor),
                     SizedBox(
                       height: 20.h,
                     ),
@@ -76,7 +76,7 @@ class LoginPasswordView extends StatelessWidget {
                                 contentPadding: const EdgeInsets.all(8),
                                 hintText: 'Password',
                                 hintStyle: const TextStyle(
-                                  color: AppColors.SignupColor,
+                                  color: AppColors.signUpColor,
                                   fontWeight: FontWeight.w300,
                                 ),
                                 suffixIcon: IconButton(
@@ -92,7 +92,7 @@ class LoginPasswordView extends StatelessWidget {
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(5.0),
                                   borderSide: const BorderSide(
-                                      color: AppColors.primarycolor,
+                                      color: AppColors.primaryColor,
                                       width: 1.0),
                                 ),
                                 // filled: true,
@@ -120,7 +120,7 @@ class LoginPasswordView extends StatelessWidget {
                       () => authViewModel.getIsLoading
                           ? const Center(
                               child: CircularProgressIndicator(
-                                color: AppColors.primarycolor,
+                                color: AppColors.primaryColor,
                               ),
                             )
                           : InkWell(
@@ -129,7 +129,7 @@ class LoginPasswordView extends StatelessWidget {
                                 height: 40.h,
                                 width: 340.w,
                                 decoration: BoxDecoration(
-                                    color: AppColors.primarycolor,
+                                    color: AppColors.primaryColor,
                                     borderRadius: BorderRadius.circular(8.r)),
                                 child: Center(
                                   child: TextHeading(
@@ -156,7 +156,7 @@ class LoginPasswordView extends StatelessWidget {
                                 title: "Login by OTP",
                                 fontweight: FontWeight.w500,
                                 fontsize: 14.sp,
-                                fontcolor: AppColors.primarycolor,
+                                fontcolor: AppColors.primaryColor,
                               ),
                             ),
                     ),

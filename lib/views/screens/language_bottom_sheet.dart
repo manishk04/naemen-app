@@ -43,7 +43,7 @@ class LanguageBottomSheet extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.red.shade50,
                     borderRadius: BorderRadius.circular(10.r),
-                    border: Border.all(color: AppColors.primarycolor, width: 1),
+                    border: Border.all(color: AppColors.primaryColor, width: 1),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -81,7 +81,7 @@ class LanguageBottomSheet extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.red.shade50,
                     borderRadius: BorderRadius.circular(10.r),
-                    border: Border.all(color: AppColors.primarycolor, width: 1),
+                    border: Border.all(color: AppColors.primaryColor, width: 1),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,

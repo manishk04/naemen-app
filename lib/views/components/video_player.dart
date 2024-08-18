@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
-import 'package:flutter/material.dart';
-import 'package:video_player/video_player.dart';
-
-import 'package:flutter/material.dart';
-import 'package:video_player/video_player.dart';
-
 class VideoPlayerScreen extends StatefulWidget {
+  const VideoPlayerScreen({super.key});
+
   @override
-  _VideoPlayerScreenState createState() => _VideoPlayerScreenState();
+  State<VideoPlayerScreen> createState() => _VideoPlayerScreenState();
 }
 
 class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
@@ -48,7 +44,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                   ),
                 );
               } else {
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               }
             },
           );

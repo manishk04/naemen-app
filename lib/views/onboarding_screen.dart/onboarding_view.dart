@@ -79,7 +79,7 @@ class OnboardingPage extends StatelessWidget {
           imageUrl: "${AppUrl.baseUrl}/$image",
           placeholder: (context, url) => const Center(
             child: CircularProgressIndicator(
-              color: AppColors.primarycolor,
+              color: AppColors.primaryColor,
             ),
           ),
           errorWidget: (context, url, error) => const Icon(Icons.error),
@@ -100,7 +100,7 @@ class OnboardingPage extends StatelessWidget {
                     title: title,
                     fontweight: FontWeight.w700,
                     fontsize: 25.h,
-                    fontcolor: AppColors.primarycolor),
+                    fontcolor: AppColors.primaryColor),
                 const SizedBox(height: 10),
                 TextHeading(
                     title: description,
@@ -114,7 +114,7 @@ class OnboardingPage extends StatelessWidget {
                   effect: const WormEffect(
                     dotWidth: 8.0,
                     dotHeight: 8.0,
-                    activeDotColor: AppColors.primarycolor,
+                    activeDotColor: AppColors.primaryColor,
                     dotColor: Colors.grey,
                   ),
                 ),
@@ -125,7 +125,7 @@ class OnboardingPage extends StatelessWidget {
                     title: "Skip",
                     fontweight: FontWeight.w500,
                     fontsize: 12.sp,
-                    fontcolor: AppColors.primarycolor,
+                    fontcolor: AppColors.primaryColor,
                   ),
                 ),
               ],

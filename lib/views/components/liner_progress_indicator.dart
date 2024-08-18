@@ -39,7 +39,7 @@ class _ProgressIndicatorExampleState extends State<ProgressIndicatorExample>
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         LinearProgressIndicator(
-          color: AppColors.primarycolor,
+          color: AppColors.primaryColor,
           value: controller.value,
           semanticsLabel: 'Linear progress indicator',
         ),

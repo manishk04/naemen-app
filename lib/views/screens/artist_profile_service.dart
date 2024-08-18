@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:naemen/Components/text_heading.dart';
-import 'package:naemen/Screens/dropdown_button.dart';
+import 'package:naemen/views/screens/dropdown_button.dart';
 import 'package:naemen/utils/color_constant.dart';
-import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
-import '../Components/newely_added.dart';
+import '../components/newely_added.dart';
+import '../components/text_heading.dart';
 
 class ArtistProfileService extends StatefulWidget {
   const ArtistProfileService({super.key});
@@ -16,14 +15,12 @@ class ArtistProfileService extends StatefulWidget {
 }
 
 class _ArtistProfileServiceState extends State<ArtistProfileService> {
+  List number = ["1", "2", "3", "5"];
 
-  List number = ["1","2","3","5"];
-
-
-    final List<String> _myList = List.generate(6, (i) => "Item $i");
+  final List<String> _myList = List.generate(6, (i) => "Item $i");
   final ItemScrollController _itemScrollController = ItemScrollController();
 
-   void _scrollToIndex(int index) {
+  void _scrollToIndex(int index) {
     _itemScrollController.scrollTo(
         index: index,
         duration: const Duration(seconds: 1),
@@ -32,11 +29,9 @@ class _ArtistProfileServiceState extends State<ArtistProfileService> {
 
   int desiredItemIndex = 0;
   int currentindex = 0;
-  
+
   @override
   Widget build(BuildContext context) {
- 
-
     return Scaffold(
       body: Container(
         height: double.infinity,
@@ -93,8 +88,8 @@ class _ArtistProfileServiceState extends State<ArtistProfileService> {
                   height: 134.h,
                   width: 340.w,
                   decoration: BoxDecoration(
-                      color: AppColors.SearchfieldsColor,
-                      border: Border.all(color: AppColors.SignupColor),
+                      color: AppColors.searchFieldsColor,
+                      border: Border.all(color: AppColors.signUpColor),
                       borderRadius: BorderRadius.circular(16.r)),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -102,8 +97,7 @@ class _ArtistProfileServiceState extends State<ArtistProfileService> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Image.asset(
-                            "assets/images/artist_profileimage.png"),
+                        Image.asset("assets/images/artist_profileimage.png"),
                         SizedBox(
                           width: 10.w,
                         ),
@@ -123,7 +117,7 @@ class _ArtistProfileServiceState extends State<ArtistProfileService> {
                                 Icon(
                                   Icons.star,
                                   size: 18,
-                                  color: AppColors.primarycolor,
+                                  color: AppColors.primaryColor,
                                 ),
                                 SizedBox(
                                   width: 3.w,
@@ -152,7 +146,7 @@ class _ArtistProfileServiceState extends State<ArtistProfileService> {
                                     title: " nspirations Salons",
                                     fontweight: FontWeight.w600,
                                     fontsize: 12.sp,
-                                    fontcolor: AppColors.primarycolor),
+                                    fontcolor: AppColors.primaryColor),
                               ],
                             ),
                             SizedBox(
@@ -161,8 +155,7 @@ class _ArtistProfileServiceState extends State<ArtistProfileService> {
                             Row(
                               //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Image.asset(
-                                    "assets/images/mark_Location.png"),
+                                Image.asset("assets/images/mark_Location.png"),
                                 SizedBox(
                                   width: 3.w,
                                 ),
@@ -182,9 +175,6 @@ class _ArtistProfileServiceState extends State<ArtistProfileService> {
                 SizedBox(
                   height: 20.h,
                 ),
-                
-
-
 
                 TextHeading(
                     title: "Select your date",
@@ -194,112 +184,108 @@ class _ArtistProfileServiceState extends State<ArtistProfileService> {
                 SizedBox(
                   height: 15.h,
                 ),
-                 Container(
+                Container(
                   height: 61.h,
                   width: 340.w,
                   decoration: BoxDecoration(
-                    color: AppColors.SearchfieldsColor,
-                    borderRadius: BorderRadius.circular(8.r)),
-                   child: Stack(
-                          children: [
-                            SizedBox(
-                              height: 103,
-                              child: ScrollablePositionedList.builder(
-                                itemScrollController: _itemScrollController,
-                                scrollDirection: Axis.horizontal,
-                                itemCount:30, 
-                                //_myList.length,
-                                itemBuilder: (context, index) {
-
-                                  return Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: CircleAvatar(
-                                      backgroundColor: AppColors.primarycolor,
-                                      child:
-                                      
-                                       TextHeading(title: "24", fontweight: FontWeight.w600, fontsize: 12.sp, fontcolor: Colors.white),
-
-
-                                    ),
-                                  );
-                                  // return Container(
-                                  //   height: 103.h,
-                                  //   width: 103.w,
-                                  //   key: ValueKey(_myList[index]),
-                                  //   margin: const EdgeInsets.all(10),
-                                  //   decoration: BoxDecoration(
-                                  //       border: Border.all(color: Colors.grey),
-                                  //       image: const DecorationImage(
-                                  //           image: AssetImage(
-                                  //             "assets/images/sweatshirts.png",
-                                  //           ),
-                                  //           fit: BoxFit.contain)),
-                                  // );
-                                },
+                      color: AppColors.searchFieldsColor,
+                      borderRadius: BorderRadius.circular(8.r)),
+                  child: Stack(
+                    children: [
+                      SizedBox(
+                        height: 103,
+                        child: ScrollablePositionedList.builder(
+                          itemScrollController: _itemScrollController,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 30,
+                          //_myList.length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: CircleAvatar(
+                                backgroundColor: AppColors.primaryColor,
+                                child: TextHeading(
+                                    title: "24",
+                                    fontweight: FontWeight.w600,
+                                    fontsize: 12.sp,
+                                    fontcolor: Colors.white),
                               ),
-                            ),
-                            Positioned(
-                              top: 20.h,
-                              left: 0,
-                              child: InkWell(
-                                onTap: () {
-                                  if (desiredItemIndex != 0) {
-                                    setState(() {
-                                      desiredItemIndex = desiredItemIndex - 1;
-                                    });
-                                    _scrollToIndex(desiredItemIndex);
-                                  }
-                                },
-                                child: Container(
-                                  height: 24.h,
-                                  width: 24.w,
-                                  color: desiredItemIndex == 0
-                                      ? const Color(0xffC1C1C1)
-                                      : AppColors.primarycolor,
-                                  child: const Center(
-                                    child: Icon(
-                                      Icons.arrow_back_ios,
-                                      color: Colors.white,
-                                      size: 18,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              top: 20.h,
-                              right: 0,
-                              child: InkWell(
-                                onTap: () {
-                                  if (desiredItemIndex < _myList.length - 1) {
-                                    setState(() {
-                                      desiredItemIndex = desiredItemIndex + 1;
-                                    });
-                                    _scrollToIndex(desiredItemIndex);
-                                  }
-                                },
-                                child: Container(
-                                  height: 24.h,
-                                  width: 24.w,
-                                  color: desiredItemIndex == _myList.length - 2
-                                      ? const Color(0xffC1C1C1)
-                                      : AppColors.primarycolor,
-                                  child: const Center(
-                                    child: Icon(
-                                      Icons.arrow_forward_ios,
-                                      color: Colors.white,
-                                      size: 18,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            )
-                          ],
+                            );
+                            // return Container(
+                            //   height: 103.h,
+                            //   width: 103.w,
+                            //   key: ValueKey(_myList[index]),
+                            //   margin: const EdgeInsets.all(10),
+                            //   decoration: BoxDecoration(
+                            //       border: Border.all(color: Colors.grey),
+                            //       image: const DecorationImage(
+                            //           image: AssetImage(
+                            //             "assets/images/sweatshirts.png",
+                            //           ),
+                            //           fit: BoxFit.contain)),
+                            // );
+                          },
                         ),
-                 ),
-
-
-
+                      ),
+                      Positioned(
+                        top: 20.h,
+                        left: 0,
+                        child: InkWell(
+                          onTap: () {
+                            if (desiredItemIndex != 0) {
+                              setState(() {
+                                desiredItemIndex = desiredItemIndex - 1;
+                              });
+                              _scrollToIndex(desiredItemIndex);
+                            }
+                          },
+                          child: Container(
+                            height: 24.h,
+                            width: 24.w,
+                            color: desiredItemIndex == 0
+                                ? const Color(0xffC1C1C1)
+                                : AppColors.primaryColor,
+                            child: const Center(
+                              child: Icon(
+                                Icons.arrow_back_ios,
+                                color: Colors.white,
+                                size: 18,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        top: 20.h,
+                        right: 0,
+                        child: InkWell(
+                          onTap: () {
+                            if (desiredItemIndex < _myList.length - 1) {
+                              setState(() {
+                                desiredItemIndex = desiredItemIndex + 1;
+                              });
+                              _scrollToIndex(desiredItemIndex);
+                            }
+                          },
+                          child: Container(
+                            height: 24.h,
+                            width: 24.w,
+                            color: desiredItemIndex == _myList.length - 2
+                                ? const Color(0xffC1C1C1)
+                                : AppColors.primaryColor,
+                            child: const Center(
+                              child: Icon(
+                                Icons.arrow_forward_ios,
+                                color: Colors.white,
+                                size: 18,
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
 
                 // Container(
                 //   height: 100.h,
@@ -389,7 +375,7 @@ class _ArtistProfileServiceState extends State<ArtistProfileService> {
                     )
                   ],
                 ),
-      
+
                 SizedBox(
                   height: 15.h,
                 ),
@@ -565,11 +551,12 @@ class _ArtistProfileServiceState extends State<ArtistProfileService> {
                   height: 650.h,
                   width: 340.w,
                   decoration: BoxDecoration(
-                      color: AppColors.SearchfieldsColor,
-                      border: Border.all(color: AppColors.SignupColor),
+                      color: AppColors.searchFieldsColor,
+                      border: Border.all(color: AppColors.signUpColor),
                       borderRadius: BorderRadius.circular(16.r)),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 20),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10, vertical: 20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -581,22 +568,29 @@ class _ArtistProfileServiceState extends State<ArtistProfileService> {
                             fontweight: FontWeight.w600,
                             fontsize: 12,
                             fontcolor: Colors.white),
-                        SizedBox(height: 10.h,),
-      
-                       ExpansionTileControllerApp(),
-      
-      
-      
-                       // DropdownButtonPage()
-      
-      
+                        SizedBox(
+                          height: 10.h,
+                        ),
+
+                        ExpansionTileControllerApp(),
+
+                        // DropdownButtonPage()
                       ],
                     ),
                   ),
                 ),
-      
-                SizedBox(height: 20.h,),
-                TextHeading(title: "Recommended Artists", fontweight: FontWeight.w700, fontsize: 12.sp, fontcolor: Colors.white),SizedBox(height: 20.h,),
+
+                SizedBox(
+                  height: 20.h,
+                ),
+                TextHeading(
+                    title: "Recommended Artists",
+                    fontweight: FontWeight.w700,
+                    fontsize: 12.sp,
+                    fontcolor: Colors.white),
+                SizedBox(
+                  height: 20.h,
+                ),
                 const NewelyWidget(
                   status: "Status:",
                   description: 'Chameleon salon',
@@ -605,7 +599,9 @@ class _ArtistProfileServiceState extends State<ArtistProfileService> {
                   statuValue: 'ONLINE',
                   typeValue: 'Unisex',
                 ),
-                SizedBox(height: 20.h,)
+                SizedBox(
+                  height: 20.h,
+                )
               ],
             ),
           ),

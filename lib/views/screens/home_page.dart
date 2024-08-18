@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:naemen/models/salon_model.dart';
 import 'package:naemen/models/tag_model.dart';
 
+import '../components/artist_slider.dart';
+import '../components/recommended.dart';
 import '../../models/category_model.dart';
 import '../../routes/app_routes.dart';
 import '../../utils/app_url.dart';
@@ -11,7 +13,6 @@ import '../../utils/color_constant.dart';
 import '../../view_models/auth_view_model.dart';
 import '../../view_models/home_view_model.dart';
 import '../../view_models/language_view_model.dart';
-import '../components/artist_slider.dart';
 import '../components/crousel_slider.dart';
 import '../components/newely_added.dart';
 import '../components/search_bar.dart';
@@ -176,13 +177,13 @@ class _HomeViewState extends State<HomeView> {
                                       height: 52.h,
                                       // width: 108.w,
                                       child: Card(
-                                        color: AppColors.SearchfieldsColor,
+                                        color: AppColors.searchFieldsColor,
                                         shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(8.0),
                                           side: BorderSide(
                                             color: AppColors
-                                                .SignupColor, // Set the border color here
+                                                .signUpColor, // Set the border color here
                                             width:
                                                 1.0, // Set the border width here
                                           ),
@@ -315,12 +316,20 @@ class _HomeViewState extends State<HomeView> {
                       SizedBox(
                         height: 25.h,
                       ),
-                      ArtistSliderWidget(
-                        name: 'Urmi Khan',
-                        image: "assets/images/artist.png",
-                        description: "Work at:",
-                        descriptiondetail: "Work at: ",
-                      ),
+                      ArtistSlider(),
+
+                      // const NewelyWidget(
+                      //   status: "Status:",
+                      //   description: 'Chameleon salon',
+                      //   type: 'Saloon Type:',
+                      //   image: 'assets/images/newly.png',
+                      //   statuValue: 'ONLINE',
+                      //   typeValue: 'Unisex',
+                      // ),
+                      // ArtistSlider(status: 'Status', statuValue: 'Online', description: '2q4qrw', type: 'rewrwr', typeValue: 'wdad', image: 'assets/images/newly.png',),
+
+                      //ArtistSliderWidget( ),
+
                       SizedBox(
                         height: 20.h,
                       ),
@@ -332,12 +341,12 @@ class _HomeViewState extends State<HomeView> {
                       SizedBox(
                         height: 20.h,
                       ),
-                      const NewlyWidget(
+                      Recommended(
                         status: "Status:",
                         description: 'Chameleon salon',
                         type: 'Saloon Type:',
                         image: 'assets/images/newly.png',
-                        statusValue: 'ONLINE',
+                        statuValue: 'ONLINE',
                         typeValue: 'Unisex',
                       ),
                       SizedBox(

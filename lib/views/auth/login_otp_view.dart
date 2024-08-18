@@ -21,9 +21,9 @@ class LoginOtpView extends StatelessWidget {
         color: Colors.white, // Set the text color to black
       ),
       decoration: BoxDecoration(
-        color: AppColors.SearchfieldsColor, // Set the background color to white
+        color: AppColors.searchFieldsColor, // Set the background color to white
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: AppColors.SignupColor),
+        border: Border.all(color: AppColors.signUpColor),
       ),
     );
 
@@ -35,7 +35,7 @@ class LoginOtpView extends StatelessWidget {
             width: double.infinity,
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/images/bg_image.png"),
+                image: AssetImage("assets/images/sign up bg2.jpg"),
                 fit: BoxFit.cover,
               ),
             ),
@@ -63,7 +63,7 @@ class LoginOtpView extends StatelessWidget {
                       title: "Verify Phone",
                       fontweight: FontWeight.w700,
                       fontsize: 26.sp,
-                      fontcolor: AppColors.primarycolor,
+                      fontcolor: AppColors.primaryColor,
                     ),
                     SizedBox(
                       height: 40.h,
@@ -76,13 +76,13 @@ class LoginOtpView extends StatelessWidget {
                               title: "By signup, you’re agree to our",
                               fontweight: FontWeight.w500,
                               fontsize: 12.sp,
-                              fontcolor: AppColors.SignupColor,
+                              fontcolor: AppColors.signUpColor,
                             ),
                             TextHeading(
                               title: "Terms & Condition",
                               fontweight: FontWeight.w600,
                               fontsize: 12.sp,
-                              fontcolor: AppColors.primarycolor,
+                              fontcolor: AppColors.primaryColor,
                             ),
                           ],
                         ),
@@ -99,7 +99,7 @@ class LoginOtpView extends StatelessWidget {
                         defaultPinTheme: defaultPinTheme,
                         focusedPinTheme: defaultPinTheme.copyWith(
                           decoration: defaultPinTheme.decoration!.copyWith(
-                            border: Border.all(color: AppColors.primarycolor),
+                            border: Border.all(color: AppColors.primaryColor),
                           ),
                         ),
                         validator: (value) {
@@ -120,7 +120,7 @@ class LoginOtpView extends StatelessWidget {
                       () => authViewModel.getIsLoading
                           ? const Center(
                               child: CircularProgressIndicator(
-                                color: AppColors.primarycolor,
+                                color: AppColors.primaryColor,
                               ),
                             )
                           : InkWell(
@@ -129,7 +129,7 @@ class LoginOtpView extends StatelessWidget {
                                 height: 40.h,
                                 width: 340.w,
                                 decoration: BoxDecoration(
-                                  color: AppColors.primarycolor,
+                                  color: AppColors.primaryColor,
                                   borderRadius: BorderRadius.circular(8.r),
                                 ),
                                 child: Center(
@@ -156,7 +156,7 @@ class LoginOtpView extends StatelessWidget {
                                   title: "OTP not received?",
                                   fontweight: FontWeight.w500,
                                   fontsize: 12.sp,
-                                  fontcolor: AppColors.SignupColor,
+                                  fontcolor: AppColors.signUpColor,
                                 ),
                                 SizedBox(width: 5.w),
                                 InkWell(
@@ -165,7 +165,7 @@ class LoginOtpView extends StatelessWidget {
                                     title: "Resend OTP",
                                     fontweight: FontWeight.w600,
                                     fontsize: 12.sp,
-                                    fontcolor: AppColors.primarycolor,
+                                    fontcolor: AppColors.primaryColor,
                                   ),
                                 ),
                               ],
