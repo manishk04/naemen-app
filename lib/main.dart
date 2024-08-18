@@ -5,6 +5,9 @@ import 'package:get/get.dart';
 import 'binding/app_binding.dart';
 import 'routes/app_pages.dart';
 import 'utils/theme_manager.dart';
+import 'package:naemen/Screens/shopPage.dart';
+import 'package:naemen/Screens/splash_screen.dart';
+import 'utils/theme_manager.dart';
 
 void main() async {
   runApp(const MyApp());
