@@ -1,11 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:naemen/utils/color_constant.dart';
-import 'package:naemen/utils/image_constant.dart';
 
+import '../../utils/color_constant.dart';
+import '../../utils/image_constant.dart';
 
 // ignore: must_be_immutable
 class SearchBarWidget extends StatefulWidget {
@@ -26,14 +23,11 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: AppColors.SignupColor,width: 0.5),
-            color: AppColors.SearchfieldsColor,
+          border: Border.all(color: AppColors.SignupColor, width: 0.5),
+          color: AppColors.SearchfieldsColor,
         ),
-   
         child: TextFormField(
-
           style: TextStyle(color: Colors.white),
-
           autofocus: widget.focusOnTextField ?? false,
           decoration: InputDecoration(
             //contentPadding: EdgeInsets.all(12.0),

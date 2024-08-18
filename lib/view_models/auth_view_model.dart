@@ -188,8 +188,8 @@ class AuthViewModel extends GetxController {
       if (response["code"] == 200) {
         Utils.toastMessage(response["msg"] ?? "Registered Successfully!");
         setCustomer = CustomerModel.fromMap(response["customer"]);
-        StorageData.setContactNumber(getCustomer.contactNumber ?? "");
-        StorageData.setCustomerId("${getCustomer.id ?? ""}");
+        await StorageData.setContactNumber(getCustomer.contactNumber ?? "");
+        await StorageData.setCustomerId("${getCustomer.id ?? ""}");
         fetchLocation();
       } else {
         Utils.toastMessage(response["msg"] ?? "Something went wrong!");
@@ -262,8 +262,8 @@ class AuthViewModel extends GetxController {
         log(response.toString());
         if (response["code"] == 200) {
           setCustomer = CustomerModel.fromMap(response["customer"]);
-          StorageData.setContactNumber(getCustomer.contactNumber ?? "");
-          StorageData.setCustomerId("${getCustomer.id ?? ""}");
+          await StorageData.setContactNumber(getCustomer.contactNumber ?? "");
+          await StorageData.setCustomerId("${getCustomer.id ?? ""}");
           fetchLocation();
         } else {
           Utils.toastMessage("Something went wrong!");

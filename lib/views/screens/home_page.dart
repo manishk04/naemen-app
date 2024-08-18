@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:naemen/models/salon_model.dart';
+import 'package:naemen/models/tag_model.dart';
 
 import '../../models/category_model.dart';
 import '../../routes/app_routes.dart';
@@ -33,9 +35,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
     super.initState();
-    homeViewModel.fetchBanners();
-    homeViewModel.fetchHomeCategories();
-    homeViewModel.fetchAllCategories();
+    homeViewModel.init();
   }
 
   @override
@@ -231,22 +231,81 @@ class _HomeViewState extends State<HomeView> {
                       SizedBox(
                         height: 20.h,
                       ),
-                      TextHeading(
-                          title: "Newly Added Saloons",
-                          fontweight: FontWeight.w600,
-                          fontsize: 12.sp,
-                          fontcolor: Colors.white),
-                      SizedBox(
-                        height: 25.h,
+                      Obx(
+                        () {
+                          TagModel tag = homeViewModel.getTag;
+                          return tag.salons != null && tag.salons!.isNotEmpty
+                              ? TextHeading(
+                                  title:
+                                      languageViewModel.getSelectedLanguage ==
+                                              "English"
+                                          ? tag.titleEng ?? ""
+                                          : tag.titleArb ?? "",
+                                  fontweight: FontWeight.w600,
+                                  fontsize: 12.sp,
+                                  fontcolor: Colors.white,
+                                )
+                              : const SizedBox();
+                        },
                       ),
-                      NewelyWidget(
-                        status: "Status:",
-                        description: 'Chameleon salon',
-                        type: 'Saloon Type:',
-                        image: 'assets/images/newly.png',
-                        statuValue: 'ONLINE',
-                        typeValue: 'Unisex',
+                      Obx(
+                        () {
+                          TagModel tag = homeViewModel.getTag;
+                          return SizedBox(
+                            height: tag.salons != null && tag.salons!.isNotEmpty
+                                ? 25.h
+                                : 0.h,
+                          );
+                        },
                       ),
+                      Obx(
+                        () {
+                          TagModel tag = homeViewModel.getTag;
+                          return tag.salons != null && tag.salons!.isNotEmpty
+                              ? SizedBox(
+                                  height: 255.h,
+                                  width: double.infinity,
+                                  child: ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: tag.salons!.length,
+                                    scrollDirection: Axis.horizontal,
+                                    itemBuilder: (context, index) {
+                                      SalonModel salon = tag.salons![index];
+                                      return WinterSpecialItems(
+                                        image: salon.salonImage ?? "",
+                                        status: languageViewModel
+                                                    .getSelectedLanguage ==
+                                                "English"
+                                            ? "Status:"
+                                            : "Status:",
+                                        statusValue: (salon.salonStatus ?? "")
+                                            .toString(),
+                                        description: languageViewModel
+                                                    .getSelectedLanguage ==
+                                                "English"
+                                            ? salon.salonNameEng ?? ""
+                                            : salon.salonNameArb ?? "",
+                                        type: languageViewModel
+                                                    .getSelectedLanguage ==
+                                                "English"
+                                            ? "Saloon Type:"
+                                            : "",
+                                        typeValue: "",
+                                      );
+                                    },
+                                  ),
+                                )
+                              : const SizedBox();
+                        },
+                      ),
+                      // NewelyWidget(
+                      //   status: "Status:",
+                      //   description: 'Chameleon salon',
+                      //   type: 'Saloon Type:',
+                      //   image: 'assets/images/newly.png',
+                      //   statuValue: 'ONLINE',
+                      //   typeValue: 'Unisex',
+                      // ),
                       SizedBox(height: 20.h),
                       TextHeading(
                           title: "Top Rated Artist",
@@ -273,12 +332,12 @@ class _HomeViewState extends State<HomeView> {
                       SizedBox(
                         height: 20.h,
                       ),
-                      NewelyWidget(
+                      const NewlyWidget(
                         status: "Status:",
                         description: 'Chameleon salon',
                         type: 'Saloon Type:',
                         image: 'assets/images/newly.png',
-                        statuValue: 'ONLINE',
+                        statusValue: 'ONLINE',
                         typeValue: 'Unisex',
                       ),
                       SizedBox(

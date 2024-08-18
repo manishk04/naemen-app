@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:naemen/utils/app_constants.dart';
+
 import '../network/base_api_services.dart';
 import '../network/network_api_services.dart';
 import '../utils/app_url.dart';
@@ -7,8 +9,8 @@ import '../utils/app_url.dart';
 class AuthRepo {
   final BaseApiServices _apiServices = NetworkApiServices();
 
-  final String username = "App-Developer";
-  final String password = "dG9rZW5AMjAwMw==";
+  final String username = AppConstants.username;
+  final String password = AppConstants.password;
 
   Future<dynamic> registerUser(data) async {
     // Encode the username and password in base64

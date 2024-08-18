@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:naemen/utils/app_url.dart';
 import 'package:naemen/utils/color_constant.dart';
 
 import 'text_heading.dart';
 
-class NewelyWidget extends StatelessWidget {
-  const NewelyWidget(
+class NewlyWidget extends StatelessWidget {
+  const NewlyWidget(
       {super.key,
       required this.status,
-      required this.statuValue,
+      required this.statusValue,
       required this.description,
       required this.type,
       required this.typeValue,
@@ -16,46 +17,48 @@ class NewelyWidget extends StatelessWidget {
 
   final String image;
   final String status;
-  final String statuValue;
+  final String statusValue;
   final String description;
   final String type;
   final String typeValue;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        height: 255.h,
-        width: double.infinity,
-        child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: 8,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) {
-              return WinterspecialItems(
-                image: image,
-                status: status,
-                statuValue: statuValue,
-                description: description,
-                type: type,
-                typeValue: typeValue,
-              );
-            }));
+    return SizedBox(
+      height: 255.h,
+      width: double.infinity,
+      child: ListView.builder(
+        shrinkWrap: true,
+        itemCount: 8,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return WinterSpecialItems(
+            image: image,
+            status: status,
+            statusValue: statusValue,
+            description: description,
+            type: type,
+            typeValue: typeValue,
+          );
+        },
+      ),
+    );
   }
 }
 
-class WinterspecialItems extends StatelessWidget {
-  const WinterspecialItems(
+class WinterSpecialItems extends StatelessWidget {
+  const WinterSpecialItems(
       {super.key,
       required this.image,
       required this.status,
-      required this.statuValue,
+      required this.statusValue,
       required this.description,
       required this.type,
       required this.typeValue});
 
   final String image;
   final String status;
-  final String statuValue;
+  final String statusValue;
   final String description;
   final String type;
   final String typeValue;
@@ -86,9 +89,12 @@ class WinterspecialItems extends StatelessWidget {
                 child: Container(
                   width: 190.w,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15.r),
-                      image: DecorationImage(
-                          image: AssetImage(image), fit: BoxFit.cover)),
+                    borderRadius: BorderRadius.circular(15.r),
+                    image: DecorationImage(
+                      image: NetworkImage("${AppUrl.baseUrl}/$image"),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
               ),
               Expanded(
@@ -109,7 +115,7 @@ class WinterspecialItems extends StatelessWidget {
                           width: 3.w,
                         ),
                         TextHeading(
-                            title: statuValue,
+                            title: statusValue,
                             fontweight: FontWeight.w400,
                             fontsize: 12.sp,
                             fontcolor: AppColors.primarycolor)
@@ -150,10 +156,11 @@ class WinterspecialItems extends StatelessWidget {
                           color: AppColors.primarycolor,
                         ),
                         TextHeading(
-                            title: "0.4 km",
-                            fontweight: FontWeight.w400,
-                            fontsize: 12.sp,
-                            fontcolor: Colors.white)
+                          title: "0.4 km",
+                          fontweight: FontWeight.w400,
+                          fontsize: 12.sp,
+                          fontcolor: Colors.white,
+                        )
                       ],
                     ),
                     SizedBox(
@@ -166,29 +173,35 @@ class WinterspecialItems extends StatelessWidget {
                           height: 34.h,
                           width: 34.w,
                           decoration: BoxDecoration(
-                              color: Colors.black,
-                              borderRadius: BorderRadius.circular(8.r)),
-                          child: Center(
-                              child: Icon(
-                            Icons.bookmark_add_outlined,
-                            color: Colors.white,
-                          )),
+                            color: Colors.black,
+                            borderRadius: BorderRadius.circular(8.r),
+                          ),
+                          child: const Center(
+                            child: Icon(
+                              Icons.bookmark_add_outlined,
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
                         SizedBox(
                           width: 50.w,
                         ),
                         Container(
-                            height: 34.h,
-                            width: 102.w,
-                            decoration: BoxDecoration(
-                                color: AppColors.bookmarlColor,
-                                borderRadius: BorderRadius.circular(8.r)),
-                            child: Center(
-                                child: TextHeading(
-                                    title: "View Profile",
-                                    fontweight: FontWeight.w400,
-                                    fontsize: 12.sp,
-                                    fontcolor: Colors.white)))
+                          height: 34.h,
+                          width: 102.w,
+                          decoration: BoxDecoration(
+                            color: AppColors.bookmarlColor,
+                            borderRadius: BorderRadius.circular(8.r),
+                          ),
+                          child: Center(
+                            child: TextHeading(
+                              title: "View Profile",
+                              fontweight: FontWeight.w400,
+                              fontsize: 12.sp,
+                              fontcolor: Colors.white,
+                            ),
+                          ),
+                        ),
                       ],
                     )
                   ],

@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:naemen/routes/app_routes.dart';
-import 'package:naemen/view_models/auth_view_model.dart';
-import 'package:naemen/views/auth/otp_page.dart';
-import 'package:naemen/utils/color_constant.dart';
 
+import '../../utils/color_constant.dart';
+import '../../view_models/auth_view_model.dart';
 import '../components/text_heading.dart';
 
 class VerifyMobileView extends StatelessWidget {

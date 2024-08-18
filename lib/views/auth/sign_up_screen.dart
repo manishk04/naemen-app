@@ -2,17 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:naemen/view_models/auth_view_model.dart';
-import 'package:naemen/views/auth/login_password_view.dart';
-import 'package:naemen/utils/color_constant.dart';
 
-import 'package:geolocator/geolocator.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:intl/intl.dart';
-
+import '../../utils/color_constant.dart';
+import '../../view_models/auth_view_model.dart';
 import '../components/text_heading.dart';
-import '../screens/home_page.dart';
 
 class SignUpView extends StatelessWidget {
   const SignUpView({super.key});

@@ -49,14 +49,15 @@ class CustomerModel {
     return CustomerModel(
       id: map['id'] != null ? map['id'] as int : null,
       customerName:
-          map['customerName'] != null ? map['customerName'] as String : null,
+          map['customer_name'] != null ? map['customer_name'] as String : null,
       email: map['email'] != null ? map['email'] as String : null,
       verifyStatus:
-          map['verifyStatus'] != null ? map['verifyStatus'] as String : null,
-      contactNumber:
-          map['contactNumber'] != null ? map['contactNumber'] as String : null,
+          map['verify_status'] != null ? map['verify_status'] as String : null,
+      contactNumber: map['contact_number'] != null
+          ? map['contact_number'] as String
+          : null,
       dateOfBirth:
-          map['dateOfBirth'] != null ? map['dateOfBirth'] as String : null,
+          map['date_of_birth'] != null ? map['date_of_birth'] as String : null,
     );
   }
 

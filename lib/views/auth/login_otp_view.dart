@@ -6,7 +6,6 @@ import 'package:pinput/pinput.dart';
 import '../../utils/color_constant.dart';
 import '../../view_models/auth_view_model.dart';
 import '../components/text_heading.dart';
-import '../screens/bottom_bar.dart';
 
 class LoginOtpView extends StatelessWidget {
   const LoginOtpView({super.key});

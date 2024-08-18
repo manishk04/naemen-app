@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import '../models/banner_model.dart';
 import '../models/category_model.dart';
+import '../models/tag_model.dart';
 import '../repo/home_repo.dart';
 import '../utils/utils.dart';
 
@@ -15,10 +16,14 @@ class HomeViewModel extends GetxController {
   final RxList<CategoryModel> _homeCategories = <CategoryModel>[].obs;
   final RxList<CategoryModel> _allCategories = <CategoryModel>[].obs;
 
+  final Rx<TagModel> _tag = TagModel().obs;
+
   // =============================== Getters ===================================
   List<BannerModel> get getBanners => _banners;
   List<CategoryModel> get getHomeCategories => _homeCategories;
   List<CategoryModel> get getAllCategories => _allCategories;
+
+  TagModel get getTag => _tag.value;
 
   // =============================== Setters ===================================
   set setBanners(List<BannerModel> list) => _banners.value = list;
@@ -26,7 +31,16 @@ class HomeViewModel extends GetxController {
       _homeCategories.value = list;
   set setAllCategories(List<CategoryModel> list) => _allCategories.value = list;
 
+  set setTag(TagModel tag) => _tag.value = tag;
+
   // =============================== Methods ===================================
+  init() {
+    fetchBanners();
+    fetchHomeCategories();
+    fetchAllCategories();
+    fetchHomeTagData();
+  }
+
   void fetchBanners() async {
     List<BannerModel> list = <BannerModel>[];
     try {
@@ -89,4 +103,72 @@ class HomeViewModel extends GetxController {
       log("fetchAllCategories Error => $e");
     }
   }
+
+  void fetchHomeTagData() async {
+    try {
+      // String lat = await StorageData.getLatitude();
+      // String lng = await StorageData.getLongitude();
+      Map<String, String> data = {
+        "lat": "26.88535240",
+        "lng": "80.94372100",
+        // "lat": lat,
+        // "lng": lng,
+      };
+      Map<String, dynamic> response = await _homeRepo.fetchHomeTagData(data);
+      log(response.toString());
+      if (response["code"] == 200) {
+        var data = response["data"];
+        if (data != null && data is List && data.isNotEmpty) {
+          if (data[0]["tag"] != null) {
+            setTag = TagModel.fromMap(data[0]["tag"]);
+            log(getTag.toString());
+          }
+        } else {
+          Utils.toastMessage(response["msg"] ?? "Something went wrong!");
+        }
+      } else {
+        Utils.toastMessage(response["msg"] ?? "Something went wrong!");
+      }
+    } catch (e) {
+      Utils.toastMessage(e.toString());
+      log("fetchHomeTagData Error => $e");
+    }
+  }
 }
+
+var data = {
+  "code": 200,
+  "data": [
+    {
+      "tag": {
+        "title_eng": "Newly Added Saloons",
+        "title_arb":
+            "\u0627\u0644\u0635\u0627\u0644\u0648\u0646\u0627\u062a \u0627\u0644\u0645\u0636\u0627\u0641\u0629 \u062d\u062f\u064a\u062b\u0627",
+        "salon": [
+          {
+            "salon_name_eng": "test business 2",
+            "salon_name_arb": "test",
+            "email": "testingbusiness11@gmail.com",
+            "contact_number": "730962938",
+            "salon_image": "assets\/images\/salon-img\/66b7390c44cac.webp",
+            "kids_salon_service": null,
+            "salon_status": "2",
+            "store_status": "approve",
+            "bilding_address": "block -c police station",
+            "address": "bkt",
+            "city_id": 1,
+            "district_id": 2,
+            "lat_address": "26.96405390",
+            "log_address": "80.92662970",
+            "district": "Test",
+            "city_name": "Dammam",
+            "tag_title_eng": "Newly Added Saloons",
+            "tag_title_arb":
+                "\u0627\u0644\u0635\u0627\u0644\u0648\u0646\u0627\u062a \u0627\u0644\u0645\u0636\u0627\u0641\u0629 \u062d\u062f\u064a\u062b\u0627",
+            "distance": 8913.7436865986164775677025318145751953125
+          }
+        ]
+      }
+    }
+  ]
+};
