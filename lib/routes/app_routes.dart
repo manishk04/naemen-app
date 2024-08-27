@@ -8,10 +8,12 @@ abstract class Routes {
   static const loginOtpRoute = Paths.loginOtpPath;
   static const bottomBarRoute = Paths.bottomBarPath;
   static const categoryRoute = Paths.categoryPath;
+  static const shopRoute = Paths.shopPath;
+  static const googleMapRoute = Paths.googleMapPath;
 }
 
 abstract class Paths {
-  static const splashPath = "/SplashView";
+  static const splashPath = "/SplashViewSecond";
   static const languagePath = "/LanguageView";
   static const onboardingPath = "/OnboardingView";
   static const loginPasswordPath = "/LoginPasswordView";
@@ -20,4 +22,6 @@ abstract class Paths {
   static const loginOtpPath = "/LoginOtpView";
   static const bottomBarPath = "/BottomBarView";
   static const categoryPath = "/CategoryPage";
+  static const shopPath = "/ShopPage";
+  static const googleMapPath = "/GoogleMapScreen";
 }

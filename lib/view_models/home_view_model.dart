@@ -113,7 +113,7 @@ class HomeViewModel extends GetxController {
         "lng": "80.94372100",
         // "lat": lat,
         // "lng": lng,
-      };
+      }; // TODO: Uncomment for current location
       Map<String, dynamic> response = await _homeRepo.fetchHomeTagData(data);
       log(response.toString());
       if (response["code"] == 200) {

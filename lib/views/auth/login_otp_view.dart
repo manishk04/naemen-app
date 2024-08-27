@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:naemen/view_models/google_map_view_model.dart';
 import 'package:pinput/pinput.dart';
 
 import '../../utils/color_constant.dart';
@@ -13,6 +14,7 @@ class LoginOtpView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AuthViewModel authViewModel = Get.find();
+    final GoogleMapViewModel googleMapViewModel = Get.find();
     final defaultPinTheme = PinTheme(
       width: 56,
       height: 60,
@@ -124,7 +126,8 @@ class LoginOtpView extends StatelessWidget {
                               ),
                             )
                           : InkWell(
-                              onTap: () => authViewModel.onOTPLogin(),
+                              onTap: () =>
+                                  authViewModel.onOTPLogin(googleMapViewModel),
                               child: Container(
                                 height: 40.h,
                                 width: 340.w,

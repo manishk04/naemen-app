@@ -17,4 +17,5 @@ class AppUrl {
   static String allCategoriesListUrl =
       "$baseUrl/customer-api/app/all-categories-list";
   static String homeTagDataUrl = "$baseUrl/customer-api/app/home-tag-data";
+  static String storeDetailsUrl = "$baseUrl/customer-api/app/store-details";
 }

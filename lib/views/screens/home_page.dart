@@ -292,6 +292,7 @@ class _HomeViewState extends State<HomeView> {
                                             ? "Saloon Type:"
                                             : "",
                                         typeValue: "",
+                                        distance: salon.distance ?? 0.00,
                                       );
                                     },
                                   ),

@@ -5,6 +5,7 @@ import 'package:naemen/routes/app_routes.dart';
 
 import '../../view_models/auth_view_model.dart';
 import '../../utils/color_constant.dart';
+import '../../view_models/google_map_view_model.dart';
 import '../components/text_heading.dart';
 
 class LoginPasswordView extends StatelessWidget {
@@ -13,6 +14,7 @@ class LoginPasswordView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AuthViewModel authViewModel = Get.find();
+    final GoogleMapViewModel googleMapViewModel = Get.find();
     return Scaffold(
       body: Stack(
         children: [
@@ -124,7 +126,8 @@ class LoginPasswordView extends StatelessWidget {
                               ),
                             )
                           : InkWell(
-                              onTap: () => authViewModel.onPasswordLogin(),
+                              onTap: () => authViewModel
+                                  .onPasswordLogin(googleMapViewModel),
                               child: Container(
                                 height: 40.h,
                                 width: 340.w,

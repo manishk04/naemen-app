@@ -8,4 +8,5 @@ class AppColors {
   static const Color signUpColor = Color(0xff737373);
   static const Color searchFieldsColor = Color(0xff121212);
   static const Color upcomingColor = Color(0xff008000);
+  static const Color mapBottomColor = Color(0xff2B2B2B);
 }

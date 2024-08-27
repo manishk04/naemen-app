@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import '../../utils/color_constant.dart';
 import '../../view_models/auth_view_model.dart';
+import '../../view_models/google_map_view_model.dart';
 import '../components/text_heading.dart';
 
 class VerifyMobileView extends StatelessWidget {
@@ -12,7 +13,8 @@ class VerifyMobileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AuthViewModel authViewModel = Get.find();
+    final AuthViewModel authViewModel = Get.find();
+    final GoogleMapViewModel googleMapViewModel = Get.find();
     return Scaffold(
       body: Stack(
         children: [
@@ -134,7 +136,8 @@ class VerifyMobileView extends StatelessWidget {
                       height: 30,
                     ),
                     InkWell(
-                      onTap: () => authViewModel.fetchLocation(),
+                      onTap: () =>
+                          authViewModel.fetchLocation(googleMapViewModel),
                       child: TextHeading(
                         title: "Skip",
                         fontweight: FontWeight.w500,
