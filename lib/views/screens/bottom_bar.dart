@@ -34,21 +34,29 @@ class _BottomBarViewState extends State<BottomBarView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PageView(
-        clipBehavior: Clip.antiAlias,
-        controller: controller,
-        children: const [HomeView(), MyScendScreen(), MyBagScreen()],
-        onPageChanged: (value) => setState(() {
-          selected = value;
-          controller.jumpToPage(value);
-        }),
+      backgroundColor: Colors.black,
+      body: SafeArea(
+        child: PageView(
+          clipBehavior: Clip.antiAlias,
+          controller: controller,
+          children: const [HomeView(), MyScendScreen(), MyBagScreen()],
+          onPageChanged: (value) => setState(() {
+            selected = value;
+            controller.jumpToPage(value);
+          }),
+        ),
       ),
       bottomNavigationBar: StylishBottomBar(
+        elevation: 3, borderRadius: BorderRadius.circular(20),
+        backgroundColor: AppColors.bottomBarColor,
         option: BubbleBarOptions(
+          inkEffect: true,
+          borderRadius: BorderRadius.circular(20),
+          unselectedIconColor: Colors.white,
+          padding: EdgeInsets.all(8),
           barStyle: BubbleBarStyle.horizontal,
           bubbleFillStyle: BubbleFillStyle.outlined,
-          inkColor: AppColors.primaryColor,
-          // bubbleFillStyle: BubbleFillStyle.outlined,
+          inkColor: AppColors.primaryColor.withOpacity(0.5),
           opacity: 0.3,
         ),
         // iconSpace: 5.0,
@@ -56,7 +64,7 @@ class _BottomBarViewState extends State<BottomBarView> {
           BottomBarItem(
             icon: Icon(
               Icons.home,
-              color: selected == 0 ? AppColors.primaryColor : Colors.black,
+              color: selected == 0 ? AppColors.primaryColor : Colors.white,
             ),
             title: const Text(
               'Home',
@@ -65,6 +73,8 @@ class _BottomBarViewState extends State<BottomBarView> {
             // backgroundColor: AppColors.primaryColor,
           ),
           BottomBarItem(
+         //   badgeColor: Colors.red,
+
             icon: const Icon(Icons.bookmark),
             title: const Text('Bookmark'),
             backgroundColor: AppColors.primaryColor,

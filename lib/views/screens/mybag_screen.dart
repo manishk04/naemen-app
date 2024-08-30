@@ -6,7 +6,13 @@ class MyBagScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("My Bag"),),
+      appBar: AppBar(backgroundColor: Colors.black,
+
+        title: Text("My Bag",style: TextStyle(color: Colors.white),),
+      ),
+      body: Container(
+        color: Colors.black,
+      ),
     );
   }
 }

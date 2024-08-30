@@ -2,11 +2,14 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:naemen/view_models/language_view_model.dart';
+import 'package:naemen/views/components/text_heading.dart';
+import 'package:naemen/views/screens/search_page.dart';
 
 import '../models/customer_model.dart';
 import '../repo/auth_repo.dart';
@@ -16,6 +19,7 @@ import '../utils/storage_data.dart';
 import '../utils/utils.dart';
 import 'google_map_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 
 class AuthViewModel extends GetxController {
   // ============================== Variables ==================================
@@ -336,6 +340,16 @@ class AuthViewModel extends GetxController {
   }
 }
 
+
+
+
+
+
+
+//---->>  Google map Screen  <-----//
+
+
+
 class GoogleMapScreen extends StatefulWidget {
   const GoogleMapScreen({super.key});
 
@@ -345,213 +359,303 @@ class GoogleMapScreen extends StatefulWidget {
 
 class _GoogleMapScreenState extends State<GoogleMapScreen> {
   final GoogleMapViewModel _googleMapViewModel = Get.find();
+  //final GoogleMapViewModel2 _googleMapViewModel2 = Get.find();
+
+  AuthViewModel authViewModel = Get.find();
+
+
+  static const LatLng _pGooglePlex = LatLng(28.6407533, 76.3790116);
+
+
+
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _showBottomSheet();
+      //_showBottomSheet();
     });
   }
 
-  void _showBottomSheet() {
-    showModalBottomSheet(
-      isDismissible: false,
-      context: context,
-      builder: (context) {
-        return Container(
-          height: 325.h,
-          width: double.infinity,
-          decoration: BoxDecoration(
-              color: Colors.black,
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20.r),
-                  topRight: Radius.circular(20.r))),
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 15,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  "Your Address",
-                  style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white),
-                ),
-                SizedBox(height: 10),
-                Container(
-                  height: 40.h,
-                  width: 330.w,
-                  decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(5.r)),
-                  child: const TextField(
-                    style: TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
-                        contentPadding: EdgeInsets.all(5),
-                        filled: true,
-                        fillColor: AppColors.mapBottomColor,
-                        border: OutlineInputBorder(),
-                        hintText: "Search...",
-                        hintStyle: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.white),
-                        prefixIcon: Icon(
-                          Icons.search,
-                          color: Colors.white,
-                        )),
-                  ),
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                Text(
-                  "Flat /House no / Floor/Building",
-                  style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.white),
-                ),
-                SizedBox(height: 10),
-                Container(
-                  height: 40.h,
-                  width: 330.w,
-                  decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(5.r)),
-                  child: TextField(
-                    style: TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: AppColors.mapBottomColor,
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                Text(
-                  "Area/ Sector/ Locality",
-                  style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.white),
-                ),
-                SizedBox(height: 10),
-                Container(
-                  height: 40.h,
-                  width: 330.w,
-                  decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(5.r)),
-                  child: TextField(
-                    style: TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: AppColors.mapBottomColor,
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 20.h,
-                ),
-                InkWell(
-                  onTap: () {
-                    Get.offAllNamed(Routes.bottomBarRoute);
-                  },
-                  child: Container(
-                    height: 40.h,
-                    width: 330.w,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5.r),
-                        color: AppColors.primaryColor),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(
-                          Icons.bookmark_add_outlined,
-                          color: Colors.black,
-                        ),
-                        SizedBox(
-                          width: 5.w,
-                        ),
-                        Text(
-                          "Save Address",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500, fontSize: 14.sp),
-                        )
-                      ],
-                    ),
-                  ),
-                )
+  // void _showBottomSheet() {
+  //   showModalBottomSheet(
+  //     isDismissible: false,
+  //     context: context,
+  //     builder: (context) {
+  //       return Container(
+  //         height: 200.h,
+  //         width: double.infinity,
+  //         decoration: BoxDecoration(
+  //             color: Colors.black,
+  //             borderRadius: BorderRadius.only(
+  //                 topLeft: Radius.circular(20.r),
+  //                 topRight: Radius.circular(20.r))),
+  //         child: Padding(
+  //           padding: EdgeInsets.symmetric(
+  //             horizontal: 15,
+  //           ),
+  //           child: Column(
+  //            // mainAxisAlignment: MainAxisAlignment.center,
+  //             crossAxisAlignment: CrossAxisAlignment.start,
+  //             children: [
+  //
+  //               SizedBox(height: 20.h,),
+  //
+  //               Row(
+  //                 children: [
+  //                   Icon(Icons.location_on,color: Colors.amber,),
+  //                   Expanded(
+  //                     flex: 4,
+  //                     child: Text(
+  //                       "Your Address",
+  //                       style: TextStyle(
+  //                           fontSize: 24,
+  //                           fontWeight: FontWeight.bold,
+  //                           color: AppColors.primaryColor),
+  //                     ),
+  //                   ),
+  //                   Expanded(
+  //                     child: Container(height: 25.h,
+  //                       width: 130.w,
+  //                       decoration: BoxDecoration(
+  //                         color: Colors.grey.shade100,
+  //                         border: Border.all(color: AppColors.primaryColor,width: 1),
+  //                           borderRadius: BorderRadius.circular(10.r)),
+  //                       child: Center(child: Text("Chnage",style: TextStyle(color: AppColors.primaryColor),)),
+  //
+  //                       ),
+  //                   )
+  //
+  //                 ],
+  //               ),
+  //               SizedBox(height: 10),
+  //               Obx(
+  //                     () => TextHeading(
+  //                   title: authViewModel.getAddress,
+  //                   fontweight: FontWeight.w400,
+  //                   fontsize: 11.sp,
+  //                   fontcolor: Colors.white,
+  //                 ),
+  //               ),
+  //
+  //
+  //
+  //              SizedBox(height: 50.h,),
+  //               InkWell(
+  //                 onTap: () {
+  //                   Get.offAllNamed(Routes.bottomBarRoute);
+  //                 },
+  //                 child: Container(
+  //                   height: 40.h,
+  //                   width: 330.w,
+  //                   decoration: BoxDecoration(
+  //                       borderRadius: BorderRadius.circular(5.r),
+  //                       color: AppColors.primaryColor),
+  //                   child: Row(
+  //                     mainAxisAlignment: MainAxisAlignment.center,
+  //                     children: [
+  //                       const Icon(
+  //                         Icons.bookmark_add_outlined,
+  //                         color: Colors.black,
+  //                       ),
+  //                       SizedBox(
+  //                         width: 5.w,
+  //                       ),
+  //                       Text(
+  //                         "Save Address",
+  //                         style: TextStyle(
+  //                             fontWeight: FontWeight.w500, fontSize: 14.sp),
+  //                       )
+  //                     ],
+  //                   ),
+  //                 ),
+  //               )
+  //
+  //               // Add more widgets as needed
+  //             ],
+  //           ),
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 
-                // Add more widgets as needed
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
+
+
+  //--->> get polylinepoints
+
+  // Future<List<LatLng>>getpolylinePoints() async{
+  //   List<LatLng> polylineCordinates = [];
+  //   PolylinePoints polylinePoints = PolylinePoints();
+  //   PolylineResult  results = await polylinePoints.getRouteBetweenCoordinates(request: );
+  //
+  // }
+
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors. black,
       body: SafeArea(
         child: Stack(
           children: [
-            GoogleMap(
-              initialCameraPosition: CameraPosition(
-                target: _googleMapViewModel.getInitialPosition,
-                zoom: 14.0,
-              ),
-              markers: {
-                Marker(
-                    markerId: MarkerId("_currentLocation"),
-                    icon: BitmapDescriptor.defaultMarker,
-                    position: _googleMapViewModel.getInitialPosition)
-              },
-              myLocationEnabled: true,
-              myLocationButtonEnabled: true,
-              onMapCreated: (GoogleMapController controller) {
-                _googleMapViewModel.setMapController = controller;
-              },
+            Column(
+              children: [
+                Expanded(
+                  child: GoogleMap(
+                    initialCameraPosition: CameraPosition(
+                      target: _googleMapViewModel.getInitialPosition,
+                      zoom: 14.0,
+                    ),
+                    markers: {
+                      Marker(
+                        markerId: MarkerId("_currentLocation"),
+                        icon: BitmapDescriptor.defaultMarker,
+                        position: _googleMapViewModel.getInitialPosition,
+                      ),
+                      // Marker(
+                      //   markerId: MarkerId("_sourceLocation"),
+                      //   icon: BitmapDescriptor.defaultMarker,
+                      //   position: _pGooglePlex
+                      //   //_googleMapViewModel.getInitialPosition,
+                      // ),
+                    },
+                    myLocationEnabled: true,
+                    myLocationButtonEnabled: true,
+                    onMapCreated: (GoogleMapController controller) {
+                      _googleMapViewModel.setMapController = controller;
+                    },
+                  ),
+                ),
+                Container(
+                  height: 200.h,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20.r),
+                      topRight: Radius.circular(20.r),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: 20.h),
+                        Row(
+                          children: [
+                            Icon(Icons.location_on, color: Colors.amber),
+                            Expanded(
+                              flex: 4,
+                              child: Text(
+                                "Your Address",
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.primaryColor,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: InkWell(
+                                onTap: (){
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>SearchPage()));
+                                },
+                                child: Container(
+                                  height: 25.h,
+                                  width: 130.w,
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey.shade100,
+                                    border: Border.all(color: AppColors.primaryColor, width: 1),
+                                    borderRadius: BorderRadius.circular(10.r),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      "Change",
+                                      style: TextStyle(color: Colors.black),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                        SizedBox(height: 10),
+                        Obx(
+                              () => TextHeading(
+                            title: authViewModel.getAddress,
+                            fontweight: FontWeight.w400,
+                            fontsize: 11.sp,
+                            fontcolor: Colors.white,
+                          ),
+                        ),
+                        SizedBox(height: 50.h),
+                        InkWell(
+                          onTap: () {
+
+
+                            Get.offAllNamed(Routes.bottomBarRoute);
+                          },
+                          child: Container(
+                            height: 40.h,
+                            width: 330.w,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5.r),
+                              color: AppColors.primaryColor,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Icon(
+                                  Icons.bookmark_add_outlined,
+                                  color: Colors.black,
+                                ),
+                                SizedBox(width: 5.w),
+                                Text(
+                                  "Save Address",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 14.sp,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
             Positioned(
               top: 20,
               left: 8,
-              child: Container(
-                height: 40,
-                width: 340,
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(8)),
-                child: const TextField(
-                  style: TextStyle(color: Colors.white),
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.all(5),
-                    filled: true,
-                    fillColor: Colors.black,
-                    prefixIcon: Icon(
-                      Icons.search,
-                      color: Colors.amber,
-                    ),
-                    hintText: "Search Your favorite hair expert...",
-                    hintStyle: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w300,
-                        fontSize: 12),
-                    suffixIcon: Icon(
-                      Icons.mic,
-                      color: AppColors.primaryColor,
-                    ),
-                    border: OutlineInputBorder(),
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => SearchPage()));
+                },
+                child: Container(
+                  height: 50.h,
+                  width: 340.w,
+                  decoration: BoxDecoration(
+                    color: Colors.black87,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Icon(Icons.search, color: AppColors.primaryColor),
+                      TextHeading(
+                        title: "Search Your favorite hair expert...",
+                        fontweight: FontWeight.w400,
+                        fontsize: 12.sp,
+                        fontcolor: Colors.grey.shade200,
+                      ),
+                      Icon(Icons.mic, color: AppColors.primaryColor),
+                    ],
                   ),
                 ),
               ),
@@ -561,4 +665,5 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
       ),
     );
   }
+
 }
