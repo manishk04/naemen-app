@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:naemen/models/salon_model.dart';
+import 'package:naemen/routes/app_routes.dart';
 import 'package:naemen/utils/app_url.dart';
 import 'package:naemen/utils/color_constant.dart';
+import 'package:naemen/view_models/cart_view_model.dart';
+import 'package:naemen/view_models/salon_profile_view_model.dart';
 
 import 'text_heading.dart';
 
@@ -204,7 +209,9 @@ class WinterSpecialItems extends StatelessWidget {
       required this.statusValue,
       required this.description,
       required this.type,
-      required this.typeValue});
+      required this.typeValue,
+      required this.distance,
+      required this.salon});
 
   final String image;
   final String status;
@@ -212,9 +219,13 @@ class WinterSpecialItems extends StatelessWidget {
   final String description;
   final String type;
   final String typeValue;
+  final num distance;
+  final SalonModel salon;
 
   @override
   Widget build(BuildContext context) {
+    final SalonProfileViewModel salonProfileViewModel = Get.find();
+    final CartViewModel cartViewModel = Get.find();
     return Stack(
       children: [
         Container(
@@ -265,7 +276,11 @@ class WinterSpecialItems extends StatelessWidget {
                           width: 3.w,
                         ),
                         TextHeading(
-                            title: statusValue,
+                            title: statusValue == "2"
+                                ? "OFF"
+                                : statusValue == "1"
+                                    ? "ON"
+                                    : "",
                             fontweight: FontWeight.w400,
                             fontsize: 12.sp,
                             fontcolor: AppColors.primaryColor)
@@ -306,7 +321,8 @@ class WinterSpecialItems extends StatelessWidget {
                           color: AppColors.primaryColor,
                         ),
                         TextHeading(
-                          title: "0.4 km",
+                          title:
+                              "${double.parse(distance.toString()).toStringAsFixed(2)} km",
                           fontweight: FontWeight.w400,
                           fontsize: 12.sp,
                           fontcolor: Colors.white,
@@ -336,19 +352,23 @@ class WinterSpecialItems extends StatelessWidget {
                         SizedBox(
                           width: 50.w,
                         ),
-                        Container(
-                          height: 34.h,
-                          width: 102.w,
-                          decoration: BoxDecoration(
-                            color: AppColors.bookmarkColor,
-                            borderRadius: BorderRadius.circular(8.r),
-                          ),
-                          child: Center(
-                            child: TextHeading(
-                              title: "View Profile",
-                              fontweight: FontWeight.w400,
-                              fontsize: 12.sp,
-                              fontcolor: Colors.white,
+                        InkWell(
+                          onTap: () => salonProfileViewModel.onViewProfileClick(
+                              salon, cartViewModel),
+                          child: Container(
+                            height: 34.h,
+                            width: 102.w,
+                            decoration: BoxDecoration(
+                              color: AppColors.bookmarkColor,
+                              borderRadius: BorderRadius.circular(8.r),
+                            ),
+                            child: Center(
+                              child: TextHeading(
+                                title: "View Profile",
+                                fontweight: FontWeight.w400,
+                                fontsize: 12.sp,
+                                fontcolor: Colors.white,
+                              ),
                             ),
                           ),
                         ),

@@ -1,8 +1,16 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:naemen/models/artist_service_model.dart';
+import 'package:naemen/utils/app_url.dart';
+import 'package:naemen/view_models/language_view_model.dart';
 import 'package:naemen/views/screens/coupan_screen.dart';
 
 import '../../utils/color_constant.dart';
+import '../../view_models/cart_view_model.dart';
 import '../components/text_heading.dart';
 
 class BookingDetailPage extends StatefulWidget {
@@ -13,6 +21,8 @@ class BookingDetailPage extends StatefulWidget {
 }
 
 class _BookingDetailPageState extends State<BookingDetailPage> {
+  final CartViewModel _cartViewModel = Get.find();
+  final LanguageViewModel _languageViewModel = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,9 +72,10 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
                       width: 340.w,
                       decoration: BoxDecoration(
                           image: DecorationImage(
-                              image: AssetImage(
-                                  "assets/images/saloon_detail _image.jpeg"),
-                              fit: BoxFit.cover),
+                            image: NetworkImage(
+                                "${AppUrl.baseUrl}/${_cartViewModel.getSelectedStore.salonImage ?? ""}"),
+                            fit: BoxFit.cover,
+                          ),
                           borderRadius: BorderRadius.circular(16.r),
                           border: Border.all(
                               color: AppColors.signUpColor, width: 2)),
@@ -97,13 +108,22 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 TextHeading(
-                                    title: "Art Salons",
-                                    fontweight: FontWeight.w600,
-                                    fontsize: 20.sp,
-                                    fontcolor: Colors.white),
+                                  title:
+                                      _languageViewModel.getSelectedLanguage ==
+                                              "English"
+                                          ? _cartViewModel.getSelectedStore
+                                                  .salonNameEng ??
+                                              "NA"
+                                          : _cartViewModel.getSelectedStore
+                                                  .salonNameArb ??
+                                              "",
+                                  fontweight: FontWeight.w600,
+                                  fontsize: 20.sp,
+                                  fontcolor: Colors.white,
+                                ),
                                 Row(
                                   children: [
-                                    Icon(
+                                    const Icon(
                                       Icons.star,
                                       color: AppColors.primaryColor,
                                     ),
@@ -111,10 +131,11 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
                                       width: 3.w,
                                     ),
                                     TextHeading(
-                                        title: "4.3/5",
-                                        fontweight: FontWeight.w700,
-                                        fontsize: 10.sp,
-                                        fontcolor: Colors.white)
+                                      title: "4.3/5",
+                                      fontweight: FontWeight.w700,
+                                      fontsize: 10.sp,
+                                      fontcolor: Colors.white,
+                                    )
                                   ],
                                 )
                               ],
@@ -150,32 +171,37 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
                                   width: 3.w,
                                 ),
                                 TextHeading(
-                                    title: "10:00 AM - 10:00 PM",
-                                    fontweight: FontWeight.w400,
-                                    fontsize: 12.sp,
-                                    fontcolor: Colors.white)
+                                  title:
+                                      "${_cartViewModel.getSelectedStore.salonStartTime ?? "NA"} - ${_cartViewModel.getSelectedStore.salonEndTime ?? "NA"}",
+                                  fontweight: FontWeight.w400,
+                                  fontsize: 12.sp,
+                                  fontcolor: Colors.white,
+                                )
                               ],
                             ),
                             SizedBox(
                               height: 5.h,
                             ),
-                            Row(
-                              //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Icon(
-                                  Icons.child_care,
-                                  color: AppColors.primaryColor,
-                                ),
-                                SizedBox(
-                                  width: 3.w,
-                                ),
-                                TextHeading(
-                                    title: "Child Service available",
-                                    fontweight: FontWeight.w400,
-                                    fontsize: 12.sp,
-                                    fontcolor: AppColors.primaryColor)
-                              ],
-                            )
+                            if (_cartViewModel
+                                    .getSelectedStore.kidsSalonService !=
+                                null)
+                              Row(
+                                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Icon(
+                                    Icons.child_care,
+                                    color: AppColors.primaryColor,
+                                  ),
+                                  SizedBox(
+                                    width: 3.w,
+                                  ),
+                                  TextHeading(
+                                      title: "Child Service available",
+                                      fontweight: FontWeight.w400,
+                                      fontsize: 12.sp,
+                                      fontcolor: AppColors.primaryColor)
+                                ],
+                              ),
                           ],
                         ),
                       ),
@@ -206,7 +232,8 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
                                 fontsize: 12,
                                 fontcolor: Colors.white),
                             TextHeading(
-                                title: "Sunday, 07 Apr - 12:00PM",
+                                title:
+                                    "${DateFormat("EEEE, dd MMM").format(DateFormat("dd-MM-yyyy").parse(_cartViewModel.getAddedServiceList[0].date ?? ""))} - ${_cartViewModel.getAddedServiceList[0].time ?? ""}",
                                 fontweight: FontWeight.w400,
                                 fontsize: 12,
                                 fontcolor: AppColors.primaryColor),
@@ -223,7 +250,14 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
                                 fontsize: 12,
                                 fontcolor: Colors.white),
                             TextHeading(
-                                title: "Musa",
+                                title: _languageViewModel.getSelectedLanguage ==
+                                        "English"
+                                    ? _cartViewModel
+                                            .getSelectedArtist.artistNameEng ??
+                                        "NA"
+                                    : _cartViewModel
+                                            .getSelectedArtist.artistNameEng ??
+                                        "NA",
                                 fontweight: FontWeight.w400,
                                 fontsize: 12,
                                 fontcolor: AppColors.primaryColor),
@@ -240,7 +274,9 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
                                 fontsize: 12,
                                 fontcolor: Colors.white),
                             TextHeading(
-                                title: "Male",
+                                title:
+                                    _cartViewModel.getSelectedArtist.gender ??
+                                        "NA",
                                 fontweight: FontWeight.w400,
                                 fontsize: 12,
                                 fontcolor: AppColors.primaryColor),
@@ -255,7 +291,7 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
                 ),
                 SizedBox(height: 20.h),
                 Container(
-                  height: 160.h,
+                  // height: 160.h,
                   width: 340.w,
                   decoration: BoxDecoration(
                       color: AppColors.searchFieldsColor,
@@ -293,130 +329,53 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
                             ),
                           ],
                         ),
-                        Divider(),
-                        SizedBox(
-                          height: 5.h,
-                        ),
-                        const Row(
-                          children: [
-                            Expanded(
-                              flex: 3,
-                              child: TextHeading(
-                                  title: "Haircut",
-                                  fontweight: FontWeight.w400,
-                                  fontsize: 12,
-                                  fontcolor: Colors.white),
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: TextHeading(
-                                  title: "30 minuts",
-                                  fontweight: FontWeight.w400,
-                                  fontsize: 12,
-                                  fontcolor: Colors.white),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: TextHeading(
-                                  title: "SAR 90",
-                                  fontweight: FontWeight.w400,
-                                  fontsize: 12,
-                                  fontcolor: AppColors.primaryColor),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 5.h,
-                        ),
-                        const Row(
-                          children: [
-                            Expanded(
-                              flex: 3,
-                              child: TextHeading(
-                                  title: "Beard Trim",
-                                  fontweight: FontWeight.w400,
-                                  fontsize: 12,
-                                  fontcolor: Colors.white),
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: TextHeading(
-                                  title: "20 minuts",
-                                  fontweight: FontWeight.w400,
-                                  fontsize: 12,
-                                  fontcolor: Colors.white),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: TextHeading(
-                                  title: "SAR 79",
-                                  fontweight: FontWeight.w400,
-                                  fontsize: 12,
-                                  fontcolor: AppColors.primaryColor),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 5.h,
-                        ),
-                        const Row(
-                          children: [
-                            Expanded(
-                              flex: 3,
-                              child: TextHeading(
-                                  title: "Patial Facial Wax",
-                                  fontweight: FontWeight.w400,
-                                  fontsize: 12,
-                                  fontcolor: Colors.white),
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: TextHeading(
-                                  title: "15 minuts",
-                                  fontweight: FontWeight.w400,
-                                  fontsize: 12,
-                                  fontcolor: Colors.white),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: TextHeading(
-                                  title: "SAR 40",
-                                  fontweight: FontWeight.w400,
-                                  fontsize: 12,
-                                  fontcolor: AppColors.primaryColor),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 5.h,
-                        ),
-                        const Row(
-                          children: [
-                            Expanded(
-                              flex: 3,
-                              child: TextHeading(
-                                  title: "Manicure & Pedicure",
-                                  fontweight: FontWeight.w400,
-                                  fontsize: 12,
-                                  fontcolor: Colors.white),
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: TextHeading(
-                                  title: "60 minuts",
-                                  fontweight: FontWeight.w400,
-                                  fontsize: 12,
-                                  fontcolor: Colors.white),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: TextHeading(
-                                  title: "SAR 190",
-                                  fontweight: FontWeight.w400,
-                                  fontsize: 12,
-                                  fontcolor: AppColors.primaryColor),
-                            ),
-                          ],
+                        // Divider(),
+                        // SizedBox(
+                        //   height: 5.h,
+                        // ),
+                        ListView.separated(
+                          shrinkWrap: true,
+                          itemCount: _cartViewModel.getAddedServiceList.length,
+                          separatorBuilder: (context, index) => SizedBox(
+                            height: 5.h,
+                          ),
+                          itemBuilder: (context, index) {
+                            ArtistServiceModel service =
+                                _cartViewModel.getAddedServiceList[index];
+                            return Row(
+                              children: [
+                                Expanded(
+                                  flex: 3,
+                                  child: TextHeading(
+                                      title: _languageViewModel
+                                                  .getSelectedLanguage ==
+                                              "English"
+                                          ? service.categoryTitle ?? "NA"
+                                          : service.categoryArb ?? "NA",
+                                      fontweight: FontWeight.w400,
+                                      fontsize: 12,
+                                      fontcolor: Colors.white),
+                                ),
+                                Expanded(
+                                  flex: 2,
+                                  child: TextHeading(
+                                      title: service.serviceDuration ?? "",
+                                      fontweight: FontWeight.w400,
+                                      fontsize: 12,
+                                      fontcolor: Colors.white),
+                                ),
+                                Expanded(
+                                  flex: 1,
+                                  child: TextHeading(
+                                      title:
+                                          "SAR ${service.serviceFinalAmount ?? 0}",
+                                      fontweight: FontWeight.w400,
+                                      fontsize: 12,
+                                      fontcolor: AppColors.primaryColor),
+                                ),
+                              ],
+                            );
+                          },
                         ),
                       ],
                     ),
@@ -573,7 +532,7 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
                                 fontsize: 12.sp,
                                 fontcolor: Colors.white),
                             TextHeading(
-                                title: "SAR 375",
+                                title: "SAR ${_cartViewModel.fetchSubtotal()}",
                                 fontweight: FontWeight.w400,
                                 fontsize: 12.sp,
                                 fontcolor: AppColors.primaryColor)

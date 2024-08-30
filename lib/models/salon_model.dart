@@ -2,6 +2,8 @@ import 'dart:convert';
 
 class SalonModel {
   String? salonNameEng;
+  int? salonId;
+  String? salonType;
   String? salonNameArb;
   String? email;
   String? contactNumber;
@@ -9,12 +11,14 @@ class SalonModel {
   dynamic kidsSalonService;
   String? salonStatus;
   String? storeStatus;
-  String? buildingAddress;
-  String? address;
+  String? buildingAddress; //
+  String? address; //
   int? cityId;
   int? districtId;
   String? latAddress;
   String? logAddress;
+  int? categoryId;
+  String? categoryTitle;
   String? district;
   String? cityName;
   String? tagTitleEng;
@@ -22,6 +26,8 @@ class SalonModel {
   num? distance;
   SalonModel({
     this.salonNameEng,
+    this.salonId,
+    this.salonType,
     this.salonNameArb,
     this.email,
     this.contactNumber,
@@ -35,6 +41,8 @@ class SalonModel {
     this.districtId,
     this.latAddress,
     this.logAddress,
+    this.categoryId,
+    this.categoryTitle,
     this.district,
     this.cityName,
     this.tagTitleEng,
@@ -44,6 +52,8 @@ class SalonModel {
 
   SalonModel copyWith({
     String? salonNameEng,
+    int? salonId,
+    String? salonType,
     String? salonNameArb,
     String? email,
     String? contactNumber,
@@ -57,6 +67,8 @@ class SalonModel {
     int? districtId,
     String? latAddress,
     String? logAddress,
+    int? categoryId,
+    String? categoryTitle,
     String? district,
     String? cityName,
     String? tagTitleEng,
@@ -65,6 +77,8 @@ class SalonModel {
   }) {
     return SalonModel(
       salonNameEng: salonNameEng ?? this.salonNameEng,
+      salonId: salonId ?? this.salonId,
+      salonType: salonType ?? this.salonType,
       salonNameArb: salonNameArb ?? this.salonNameArb,
       email: email ?? this.email,
       contactNumber: contactNumber ?? this.contactNumber,
@@ -78,6 +92,8 @@ class SalonModel {
       districtId: districtId ?? this.districtId,
       latAddress: latAddress ?? this.latAddress,
       logAddress: logAddress ?? this.logAddress,
+      categoryId: categoryId ?? this.categoryId,
+      categoryTitle: categoryTitle ?? this.categoryTitle,
       district: district ?? this.district,
       cityName: cityName ?? this.cityName,
       tagTitleEng: tagTitleEng ?? this.tagTitleEng,
@@ -89,6 +105,8 @@ class SalonModel {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'salonNameEng': salonNameEng,
+      'salonId': salonId,
+      'salonType': salonType,
       'salonNameArb': salonNameArb,
       'email': email,
       'contactNumber': contactNumber,
@@ -102,6 +120,8 @@ class SalonModel {
       'districtId': districtId,
       'latAddress': latAddress,
       'logAddress': logAddress,
+      'categoryId': categoryId,
+      'categoryTitle': categoryTitle,
       'district': district,
       'cityName': cityName,
       'tagTitleEng': tagTitleEng,
@@ -115,6 +135,8 @@ class SalonModel {
       salonNameEng: map['salon_name_eng'] != null
           ? map['salon_name_eng'] as String
           : null,
+      salonId: map['salon_id'] != null ? map['salon_id'] as int : null,
+      salonType: map['salon_type'] != null ? map['salon_type'] as String : null,
       salonNameArb: map['salon_name_arb'] != null
           ? map['salon_name_arb'] as String
           : null,
@@ -139,6 +161,10 @@ class SalonModel {
           map['lat_address'] != null ? map['lat_address'] as String : null,
       logAddress:
           map['log_address'] != null ? map['log_address'] as String : null,
+      categoryId: map['category_id'] != null ? map['category_id'] as int : null,
+      categoryTitle: map['category_title'] != null
+          ? map['category_title'] as String
+          : null,
       district: map['district'] != null ? map['district'] as String : null,
       cityName: map['city_name'] != null ? map['city_name'] as String : null,
       tagTitleEng:
@@ -156,7 +182,7 @@ class SalonModel {
 
   @override
   String toString() {
-    return 'SalonModel(salonNameEng: $salonNameEng, salonNameArb: $salonNameArb, email: $email, contactNumber: $contactNumber, salonImage: $salonImage, kidsSalonService: $kidsSalonService, salonStatus: $salonStatus, storeStatus: $storeStatus, buildingAddress: $buildingAddress, address: $address, cityId: $cityId, districtId: $districtId, latAddress: $latAddress, logAddress: $logAddress, district: $district, cityName: $cityName, tagTitleEng: $tagTitleEng, tagTitleAr: $tagTitleAr, distance: $distance)';
+    return 'SalonModel(salonNameEng: $salonNameEng, salonId: $salonId, salonType: $salonType, salonNameArb: $salonNameArb, email: $email, contactNumber: $contactNumber, salonImage: $salonImage, kidsSalonService: $kidsSalonService, salonStatus: $salonStatus, storeStatus: $storeStatus, buildingAddress: $buildingAddress, address: $address, cityId: $cityId, districtId: $districtId, latAddress: $latAddress, logAddress: $logAddress, categoryId: $categoryId, categoryTitle: $categoryTitle, district: $district, cityName: $cityName, tagTitleEng: $tagTitleEng, tagTitleAr: $tagTitleAr, distance: $distance)';
   }
 
   @override
@@ -164,6 +190,8 @@ class SalonModel {
     if (identical(this, other)) return true;
 
     return other.salonNameEng == salonNameEng &&
+        other.salonId == salonId &&
+        other.salonType == salonType &&
         other.salonNameArb == salonNameArb &&
         other.email == email &&
         other.contactNumber == contactNumber &&
@@ -177,6 +205,8 @@ class SalonModel {
         other.districtId == districtId &&
         other.latAddress == latAddress &&
         other.logAddress == logAddress &&
+        other.categoryId == categoryId &&
+        other.categoryTitle == categoryTitle &&
         other.district == district &&
         other.cityName == cityName &&
         other.tagTitleEng == tagTitleEng &&
@@ -187,6 +217,8 @@ class SalonModel {
   @override
   int get hashCode {
     return salonNameEng.hashCode ^
+        salonId.hashCode ^
+        salonType.hashCode ^
         salonNameArb.hashCode ^
         email.hashCode ^
         contactNumber.hashCode ^
@@ -200,6 +232,8 @@ class SalonModel {
         districtId.hashCode ^
         latAddress.hashCode ^
         logAddress.hashCode ^
+        categoryId.hashCode ^
+        categoryTitle.hashCode ^
         district.hashCode ^
         cityName.hashCode ^
         tagTitleEng.hashCode ^

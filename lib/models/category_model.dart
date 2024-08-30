@@ -8,6 +8,7 @@ class CategoryModel {
   String? isFront;
   String? isActive;
   String? dateTime;
+  int? totalServices;
   CategoryModel({
     this.id,
     this.categoryTitle,
@@ -16,6 +17,7 @@ class CategoryModel {
     this.isFront,
     this.isActive,
     this.dateTime,
+    this.totalServices,
   });
 
   CategoryModel copyWith({
@@ -26,6 +28,7 @@ class CategoryModel {
     String? isFront,
     String? isActive,
     String? dateTime,
+    int? totalServices,
   }) {
     return CategoryModel(
       id: id ?? this.id,
@@ -35,6 +38,7 @@ class CategoryModel {
       isFront: isFront ?? this.isFront,
       isActive: isActive ?? this.isActive,
       dateTime: dateTime ?? this.dateTime,
+      totalServices: totalServices ?? this.totalServices,
     );
   }
 
@@ -47,6 +51,7 @@ class CategoryModel {
       'isFront': isFront,
       'isActive': isActive,
       'dateTime': dateTime,
+      'totalServices': totalServices,
     };
   }
 
@@ -63,6 +68,8 @@ class CategoryModel {
       isFront: map['is_front'] != null ? map['is_front'] as String : null,
       isActive: map['is_active'] != null ? map['is_active'] as String : null,
       dateTime: map['date_time'] != null ? map['date_time'] as String : null,
+      totalServices:
+          map['total_services'] != null ? map['total_services'] as int : null,
     );
   }
 
@@ -73,7 +80,7 @@ class CategoryModel {
 
   @override
   String toString() {
-    return 'CategoryModel(id: $id, categoryTitle: $categoryTitle, categoryArb: $categoryArb, categoryImage: $categoryImage, isFront: $isFront, isActive: $isActive, dateTime: $dateTime)';
+    return 'CategoryModel(id: $id, categoryTitle: $categoryTitle, categoryArb: $categoryArb, categoryImage: $categoryImage, isFront: $isFront, isActive: $isActive, dateTime: $dateTime, totalServices: $totalServices)';
   }
 
   @override
@@ -86,7 +93,8 @@ class CategoryModel {
         other.categoryImage == categoryImage &&
         other.isFront == isFront &&
         other.isActive == isActive &&
-        other.dateTime == dateTime;
+        other.dateTime == dateTime &&
+        other.totalServices == totalServices;
   }
 
   @override
@@ -97,6 +105,7 @@ class CategoryModel {
         categoryImage.hashCode ^
         isFront.hashCode ^
         isActive.hashCode ^
-        dateTime.hashCode;
+        dateTime.hashCode ^
+        totalServices.hashCode;
   }
 }

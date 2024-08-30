@@ -8,6 +8,10 @@ abstract class Routes {
   static const loginOtpRoute = Paths.loginOtpPath;
   static const bottomBarRoute = Paths.bottomBarPath;
   static const categoryRoute = Paths.categoryPath;
+  static const shopRoute = Paths.shopPath;
+  static const vendersRoute = Paths.vendersPath;
+  static const artistProfileRoute = Paths.artistProfilePath;
+  static const bookingDetailRoute = Paths.bookingDetailPath;
 }
 
 abstract class Paths {
@@ -20,4 +24,8 @@ abstract class Paths {
   static const loginOtpPath = "/LoginOtpView";
   static const bottomBarPath = "/BottomBarView";
   static const categoryPath = "/CategoryPage";
+  static const shopPath = "/ShopPage";
+  static const vendersPath = "/VendersPage";
+  static const artistProfilePath = "/ArtistProfileService";
+  static const bookingDetailPath = "/BookingDetailPage";
 }

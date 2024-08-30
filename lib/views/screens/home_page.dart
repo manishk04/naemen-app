@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -13,9 +14,7 @@ import '../../utils/color_constant.dart';
 import '../../view_models/auth_view_model.dart';
 import '../../view_models/home_view_model.dart';
 import '../../view_models/language_view_model.dart';
-import '../components/crousel_slider.dart';
 import '../components/newely_added.dart';
-import '../components/search_bar.dart';
 import '../components/text_heading.dart';
 
 class HomeView extends StatefulWidget {
@@ -120,23 +119,23 @@ class _HomeViewState extends State<HomeView> {
                         ],
                       ),
                       SizedBox(height: 30.h),
-                      SearchBarWidget(
-                        hinttexttitle: "Search your favorite hair expert...",
-                      ),
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                      Obx(
-                        () => homeViewModel.getBanners.isNotEmpty
-                            ? HomePageSlider(
-                                pageController1: pageController1,
-                                banners: homeViewModel.getBanners,
-                              )
-                            : const SizedBox(),
-                      ),
-                      SizedBox(
-                        height: 20.h,
-                      ),
+                      // SearchBarWidget(
+                      //   hinttexttitle: "Search your favorite hair expert...",
+                      // ),
+                      // SizedBox(
+                      //   height: 20.h,
+                      // ),
+                      // Obx(
+                      //   () => homeViewModel.getBanners.isNotEmpty
+                      //       ? HomePageSlider(
+                      //           pageController1: pageController1,
+                      //           banners: homeViewModel.getBanners,
+                      //         )
+                      //       : const SizedBox(),
+                      // ),
+                      // SizedBox(
+                      //   height: 20.h,
+                      // ),
                       Obx(
                         () => homeViewModel.getHomeCategories.isNotEmpty
                             ? InkWell(
@@ -163,71 +162,10 @@ class _HomeViewState extends State<HomeView> {
                       SizedBox(
                         height: 20.h,
                       ),
-                      Obx(
-                        () => homeViewModel.getHomeCategories.isNotEmpty
-                            ? SizedBox(
-                                height: 52.h,
-                                child: ListView.separated(
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.horizontal,
-                                  itemBuilder: (context, index) {
-                                    CategoryModel category =
-                                        homeViewModel.getHomeCategories[index];
-                                    return SizedBox(
-                                      height: 52.h,
-                                      // width: 108.w,
-                                      child: Card(
-                                        color: AppColors.searchFieldsColor,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                          side: BorderSide(
-                                            color: AppColors
-                                                .signUpColor, // Set the border color here
-                                            width:
-                                                1.0, // Set the border width here
-                                          ),
-                                        ),
-                                        elevation: 2,
-                                        child: Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 8.w, vertical: 4.h),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              Image.network(
-                                                "${AppUrl.baseUrl}/${category.categoryImage}",
-                                                height: 52.h,
-                                                width: 52.w,
-                                                color: Colors.white,
-                                              ),
-                                              TextHeading(
-                                                  title: languageViewModel
-                                                              .getSelectedLanguage ==
-                                                          "English"
-                                                      ? category
-                                                              .categoryTitle ??
-                                                          ""
-                                                      : category.categoryArb ??
-                                                          "",
-                                                  fontweight: FontWeight.w600,
-                                                  fontsize: 12.sp,
-                                                  fontcolor: Colors.white)
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                  separatorBuilder: (context, index) =>
-                                      SizedBox(
-                                    width: 10,
-                                  ),
-                                  itemCount:
-                                      homeViewModel.getHomeCategories.length,
-                                ),
-                              )
-                            : SizedBox(),
+                      CategoryListWidget(
+                        homeViewModel: homeViewModel,
+                        languageViewModel: languageViewModel,
+                        canNavigate: true,
                       ),
                       SizedBox(
                         height: 20.h,
@@ -290,8 +228,10 @@ class _HomeViewState extends State<HomeView> {
                                                     .getSelectedLanguage ==
                                                 "English"
                                             ? "Saloon Type:"
-                                            : "",
-                                        typeValue: "",
+                                            : "Saloon Type:",
+                                        typeValue: salon.salonType ?? "NA",
+                                        distance: salon.distance ?? 0.00,
+                                        salon: salon,
                                       );
                                     },
                                   ),
@@ -360,6 +300,96 @@ class _HomeViewState extends State<HomeView> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class CategoryListWidget extends StatelessWidget {
+  const CategoryListWidget({
+    super.key,
+    required this.homeViewModel,
+    required this.languageViewModel,
+    this.canNavigate = false,
+  });
+
+  final HomeViewModel homeViewModel;
+  final LanguageViewModel languageViewModel;
+  final bool canNavigate;
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(
+      () => homeViewModel.getHomeCategories.isNotEmpty
+          ? SizedBox(
+              height: 52.h,
+              child: ListView.separated(
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  CategoryModel category =
+                      homeViewModel.getHomeCategories[index];
+                  return InkWell(
+                    onTap: () =>
+                        homeViewModel.onCategorySelect(category, canNavigate),
+                    child: SizedBox(
+                      height: 52.h,
+                      // width: 108.w,
+                      child: Card(
+                        color: AppColors.searchFieldsColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                          side: BorderSide(
+                            color: AppColors
+                                .signUpColor, // Set the border color here
+                            width: 1.0, // Set the border width here
+                          ),
+                        ),
+                        elevation: 2,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 8.w, vertical: 4.h),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              CachedNetworkImage(
+                                height: 52.h,
+                                width: 52.w,
+                                imageUrl:
+                                    "${AppUrl.baseUrl}/${category.categoryImage}",
+                                placeholder: (context, url) => SizedBox(
+                                  height: 52.h,
+                                  width: 52.w,
+                                ),
+                                errorWidget: (context, url, error) =>
+                                    const Icon(Icons.error),
+                                fit: BoxFit.cover,
+                              ),
+                              SizedBox(
+                                width: 5.w,
+                              ),
+                              TextHeading(
+                                  title:
+                                      languageViewModel.getSelectedLanguage ==
+                                              "English"
+                                          ? category.categoryTitle ?? ""
+                                          : category.categoryArb ?? "",
+                                  fontweight: FontWeight.w600,
+                                  fontsize: 12.sp,
+                                  fontcolor: Colors.white)
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+                separatorBuilder: (context, index) => SizedBox(
+                  width: 10,
+                ),
+                itemCount: homeViewModel.getHomeCategories.length,
+              ),
+            )
+          : SizedBox(),
     );
   }
 }

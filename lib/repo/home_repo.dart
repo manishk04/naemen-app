@@ -59,4 +59,23 @@ class HomeRepo {
       rethrow;
     }
   }
+
+  Future<dynamic> fetchStoresByCategory(data) async {
+    // Encode the username and password in base64
+    String basicAuth =
+        "Basic ${base64Encode(utf8.encode("$username:$password"))}";
+    try {
+      dynamic response = await _apiServices.getPostApiResponse(
+        AppUrl.categoriesByStoreUrl,
+        jsonEncode(data),
+        <String, String>{
+          "authorization": basicAuth,
+          "Content-Type": "application/json",
+        },
+      );
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

@@ -10,7 +10,6 @@ import '../../utils/color_constant.dart';
 import '../../view_models/home_view_model.dart';
 import '../../view_models/language_view_model.dart';
 import '../components/text_heading.dart';
-import 'venders_list.dart';
 
 class CategoryPage extends StatelessWidget {
   const CategoryPage({super.key});
@@ -58,22 +57,17 @@ class CategoryPage extends StatelessWidget {
                       itemCount: homeViewModel.getAllCategories.length,
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
+                        crossAxisCount: 2,
                         crossAxisSpacing: 10,
                         mainAxisSpacing: 10,
+                        childAspectRatio: 1.5,
                       ),
                       itemBuilder: (BuildContext context, int index) {
                         CategoryModel category =
                             homeViewModel.getAllCategories[index];
                         return InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => VendersPage(),
-                              ),
-                            );
-                          },
+                          onTap: () =>
+                              homeViewModel.onCategorySelect(category, true),
                           child: Stack(
                             children: [
                               Container(
