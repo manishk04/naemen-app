@@ -12,10 +12,11 @@ abstract class Routes {
   static const vendersRoute = Paths.vendersPath;
   static const artistProfileRoute = Paths.artistProfilePath;
   static const bookingDetailRoute = Paths.bookingDetailPath;
+  static const googleMapRoute = Paths.googleMapPath;
 }
 
 abstract class Paths {
-  static const splashPath = "/SplashView";
+  static const splashPath = "/SplashViewSecond";
   static const languagePath = "/LanguageView";
   static const onboardingPath = "/OnboardingView";
   static const loginPasswordPath = "/LoginPasswordView";
@@ -28,4 +29,5 @@ abstract class Paths {
   static const vendersPath = "/VendersPage";
   static const artistProfilePath = "/ArtistProfileService";
   static const bookingDetailPath = "/BookingDetailPage";
+  static const googleMapPath = "/googleMapRoute";
 }

@@ -6,7 +6,13 @@ class MyScendScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Bookmark"),),
+      appBar: AppBar(backgroundColor: Colors.black,
+
+        title: Text("Bookmark",style: TextStyle(color: Colors.white),),
+      ),
+      body: Container(
+        color: Colors.black,
+      ),
     );
   }
 }

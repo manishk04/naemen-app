@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import '../../utils/color_constant.dart';
 import '../../view_models/auth_view_model.dart';
+import '../../view_models/google_map_view_model.dart';
 import '../components/text_heading.dart';
 
 class SignUpView extends StatelessWidget {
@@ -12,7 +13,8 @@ class SignUpView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AuthViewModel authViewModel = Get.find();
+    final AuthViewModel authViewModel = Get.find();
+    final GoogleMapViewModel googleMapViewModel = Get.find();
     return Scaffold(
       body: Stack(
         children: [
@@ -214,7 +216,7 @@ class SignUpView extends StatelessWidget {
                     ),
                     SizedBox(height: 85.h),
                     InkWell(
-                      onTap: () => authViewModel.onSignUp(),
+                      onTap: () => authViewModel.onSignUp(googleMapViewModel),
                       child: Container(
                         height: 40.h,
                         width: 340.w,

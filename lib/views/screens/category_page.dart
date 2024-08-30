@@ -55,12 +55,11 @@ class CategoryPage extends StatelessWidget {
                     child: GridView.builder(
                       shrinkWrap: false,
                       itemCount: homeViewModel.getAllCategories.length,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        childAspectRatio: 1.5,
                         crossAxisCount: 2,
                         crossAxisSpacing: 10,
                         mainAxisSpacing: 10,
-                        childAspectRatio: 1.5,
                       ),
                       itemBuilder: (BuildContext context, int index) {
                         CategoryModel category =

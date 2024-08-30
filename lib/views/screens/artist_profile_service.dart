@@ -11,7 +11,6 @@ import '../../utils/app_url.dart';
 import '../../view_models/cart_view_model.dart';
 import '../components/newely_added.dart';
 import '../components/text_heading.dart';
-import 'booking_detail_page.dart';
 
 class ArtistProfileService extends StatefulWidget {
   const ArtistProfileService({super.key});

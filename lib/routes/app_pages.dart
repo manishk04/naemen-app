@@ -13,12 +13,14 @@ import '../views/screens/language_view.dart';
 import '../views/screens/shop_page.dart';
 import '../views/screens/splash_screen.dart';
 import '../views/screens/venders_list.dart';
+import '../view_models/auth_view_model.dart';
 import 'app_routes.dart';
 
 class AppPages {
   static const initialRoute = Routes.splashRoute;
   static Map<String, WidgetBuilder> routes = {
-    Routes.splashRoute: (context) => const SplashView(),
+    Routes.splashRoute: (context) => SplashView(),
+    //VideoSplashView(),
     Routes.languageRoute: (context) => const LanguageView(),
     Routes.onboardingRoute: (context) => const OnboardingView(),
     Routes.loginPasswordRoute: (context) => const LoginPasswordView(),
@@ -31,5 +33,6 @@ class AppPages {
     Routes.vendersRoute: (context) => const VendersPage(),
     Routes.artistProfileRoute: (context) => const ArtistProfileService(),
     Routes.bookingDetailRoute: (context) => const BookingDetailPage(),
+    Routes.googleMapRoute: (context) => const GoogleMapScreen(),
   };
 }

@@ -1,10 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:naemen/models/salon_model.dart';
-import 'package:naemen/utils/app_functions.dart';
 import 'package:naemen/utils/app_url.dart';
 import 'package:naemen/view_models/cart_view_model.dart';
 import 'package:naemen/view_models/home_view_model.dart';
@@ -13,7 +10,6 @@ import 'package:naemen/view_models/salon_profile_view_model.dart';
 import 'package:naemen/views/components/search_bar.dart';
 import 'package:naemen/utils/color_constant.dart';
 
-import '../components/reusable_row.dart';
 import '../components/text_heading.dart';
 import 'home_page.dart';
 

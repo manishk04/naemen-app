@@ -1,9 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:naemen/models/salon_model.dart';
 import 'package:naemen/models/tag_model.dart';
+import 'package:naemen/views/screens/search_page.dart';
+import 'package:naemen/views/screens/venders_list.dart';
 
 import '../components/artist_slider.dart';
 import '../components/recommended.dart';
@@ -25,6 +29,8 @@ class HomeView extends StatefulWidget {
   @override
   State<HomeView> createState() => _HomeViewState();
 }
+
+List serviceName = ["Barber", "Salon", "SPA"];
 
 class _HomeViewState extends State<HomeView> {
   PageController pageController1 = PageController();
@@ -71,33 +77,41 @@ class _HomeViewState extends State<HomeView> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Image.asset("assets/images/Location.png"),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(width: 3.w),
-                                  TextHeading(
-                                    title: "Home",
-                                    fontweight: FontWeight.w600,
-                                    fontsize: 12.sp,
-                                    fontcolor:
-                                        isDark ? Colors.white : Colors.white,
-                                  ),
-                                  Obx(
-                                    () => TextHeading(
-                                      title: authViewModel.getAddress,
-                                      fontweight: FontWeight.w400,
-                                      fontsize: 11.sp,
-                                      fontcolor: Colors.white,
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SearchPage()));
+                            },
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Image.asset("assets/images/Location.png"),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(width: 3.w),
+                                    TextHeading(
+                                      title: "Home",
+                                      fontweight: FontWeight.w600,
+                                      fontsize: 12.sp,
+                                      fontcolor:
+                                          isDark ? Colors.white : Colors.white,
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ],
+                                    Obx(
+                                      () => TextHeading(
+                                        title: authViewModel.getAddress,
+                                        fontweight: FontWeight.w400,
+                                        fontsize: 11.sp,
+                                        fontcolor: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
 
                           //       Switch(
@@ -136,6 +150,57 @@ class _HomeViewState extends State<HomeView> {
                       // SizedBox(
                       //   height: 20.h,
                       // ),
+                      Container(
+                        height: 490.h,
+                        width: double.infinity,
+                        child: ListView.builder(
+                          itemCount: serviceName.length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Stack(
+                                children: [
+                                  Container(
+                                      height: 150.h,
+                                      width: 341.w,
+                                      decoration: BoxDecoration(
+                                          color: Colors.grey,
+                                          borderRadius:
+                                              BorderRadius.circular(10.r))),
+                                  Container(
+                                      height: 150.h,
+                                      width: 341.w,
+                                      decoration: BoxDecoration(
+                                          gradient: LinearGradient(
+                                            begin: Alignment.bottomCenter,
+                                            end: Alignment.centerLeft,
+                                            colors: <Color>[
+                                              Color(0xff000000)
+                                                  .withOpacity(0.1),
+                                              Color(0xff000000)
+                                                  .withOpacity(0.8),
+                                            ],
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(10.r))),
+                                  Positioned(
+                                    left: 15,
+                                    top: 65,
+                                    child: TextHeading(
+                                        title: serviceName[index],
+                                        fontweight: FontWeight.w700,
+                                        fontsize: 30.sp,
+                                        fontcolor: Colors.yellow.shade300),
+                                  )
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20.h,
+                      ),
                       Obx(
                         () => homeViewModel.getHomeCategories.isNotEmpty
                             ? InkWell(
@@ -289,6 +354,97 @@ class _HomeViewState extends State<HomeView> {
                         statuValue: 'ONLINE',
                         typeValue: 'Unisex',
                       ),
+                      SizedBox(
+                        height: 20.h,
+                      ),
+                      TextHeading(
+                          title: "Categories",
+                          fontweight: FontWeight.w600,
+                          fontsize: 12.sp,
+                          fontcolor: Colors.white),
+                      SizedBox(
+                        height: 20.h,
+                      ),
+                      SizedBox(
+                        height: 200.h,
+                        width: double.infinity,
+                        child: GridView.builder(
+                          shrinkWrap: false,
+                          itemCount: homeViewModel.getAllCategories.length,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            childAspectRatio: 1.5,
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10,
+                          ),
+                          itemBuilder: (BuildContext context, int index) {
+                            CategoryModel category =
+                                homeViewModel.getAllCategories[index];
+                            return InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => VendersPage(),
+                                  ),
+                                );
+                              },
+                              child: Stack(
+                                children: [
+                                  Container(
+                                    height: 87.h,
+                                    width: 165.w,
+                                    decoration: BoxDecoration(
+                                        color: AppColors.searchFieldsColor,
+                                        borderRadius:
+                                            BorderRadius.circular(10.r)),
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 10, top: 35),
+                                      child: TextHeading(
+                                        title: languageViewModel
+                                                    .getSelectedLanguage ==
+                                                "English"
+                                            ? category.categoryTitle ?? "NA"
+                                            : category.categoryArb ?? "NA",
+                                        fontweight: FontWeight.w600,
+                                        fontsize: 14.sp,
+                                        fontcolor: AppColors.primaryColor,
+                                      ),
+                                    ),
+                                  ),
+                                  Positioned(
+                                    right: -8,
+                                    top: 7.6,
+                                    child: Transform.rotate(
+                                      angle: -pi / 10,
+                                      child: Container(
+                                        height: 72.h,
+                                        width: 80.w,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(10.r),
+                                              topRight: Radius.circular(10.r),
+                                              bottomLeft: Radius.circular(10.r),
+                                              bottomRight:
+                                                  Radius.circular(10.r)),
+                                          image: DecorationImage(
+                                            image: NetworkImage(
+                                                "${AppUrl.baseUrl}/${category.categoryImage}"),
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+
                       SizedBox(
                         height: 30.h,
                       )

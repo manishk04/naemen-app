@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:naemen/models/salon_model.dart';
-import 'package:naemen/routes/app_routes.dart';
 import 'package:naemen/utils/app_url.dart';
 import 'package:naemen/utils/color_constant.dart';
 import 'package:naemen/view_models/cart_view_model.dart';

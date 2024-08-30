@@ -8,7 +8,6 @@ import 'package:naemen/view_models/cart_view_model.dart';
 import 'package:naemen/view_models/language_view_model.dart';
 import 'package:naemen/view_models/salon_profile_view_model.dart';
 import 'package:naemen/views/components/rating_bar.dart';
-import 'package:naemen/views/screens/artist_profile_service.dart';
 import 'package:naemen/utils/color_constant.dart';
 
 import '../components/text_heading.dart';

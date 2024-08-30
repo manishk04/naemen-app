@@ -30,6 +30,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+    
+
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -59,6 +61,9 @@ dependencies:
   animated_custom_dropdown: ^3.1.1
   scrollable_positioned_list: ^0.3.8
   quickalert: ^1.1.0
+  chewie: ^1.8.3
+  location: ^6.0.2
+  flutter_polyline_points: ^2.1.0
 
 
 dev_dependencies:
@@ -88,6 +93,8 @@ flutter:
     - assets/images/
     - assets/videos/
   #   - images/a_dot_ham.jpeg
+     - assets/images/
+     - assets/videos/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
