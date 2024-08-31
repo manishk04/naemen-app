@@ -107,6 +107,10 @@ class AuthViewModel extends GetxController {
       if (customerId.isNotEmpty && contactNumber.isNotEmpty) {
         setAddress = await StorageData.getAddress();
         if (getAddress.isNotEmpty) {
+          setCustomer = CustomerModel(
+            contactNumber: contactNumber,
+            id: int.parse(customerId),
+          );
           fetchLocation(googleMapViewModel);
         } else {
           Get.offNamed(Routes.bottomBarRoute);

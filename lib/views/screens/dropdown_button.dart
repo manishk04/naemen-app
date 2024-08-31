@@ -65,7 +65,7 @@ class _ExpansionTileControllerAppState
                                 "${AppUrl.baseUrl}/${service.servicesImage ?? ""}",
                             placeholder: (context, url) => const Center(
                               child: CircularProgressIndicator(
-                                color: AppColors.primaryColor,
+                                color: Colors.red,
                               ),
                             ),
                             errorWidget: (context, url, error) =>

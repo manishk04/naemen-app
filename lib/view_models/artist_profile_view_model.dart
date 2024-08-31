@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:naemen/repo/artist_rpo.dart';
+import 'package:naemen/view_models/auth_view_model.dart';
 import 'package:naemen/view_models/cart_view_model.dart';
 import 'package:naemen/views/components/add_service_warning.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
@@ -91,14 +92,14 @@ class ArtistProfileViewModel extends GetxController {
     if (_cartViewModel.getAddedServiceList.isEmpty ||
         (service.salonId == _cartViewModel.getAddedServiceList[0].salonId)) {
       _cartViewModel.addService(service);
-      showDateTimeDialog();
+      showDateTimeDialog(service);
     } else {
       Get.dialog(
         AddServiceWarning(
           onRemove: () {
             _cartViewModel.clearServices();
             _cartViewModel.addService(service);
-            showDateTimeDialog();
+            showDateTimeDialog(service);
           },
         ),
       );
@@ -109,10 +110,19 @@ class ArtistProfileViewModel extends GetxController {
     _cartViewModel.remove(service);
   }
 
-  showDateTimeDialog() {
+  showDateTimeDialog(ArtistServiceModel service) {
     setDates = getNextSevenDays();
     setSelectedDate = getDates[0];
-    setTimeSlots = getNextTimeSlots(const Duration(minutes: 15));
+    int serviceDuration = int.parse(service.serviceDuration ?? "0");
+    int intervalMinutes = serviceDuration + 10; // Interval between start times
+    int slotDurationMinutes = serviceDuration; // Duration of each slot
+
+    List<String> slots = generateTimeSlots(
+      intervalMinutes: intervalMinutes,
+      slotDurationMinutes: slotDurationMinutes,
+    );
+    log(slots.toString());
+    setTimeSlots = slots;
     Get.bottomSheet(
       BottomSheet(
         backgroundColor: Colors.black,
@@ -131,6 +141,7 @@ class ArtistProfileViewModel extends GetxController {
           onCancelClick: () => onBottomSheetCancel(),
         ),
       ),
+      isDismissible: false,
     );
   }
 
@@ -179,10 +190,16 @@ class ArtistProfileViewModel extends GetxController {
     }
   }
 
-  onViewProfileClick(ArtistModel artist, CartViewModel cartViewModel) {
-    setSelectedArtist = artist;
-    fetchArtistProfile(cartViewModel);
-    Get.toNamed(Routes.artistProfileRoute);
+  onViewProfileClick(ArtistModel artist, CartViewModel cartViewModel,
+      AuthViewModel authViewModel) {
+    if (authViewModel.getCustomer.id == null) {
+      Utils.toastMessage("Please Login to proceed!");
+      Get.offAllNamed(Routes.verifyMobileViewRoute);
+    } else {
+      setSelectedArtist = artist;
+      fetchArtistProfile(cartViewModel);
+      Get.toNamed(Routes.artistProfileRoute);
+    }
   }
 
   void fetchArtistProfile(CartViewModel cartViewModel) async {

@@ -37,6 +37,58 @@ List<String> getNextTimeSlots(Duration interval) {
   return times;
 }
 
+String getRoundedTime() {
+  DateTime now = DateTime.now();
+
+  // Calculate minutes to add to round up to the next 15-minute interval
+  int remainder = now.minute % 15;
+  int minutesToAdd = remainder == 0 ? 0 : 15 - remainder;
+
+  // Add the minutes to the current time
+  DateTime roundedTime = now.add(Duration(minutes: minutesToAdd));
+
+  // Format the time in HH:mm format
+  String formattedTime = DateFormat('HH:mm').format(roundedTime);
+
+  return formattedTime;
+}
+
+List<String> generateTimeSlots({
+  required int intervalMinutes,
+  required int slotDurationMinutes,
+  String endTime = '23:59',
+}) {
+  // Parse start and end times
+  DateTime now = DateTime.now();
+  String startTime = getRoundedTime();
+  DateTime startDateTime = DateTime(now.year, now.month, now.day,
+      int.parse(startTime.split(':')[0]), int.parse(startTime.split(':')[1]));
+  DateTime endDateTime = DateTime(now.year, now.month, now.day,
+      int.parse(endTime.split(':')[0]), int.parse(endTime.split(':')[1]));
+
+  List<String> timeSlots = [];
+
+  while (startDateTime
+      .add(Duration(minutes: slotDurationMinutes))
+      .isBefore(endDateTime)) {
+    // End time for each slot
+    DateTime slotEndTime =
+        startDateTime.add(Duration(minutes: slotDurationMinutes));
+
+    // Format time in HH:mm
+    String startTimeString = DateFormat('HH:mm').format(startDateTime);
+    String endTimeString = DateFormat('HH:mm').format(slotEndTime);
+
+    // Add the slot to the list
+    timeSlots.add('$startTimeString - $endTimeString');
+
+    // Move to the next slot by adding interval minutes
+    startDateTime = startDateTime.add(Duration(minutes: intervalMinutes));
+  }
+
+  return timeSlots;
+}
+
 String convertDate(String dateStr) {
   DateFormat inputFormat = DateFormat('dd-MM-yyyy');
   DateTime dateTime = inputFormat.parse(dateStr);

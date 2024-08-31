@@ -1,4 +1,3 @@
-import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -281,7 +280,7 @@ class SelectDateTimeWidget extends StatelessWidget {
                   crossAxisCount: 2,
                   mainAxisSpacing: 5.h,
                   crossAxisSpacing: 5.w,
-                  childAspectRatio: 0.65,
+                  childAspectRatio: 0.48,
                 ),
                 itemBuilder: (context, index) {
                   String time = artistProfileViewModel.getTimeSlots[index];

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:naemen/models/artist_model.dart';
 import 'package:naemen/utils/app_url.dart';
 import 'package:naemen/view_models/artist_profile_view_model.dart';
+import 'package:naemen/view_models/auth_view_model.dart';
 import 'package:naemen/view_models/cart_view_model.dart';
 import 'package:naemen/view_models/language_view_model.dart';
 import 'package:naemen/view_models/salon_profile_view_model.dart';
@@ -24,6 +25,7 @@ class _ShopPageState extends State<ShopPage> {
   final LanguageViewModel _languageViewModel = Get.find();
   final ArtistProfileViewModel _artistProfileViewModel = Get.find();
   final CartViewModel _cartViewModel = Get.find();
+  final AuthViewModel _authViewModel = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -464,7 +466,8 @@ class _ShopPageState extends State<ShopPage> {
                                                     _artistProfileViewModel
                                                         .onViewProfileClick(
                                                             artist,
-                                                            _cartViewModel),
+                                                            _cartViewModel,
+                                                            _authViewModel),
                                                 child: Container(
                                                   height: 34.h,
                                                   width: 90.w,
