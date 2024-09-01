@@ -88,6 +88,12 @@ class ArtistProfileViewModel extends GetxController {
   set setSelectedTime(String time) => _selectedTime.value = time;
 
   // =============================== Methods ===================================
+  void resetOrderData() {
+    // After Order Success
+    setSelectedDate = getDates[0];
+    setSelectedTime = "";
+  }
+
   void onServiceAdd(ArtistServiceModel service) {
     if (_cartViewModel.getAddedServiceList.isEmpty ||
         (service.salonId == _cartViewModel.getAddedServiceList[0].salonId)) {

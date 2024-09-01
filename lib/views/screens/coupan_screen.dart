@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:naemen/views/screens/order_page.dart';
+import 'package:naemen/views/screens/order_success_view.dart';
 import 'package:naemen/utils/color_constant.dart';
 
 import '../components/text_heading.dart';
@@ -165,7 +165,7 @@ class _CoupanPageState extends State<CoupanPage> {
                                                       context,
                                                       MaterialPageRoute(
                                                           builder: (context) =>
-                                                              OrderPage()));
+                                                              OrderSuccessView()));
                                                 },
                                                 child: TextHeading(
                                                     title: "FLAT OFF",

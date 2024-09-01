@@ -8,7 +8,10 @@ import 'package:naemen/view_models/language_view_model.dart';
 import 'package:naemen/views/screens/coupan_screen.dart';
 
 import '../../utils/color_constant.dart';
+import '../../utils/storage_data.dart';
+import '../../view_models/auth_view_model.dart';
 import '../../view_models/cart_view_model.dart';
+import '../components/booking_dattime_widget.dart';
 import '../components/text_heading.dart';
 
 class BookingDetailPage extends StatefulWidget {
@@ -20,6 +23,7 @@ class BookingDetailPage extends StatefulWidget {
 
 class _BookingDetailPageState extends State<BookingDetailPage> {
   final CartViewModel _cartViewModel = Get.find();
+  final AuthViewModel _authViewModel = Get.find();
   final LanguageViewModel _languageViewModel = Get.find();
   @override
   Widget build(BuildContext context) {
@@ -209,84 +213,7 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
                 SizedBox(
                   height: 15.h,
                 ),
-                Container(
-                  height: 84.h,
-                  width: 340.w,
-                  decoration: BoxDecoration(
-                      color: AppColors.searchFieldsColor,
-                      border: Border.all(color: AppColors.signUpColor),
-                      borderRadius: BorderRadius.circular(16.r)),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Row(
-                          children: [
-                            TextHeading(
-                                title: "Date & Timing: ",
-                                fontweight: FontWeight.w400,
-                                fontsize: 12,
-                                fontcolor: Colors.white),
-                            TextHeading(
-                                title:
-                                    "${DateFormat("EEEE, dd MMM").format(DateFormat("dd-MM-yyyy").parse(_cartViewModel.getAddedServiceList[0].date ?? ""))} - ${_cartViewModel.getAddedServiceList[0].time ?? ""}",
-                                fontweight: FontWeight.w400,
-                                fontsize: 12,
-                                fontcolor: AppColors.primaryColor),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 5.h,
-                        ),
-                        Row(
-                          children: [
-                            TextHeading(
-                                title: "Artist: ",
-                                fontweight: FontWeight.w400,
-                                fontsize: 12,
-                                fontcolor: Colors.white),
-                            TextHeading(
-                                title: _languageViewModel.getSelectedLanguage ==
-                                        "English"
-                                    ? _cartViewModel
-                                            .getSelectedArtist.artistNameEng ??
-                                        "NA"
-                                    : _cartViewModel
-                                            .getSelectedArtist.artistNameEng ??
-                                        "NA",
-                                fontweight: FontWeight.w400,
-                                fontsize: 12,
-                                fontcolor: AppColors.primaryColor),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 5.h,
-                        ),
-                        Row(
-                          children: [
-                            TextHeading(
-                                title: "Gender: ",
-                                fontweight: FontWeight.w400,
-                                fontsize: 12,
-                                fontcolor: Colors.white),
-                            TextHeading(
-                                title:
-                                    _cartViewModel.getSelectedArtist.gender ??
-                                        "NA",
-                                fontweight: FontWeight.w400,
-                                fontsize: 12,
-                                fontcolor: AppColors.primaryColor),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 5.h,
-                        )
-                      ],
-                    ),
-                  ),
-                ),
+                const BookingDateTimeWidget(), // DateTime, Artist and Gender
                 SizedBox(height: 20.h),
                 Container(
                   // height: 160.h,
@@ -357,7 +284,7 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
                                 Expanded(
                                   flex: 2,
                                   child: TextHeading(
-                                      title: service.serviceDuration ?? "",
+                                      title: service.time ?? "",
                                       fontweight: FontWeight.w400,
                                       fontsize: 12,
                                       fontcolor: Colors.white),
@@ -398,12 +325,13 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
                         ),
                         Row(
                           children: [
-                            Expanded(
-                                flex: 1,
-                                child: Icon(
-                                  Icons.countertops_outlined,
-                                  color: AppColors.primaryColor,
-                                )),
+                            const Expanded(
+                              flex: 1,
+                              child: Icon(
+                                Icons.countertops_outlined,
+                                color: AppColors.primaryColor,
+                              ),
+                            ),
                             Expanded(
                                 flex: 3,
                                 child: TextHeading(
@@ -585,18 +513,22 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
                                 fontweight: FontWeight.w400,
                                 fontsize: 12.sp,
                                 fontcolor: Colors.white),
-                            Container(
-                              height: 28.h,
-                              width: 78.w,
-                              decoration: BoxDecoration(
-                                  color: AppColors.primaryColor,
-                                  borderRadius: BorderRadius.circular(4.r)),
-                              child: Center(
-                                child: TextHeading(
-                                    title: "Book now",
-                                    fontweight: FontWeight.w400,
-                                    fontsize: 12.sp,
-                                    fontcolor: Colors.white),
+                            InkWell(
+                              onTap: () =>
+                                  _cartViewModel.onBookNowClick(_authViewModel),
+                              child: Container(
+                                height: 28.h,
+                                width: 78.w,
+                                decoration: BoxDecoration(
+                                    color: AppColors.primaryColor,
+                                    borderRadius: BorderRadius.circular(4.r)),
+                                child: Center(
+                                  child: TextHeading(
+                                      title: "Book now",
+                                      fontweight: FontWeight.w400,
+                                      fontsize: 12.sp,
+                                      fontcolor: Colors.white),
+                                ),
                               ),
                             ),
                           ],

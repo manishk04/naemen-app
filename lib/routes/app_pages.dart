@@ -10,6 +10,7 @@ import '../views/screens/booking_detail_page.dart';
 import '../views/screens/bottom_bar.dart';
 import '../views/screens/category_page.dart';
 import '../views/screens/language_view.dart';
+import '../views/screens/order_success_view.dart';
 import '../views/screens/shop_page.dart';
 import '../views/screens/splash_screen.dart';
 import '../views/screens/venders_list.dart';
@@ -34,5 +35,6 @@ class AppPages {
     Routes.artistProfileRoute: (context) => const ArtistProfileService(),
     Routes.bookingDetailRoute: (context) => const BookingDetailPage(),
     Routes.googleMapRoute: (context) => const GoogleMapScreen(),
+    Routes.orderSuccessRoute: (context) => const OrderSuccessView(),
   };
 }
