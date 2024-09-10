@@ -553,28 +553,6 @@ class _ShopPageState extends State<ShopPage> {
                               SizedBox(
                                 height: 15.h,
                               ),
-                              // Container(
-                              //   height: 152.h,
-                              //   width: 340.w,
-                              //   decoration: BoxDecoration(
-                              //       color: AppColors.searchFieldsColor,
-                              //       borderRadius: BorderRadius.circular(16.r),
-                              //       border: Border.all(color: AppColors.signUpColor)),
-                              //   child: Column(
-                              //     children: [
-                              //       Row(
-                              //         children: [
-                              //           TextHeading(
-                              //               title: "5",
-                              //               fontweight: FontWeight.w600,
-                              //               fontsize: 12.sp,
-                              //               fontcolor: Colors.white),
-                              //           ProgressIndicatorExample(),
-                              //         ],
-                              //       )
-                              //     ],
-                              //   ),
-                              // ),
                               Container(
                                 height: 152.h,
                                 width: 340.w,
