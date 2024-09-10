@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:naemen/utils/color_constant.dart';
+import 'package:naemen/views/screens/appointment_history.dart';
 
 import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
 
@@ -39,7 +40,11 @@ class _BottomBarViewState extends State<BottomBarView> {
         child: PageView(
           clipBehavior: Clip.antiAlias,
           controller: controller,
-          children: const [HomeView(), MyScendScreen(), MyBagScreen()],
+          children: const [
+            HomeView(),
+            AppointmentHIstoreyPage(),
+            MyBagScreen()
+          ],
           onPageChanged: (value) => setState(() {
             selected = value;
             controller.jumpToPage(value);
@@ -73,7 +78,8 @@ class _BottomBarViewState extends State<BottomBarView> {
             // backgroundColor: AppColors.primaryColor,
           ),
           BottomBarItem(
-         //   badgeColor: Colors.red,
+            //   badgeColor: Colors.red,
+            //   badgeColor: Colors.red,
 
             icon: const Icon(Icons.bookmark),
             title: const Text('Bookmark'),

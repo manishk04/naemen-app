@@ -280,7 +280,7 @@ class SelectDateTimeWidget extends StatelessWidget {
                   crossAxisCount: 2,
                   mainAxisSpacing: 5.h,
                   crossAxisSpacing: 5.w,
-                  childAspectRatio: 0.3,
+                  childAspectRatio: 0.48,
                 ),
                 itemBuilder: (context, index) {
                   String time = artistProfileViewModel.getTimeSlots[index];

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:naemen/views/components/appointment_filter.dart';
 import 'package:naemen/views/components/search_bar.dart';
+import 'package:naemen/views/screens/appointment_detail_page.dart';
 import 'package:naemen/views/screens/shop_page.dart';
 import 'package:naemen/utils/color_constant.dart';
 
@@ -242,6 +243,13 @@ class _AppointmentHIstoreyPageState extends State<AppointmentHIstoreyPage> {
                                               width: 10.w,
                                             ),
                                             InkWell(
+                                              onTap: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            AppointmentDetailPage()));
+                                              },
                                               child: Container(
                                                 height: 23.h,
                                                 width: 72.w,

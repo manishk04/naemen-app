@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:naemen/models/salon_model.dart';
 import 'package:naemen/models/tag_model.dart';
+import 'package:naemen/views/components/crousel_slider.dart';
 import 'package:naemen/views/screens/search_page.dart';
 import 'package:naemen/views/screens/venders_list.dart';
 
@@ -31,6 +32,11 @@ class HomeView extends StatefulWidget {
 }
 
 List serviceName = ["Barber", "Salon", "SPA"];
+List imagesHome = [
+  "assets/images/barbar_namen.jpg",
+  "assets/images/salon_namen.jpg",
+  "assets/images/spa_namen.jpg",
+];
 
 class _HomeViewState extends State<HomeView> {
   PageController pageController1 = PageController();
@@ -139,100 +145,104 @@ class _HomeViewState extends State<HomeView> {
                       // SizedBox(
                       //   height: 20.h,
                       // ),
-                      // Obx(
-                      //   () => homeViewModel.getBanners.isNotEmpty
-                      //       ? HomePageSlider(
-                      //           pageController1: pageController1,
-                      //           banners: homeViewModel.getBanners,
-                      //         )
-                      //       : const SizedBox(),
+                      Obx(
+                        () => homeViewModel.getBanners.isNotEmpty
+                            ? HomePageSlider(
+                                pageController1: pageController1,
+                                banners: homeViewModel.getBanners,
+                              )
+                            : const SizedBox(),
+                      ),
+                      // SizedBox(
+                      //   height: 20.h,
+                      // ),
+                      // Container(
+                      //   height: 490.h,
+                      //   width: double.infinity,
+                      //   child: ListView.builder(
+                      //     itemCount: imagesHome.length,
+                      //     physics: const NeverScrollableScrollPhysics(),
+                      //     itemBuilder: (context, index) {
+                      //       return Padding(
+                      //         padding: const EdgeInsets.all(8.0),
+                      //         child: Stack(
+                      //           children: [
+                      //             Container(
+                      //                 height: 150.h,
+                      //                 width: 341.w,
+                      //                 decoration: BoxDecoration(
+                      //                     image: DecorationImage(
+                      //                         image:
+                      //                             AssetImage(imagesHome[index]),
+                      //                         fit: BoxFit.cover),
+                      //                     color: Colors.grey,
+                      //                     borderRadius:
+                      //                         BorderRadius.circular(10.r))),
+                      //             Container(
+                      //                 height: 150.h,
+                      //                 width: 341.w,
+                      //                 decoration: BoxDecoration(
+                      //                     gradient: LinearGradient(
+                      //                       begin: Alignment.bottomCenter,
+                      //                       end: Alignment.centerLeft,
+                      //                       colors: <Color>[
+                      //                         Color(0xff000000)
+                      //                             .withOpacity(0.1),
+                      //                         Color(0xff000000)
+                      //                             .withOpacity(0.8),
+                      //                       ],
+                      //                     ),
+                      //                     borderRadius:
+                      //                         BorderRadius.circular(10.r))),
+                      //             Positioned(
+                      //               left: 15,
+                      //               top: 65,
+                      //               child: TextHeading(
+                      //                   title: serviceName[index],
+                      //                   fontweight: FontWeight.w700,
+                      //                   fontsize: 30.sp,
+                      //                   fontcolor: Colors.yellow.shade300),
+                      //             )
+                      //           ],
+                      //         ),
+                      //       );
+                      //     },
+                      //   ),
                       // ),
                       // SizedBox(
                       //   height: 20.h,
                       // ),
-                      Container(
-                        height: 490.h,
-                        width: double.infinity,
-                        child: ListView.builder(
-                          itemCount: serviceName.length,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Stack(
-                                children: [
-                                  Container(
-                                      height: 150.h,
-                                      width: 341.w,
-                                      decoration: BoxDecoration(
-                                          color: Colors.grey,
-                                          borderRadius:
-                                              BorderRadius.circular(10.r))),
-                                  Container(
-                                      height: 150.h,
-                                      width: 341.w,
-                                      decoration: BoxDecoration(
-                                          gradient: LinearGradient(
-                                            begin: Alignment.bottomCenter,
-                                            end: Alignment.centerLeft,
-                                            colors: <Color>[
-                                              Color(0xff000000)
-                                                  .withOpacity(0.1),
-                                              Color(0xff000000)
-                                                  .withOpacity(0.8),
-                                            ],
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(10.r))),
-                                  Positioned(
-                                    left: 15,
-                                    top: 65,
-                                    child: TextHeading(
-                                        title: serviceName[index],
-                                        fontweight: FontWeight.w700,
-                                        fontsize: 30.sp,
-                                        fontcolor: Colors.yellow.shade300),
-                                  )
-                                ],
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                      Obx(
-                        () => homeViewModel.getHomeCategories.isNotEmpty
-                            ? InkWell(
-                                onTap: () => Get.toNamed(Routes.categoryRoute),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    TextHeading(
-                                        title: "Categories",
-                                        fontweight: FontWeight.w600,
-                                        fontsize: 12.sp,
-                                        fontcolor: Colors.white),
-                                    TextHeading(
-                                        title: "View all",
-                                        fontweight: FontWeight.w400,
-                                        fontsize: 10.sp,
-                                        fontcolor: Colors.white)
-                                  ],
-                                ),
-                              )
-                            : SizedBox(),
-                      ),
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                      CategoryListWidget(
-                        homeViewModel: homeViewModel,
-                        languageViewModel: languageViewModel,
-                        canNavigate: true,
-                      ),
+                      // Obx(
+                      //   () => homeViewModel.getHomeCategories.isNotEmpty
+                      //       ? InkWell(
+                      //           onTap: () => Get.toNamed(Routes.categoryRoute),
+                      //           child: Row(
+                      //             mainAxisAlignment:
+                      //                 MainAxisAlignment.spaceBetween,
+                      //             children: [
+                      //               TextHeading(
+                      //                   title: "Categories",
+                      //                   fontweight: FontWeight.w600,
+                      //                   fontsize: 12.sp,
+                      //                   fontcolor: Colors.white),
+                      //               TextHeading(
+                      //                   title: "View all",
+                      //                   fontweight: FontWeight.w400,
+                      //                   fontsize: 10.sp,
+                      //                   fontcolor: Colors.white)
+                      //             ],
+                      //           ),
+                      //         )
+                      //       : SizedBox(),
+                      // ),
+                      // SizedBox(
+                      //   height: 20.h,
+                      // ),
+                      // CategoryListWidget(
+                      //   homeViewModel: homeViewModel,
+                      //   languageViewModel: languageViewModel,
+                      //   canNavigate: true,
+                      // ),
                       SizedBox(
                         height: 20.h,
                       ),

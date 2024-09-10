@@ -5,6 +5,7 @@ import 'package:naemen/models/artist_model.dart';
 import 'package:naemen/models/order_detail_model.dart';
 import 'package:naemen/models/store_model.dart';
 import 'package:naemen/view_models/artist_profile_view_model.dart';
+import 'package:naemen/models/store_model.dart';
 import 'package:naemen/view_models/auth_view_model.dart';
 
 import '../models/artist_service_model.dart';

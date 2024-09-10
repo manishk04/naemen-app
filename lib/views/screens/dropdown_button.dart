@@ -46,9 +46,8 @@ class _ExpansionTileControllerAppState
                   // height: 123.h,
                   width: 340.w,
                   decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(16.r),
-                  ),
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(16.r)),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(

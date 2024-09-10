@@ -41,6 +41,7 @@ class _HomePageSliderState extends State<HomePageSlider> {
             },
             itemBuilder: (context, index) => Container(
               decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16.r),
                 image: DecorationImage(
                   image: NetworkImage(
                       "${AppUrl.baseUrl}/${widget.banners[index].bannerImageUrl}"),

@@ -3,6 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../models/order_item_model.dart';
+import 'package:naemen/view_models/language_view_model.dart';
+
+import '../../models/artist_service_model.dart';
 import '../../routes/app_routes.dart';
 import '../../utils/color_constant.dart';
 import '../../view_models/artist_profile_view_model.dart';

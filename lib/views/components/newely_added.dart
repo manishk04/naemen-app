@@ -234,7 +234,7 @@ class WinterSpecialItems extends StatelessWidget {
           decoration: BoxDecoration(
               color: AppColors.searchFieldsColor,
               borderRadius: BorderRadius.circular(16.r),
-              border: Border.all(color: AppColors.signUpColor)),
+              border: Border.all(color: AppColors.signUpColor, width: 0.2)),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 5),
@@ -264,6 +264,37 @@ class WinterSpecialItems extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     //SizedBox(height: 5.h,),
+                    // Row(
+                    //   children: [
+                    //     TextHeading(
+                    //         title: status,
+                    //         fontweight: FontWeight.w600,
+                    //         fontsize: 12.sp,
+                    //         fontcolor: Colors.white),
+                    //     SizedBox(
+                    //       width: 3.w,
+                    //     ),
+                    //     TextHeading(
+                    //         title: statusValue == "2"
+                    //             ? "OFF"
+                    //             : statusValue == "1"
+                    //                 ? "ON"
+                    //                 : "",
+                    //         fontweight: FontWeight.w400,
+                    //         fontsize: 12.sp,
+                    //         fontcolor: AppColors.primaryColor)
+                    //   ],
+                    // ),
+
+                    SizedBox(
+                      height: 3.h,
+                    ),
+
+                    TextHeading(
+                        title: description,
+                        fontweight: FontWeight.w600,
+                        fontsize: 12.sp,
+                        fontcolor: Colors.white),
                     Row(
                       children: [
                         TextHeading(
@@ -285,16 +316,6 @@ class WinterSpecialItems extends StatelessWidget {
                             fontcolor: AppColors.primaryColor)
                       ],
                     ),
-
-                    SizedBox(
-                      height: 3.h,
-                    ),
-
-                    TextHeading(
-                        title: description,
-                        fontweight: FontWeight.w600,
-                        fontsize: 12.sp,
-                        fontcolor: Colors.white),
                     Row(
                       children: [
                         TextHeading(
@@ -338,6 +359,8 @@ class WinterSpecialItems extends StatelessWidget {
                           height: 34.h,
                           width: 34.w,
                           decoration: BoxDecoration(
+                            border: Border.all(
+                                color: AppColors.signUpColor, width: 0.2),
                             color: Colors.black,
                             borderRadius: BorderRadius.circular(8.r),
                           ),
