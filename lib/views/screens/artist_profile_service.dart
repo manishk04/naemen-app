@@ -253,7 +253,7 @@ class _ArtistProfileServiceState extends State<ArtistProfileService> {
                                       InkWell(
                                         onTap: () {
                                           _artistProfileViewModel
-                                              .checkArtistAvailability();
+                                              .showDateTimeDialog();
                                           // Navigator.push(context, MaterialPageRoute(builder: (context)=>AppointmentScreen()));
                                         },
                                         child: Obx(
@@ -332,6 +332,7 @@ class _ArtistProfileServiceState extends State<ArtistProfileService> {
                                       //   height: 10.h,
                                       // ),
                                       ExpansionTile(
+                                          initiallyExpanded: true,
                                           iconColor: Colors.white,
                                           controller: _artistProfileViewModel
                                               .getControllers[index],

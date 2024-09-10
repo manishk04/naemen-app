@@ -4,14 +4,16 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:naemen/models/artist_service_model.dart';
 import 'package:naemen/utils/app_url.dart';
+import 'package:naemen/view_models/artist_profile_view_model.dart';
 import 'package:naemen/view_models/language_view_model.dart';
 import 'package:naemen/views/screens/coupan_screen.dart';
 
+import '../../utils/app_functions.dart';
 import '../../utils/color_constant.dart';
 import '../../utils/storage_data.dart';
 import '../../view_models/auth_view_model.dart';
 import '../../view_models/cart_view_model.dart';
-import '../components/booking_dattime_widget.dart';
+import '../components/booking_datetime_widget.dart';
 import '../components/text_heading.dart';
 
 class BookingDetailPage extends StatefulWidget {
@@ -23,6 +25,7 @@ class BookingDetailPage extends StatefulWidget {
 
 class _BookingDetailPageState extends State<BookingDetailPage> {
   final CartViewModel _cartViewModel = Get.find();
+  final ArtistProfileViewModel _artistProfileViewModel = Get.find();
   final AuthViewModel _authViewModel = Get.find();
   final LanguageViewModel _languageViewModel = Get.find();
   @override
@@ -198,10 +201,11 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
                                     width: 3.w,
                                   ),
                                   TextHeading(
-                                      title: "Child Service available",
-                                      fontweight: FontWeight.w400,
-                                      fontsize: 12.sp,
-                                      fontcolor: AppColors.primaryColor)
+                                    title: "Child Service available",
+                                    fontweight: FontWeight.w400,
+                                    fontsize: 12.sp,
+                                    fontcolor: AppColors.primaryColor,
+                                  )
                                 ],
                               ),
                           ],
@@ -213,99 +217,109 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
                 SizedBox(
                   height: 15.h,
                 ),
-                const BookingDateTimeWidget(), // DateTime, Artist and Gender
-                SizedBox(height: 20.h),
                 Container(
-                  // height: 160.h,
                   width: 340.w,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   decoration: BoxDecoration(
-                      color: AppColors.searchFieldsColor,
-                      border: Border.all(color: AppColors.signUpColor),
-                      borderRadius: BorderRadius.circular(16.r)),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 10),
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            Expanded(
-                              flex: 3,
-                              child: TextHeading(
-                                  title: "Services",
-                                  fontweight: FontWeight.w400,
-                                  fontsize: 12,
-                                  fontcolor: Colors.white),
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: TextHeading(
-                                  title: "Time",
-                                  fontweight: FontWeight.w400,
-                                  fontsize: 12,
-                                  fontcolor: AppColors.primaryColor),
-                            ),
-                            Expanded(
-                              child: TextHeading(
-                                  title: "Price",
-                                  fontweight: FontWeight.w400,
-                                  fontsize: 12,
-                                  fontcolor: AppColors.primaryColor),
-                            ),
-                          ],
-                        ),
-                        // Divider(),
-                        // SizedBox(
-                        //   height: 5.h,
-                        // ),
-                        ListView.separated(
-                          shrinkWrap: true,
-                          itemCount: _cartViewModel.getAddedServiceList.length,
-                          separatorBuilder: (context, index) => SizedBox(
-                            height: 5.h,
+                    color: AppColors.searchFieldsColor,
+                    border: Border.all(color: AppColors.signUpColor),
+                    borderRadius: BorderRadius.circular(16.r),
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Row(
+                        children: [
+                          Expanded(
+                            flex: 3,
+                            child: TextHeading(
+                                title: "Services",
+                                fontweight: FontWeight.w400,
+                                fontsize: 12,
+                                fontcolor: Colors.white),
                           ),
-                          itemBuilder: (context, index) {
-                            ArtistServiceModel service =
-                                _cartViewModel.getAddedServiceList[index];
-                            return Row(
-                              children: [
-                                Expanded(
-                                  flex: 3,
-                                  child: TextHeading(
-                                      title: _languageViewModel
-                                                  .getSelectedLanguage ==
-                                              "English"
-                                          ? service.categoryTitle ?? "NA"
-                                          : service.categoryArb ?? "NA",
-                                      fontweight: FontWeight.w400,
-                                      fontsize: 12,
-                                      fontcolor: Colors.white),
-                                ),
-                                Expanded(
-                                  flex: 2,
-                                  child: TextHeading(
-                                      title: service.time ?? "",
-                                      fontweight: FontWeight.w400,
-                                      fontsize: 12,
-                                      fontcolor: Colors.white),
-                                ),
-                                Expanded(
-                                  flex: 1,
-                                  child: TextHeading(
-                                      title:
-                                          "SAR ${service.serviceFinalAmount ?? 0}",
-                                      fontweight: FontWeight.w400,
-                                      fontsize: 12,
-                                      fontcolor: AppColors.primaryColor),
-                                ),
-                              ],
-                            );
-                          },
+                          Expanded(
+                            flex: 2,
+                            child: TextHeading(
+                                title: "Duration",
+                                fontweight: FontWeight.w400,
+                                fontsize: 12,
+                                fontcolor: AppColors.primaryColor),
+                          ),
+                          Expanded(
+                            child: TextHeading(
+                                title: "Price",
+                                fontweight: FontWeight.w400,
+                                fontsize: 12,
+                                fontcolor: AppColors.primaryColor),
+                          ),
+                        ],
+                      ),
+                      ListView.separated(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: _cartViewModel.getAddedServiceList.length,
+                        separatorBuilder: (context, index) => SizedBox(
+                          height: 10.h,
                         ),
-                      ],
-                    ),
+                        itemBuilder: (context, index) {
+                          ArtistServiceModel service =
+                              _cartViewModel.getAddedServiceList[index];
+                          // String time =
+                          //     "${service.time?.substring(0, 5) ?? ""} - ${service.time?.substring(11, 16) ?? ""}";
+                          return Row(
+                            children: [
+                              Expanded(
+                                flex: 3,
+                                child: TextHeading(
+                                    title: _languageViewModel
+                                                .getSelectedLanguage ==
+                                            "English"
+                                        ? service.categoryTitle ?? "NA"
+                                        : service.categoryArb ?? "NA",
+                                    fontweight: FontWeight.w400,
+                                    fontsize: 12,
+                                    fontcolor: Colors.white),
+                              ),
+                              Expanded(
+                                flex: 2,
+                                child: TextHeading(
+                                  title: convertMinutesToHourMinutes(int.parse(
+                                      service.serviceDuration ?? "0")),
+                                  fontweight: FontWeight.w400,
+                                  fontsize: 12,
+                                  fontcolor: Colors.white,
+                                ),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: TextHeading(
+                                    title:
+                                        "SAR ${service.serviceFinalAmount ?? 0}",
+                                    fontweight: FontWeight.w400,
+                                    fontsize: 12,
+                                    fontcolor: AppColors.primaryColor),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                    ],
                   ),
                 ),
+
+                // Divider(),
+                SizedBox(
+                  height: 10.h,
+                ),
+                BookingDateTimeWidget(
+                  name: _languageViewModel.getSelectedLanguage == "English"
+                      ? _cartViewModel.getSelectedArtist.artistNameEng ?? "NA"
+                      : _cartViewModel.getSelectedArtist.artistNameArb ?? "NA",
+                  date: _artistProfileViewModel.getSelectedDate,
+                  time: _artistProfileViewModel.getSelectedTime,
+                ), // DateTime, Artist and Gender
                 SizedBox(
                   height: 10.h,
                 ),
@@ -477,7 +491,7 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
                                 fontsize: 12.sp,
                                 fontcolor: Colors.white),
                             TextHeading(
-                                title: "SAR 72",
+                                title: "SAR 00",
                                 fontweight: FontWeight.w400,
                                 fontsize: 12.sp,
                                 fontcolor: AppColors.primaryColor)
@@ -514,14 +528,15 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
                                 fontsize: 12.sp,
                                 fontcolor: Colors.white),
                             InkWell(
-                              onTap: () =>
-                                  _cartViewModel.onBookNowClick(_authViewModel),
+                              onTap: () => _cartViewModel.onBookNowClick(
+                                  _authViewModel, _artistProfileViewModel),
                               child: Container(
                                 height: 28.h,
                                 width: 78.w,
                                 decoration: BoxDecoration(
-                                    color: AppColors.primaryColor,
-                                    borderRadius: BorderRadius.circular(4.r)),
+                                  color: AppColors.primaryColor,
+                                  borderRadius: BorderRadius.circular(4.r),
+                                ),
                                 child: Center(
                                   child: TextHeading(
                                       title: "Book now",

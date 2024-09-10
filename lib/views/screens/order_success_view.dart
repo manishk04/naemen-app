@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:naemen/view_models/language_view_model.dart';
 
-import '../../models/artist_service_model.dart';
+import '../../models/order_item_model.dart';
 import '../../routes/app_routes.dart';
 import '../../utils/color_constant.dart';
 import '../../view_models/artist_profile_view_model.dart';
 import '../../view_models/cart_view_model.dart';
-import '../components/booking_dattime_widget.dart';
+import '../../view_models/language_view_model.dart';
+import '../components/booking_datetime_widget.dart';
 import '../components/text_heading.dart';
 
 class OrderSuccessView extends StatelessWidget {
@@ -86,84 +86,77 @@ class OrderSuccessView extends StatelessWidget {
                     fontweight: FontWeight.w400,
                     fontsize: 12.sp,
                     fontcolor: Colors.white,
+                    maxLines: 6,
+                    textAlign: TextAlign.center,
                   ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  const BookingDateTimeWidget(), // DateTime, Artist and Gender
                   SizedBox(
                     height: 20.h,
                   ),
                   Container(
-                    height: 160.h,
+                    // height: 160.h,
                     width: 340.w,
                     decoration: BoxDecoration(
-                      color: AppColors.searchFieldsColor,
-                      border: Border.all(
-                        color: AppColors.signUpColor,
-                      ),
-                      borderRadius: BorderRadius.circular(16.r),
-                    ),
+                        color: AppColors.searchFieldsColor,
+                        border: Border.all(color: AppColors.signUpColor),
+                        borderRadius: BorderRadius.circular(16.r)),
                     child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 10.w,
-                        vertical: 10.h,
-                      ),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 10),
                       child: Column(
                         children: [
                           const Row(
                             children: [
                               Expanded(
-                                flex: 5,
+                                flex: 3,
                                 child: TextHeading(
-                                  title: "Services",
-                                  fontweight: FontWeight.w400,
-                                  fontsize: 12,
-                                  fontcolor: Colors.white,
-                                ),
+                                    title: "Services",
+                                    fontweight: FontWeight.w400,
+                                    fontsize: 12,
+                                    fontcolor: Colors.white),
                               ),
                               Expanded(
                                 child: TextHeading(
-                                  title: "Price",
-                                  fontweight: FontWeight.w400,
-                                  fontsize: 12,
-                                  fontcolor: AppColors.primaryColor,
-                                ),
+                                    title: "Price",
+                                    fontweight: FontWeight.w400,
+                                    fontsize: 12,
+                                    fontcolor: AppColors.primaryColor),
                               ),
                             ],
                           ),
-                          // const Divider(),
-                          // SizedBox(
-                          //   height: 5.h,
-                          // ),
-
+                          Divider(),
                           ListView.separated(
                             shrinkWrap: true,
-                            itemCount: cartViewModel.getAddedServiceList.length,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: cartViewModel
+                                    .getOrderDetail.orderItems?.length ??
+                                0,
                             separatorBuilder: (context, index) => SizedBox(
-                              height: 5.h,
+                              height: 10.h,
                             ),
                             itemBuilder: (context, index) {
-                              ArtistServiceModel service =
-                                  cartViewModel.getAddedServiceList[index];
+                              OrderItemModel order = cartViewModel
+                                  .getOrderDetail.orderItems![index];
+
                               return Row(
                                 children: [
                                   Expanded(
-                                    flex: 5,
+                                    flex: 3,
                                     child: TextHeading(
-                                        title: languageViewModel
-                                                    .getSelectedLanguage ==
-                                                "English"
-                                            ? service.categoryTitle ?? "NA"
-                                            : service.categoryArb ?? "NA",
-                                        fontweight: FontWeight.w400,
-                                        fontsize: 12,
-                                        fontcolor: Colors.white),
+                                      title: languageViewModel
+                                                  .getSelectedLanguage ==
+                                              "English"
+                                          ? order.serviceTitle ?? "NA"
+                                          : order.serviceTitleArb ?? "NA",
+                                      fontweight: FontWeight.w400,
+                                      fontsize: 12,
+                                      fontcolor: Colors.white,
+                                    ),
                                   ),
                                   Expanded(
+                                    flex: 1,
                                     child: TextHeading(
                                         title:
-                                            "SAR ${service.serviceFinalAmount ?? 0}",
+                                            "SAR ${order.serviceAmount ?? 0}",
                                         fontweight: FontWeight.w400,
                                         fontsize: 12,
                                         fontcolor: AppColors.primaryColor),
@@ -176,6 +169,21 @@ class OrderSuccessView extends StatelessWidget {
                       ),
                     ),
                   ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  BookingDateTimeWidget(
+                    name: languageViewModel.getSelectedLanguage == "English"
+                        ? cartViewModel.getOrderDetail.order?.artistNameEng ??
+                            "NA"
+                        : cartViewModel.getOrderDetail.order?.artistNameArb ??
+                            "NA",
+                    date: cartViewModel
+                            .getOrderDetail.orderItems![0].serviceDate ??
+                        "",
+                    time:
+                        "${cartViewModel.getOrderDetail.order?.serviceStartTime ?? ""} to ${cartViewModel.getOrderDetail.order?.serviceEndTime ?? ""}",
+                  ), // DateTime and Artist
                   SizedBox(
                     height: 20.h,
                   ),
@@ -204,7 +212,7 @@ class OrderSuccessView extends StatelessWidget {
                                 ),
                               ),
                               TextHeading(
-                                title: "SAR 05",
+                                title: "SAR 00",
                                 fontweight: FontWeight.w400,
                                 fontsize: 12,
                                 fontcolor: AppColors.primaryColor,
@@ -214,9 +222,9 @@ class OrderSuccessView extends StatelessWidget {
                           SizedBox(
                             height: 5.h,
                           ),
-                          const Row(
+                          Row(
                             children: [
-                              Expanded(
+                              const Expanded(
                                 flex: 5,
                                 child: TextHeading(
                                   title: "Sub Total",
@@ -226,7 +234,8 @@ class OrderSuccessView extends StatelessWidget {
                                 ),
                               ),
                               TextHeading(
-                                title: "SAR 95",
+                                title:
+                                    "SAR ${cartViewModel.getOrderDetail.order?.finalPayAmount ?? 0}",
                                 fontweight: FontWeight.w400,
                                 fontsize: 12,
                                 fontcolor: AppColors.primaryColor,
@@ -248,7 +257,7 @@ class OrderSuccessView extends StatelessWidget {
                                 ),
                               ),
                               TextHeading(
-                                title: "SAR 72",
+                                title: "SAR 00",
                                 fontweight: FontWeight.w400,
                                 fontsize: 12,
                                 fontcolor: AppColors.primaryColor,

@@ -46,33 +46,35 @@ class _ExpansionTileControllerAppState
                   // height: 123.h,
                   width: 340.w,
                   decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(16.r)),
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(16.r),
+                  ),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8.r),
-                            border: Border.all(color: Colors.white),
-                          ),
-                          child: CachedNetworkImage(
-                            height: 100.h,
-                            width: 100.w,
-                            imageUrl:
-                                "${AppUrl.baseUrl}/${service.servicesImage ?? ""}",
-                            placeholder: (context, url) => const Center(
-                              child: CircularProgressIndicator(
-                                color: AppColors.primaryColor,
-                              ),
+                        if ((service.servicesImage ?? "").isNotEmpty)
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8.r),
+                              border: Border.all(color: Colors.white),
                             ),
-                            errorWidget: (context, url, error) =>
-                                const Icon(Icons.error, color: Colors.red),
-                            fit: BoxFit.cover,
+                            child: CachedNetworkImage(
+                              height: 100.h,
+                              width: 100.w,
+                              imageUrl:
+                                  "${AppUrl.baseUrl}/${service.servicesImage ?? ""}",
+                              placeholder: (context, url) => const Center(
+                                child: CircularProgressIndicator(
+                                  color: AppColors.primaryColor,
+                                ),
+                              ),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error, color: Colors.red),
+                              fit: BoxFit.cover,
+                            ),
                           ),
-                        ),
                         SizedBox(
                           width: 10.w,
                         ),

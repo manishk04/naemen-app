@@ -4,30 +4,30 @@ import 'package:get/get.dart';
 
 import 'text_heading.dart';
 
-class AddServiceWarning extends StatelessWidget {
-  const AddServiceWarning({super.key, required this.onRemove});
+class AlreadyAddedWarning extends StatelessWidget {
+  const AlreadyAddedWarning({super.key, required this.onYesClick});
 
-  final VoidCallback onRemove;
+  final VoidCallback onYesClick;
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: Colors.black,
       title: const Text(
-        "Services already added from another salon!",
+        "You can Add services only for a single artist!",
         style: TextStyle(
           color: Colors.white,
         ),
       ),
       content: const Text(
-        "You have added some services from another salon. To add this service to cart you have to remove previously added services.",
+        "Do you want to remove previously added services and add this service?",
         style: TextStyle(
           color: Colors.white,
         ),
       ),
       actions: [
         TextButton(
-          onPressed: onRemove,
+          onPressed: onYesClick,
           child: Container(
             height: 23.h,
             width: 55.w,
@@ -35,7 +35,7 @@ class AddServiceWarning extends StatelessWidget {
                 color: Colors.orange, borderRadius: BorderRadius.circular(4.r)),
             child: Center(
               child: TextHeading(
-                title: "Remove",
+                title: "Yes",
                 fontweight: FontWeight.w400,
                 fontsize: 12.sp,
                 fontcolor: Colors.white,
@@ -54,7 +54,7 @@ class AddServiceWarning extends StatelessWidget {
             ),
             child: Center(
               child: TextHeading(
-                title: "Cancel",
+                title: "No",
                 fontweight: FontWeight.w400,
                 fontsize: 12.sp,
                 fontcolor: Colors.white,

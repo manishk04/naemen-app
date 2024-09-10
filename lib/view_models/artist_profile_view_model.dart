@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:naemen/models/store_model.dart';
 import 'package:naemen/repo/artist_rpo.dart';
 import 'package:naemen/view_models/auth_view_model.dart';
 import 'package:naemen/view_models/cart_view_model.dart';
 import 'package:naemen/views/components/add_service_warning.dart';
+import 'package:naemen/views/screens/home_page.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../models/artist_model.dart';
@@ -16,6 +18,7 @@ import '../models/store_service_model.dart';
 import '../routes/app_routes.dart';
 import '../utils/app_functions.dart';
 import '../utils/utils.dart';
+import '../views/components/already_added_warning.dart';
 import '../views/components/select_date_time_widget.dart';
 import '../views/components/text_heading.dart';
 
@@ -95,37 +98,95 @@ class ArtistProfileViewModel extends GetxController {
   }
 
   void onServiceAdd(ArtistServiceModel service) {
-    if (_cartViewModel.getAddedServiceList.isEmpty ||
-        (service.salonId == _cartViewModel.getAddedServiceList[0].salonId)) {
-      _cartViewModel.addService(service);
-      showDateTimeDialog(service);
+    if (_cartViewModel.getAddedServiceList.isNotEmpty) {
+      // Services List is Not Empty
+      if (_cartViewModel.getAddedServiceList[0].artist?.id ==
+          getSelectedArtist.id) {
+        // already added services and the newly added service are from the same Artist
+        service.artist = getSelectedArtist;
+        _cartViewModel.addService(service);
+      } else {
+        // already added services and the newly added service are from the different Artist
+        Get.dialog(
+          AlreadyAddedWarning(
+            onYesClick: () {
+              Get.back();
+              _cartViewModel.clearServices();
+              service.artist = getSelectedArtist;
+              _cartViewModel.addService(service);
+            },
+          ),
+        );
+      }
     } else {
-      Get.dialog(
-        AddServiceWarning(
-          onRemove: () {
-            _cartViewModel.clearServices();
-            _cartViewModel.addService(service);
-            showDateTimeDialog(service);
-          },
-        ),
-      );
+      // Services List is Empty
+      service.artist = getSelectedArtist;
+      _cartViewModel.addService(service);
     }
+    // service.artist = getSelectedArtist;
+    // if (_cartViewModel.getAddedServiceList.isEmpty ||
+    //     (service.salonId == _cartViewModel.getAddedServiceList[0].salonId)) {
+    //   ArtistServiceModel serviceAlreadyAdded =
+    //       _cartViewModel.getAddedServiceList.firstWhere(
+    //     (element) => element.id == service.id,
+    //     orElse: () => ArtistServiceModel(),
+    //   );
+    //   if (serviceAlreadyAdded.id != null) {
+    //     Get.dialog(
+    //       AlreadyAddedWarning(
+    //         onYesClick: () {
+    //           Get.back();
+    //           _cartViewModel.remove(serviceAlreadyAdded);
+    //           _cartViewModel.addService(service);
+    //           showDateTimeDialog(service, store);
+    //         },
+    //       ),
+    //     );
+    //   } else {
+    //     _cartViewModel.addService(service);
+    //     showDateTimeDialog(service, store);
+    //   }
+    // } else {
+    //   Get.dialog(
+    //     AddServiceWarning(
+    //       onRemove: () {
+    //         _cartViewModel.clearServices();
+    //         _cartViewModel.addService(service);
+    //         showDateTimeDialog(service, store);
+    //       },
+    //     ),
+    //   );
+    // }
   }
 
   void onRemoveService(ArtistServiceModel service) {
     _cartViewModel.remove(service);
   }
 
-  showDateTimeDialog(ArtistServiceModel service) {
+  int intervalMinutes = 0; // Interval between start times
+  int slotDurationMinutes = 0; // Duration of each slot
+  String startTime = "";
+  String endTime = "";
+
+  showDateTimeDialog() {
+    startTime = _cartViewModel.getSelectedStore.salonStartTime ?? "";
+    endTime = _cartViewModel.getSelectedStore.salonEndTime ?? "";
     setDates = getNextSevenDays();
     setSelectedDate = getDates[0];
-    int serviceDuration = int.parse(service.serviceDuration ?? "0");
-    int intervalMinutes = serviceDuration + 10; // Interval between start times
-    int slotDurationMinutes = serviceDuration; // Duration of each slot
+    int serviceDuration = 0;
+    for (var service in _cartViewModel.getAddedServiceList) {
+      serviceDuration += int.parse(service.serviceDuration ?? "0");
+    }
+    log(serviceDuration.toString());
+    intervalMinutes = serviceDuration + 10; // Interval between start times
+    slotDurationMinutes = serviceDuration; // Duration of each slot
 
     List<String> slots = generateTimeSlots(
+      startTime: startTime,
+      endTime: endTime,
       intervalMinutes: intervalMinutes,
       slotDurationMinutes: slotDurationMinutes,
+      selectedDate: getSelectedDate,
     );
     log(slots.toString());
     setTimeSlots = slots;
@@ -138,10 +199,8 @@ class ArtistProfileViewModel extends GetxController {
             if (getSelectedTime == "") {
               Utils.toastMessage("Please Selected time!");
             } else {
-              _cartViewModel.getAddedServiceList.last.date = getSelectedDate;
-              _cartViewModel.getAddedServiceList.last.time = getSelectedTime;
-              setSelectedTime = "";
               Get.back();
+              checkArtistAvailability();
             }
           },
           onCancelClick: () => onBottomSheetCancel(),
@@ -153,7 +212,6 @@ class ArtistProfileViewModel extends GetxController {
 
   onBottomSheetCancel() {
     Get.back();
-    _cartViewModel.getAddedServiceList.removeLast();
     setSelectedTime = "";
   }
 
@@ -172,6 +230,15 @@ class ArtistProfileViewModel extends GetxController {
 
   onDateSelect(String date) {
     setSelectedDate = date;
+    List<String> slots = generateTimeSlots(
+      startTime: startTime,
+      endTime: endTime,
+      intervalMinutes: intervalMinutes,
+      slotDurationMinutes: slotDurationMinutes,
+      selectedDate: getSelectedDate,
+    );
+    log(slots.toString());
+    setTimeSlots = slots;
   }
 
   void scrollToIndex(int index) {
@@ -259,121 +326,61 @@ class ArtistProfileViewModel extends GetxController {
     setIsBooking = false;
 
     // Example: Check if the artist is available
-    bool isArtistAvailable = _isArtistAvailable();
+    // bool isArtistAvailable = _isArtistAvailable();
 
-    // Show the popup
-    _showAvailabilityPopup(isArtistAvailable);
+    // // Show the popup
+    // _showAvailabilityPopup(isArtistAvailable);
+    Get.toNamed(Routes.bookingDetailRoute);
   }
 
-  bool _isArtistAvailable() {
-    // Logic to determine if the artist is available
-    // This is just an example, you would replace this with your actual logic
-    return true; // Just a random condition
-  }
+  // bool _isArtistAvailable() {
+  //   // Logic to determine if the artist is available
+  //   // This is just an example, you would replace this with your actual logic
+  //   return true; // Just a random condition
+  // }
 
-  void _showAvailabilityPopup(bool isAvailable) {
-    Get.dialog(
-      AlertDialog(
-        backgroundColor: Colors.black,
-        iconColor: Colors.white,
-        title: Text(
-          isAvailable ? 'Artist Available' : 'Artist Unavailable',
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-        content: Text(
-          isAvailable
-              ? 'The artist is available for the appointment.'
-              : 'The artist is not available at the moment.',
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Get.back();
-              Get.toNamed(Routes.bookingDetailRoute);
-            },
-            child: Container(
-              height: 23.h,
-              width: 55.w,
-              decoration: BoxDecoration(
-                  color: Colors.orange,
-                  borderRadius: BorderRadius.circular(4.r)),
-              child: Center(
-                child: TextHeading(
-                    title: "Okay",
-                    fontweight: FontWeight.w400,
-                    fontsize: 12.sp,
-                    fontcolor: Colors.white),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  final data = {
-    "code": 200,
-    "data": {
-      "artist_profile": {
-        "id": 4,
-        "salon_id": 10,
-        "artist_name_eng": "nsnsn",
-        "artist_name_arb": "bababns",
-        "artist_email": "haja@gmail.com",
-        "artist_contact_number": "9869869866",
-        "artist_image": "assets\/images\/salon-img\/66bb940f63e69.webp",
-        "gender": "Male",
-        "artist_categories": null,
-        "account_number": "67899890",
-        "account_holder_name": "vaha",
-        "account_ifsc": null,
-        "bank_name": "hkl",
-        "is_active": "1",
-        "date_time": "2024-07-30 12:54:41",
-        "added_by": "sam",
-        "update_date": null,
-        "updated_by": null,
-        "salon_name_eng": "hddjdj",
-        "salon_name_arb": "gxhdhdy",
-        "email": "Ssaurabhppathak@gmail.co",
-        "contact_number": "84979494",
-        "salon_image": "assets\/images\/salon-img\/66bb901c580ae.webp"
-      },
-      "store_services": [
-        {
-          "id": 1,
-          "salon_id": 10,
-          "category_id": 10,
-          "sub_category_id": 1,
-          "services_name_eng": "hai",
-          "service_name_arb": "hai",
-          "services_image": null,
-          "service_amount": 800,
-          "service_commission": 0,
-          "service_final_amount": 800,
-          "service_durattion": "90",
-          "service_des_eng": "gahshwhs",
-          "service_des_arb": "hahajja",
-          "is_active": "1",
-          "is_delete": "1",
-          "date_time": "2024-07-30 12:53:57",
-          "added_by": "sam",
-          "updated_date": null,
-          "updated_by": null,
-          "salon_name_eng": "hddjdj",
-          "salon_name_arb": "gxhdhdy",
-          "email": "Ssaurabhppathak@gmail.co",
-          "contact_number": "84979494",
-          "salon_image": "assets\/images\/salon-img\/66bb901c580ae.webp",
-          "category_title": "Hair",
-          "category_arb": "\u0634\u0639\u0631"
-        }
-      ]
-    }
-  };
+  // void _showAvailabilityPopup(bool isAvailable) {
+  //   Get.dialog(
+  //     AlertDialog(
+  //       backgroundColor: Colors.black,
+  //       iconColor: Colors.white,
+  //       title: Text(
+  //         isAvailable ? 'Artist Available' : 'Artist Unavailable',
+  //         style: TextStyle(
+  //           color: Colors.white,
+  //         ),
+  //       ),
+  //       content: Text(
+  //         isAvailable
+  //             ? 'The artist is available for the appointment.'
+  //             : 'The artist is not available at the moment.',
+  //         style: TextStyle(
+  //           color: Colors.white,
+  //         ),
+  //       ),
+  //       actions: [
+  //         TextButton(
+  //           onPressed: () {
+  //             Get.back();
+  //             Get.toNamed(Routes.bookingDetailRoute);
+  //           },
+  //           child: Container(
+  //             height: 23.h,
+  //             width: 55.w,
+  //             decoration: BoxDecoration(
+  //                 color: Colors.orange,
+  //                 borderRadius: BorderRadius.circular(4.r)),
+  //             child: Center(
+  //               child: TextHeading(
+  //                   title: "Okay",
+  //                   fontweight: FontWeight.w400,
+  //                   fontsize: 12.sp,
+  //                   fontcolor: Colors.white),
+  //             ),
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 }

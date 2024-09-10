@@ -257,15 +257,15 @@ class SelectDateTimeWidget extends StatelessWidget {
                     width: 2.w,
                   ),
                   TextHeading(
-                      title: "Selected",
-                      fontweight: FontWeight.w400,
-                      fontsize: 10.sp,
-                      fontcolor: Colors.white)
+                    title: "Selected",
+                    fontweight: FontWeight.w400,
+                    fontsize: 10.sp,
+                    fontcolor: Colors.white,
+                  )
                 ],
-              )
+              ),
             ],
           ),
-
           SizedBox(
             height: 15.h,
           ),
@@ -280,7 +280,7 @@ class SelectDateTimeWidget extends StatelessWidget {
                   crossAxisCount: 2,
                   mainAxisSpacing: 5.h,
                   crossAxisSpacing: 5.w,
-                  childAspectRatio: 0.48,
+                  childAspectRatio: 0.3,
                 ),
                 itemBuilder: (context, index) {
                   String time = artistProfileViewModel.getTimeSlots[index];

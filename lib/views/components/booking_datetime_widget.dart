@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../../utils/color_constant.dart';
-import '../../view_models/cart_view_model.dart';
 import 'text_heading.dart';
 
 class BookingDateTimeWidget extends StatelessWidget {
   const BookingDateTimeWidget({
     super.key,
+    required this.date,
+    required this.time,
+    required this.name,
   });
+
+  final String date;
+  final String time;
+  final String name;
 
   @override
   Widget build(BuildContext context) {
-    CartViewModel cartViewModel = Get.find();
     return Container(
       height: 84.h,
       width: 340.w,
@@ -43,7 +47,7 @@ class BookingDateTimeWidget extends StatelessWidget {
                 ),
                 TextHeading(
                   title:
-                      "${DateFormat("EEEE, dd MMM").format(DateFormat("dd-MM-yyyy").parse(cartViewModel.getAddedServiceList[0].date ?? ""))} - ${cartViewModel.getAddedServiceList[0].time ?? ""}",
+                      "${date.isEmpty ? "" : DateFormat("EEEE, dd MMM").format(DateFormat("dd-MM-yyyy").parse(date))} - ${time ?? ""}",
                   fontweight: FontWeight.w400,
                   fontsize: 12,
                   fontcolor: AppColors.primaryColor,
@@ -53,7 +57,7 @@ class BookingDateTimeWidget extends StatelessWidget {
             SizedBox(
               height: 5.h,
             ),
-            const Row(
+            Row(
               children: [
                 TextHeading(
                   title: "Artist: ",
@@ -62,32 +66,32 @@ class BookingDateTimeWidget extends StatelessWidget {
                   fontcolor: Colors.white,
                 ),
                 TextHeading(
-                  title: "Abdulazeez",
+                  title: name,
                   fontweight: FontWeight.w400,
                   fontsize: 12,
                   fontcolor: AppColors.primaryColor,
                 ),
               ],
             ),
-            SizedBox(
-              height: 5.h,
-            ),
-            const Row(
-              children: [
-                TextHeading(
-                  title: "Gender: ",
-                  fontweight: FontWeight.w400,
-                  fontsize: 12,
-                  fontcolor: Colors.white,
-                ),
-                TextHeading(
-                  title: "Male",
-                  fontweight: FontWeight.w400,
-                  fontsize: 12,
-                  fontcolor: AppColors.primaryColor,
-                ),
-              ],
-            ),
+            // SizedBox(
+            //   height: 5.h,
+            // ),
+            // Row(
+            //   children: [
+            //     TextHeading(
+            //       title: "Gender: ",
+            //       fontweight: FontWeight.w400,
+            //       fontsize: 12,
+            //       fontcolor: Colors.white,
+            //     ),
+            //     TextHeading(
+            //       title: gender,
+            //       fontweight: FontWeight.w400,
+            //       fontsize: 12,
+            //       fontcolor: AppColors.primaryColor,
+            //     ),
+            //   ],
+            // ),
             SizedBox(
               height: 5.h,
             )

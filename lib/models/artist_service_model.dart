@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:naemen/models/artist_model.dart';
+
 class ArtistServiceModel {
   int? id;
   int? salonId;
@@ -29,6 +31,7 @@ class ArtistServiceModel {
   String? categoryArb;
   String? date;
   String? time;
+  ArtistModel? artist;
   ArtistServiceModel({
     this.id,
     this.salonId,
@@ -58,6 +61,7 @@ class ArtistServiceModel {
     this.categoryArb,
     this.date,
     this.time,
+    this.artist,
   });
 
   ArtistServiceModel copyWith({
@@ -89,6 +93,7 @@ class ArtistServiceModel {
     String? categoryArb,
     String? date,
     String? time,
+    ArtistModel? artist,
   }) {
     return ArtistServiceModel(
       id: id ?? this.id,
@@ -119,6 +124,7 @@ class ArtistServiceModel {
       categoryArb: categoryArb ?? this.categoryArb,
       date: date ?? this.date,
       time: time ?? this.time,
+      artist: artist ?? this.artist,
     );
   }
 
@@ -152,6 +158,7 @@ class ArtistServiceModel {
       'categoryArb': categoryArb,
       'date': date,
       'time': time,
+      'artist': artist,
     };
   }
 
@@ -214,6 +221,9 @@ class ArtistServiceModel {
           map['category_arb'] != null ? map['category_arb'] as String : null,
       date: map['date'] != null ? map['date'] as String : null,
       time: map['time'] != null ? map['time'] as String : null,
+      artist: map['artist'] != null
+          ? ArtistModel.fromMap(map['artist'] as Map<String, dynamic>)
+          : null,
     );
   }
 
@@ -224,7 +234,7 @@ class ArtistServiceModel {
 
   @override
   String toString() {
-    return 'ArtistServiceModel(id: $id, salonId: $salonId, categoryId: $categoryId, subCategoryId: $subCategoryId, servicesNameEng: $servicesNameEng, serviceNameArb: $serviceNameArb, servicesImage: $servicesImage, serviceAmount: $serviceAmount, serviceCommission: $serviceCommission, serviceFinalAmount: $serviceFinalAmount, serviceDuration: $serviceDuration, serviceDesEng: $serviceDesEng, serviceDesArb: $serviceDesArb, isActive: $isActive, isDelete: $isDelete, dateTime: $dateTime, addedBy: $addedBy, updatedDate: $updatedDate, updatedBy: $updatedBy, salonNameEng: $salonNameEng, salonNameArb: $salonNameArb, email: $email, contactNumber: $contactNumber, salonImage: $salonImage, categoryTitle: $categoryTitle, categoryArb: $categoryArb, date: $date, time: $time)';
+    return 'ArtistServiceModel(id: $id, salonId: $salonId, categoryId: $categoryId, subCategoryId: $subCategoryId, servicesNameEng: $servicesNameEng, serviceNameArb: $serviceNameArb, servicesImage: $servicesImage, serviceAmount: $serviceAmount, serviceCommission: $serviceCommission, serviceFinalAmount: $serviceFinalAmount, serviceDuration: $serviceDuration, serviceDesEng: $serviceDesEng, serviceDesArb: $serviceDesArb, isActive: $isActive, isDelete: $isDelete, dateTime: $dateTime, addedBy: $addedBy, updatedDate: $updatedDate, updatedBy: $updatedBy, salonNameEng: $salonNameEng, salonNameArb: $salonNameArb, email: $email, contactNumber: $contactNumber, salonImage: $salonImage, categoryTitle: $categoryTitle, categoryArb: $categoryArb, date: $date, time: $time, artist: $artist)';
   }
 
   @override
@@ -258,7 +268,8 @@ class ArtistServiceModel {
         other.categoryTitle == categoryTitle &&
         other.categoryArb == categoryArb &&
         other.date == date &&
-        other.time == time;
+        other.time == time &&
+        other.artist == artist;
   }
 
   @override
@@ -290,6 +301,7 @@ class ArtistServiceModel {
         categoryTitle.hashCode ^
         categoryArb.hashCode ^
         date.hashCode ^
-        time.hashCode;
+        time.hashCode ^
+        artist.hashCode;
   }
 }

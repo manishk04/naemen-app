@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
+import 'package:naemen/utils/color_constant.dart';
 
 class Utils {
   static void fieldFocusChange(
@@ -32,14 +34,20 @@ class Utils {
     );
   }
 
-  // static startLoading(BuildContext context) {
-  //   showDialog(
-  //     context: context,
-  //     builder: (context) {
-  //       return const LoadingWidget();
-  //     },
-  //   );
-  // }
+  static startLoading() {
+    Get.dialog(
+      PopScope(
+        canPop: false,
+        onPopInvokedWithResult: (didPop, result) => false,
+        child: const Center(
+          child: CircularProgressIndicator(
+            color: AppColors.primaryColor,
+          ),
+        ),
+      ),
+      barrierColor: Colors.transparent,
+    );
+  }
 
   static showError(String title, Object? error, StackTrace? stackTrace) {
     log(title, error: error, stackTrace: stackTrace);

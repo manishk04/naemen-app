@@ -22,4 +22,6 @@ class AppUrl {
   static String categoriesByStoreUrl =
       "$baseUrl/customer-api/app/categories-by-store";
   static String generateOrderUrl = "$baseUrl/customer-api/order/generate-order";
+  static String orderBookUrl = "$baseUrl/customer-api/order/order-book";
+  static String orderDetailsUrl = "$baseUrl/customer-api/order/order-details";
 }

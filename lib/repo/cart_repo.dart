@@ -29,4 +29,36 @@ class CartRepo {
       rethrow;
     }
   }
+
+  Future<dynamic> orderBook(data) async {
+    // Encode the username and password in base64
+    String basicAuth =
+        "Basic ${base64Encode(utf8.encode("$username:$password"))}";
+    try {
+      dynamic response = await _apiServices.getPostApiResponse(
+        AppUrl.orderBookUrl,
+        jsonEncode(data),
+        <String, String>{
+          "authorization": basicAuth,
+          "Content-Type": "application/json",
+        },
+      );
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<dynamic> orderDetails(params) async {
+    try {
+      dynamic response = await _apiServices.getGetApiResponse(
+        AppUrl.orderDetailsUrl,
+        params,
+        null,
+      );
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

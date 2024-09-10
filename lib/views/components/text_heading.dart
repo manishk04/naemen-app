@@ -9,6 +9,7 @@ class TextHeading extends StatelessWidget {
     required this.fontsize,
     required this.fontcolor,
     this.maxLines,
+    this.textAlign = TextAlign.start,
   });
 
   final String title;
@@ -16,6 +17,7 @@ class TextHeading extends StatelessWidget {
   final double fontsize;
   final Color fontcolor;
   final int? maxLines;
+  final TextAlign textAlign;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +28,7 @@ class TextHeading extends StatelessWidget {
         fontSize: fontsize,
         fontWeight: fontweight,
       ),
+      textAlign: textAlign,
       maxLines: maxLines,
       overflow: TextOverflow.ellipsis,
       softWrap: true,
