@@ -241,7 +241,7 @@ class SelectDateTimeWidget extends StatelessWidget {
                     width: 2.w,
                   ),
                   TextHeading(
-                      title: "Aviliable",
+                      title: "Available",
                       fontweight: FontWeight.w400,
                       fontsize: 10.sp,
                       fontcolor: Colors.white)
@@ -271,49 +271,65 @@ class SelectDateTimeWidget extends StatelessWidget {
           ),
           SizedBox(
             height: 75.h,
-            child: Obx(
-              () => GridView.builder(
-                scrollDirection: Axis.horizontal,
-                shrinkWrap: true,
-                itemCount: artistProfileViewModel.getTimeSlots.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 5.h,
-                  crossAxisSpacing: 5.w,
-                  childAspectRatio: 0.48,
-                ),
-                itemBuilder: (context, index) {
-                  String time = artistProfileViewModel.getTimeSlots[index];
-                  return InkWell(
-                    onTap: () => artistProfileViewModel.setSelectedTime = time,
-                    child: Obx(
-                      () => Container(
-                        height: 35.h,
-                        width: 64.w,
-                        decoration: BoxDecoration(
-                          color: time == artistProfileViewModel.getSelectedTime
-                              ? AppColors.primaryColor.withOpacity(0.5)
-                              : Colors.green.withOpacity(0.5),
-                          borderRadius: BorderRadius.circular(8.r),
-                        ),
-                        child: Center(
-                          child: TextHeading(
-                            title: time,
-                            fontweight: FontWeight.w400,
-                            fontsize: 10.sp,
-                            fontcolor:
-                                time == artistProfileViewModel.getSelectedTime
-                                    ? AppColors.primaryColor
-                                    : Colors.green,
-                          ),
-                        ),
+            child: GetBuilder<ArtistProfileViewModel>(builder: (viewModel) {
+              return viewModel.getIsSlotLoading
+                  ? const Center(
+                      child: CircularProgressIndicator(
+                        color: AppColors.primaryColor,
                       ),
-                    ),
-                  );
-                },
-              ),
-            ),
+                    )
+                  : GridView.builder(
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      itemCount: viewModel.getTimeSlots.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 5.h,
+                        crossAxisSpacing: 5.w,
+                        childAspectRatio: 0.3,
+                      ),
+                      itemBuilder: (context, index) {
+                        String time = viewModel.getTimeSlots[index];
+                        bool isBooked =
+                            viewModel.getAppointedTimeSlots.contains(time);
+                        return InkWell(
+                          onTap: isBooked
+                              ? null
+                              : () {
+                                  viewModel.setSelectedTime = time;
+                                  viewModel.update();
+                                },
+                          child: Container(
+                            height: 35.h,
+                            width: 64.w,
+                            decoration: BoxDecoration(
+                              color: (isBooked
+                                      ? Colors.red
+                                      : time == viewModel.getSelectedTime
+                                          ? AppColors.primaryColor
+                                          : Colors.green)
+                                  .withOpacity(0.5),
+                              borderRadius: BorderRadius.circular(8.r),
+                            ),
+                            child: Center(
+                              child: TextHeading(
+                                title: time,
+                                fontweight: FontWeight.w400,
+                                fontsize: 10.sp,
+                                fontcolor: isBooked
+                                    ? Colors.red
+                                    : time == viewModel.getSelectedTime
+                                        ? AppColors.primaryColor
+                                        : Colors.green,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    );
+            }),
           ),
+
           SizedBox(
             height: 20.h,
           ),

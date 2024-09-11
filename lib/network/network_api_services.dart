@@ -34,17 +34,42 @@ class NetworkApiServices extends BaseApiServices {
   }
 
   @override
-  Future getPostApiResponse(String url, dynamic data, dynamic headers) async {
+  Future getPostApiResponse(String url, dynamic data, dynamic headers,
+      {bool isFormData = false}) async {
     dynamic responseJson;
     try {
       final connectivityResult = await Connectivity().checkConnectivity();
       if (connectivityResult.contains(ConnectivityResult.none)) {
         throw FetchDataException("No Internet Connection!");
       }
+
       Uri uri = Uri.parse(url);
-      var response = await http
-          .post(uri, body: data, headers: headers)
-          .timeout(const Duration(seconds: 60));
+
+      // Prepare the request
+      http.Response response;
+      if (isFormData) {
+        var request = http.MultipartRequest('POST', uri);
+
+        // Add form data fields
+        if (data is Map<String, String>) {
+          request.fields.addAll(data);
+        }
+
+        // Add headers
+        request.headers.addAll(headers);
+
+        // Send the request
+        var streamedResponse = await request.send();
+        log(streamedResponse.toString());
+        response = await http.Response.fromStream(streamedResponse);
+        log(response.toString());
+        // return streamedResponse;
+      } else {
+        response = await http
+            .post(uri, body: data, headers: headers)
+            .timeout(const Duration(seconds: 60));
+      }
+      log(response.toString());
       responseJson = await returnResponse(response);
       log(url);
       log(response.body.toString());

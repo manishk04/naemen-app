@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -39,8 +40,10 @@ class ArtistProfileViewModel extends GetxController {
 
   final RxList<String> _dates = <String>[].obs;
   final RxList<String> _timeSlots = <String>[].obs;
+  final RxList<String> _appointedTimeSlots = <String>[].obs;
 
   final RxBool _isLoading = false.obs;
+  final RxBool _isSlotLoading = false.obs;
   final RxBool _isBooking = false.obs;
 
   final RxInt _desiredItemIndex = 0.obs;
@@ -60,8 +63,10 @@ class ArtistProfileViewModel extends GetxController {
 
   List<String> get getDates => _dates;
   List<String> get getTimeSlots => _timeSlots;
+  List<String> get getAppointedTimeSlots => _appointedTimeSlots;
 
   bool get getIsLoading => _isLoading.value;
+  bool get getIsSlotLoading => _isSlotLoading.value;
   bool get getIsBooking => _isBooking.value;
 
   int get getDesiredItemIndex => _desiredItemIndex.value;
@@ -81,8 +86,11 @@ class ArtistProfileViewModel extends GetxController {
 
   set setDates(List<String> dates) => _dates.value = dates;
   set setTimeSlots(List<String> dates) => _timeSlots.value = dates;
+  set setAppointedTimeSlots(List<String> dates) =>
+      _appointedTimeSlots.value = dates;
 
   set setIsLoading(bool value) => _isLoading.value = value;
+  set setIsSlotLoading(bool value) => _isSlotLoading.value = value;
   set setIsBooking(bool value) => _isBooking.value = value;
 
   set setDesiredItemIndex(int index) => _desiredItemIndex.value = index;
@@ -190,6 +198,7 @@ class ArtistProfileViewModel extends GetxController {
     );
     log(slots.toString());
     setTimeSlots = slots;
+    fetchArtistBookingCalendar();
     Get.bottomSheet(
       BottomSheet(
         backgroundColor: Colors.black,
@@ -225,6 +234,7 @@ class ArtistProfileViewModel extends GetxController {
     if (picked != null) {
       onDateSelect(DateFormat('dd-MM-yyyy').format(picked));
       log(getSelectedDate);
+      fetchArtistBookingCalendar();
     }
   }
 
@@ -239,6 +249,7 @@ class ArtistProfileViewModel extends GetxController {
     );
     log(slots.toString());
     setTimeSlots = slots;
+    fetchArtistBookingCalendar();
   }
 
   void scrollToIndex(int index) {
@@ -315,6 +326,52 @@ class ArtistProfileViewModel extends GetxController {
       log("fetchArtistProfile Error => $e");
     }
     setIsLoading = false;
+  }
+
+  void fetchArtistBookingCalendar() async {
+    List<String> appointedSlots = <String>[];
+    // Encode the username and password in base64
+    String basicArtistID =
+        base64Encode(utf8.encode((getSelectedArtist.id ?? -1).toString()));
+    Map<String, String> data = {
+      "artist_id": basicArtistID,
+      "date": getSelectedDate,
+      // "date": "31-08-2024",
+    };
+    setIsSlotLoading = true;
+    update();
+    try {
+      Map<String, dynamic> response =
+          await _artistRepo.fetchArtistBookingCalendar(data);
+      log(response.toString());
+      if (response["order"] != null &&
+          response["order"] is List &&
+          (response["order"] as List).isNotEmpty) {
+        for (var element in response["order"]) {
+          // Split the input string by the hyphen to separate start and end times
+          List<String> times = element.split('-');
+
+          // Parse the times to DateTime objects
+          DateTime startTime = DateFormat('HH:mm:ss').parse(times[0]);
+          DateTime endTime = DateFormat('HH:mm:ss').parse(times[1]);
+
+          // Format the DateTime objects to the desired format
+          String formattedStartTime = DateFormat('HH:mm a').format(startTime);
+          String formattedEndTime = DateFormat('HH:mm a').format(endTime);
+
+          // Combine the formatted times into a single string
+          appointedSlots.add("$formattedStartTime - $formattedEndTime");
+        }
+        log(appointedSlots.toString());
+        log(getTimeSlots.toString());
+      }
+    } catch (e) {
+      Utils.toastMessage(e.toString());
+      log("fetchArtistBookingCalendar Error => $e");
+    }
+    setAppointedTimeSlots = appointedSlots;
+    setIsSlotLoading = false;
+    update();
   }
 
   Future<void> checkArtistAvailability() async {

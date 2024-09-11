@@ -16,20 +16,20 @@ List<String> generateTimeSlots({
   required int intervalMinutes,
   required int slotDurationMinutes,
   required String
-      startTime, // Start time in 'hh:mm a' format (e.g., '10:52 AM')
+      startTime, // Start time in 'HH:mm a' format (e.g., '10:52 AM')
   required String selectedDate, // Selected date in 'dd-MM-yyyy' format
   String endTime =
-      '11:59 PM', // End time in 'hh:mm a' format (e.g., '0:00 AM' means '11:59 PM')
+      '11:59 PM', // End time in 'HH:mm a' format (e.g., '0:00 AM' means '11:59 PM')
 }) {
   // Parse selected date using the provided format 'dd-MM-yyyy'
   DateTime date = DateFormat('dd-MM-yyyy').parse(selectedDate);
 
-  // Parse start and end times using the provided format 'hh:mm a'
-  DateTime startDateTime = DateFormat('hh:mm a').parse(startTime);
+  // Parse start and end times using the provided format 'HH:mm a'
+  DateTime startDateTime = DateFormat('HH:mm a').parse(startTime);
   DateTime endDateTime = endTime == '0:00 AM'
       ? DateTime(date.year, date.month, date.day, 23,
           59) // Treat '0:00 AM' as '11:59 PM'
-      : DateFormat('hh:mm a').parse(endTime);
+      : DateFormat('HH:mm a').parse(endTime);
 
   // Adjust start and end times to the selected date
   startDateTime = DateTime(date.year, date.month, date.day, startDateTime.hour,
@@ -64,8 +64,8 @@ List<String> generateTimeSlots({
         startDateTime.add(Duration(minutes: slotDurationMinutes));
 
     // Format time in HH:mm
-    String startTimeString = DateFormat('hh:mm a').format(startDateTime);
-    String endTimeString = DateFormat('hh:mm a').format(slotEndTime);
+    String startTimeString = DateFormat('HH:mm a').format(startDateTime);
+    String endTimeString = DateFormat('HH:mm a').format(slotEndTime);
 
     // Add the slot to the list
     timeSlots.add('$startTimeString - $endTimeString');
