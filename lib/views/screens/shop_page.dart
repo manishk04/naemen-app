@@ -562,6 +562,14 @@ class _ShopPageState extends State<ShopPage> {
                               SizedBox(
                                 height: 15.h,
                               ),
+                              TextHeading(
+                                  title: "Rating & Review (273)",
+                                  fontweight: FontWeight.w600,
+                                  fontsize: 12.sp,
+                                  fontcolor: Colors.white),
+                              SizedBox(
+                                height: 10.h,
+                              ),
                               Container(
                                 height: 152.h,
                                 width: 340.w,
