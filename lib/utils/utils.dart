@@ -38,7 +38,7 @@ class Utils {
     Get.dialog(
       PopScope(
         canPop: false,
-        onPopInvokedWithResult: (didPop, result) => false,
+        // onPopInvokedWithResult: (didPop, result) => false,
         child: const Center(
           child: CircularProgressIndicator(
             color: AppColors.primaryColor,

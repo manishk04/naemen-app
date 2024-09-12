@@ -558,26 +558,154 @@ class _ShopPageState extends State<ShopPage> {
                                     borderRadius: BorderRadius.circular(16.r),
                                     border: Border.all(
                                         color: AppColors.signUpColor)),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        TextHeading(
-                                            title: "5",
-                                            fontweight: FontWeight.w600,
-                                            fontsize: 12.sp,
-                                            fontcolor: Colors.white),
-                                        Expanded(
-                                          child: SizedBox(
-                                              height: 20,
-                                              width: double.infinity,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          TextHeading(
+                                              title: "5",
+                                              fontweight: FontWeight.w600,
+                                              fontsize: 12.sp,
+                                              fontcolor: Colors.white),
+                                          SizedBox(
+                                            width: 3.w,
+                                          ),
+                                          SizedBox(
+                                              height: 5,
+                                              width: 180.w,
                                               child:
                                                   ProgressIndicatorExample()),
-                                        )
-                                      ],
-                                    )
-                                  ],
+
+                                          SizedBox(
+                                            width: 10.w,
+                                          ),
+                                          const Row(
+                                            children: [
+                                              TextHeading(
+                                                  title: "4.5",
+                                                  fontweight: FontWeight.w400,
+                                                  fontsize: 24,
+                                                  fontcolor: Colors.white),
+                                              Icon(
+                                                Icons.star,
+                                                color: AppColors.primaryColor,
+                                              )
+                                            ],
+                                          ),
+
+                                          // SizedBox(
+                                          //   height: 20.h,
+                                          // ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          TextHeading(
+                                              title: "4",
+                                              fontweight: FontWeight.w600,
+                                              fontsize: 12.sp,
+                                              fontcolor: Colors.white),
+                                          SizedBox(
+                                            width: 3.w,
+                                          ),
+                                          SizedBox(
+                                              height: 5,
+                                              width: 180.w,
+                                              child:
+                                                  ProgressIndicatorExample()),
+                                          SizedBox(
+                                            width: 10.w,
+                                          ),
+                                          TextHeading(
+                                              title: "273 Reviews",
+                                              fontweight: FontWeight.w400,
+                                              fontsize: 12.sp,
+                                              fontcolor: Colors.white),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          TextHeading(
+                                              title: "3",
+                                              fontweight: FontWeight.w600,
+                                              fontsize: 12.sp,
+                                              fontcolor: Colors.white),
+                                          SizedBox(
+                                            width: 3.w,
+                                          ),
+                                          SizedBox(
+                                              height: 5,
+                                              width: 180.w,
+                                              child:
+                                                  ProgressIndicatorExample()),
+                                          SizedBox(
+                                            width: 10.w,
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          TextHeading(
+                                              title: "2",
+                                              fontweight: FontWeight.w600,
+                                              fontsize: 12.sp,
+                                              fontcolor: Colors.white),
+                                          SizedBox(
+                                            width: 3.w,
+                                          ),
+                                          SizedBox(
+                                              height: 5,
+                                              width: 180.w,
+                                              child:
+                                                  ProgressIndicatorExample()),
+                                          SizedBox(
+                                            width: 10.w,
+                                          ),
+                                          TextHeading(
+                                              title: "88%",
+                                              fontweight: FontWeight.w400,
+                                              fontsize: 24.h,
+                                              fontcolor: Colors.white),
+                                          // SizedBox(
+                                          //   height: 20.h,
+                                          // ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          TextHeading(
+                                              title: "1",
+                                              fontweight: FontWeight.w600,
+                                              fontsize: 12.sp,
+                                              fontcolor: Colors.white),
+                                          SizedBox(
+                                            width: 3.w,
+                                          ),
+                                          SizedBox(
+                                              height: 5,
+                                              width: 180.w,
+                                              child:
+                                                  ProgressIndicatorExample()),
+                                          SizedBox(
+                                            width: 10.w,
+                                          ),
+                                          TextHeading(
+                                              title: "Recommended",
+                                              fontweight: FontWeight.w400,
+                                              fontsize: 12.sp,
+                                              fontcolor: Colors.white)
+                                        ],
+                                      )
+                                    ],
+                                  ),
                                 ),
+                              ),
+                              SizedBox(
+                                height: 20.h,
                               ),
                               Container(
                                 height: 260.h,
@@ -586,7 +714,12 @@ class _ShopPageState extends State<ShopPage> {
                                     color: AppColors.searchFieldsColor,
                                     border: Border.all(
                                         color: const Color.fromRGBO(
-                                            115, 115, 115, 1)),
+                                          115,
+                                          115,
+                                          115,
+                                          1,
+                                        ),
+                                        width: 0.3),
                                     borderRadius: BorderRadius.circular(16.r)),
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
