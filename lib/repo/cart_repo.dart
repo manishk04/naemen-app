@@ -61,4 +61,17 @@ class CartRepo {
       rethrow;
     }
   }
+
+  Future<dynamic> fetchOrderHistory(params) async {
+    try {
+      dynamic response = await _apiServices.getGetApiResponse(
+        AppUrl.orderHistoryUrl,
+        params,
+        null,
+      );
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

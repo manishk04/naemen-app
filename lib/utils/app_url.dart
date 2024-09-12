@@ -26,4 +26,5 @@ class AppUrl {
   static String orderDetailsUrl = "$baseUrl/customer-api/order/order-details";
   static String artistBookingCalendarUrl =
       "$baseUrl/customer-api/order/artist-booking-calender";
+  static String orderHistoryUrl = "$baseUrl/customer-api/order/order-history";
 }

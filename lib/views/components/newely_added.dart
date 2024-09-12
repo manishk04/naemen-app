@@ -291,7 +291,8 @@ class WinterSpecialItems extends StatelessWidget {
                     ),
 
                     TextHeading(
-                        title: description,
+                        title: description[0].toUpperCase() +
+                            description.substring(1),
                         fontweight: FontWeight.w600,
                         fontsize: 12.sp,
                         fontcolor: Colors.white),

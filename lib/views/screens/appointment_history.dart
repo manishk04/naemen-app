@@ -1,11 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:naemen/models/salon_model.dart';
+import 'package:naemen/routes/app_routes.dart';
+import 'package:naemen/utils/app_functions.dart';
+import 'package:naemen/utils/app_url.dart';
+import 'package:naemen/view_models/auth_view_model.dart';
+import 'package:naemen/view_models/salon_profile_view_model.dart';
 import 'package:naemen/views/components/appointment_filter.dart';
 import 'package:naemen/views/components/search_bar.dart';
 import 'package:naemen/views/screens/appointment_detail_page.dart';
 import 'package:naemen/views/screens/shop_page.dart';
 import 'package:naemen/utils/color_constant.dart';
 
+import '../../models/order_model.dart';
+import '../../utils/app_enums.dart';
+import '../../view_models/appointment_history_view_model.dart';
+import '../../view_models/language_view_model.dart';
 import '../components/text_heading.dart';
 
 class AppointmentHIstoreyPage extends StatefulWidget {
@@ -17,6 +29,16 @@ class AppointmentHIstoreyPage extends StatefulWidget {
 }
 
 class _AppointmentHIstoreyPageState extends State<AppointmentHIstoreyPage> {
+  final AppointmentHistoryViewModel _appointmentHistoryViewModel = Get.find();
+  final LanguageViewModel _languageViewModel = Get.find();
+  final AuthViewModel _authViewModel = Get.find();
+  final SalonProfileViewModel _salonProfileViewModel = Get.find();
+  @override
+  void initState() {
+    _appointmentHistoryViewModel.fetchAppointmentHistory(_authViewModel);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,10 +46,10 @@ class _AppointmentHIstoreyPageState extends State<AppointmentHIstoreyPage> {
           preferredSize: Size.fromHeight(70.0),
           child: AppBar(
             backgroundColor: Colors.black,
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back, color: AppColors.primaryColor),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
+            // leading: IconButton(
+            //   icon: Icon(Icons.arrow_back, color: AppColors.primaryColor),
+            //   onPressed: () => Navigator.of(context).pop(),
+            // ),
             title: TextHeading(
                 title: "Appointment History",
                 fontweight: FontWeight.w700,
@@ -50,240 +72,302 @@ class _AppointmentHIstoreyPageState extends State<AppointmentHIstoreyPage> {
                   SizedBox(
                     height: 10.h,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Column(
-                      children: [
-                        SearchBarWidget(
-                            hinttexttitle: "Search your appointment... "),
-                        SizedBox(
-                          height: 20.h,
-                        ),
-                        AppointmentFilter(),
-                        Container(
-                          height: 500.h,
-                          width: double.infinity,
-                          child: ListView.builder(
-                            itemCount: 10,
-                            itemBuilder: (BuildContext context, int index) {
-                              return Padding(
-                                padding: const EdgeInsets.only(top: 20),
-                                child: Container(
-                                  height: 200.h,
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                      color: AppColors.searchFieldsColor,
-                                      border: Border.all(
-                                          color: AppColors.signUpColor,
-                                          width: 0.5),
-                                      borderRadius: BorderRadius.circular(20)),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Row(
-                                        //mainAxisAlignment: MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Stack(
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 10),
-                                                child: InkWell(
-                                                  onTap: () {
-                                                    Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                ShopPage()));
-                                                  },
-                                                  child: Container(
-                                                    height: 120.h,
-                                                    width: 120.w,
-                                                    decoration: BoxDecoration(
-                                                        image: DecorationImage(
-                                                            image: AssetImage(
-                                                              "assets/images/saloon_detail _image.jpeg",
-                                                            ),
-                                                            fit: BoxFit.cover),
-                                                        color: Colors.blueGrey,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                                    15.r)),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            width: 10.w,
-                                          ),
-                                          Column(
+                  Obx(
+                    () => Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Column(
+                        children: [
+                          SearchBarWidget(
+                              hinttexttitle: "Search your appointment... "),
+                          SizedBox(
+                            height: 20.h,
+                          ),
+                          AppointmentFilter(
+                            appointmentHistoryViewModel:
+                                _appointmentHistoryViewModel,
+                            authViewModel: _authViewModel,
+                          ),
+                          SizedBox(
+                            height: 500.h,
+                            width: double.infinity,
+                            child: _appointmentHistoryViewModel.getIsLoading
+                                ? const Center(
+                                    child: CircularProgressIndicator(
+                                      color: AppColors.primaryColor,
+                                    ),
+                                  )
+                                : ListView.builder(
+                                    itemCount: _appointmentHistoryViewModel
+                                        .getOrders.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      OrderModel order =
+                                          _appointmentHistoryViewModel
+                                              .getOrders[index];
+                                      return Padding(
+                                        padding: const EdgeInsets.only(top: 20),
+                                        child: Container(
+                                          height: 200.h,
+                                          width: double.infinity,
+                                          decoration: BoxDecoration(
+                                              color:
+                                                  AppColors.searchFieldsColor,
+                                              border: Border.all(
+                                                  color: AppColors.signUpColor,
+                                                  width: 0.5),
+                                              borderRadius:
+                                                  BorderRadius.circular(20)),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            // mainAxisAlignment: MainAxisAlignment.start,
+                                                CrossAxisAlignment.center,
                                             children: [
-                                              TextHeading(
-                                                  title: "The Stars Baerber",
-                                                  fontweight: FontWeight.w400,
-                                                  fontsize: 12.sp,
-                                                  fontcolor:
-                                                      AppColors.primaryColor),
-                                              SizedBox(
-                                                height: 10.w,
-                                              ),
                                               Row(
+                                                //mainAxisAlignment: MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
                                                 children: [
-                                                  Image.asset(
-                                                      "assets/images/mark_Location.png"),
-                                                  SizedBox(
-                                                    width: 4.w,
+                                                  Stack(
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(left: 10),
+                                                        child: InkWell(
+                                                          onTap: () {
+                                                            // _salonProfileViewModel.onViewProfileClick(SalonModel(salonId: order.), cartViewModel);
+                                                          },
+                                                          child: Container(
+                                                            height: 120.h,
+                                                            width: 120.w,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                                    image:
+                                                                        DecorationImage(
+                                                                            image:
+                                                                                NetworkImage(
+                                                                              "${AppUrl.baseUrl}/${order.salonImage ?? "NA"}",
+                                                                            ),
+                                                                            fit: BoxFit
+                                                                                .cover),
+                                                                    color: Colors
+                                                                        .blueGrey,
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            15.r)),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
-                                                  // Icon(Icons.location_city,color: Colors.white,),
-                                                  TextHeading(
-                                                      title: "3.5 Km From you",
-                                                      fontweight:
-                                                          FontWeight.w400,
-                                                      fontsize: 12.sp,
-                                                      fontcolor: Colors.white)
+                                                  SizedBox(
+                                                    width: 10.w,
+                                                  ),
+                                                  Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    // mainAxisAlignment: MainAxisAlignment.start,
+                                                    children: [
+                                                      TextHeading(
+                                                          title: _languageViewModel
+                                                                      .getSelectedLanguage ==
+                                                                  "English"
+                                                              ? order.salonNameEng ??
+                                                                  "NA"
+                                                              : order.salonNameArb ??
+                                                                  "NA",
+                                                          fontweight:
+                                                              FontWeight.w400,
+                                                          fontsize: 12.sp,
+                                                          fontcolor: AppColors
+                                                              .primaryColor),
+                                                      SizedBox(
+                                                        height: 10.w,
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Image.asset(
+                                                              "assets/images/mark_Location.png"),
+                                                          SizedBox(
+                                                            width: 4.w,
+                                                          ),
+                                                          // Icon(Icons.location_city,color: Colors.white,),
+                                                          TextHeading(
+                                                              title:
+                                                                  "${order.distance} Km From you",
+                                                              fontweight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                              fontsize: 12.sp,
+                                                              fontcolor:
+                                                                  Colors.white)
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        height: 10.h,
+                                                      ),
+                                                      TextHeading(
+                                                          title:
+                                                              "${DateFormat('dd MMM, yyyy').format(DateTime.parse(order.orderGenerateTime ?? ""))} at ${DateFormat('HH:mm a').format(DateFormat("HH:mm:ss").parse(order.serviceStartTime ?? ""))} - ${DateFormat('HH:mm a').format(DateFormat("HH:mm:ss").parse(order.serviceEndTime ?? ""))}",
+                                                          // "04 Apr,2024 at 02:00 PM - 03:00 PM",
+                                                          fontweight:
+                                                              FontWeight.w400,
+                                                          fontsize: 8.sp,
+                                                          fontcolor: AppColors
+                                                              .primaryColor),
+                                                      SizedBox(
+                                                        height: 10.h,
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          TextHeading(
+                                                              title:
+                                                                  "Artist Name: ",
+                                                              fontweight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                              fontsize: 12.sp,
+                                                              fontcolor:
+                                                                  Colors.white),
+                                                          TextHeading(
+                                                              title: _languageViewModel
+                                                                          .getSelectedLanguage ==
+                                                                      "English"
+                                                                  ? order.artistNameEng ??
+                                                                      "NA"
+                                                                  : order.artistNameArb ??
+                                                                      "NA",
+                                                              fontweight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                              fontsize: 12.sp,
+                                                              fontcolor: AppColors
+                                                                  .bookmarkColor)
+                                                        ],
+                                                      )
+                                                    ],
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      Icon(
+                                                        Icons.star,
+                                                        color: AppColors
+                                                            .primaryColor,
+                                                        size: 15,
+                                                      ),
+                                                      SizedBox(
+                                                        width: 3.w,
+                                                      ),
+                                                      TextHeading(
+                                                          title: "4.3/5",
+                                                          fontweight:
+                                                              FontWeight.w400,
+                                                          fontsize: 10.sp,
+                                                          fontcolor:
+                                                              Colors.white)
+                                                    ],
+                                                  ),
                                                 ],
                                               ),
                                               SizedBox(
-                                                height: 10.h,
+                                                height: 15.h,
                                               ),
-                                              TextHeading(
-                                                  title:
-                                                      "04 Apr,2024 at 02:00 PM - 03:00 PM",
-                                                  fontweight: FontWeight.w400,
-                                                  fontsize: 8.sp,
-                                                  fontcolor:
-                                                      AppColors.primaryColor),
-                                              SizedBox(
-                                                height: 10.h,
+                                              Divider(
+                                                thickness: 0.5,
                                               ),
-                                              Row(
-                                                children: [
-                                                  TextHeading(
-                                                      title: "Artist Name:",
-                                                      fontweight:
-                                                          FontWeight.w400,
-                                                      fontsize: 12.sp,
-                                                      fontcolor: Colors.white),
-                                                  TextHeading(
-                                                      title: " Artist1",
-                                                      fontweight:
-                                                          FontWeight.w400,
-                                                      fontsize: 12.sp,
-                                                      fontcolor: AppColors
-                                                          .bookmarkColor)
-                                                ],
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 10),
+                                                child: Row(
+                                                  children: [
+                                                    Expanded(
+                                                        flex: 5,
+                                                        child: TextHeading(
+                                                            title:
+                                                                "View Orders >",
+                                                            fontweight:
+                                                                FontWeight.w400,
+                                                            fontsize: 10.sp,
+                                                            fontcolor: AppColors
+                                                                .primaryColor)),
+                                                    Expanded(
+                                                      child: Container(
+                                                        height: 24,
+                                                        width: 20,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      5.r),
+                                                          border: Border.all(
+                                                              width: 0.5,
+                                                              color: AppColors
+                                                                  .signUpColor),
+                                                        ),
+                                                        child: Image.asset(
+                                                            "assets/images/location3.png"),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10.w,
+                                                    ),
+                                                    if (order.serviceDate !=
+                                                            null &&
+                                                        order.serviceEndTime !=
+                                                            null)
+                                                      InkWell(
+                                                        onTap: () {
+                                                          // Navigator.push(
+                                                          //     context,
+                                                          //     MaterialPageRoute(
+                                                          //         builder:
+                                                          //             (context) =>
+                                                          //                 AppointmentDetailPage()));
+                                                        },
+                                                        child: Container(
+                                                          height: 23.h,
+                                                          width: 72.w,
+                                                          decoration: BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5.r),
+                                                              border: Border.all(
+                                                                  color: AppColors
+                                                                      .upcomingColor)),
+                                                          child: Center(
+                                                            child: TextHeading(
+                                                                title: isAfterCurrent(
+                                                                        "${order.serviceDate} ${order.serviceEndTime}")
+                                                                    ? "Upcoming"
+                                                                    : "Completed",
+                                                                fontweight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                                fontsize: 10.sp,
+                                                                fontcolor: AppColors
+                                                                    .upcomingColor),
+                                                          ),
+                                                        ),
+                                                      )
+                                                  ],
+                                                ),
                                               )
                                             ],
                                           ),
-                                          Row(
-                                            children: [
-                                              Icon(
-                                                Icons.star,
-                                                color: AppColors.primaryColor,
-                                                size: 15,
-                                              ),
-                                              SizedBox(
-                                                width: 3.w,
-                                              ),
-                                              TextHeading(
-                                                  title: "4.3/5",
-                                                  fontweight: FontWeight.w400,
-                                                  fontsize: 10.sp,
-                                                  fontcolor: Colors.white)
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 15.h,
-                                      ),
-                                      Divider(
-                                        thickness: 0.5,
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 10),
-                                        child: Row(
-                                          children: [
-                                            Expanded(
-                                                flex: 5,
-                                                child: TextHeading(
-                                                    title: "View Orders >",
-                                                    fontweight: FontWeight.w400,
-                                                    fontsize: 10.sp,
-                                                    fontcolor: AppColors
-                                                        .primaryColor)),
-                                            Expanded(
-                                              child: Container(
-                                                height: 24,
-                                                width: 20,
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          5.r),
-                                                  border: Border.all(
-                                                      width: 0.5,
-                                                      color: AppColors
-                                                          .signUpColor),
-                                                ),
-                                                child: Image.asset(
-                                                    "assets/images/location3.png"),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              width: 10.w,
-                                            ),
-                                            InkWell(
-                                              onTap: () {
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            AppointmentDetailPage()));
-                                              },
-                                              child: Container(
-                                                height: 23.h,
-                                                width: 72.w,
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5.r),
-                                                    border: Border.all(
-                                                        color: AppColors
-                                                            .upcomingColor)),
-                                                child: Center(
-                                                  child: TextHeading(
-                                                      title: "Upcoming",
-                                                      fontweight:
-                                                          FontWeight.w400,
-                                                      fontsize: 10.sp,
-                                                      fontcolor: AppColors
-                                                          .upcomingColor),
-                                                ),
-                                              ),
-                                            )
-                                          ],
                                         ),
-                                      )
-                                    ],
+                                      );
+                                    },
                                   ),
-                                ),
-                              );
-                            },
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),

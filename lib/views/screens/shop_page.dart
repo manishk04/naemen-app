@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:naemen/models/artist_model.dart';
@@ -32,8 +33,8 @@ class _ShopPageState extends State<ShopPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        // height: double.infinity,
-        // width: double.infinity,
+        height: double.infinity,
+        width: double.infinity,
         color: Colors.black,
         child: Obx(
           () => _salonProfileViewModel.getIsLoading
@@ -44,7 +45,7 @@ class _ShopPageState extends State<ShopPage> {
                 )
               : SingleChildScrollView(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    // crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(
                         height: 40,
@@ -533,52 +534,71 @@ class _ShopPageState extends State<ShopPage> {
                                   // ),
                                 ),
                               ),
-
-                              // TextHeading(
-                              //     title: "Our Gallary",
-                              //     fontweight: FontWeight.w600,
-                              //     fontsize: 12.sp,
-                              //     fontcolor: Colors.white),
                               SizedBox(
-                                height: 10.h,
+                                height: 15.h,
                               ),
                               TextHeading(
-                                  title: "Rating & Reviews (273)",
+                                  title: "Our Gallary",
                                   fontweight: FontWeight.w600,
                                   fontsize: 12.sp,
                                   fontcolor: Colors.white),
                               SizedBox(
-                                height: 15.h,
+                                height: 10.h,
                               ),
                               Container(
-                                height: 152.h,
-                                width: 340.w,
+                                height: 158.h,
+                                width: double.infinity,
+                                clipBehavior: Clip.hardEdge,
                                 decoration: BoxDecoration(
-                                    color: AppColors.searchFieldsColor,
-                                    borderRadius: BorderRadius.circular(16.r),
-                                    border: Border.all(
-                                        color: AppColors.signUpColor)),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        TextHeading(
-                                            title: "5",
-                                            fontweight: FontWeight.w600,
-                                            fontsize: 12.sp,
-                                            fontcolor: Colors.white),
-                                        Expanded(
-                                          child: SizedBox(
-                                              height: 20,
-                                              width: double.infinity,
-                                              child:
-                                                  ProgressIndicatorExample()),
-                                        )
-                                      ],
-                                    )
-                                  ],
+                                  borderRadius: BorderRadius.circular(15.r),
+                                ),
+                                child: InAppWebView(
+                                  initialUrlRequest: URLRequest(
+                                    url: WebUri(
+                                        "https://www.youtube.com/embed/2pxbAZtEhuM?controls=0&modestbranding=1&showinfo=0&rel=0&autoplay=1"),
+                                  ),
                                 ),
                               ),
+                              SizedBox(
+                                height: 15.h,
+                              ),
+                              // TextHeading(
+                              //     title: "Rating & Reviews (273)",
+                              //     fontweight: FontWeight.w600,
+                              //     fontsize: 12.sp,
+                              //     fontcolor: Colors.white),
+                              // SizedBox(
+                              //   height: 15.h,
+                              // ),
+                              // Container(
+                              //   height: 152.h,
+                              //   width: 340.w,
+                              //   decoration: BoxDecoration(
+                              //       color: AppColors.searchFieldsColor,
+                              //       borderRadius: BorderRadius.circular(16.r),
+                              //       border: Border.all(
+                              //           color: AppColors.signUpColor)),
+                              //   child: Column(
+                              //     children: [
+                              //       Row(
+                              //         children: [
+                              //           TextHeading(
+                              //               title: "5",
+                              //               fontweight: FontWeight.w600,
+                              //               fontsize: 12.sp,
+                              //               fontcolor: Colors.white),
+                              //           Expanded(
+                              //             child: SizedBox(
+                              //                 height: 20,
+                              //                 width: double.infinity,
+                              //                 child:
+                              //                     ProgressIndicatorExample()),
+                              //           )
+                              //         ],
+                              //       )
+                              //     ],
+                              //   ),
+                              // ),
                               Container(
                                 height: 260.h,
                                 width: 340.w,

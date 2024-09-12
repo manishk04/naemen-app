@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:intl/intl.dart';
 
 List<String> getNextSevenDays() {
@@ -132,4 +134,22 @@ String _addDaySuffix(int day) {
     default:
       return '${day}th';
   }
+}
+
+bool isAfterCurrent(String dateTime) {
+  DateTime currentDateTime = DateTime.now();
+  DateTime givenDateTime = DateTime.parse(dateTime);
+  if (givenDateTime.isAfter(currentDateTime)) {
+    return true;
+  }
+  return false;
+}
+
+double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
+  const p = 0.017453292519943295; // Pi/180
+  const R = 6371; // Radius of the Earth in kilometers
+  final a = 0.5 -
+      cos((lat2 - lat1) * p) / 2 +
+      cos(lat1 * p) * cos(lat2 * p) * (1 - cos((lon2 - lon1) * p)) / 2;
+  return R * 2 * asin(sqrt(a));
 }
