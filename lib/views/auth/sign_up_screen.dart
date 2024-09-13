@@ -36,9 +36,9 @@ class SignUpView extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    SizedBox(height: 80.h),
+                    SizedBox(height: 180.h),
                     Image.asset(
-                      "assets/images/Namen Logo (1).png",
+                      "assets/images/new_new_new_logo.png",
                       height: 136,
                       width: 136,
                     ),

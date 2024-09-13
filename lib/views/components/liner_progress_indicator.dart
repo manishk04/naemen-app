@@ -1,48 +1,52 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:naemen/utils/color_constant.dart';
 import 'package:naemen/views/components/text_heading.dart';
+import 'dart:async';
+import 'package:flutter/material.dart';
 
-class ProgressIndicatorExample extends StatefulWidget {
-  const ProgressIndicatorExample({super.key});
-
+class LinearProgressIndicatorApp extends StatefulWidget {
   @override
-  State<ProgressIndicatorExample> createState() =>
-      _ProgressIndicatorExampleState();
+  State<StatefulWidget> createState() {
+    return LinearProgressIndicatorAppState();
+  }
 }
 
-class _ProgressIndicatorExampleState extends State<ProgressIndicatorExample>
-    with TickerProviderStateMixin {
-  // late AnimationController controller;
+class LinearProgressIndicatorAppState
+    extends State<LinearProgressIndicatorApp> {
+  late bool _loading;
+  double _progressValue = 0.0;
+  Timer? _timer;
 
-  // @override
-  // void initState() {
-  //   controller = AnimationController(
-  //     /// [AnimationController]s can be created with `vsync: this` because of
-  //     /// [TickerProviderStateMixin].
-  //     vsync: this,
-  //     duration: const Duration(seconds: 5),
-  //   )..addListener(() {
-  //       setState(() {});
-  //     });
-  //   controller.repeat(reverse: true);
-  //   super.initState();
-  // }
-
-  // @override
-  // void dispose() {
-  //   controller.dispose();
-  //   super.dispose();
-  // }
+  @override
+  void initState() {
+    super.initState();
+    _loading = true;
+    // Start the progress automatically when the app initializes.
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 30.w,
-      child: LinearProgressIndicator(
-        color: AppColors.primaryColor,
-        // value: controller.value,
-        semanticsLabel: 'Linear progress indicator',
+    return Scaffold(
+      body: Center(
+        child: Container(
+          padding: EdgeInsets.all(12.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _loading
+                  ? LinearProgressIndicator(value: _progressValue)
+                  : Text(
+                      "Download Complete",
+                      style: TextStyle(fontSize: 25),
+                    ),
+              SizedBox(height: 20),
+              Text("${(_progressValue * 100).toStringAsFixed(0)}%"),
+            ],
+          ),
+        ),
       ),
     );
   }
