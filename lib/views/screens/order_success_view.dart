@@ -182,7 +182,7 @@ class OrderSuccessView extends StatelessWidget {
                         : cartViewModel.getOrderDetail.order?.artistNameArb ??
                             "NA",
                     date: cartViewModel
-                            .getOrderDetail.orderItems![0].serviceDate ??
+                            .getOrderDetail.orderItems?[0].serviceDate ??
                         "",
                     time:
                         "${cartViewModel.getOrderDetail.order?.serviceStartTime ?? ""} to ${cartViewModel.getOrderDetail.order?.serviceEndTime ?? ""}",

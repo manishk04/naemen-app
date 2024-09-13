@@ -5,6 +5,7 @@ import '../views/auth/login_password_view.dart';
 import '../views/auth/verify_mobile_view.dart';
 import '../views/auth/sign_up_screen.dart';
 import '../views/onboarding_screen.dart/onboarding_view.dart';
+import '../views/screens/appointment_detail_page.dart';
 import '../views/screens/artist_profile_service.dart';
 import '../views/screens/booking_detail_page.dart';
 import '../views/screens/bottom_bar.dart';
@@ -20,7 +21,7 @@ import 'app_routes.dart';
 class AppPages {
   static const initialRoute = Routes.splashRoute;
   static Map<String, WidgetBuilder> routes = {
-    Routes.splashRoute: (context) => SplashView(),
+    Routes.splashRoute: (context) => const SplashView(),
     //VideoSplashView(),
     Routes.languageRoute: (context) => const LanguageView(),
     Routes.onboardingRoute: (context) => const OnboardingView(),
@@ -36,5 +37,6 @@ class AppPages {
     Routes.bookingDetailRoute: (context) => const BookingDetailPage(),
     Routes.googleMapRoute: (context) => const GoogleMapScreen(),
     Routes.orderSuccessRoute: (context) => const OrderSuccessView(),
+    Routes.appointmentDetailRoute: (context) => const AppointmentDetailPage(),
   };
 }

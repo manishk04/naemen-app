@@ -23,7 +23,9 @@ class CartViewModel extends GetxController {
   final Rx<StoreModel> _selectedStore = StoreModel().obs;
   final Rx<ArtistModel> _selectedArtist = ArtistModel().obs;
 
-  OrderDetailModel _orderDetail = OrderDetailModel();
+  final Rx<OrderDetailModel> _orderDetail = OrderDetailModel().obs;
+
+  final RxBool _isBookingDetailsLoading = false.obs;
 
   // =============================== Getters ===================================
   List<ArtistServiceModel> get getAddedServiceList => _addedServicesList;
@@ -32,7 +34,9 @@ class CartViewModel extends GetxController {
 
   ArtistModel get getSelectedArtist => _selectedArtist.value;
 
-  OrderDetailModel get getOrderDetail => _orderDetail;
+  OrderDetailModel get getOrderDetail => _orderDetail.value;
+
+  bool get getIsBookingDetailsLoading => _isBookingDetailsLoading.value;
 
   // =============================== Setters ===================================
   set setAddedServices(List<ArtistServiceModel> list) =>
@@ -42,7 +46,10 @@ class CartViewModel extends GetxController {
 
   set setSelectedArtist(ArtistModel artist) => _selectedArtist.value = artist;
 
-  set setOrderDetail(OrderDetailModel detail) => _orderDetail = detail;
+  set setOrderDetail(OrderDetailModel detail) => _orderDetail.value = detail;
+
+  set setIsBookingDetailsLoading(bool value) =>
+      _isBookingDetailsLoading.value = value;
 
   // =============================== Methods ===================================
   addService(ArtistServiceModel service) => _addedServicesList.add(service);
@@ -138,6 +145,7 @@ class CartViewModel extends GetxController {
       "order_number": orderNumber,
     };
     try {
+      setIsBookingDetailsLoading = true;
       Map<String, dynamic> response = await _cartRepo.orderDetails(params);
       log(response.toString());
       if (response["order"] != null && response["order_item"] != null) {
@@ -151,66 +159,6 @@ class CartViewModel extends GetxController {
       Utils.toastMessage(e.toString());
       log("fetchOrderDetails Error => $e");
     }
+    setIsBookingDetailsLoading = false;
   }
-
-  var data = {
-    "order": {
-      "id": 8,
-      "order_number": "NMNO#A0001",
-      "customer_id": 24,
-      "store_id": "SADAA0003",
-      "customer_address": "Chandralok colony aliganj lucknow",
-      "lat": "26.77678290",
-      "lng": "80.93706950",
-      "order_amount": 1499,
-      "coupon_id": null,
-      "coupon_code": null,
-      "discount_amount": 0,
-      "final_pay_amount": 1499,
-      "payment_status": "cod",
-      "payment_id": "",
-      "order_status": "new",
-      "is_active": "1",
-      "date_time": "2024-08-31 17:51:10",
-      "customer_name": "Manish",
-      "email": "manish@gmail.com",
-      "contact_number": "898240449",
-      "profile_pic": null,
-      "salon_name_eng": "test business 2",
-      "salon_name_arb": "test",
-      "salon_image": "assets\/images\/salon-img\/66b7390c44cac.webp",
-      "cr_no": "",
-      "vat_no": "",
-      "log_address": "80.92662970",
-      "address_1": "block-c police station",
-      "address_2": "bkt"
-    },
-    "order_item": [
-      {
-        "id": 1,
-        "order_id": 8,
-        "store_id": "15",
-        "customer_id": 24,
-        "order_number": "NMNO#A0001",
-        "service_id": 16,
-        "service_title": "Smoothening",
-        "service_title_arb":
-            "\u0639\u0644\u0627\u062c\u0627\u062a\u0645\u062e\u0635\u0635\u0629",
-        "service_start_time": "13:00:00",
-        "service_end_time": "13:50:00",
-        "service_date": "2024-08-31",
-        "artist_id": 13,
-        "service_duraction": 50,
-        "service_amount": 1499,
-        "artist_start_time": null,
-        "artist_end_time": null,
-        "is_active": "1",
-        "service_status": "new",
-        "date_time": "2024-08-3117:51:10",
-        "artist_name_eng": "tanveer",
-        "artist_name_arb": "\u062a\u0646\u0648\u064a\u0631",
-        "artist_image": "assets\/images\/salon-img\/66b9f676c1df5.webp",
-      }
-    ]
-  };
 }

@@ -390,9 +390,9 @@ class _ShopPageState extends State<ShopPage> {
                                                     title: _languageViewModel
                                                                 .getSelectedLanguage ==
                                                             "English"
-                                                        ? artist.salonNameEng ??
+                                                        ? artist.artistNameEng ??
                                                             ""
-                                                        : artist.salonNameArb ??
+                                                        : artist.artistNameArb ??
                                                             "",
                                                     fontweight: FontWeight.w600,
                                                     fontsize: 12.sp,

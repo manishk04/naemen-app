@@ -14,6 +14,7 @@ abstract class Routes {
   static const bookingDetailRoute = Paths.bookingDetailPath;
   static const googleMapRoute = Paths.googleMapPath;
   static const orderSuccessRoute = Paths.orderSuccessPath;
+  static const appointmentDetailRoute = Paths.appointmentDetailPath;
 }
 
 abstract class Paths {
@@ -32,4 +33,5 @@ abstract class Paths {
   static const bookingDetailPath = "/BookingDetailPage";
   static const googleMapPath = "/googleMapRoute";
   static const orderSuccessPath = "/OrderSuccessView";
+  static const appointmentDetailPath = "/AppointmentDetailPage";
 }

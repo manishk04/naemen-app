@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 
 import '../../utils/color_constant.dart';
 import '../../view_models/cart_view_model.dart';
+import '../../view_models/language_view_model.dart';
 import 'text_heading.dart';
 
 class BookingDateTimeWidget extends StatelessWidget {
@@ -15,8 +16,9 @@ class BookingDateTimeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     CartViewModel cartViewModel = Get.find();
+    LanguageViewModel languageViewModel = Get.find();
     return Container(
-      height: 84.h,
+      // height: 84.h,
       width: 340.w,
       decoration: BoxDecoration(
         color: AppColors.searchFieldsColor,
@@ -28,12 +30,13 @@ class BookingDateTimeWidget extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.symmetric(
           horizontal: 10.w,
+          vertical: 10.h,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Row(
+            Row(
               children: [
                 TextHeading(
                   title: "Date & Timing: ",
@@ -42,8 +45,8 @@ class BookingDateTimeWidget extends StatelessWidget {
                   fontcolor: Colors.white,
                 ),
                 TextHeading(
-                  title: "",
-                  //     "${DateFormat("EEEE, dd MMM").format(DateFormat("dd-MM-yyyy").parse(cartViewModel.getAddedServiceList[0].date ?? ""))} - ${cartViewModel.getAddedServiceList[0].time ?? ""}",
+                  title:
+                      "${cartViewModel.getOrderDetail.orderItems != null && cartViewModel.getOrderDetail.orderItems![0].serviceDate != null ? DateFormat("EEEE, dd MMM").format(DateFormat("dd-MM-yyyy").parse(cartViewModel.getOrderDetail.orderItems?[0].serviceDate ?? "")) : ""} - ${cartViewModel.getOrderDetail.order?.serviceStartTime ?? ""} to ${cartViewModel.getOrderDetail.order?.serviceEndTime ?? ""}",
                   fontweight: FontWeight.w400,
                   fontsize: 12,
                   fontcolor: AppColors.primaryColor,
@@ -53,7 +56,7 @@ class BookingDateTimeWidget extends StatelessWidget {
             SizedBox(
               height: 5.h,
             ),
-            const Row(
+            Row(
               children: [
                 TextHeading(
                   title: "Artist: ",
@@ -62,35 +65,39 @@ class BookingDateTimeWidget extends StatelessWidget {
                   fontcolor: Colors.white,
                 ),
                 TextHeading(
-                  title: "Abdulazeez",
+                  title: languageViewModel.getSelectedLanguage == "English"
+                      ? cartViewModel.getOrderDetail.order?.artistNameEng ??
+                          "NA"
+                      : cartViewModel.getOrderDetail.order?.artistNameArb ??
+                          "NA",
                   fontweight: FontWeight.w400,
                   fontsize: 12,
                   fontcolor: AppColors.primaryColor,
                 ),
               ],
             ),
-            SizedBox(
-              height: 5.h,
-            ),
-            const Row(
-              children: [
-                TextHeading(
-                  title: "Gender: ",
-                  fontweight: FontWeight.w400,
-                  fontsize: 12,
-                  fontcolor: Colors.white,
-                ),
-                TextHeading(
-                  title: "Male",
-                  fontweight: FontWeight.w400,
-                  fontsize: 12,
-                  fontcolor: AppColors.primaryColor,
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 5.h,
-            )
+            // SizedBox(
+            //   height: 5.h,
+            // ),
+            // const Row(
+            //   children: [
+            //     TextHeading(
+            //       title: "Gender: ",
+            //       fontweight: FontWeight.w400,
+            //       fontsize: 12,
+            //       fontcolor: Colors.white,
+            //     ),
+            //     TextHeading(
+            //       title: "Male",
+            //       fontweight: FontWeight.w400,
+            //       fontsize: 12,
+            //       fontcolor: AppColors.primaryColor,
+            //     ),
+            //   ],
+            // ),
+            // SizedBox(
+            //   height: 5.h,
+            // )
           ],
         ),
       ),

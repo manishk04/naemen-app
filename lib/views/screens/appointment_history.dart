@@ -17,6 +17,7 @@ import 'package:naemen/utils/color_constant.dart';
 import '../../models/order_model.dart';
 import '../../utils/app_enums.dart';
 import '../../view_models/appointment_history_view_model.dart';
+import '../../view_models/cart_view_model.dart';
 import '../../view_models/language_view_model.dart';
 import '../components/text_heading.dart';
 
@@ -32,7 +33,7 @@ class _AppointmentHIstoreyPageState extends State<AppointmentHIstoreyPage> {
   final AppointmentHistoryViewModel _appointmentHistoryViewModel = Get.find();
   final LanguageViewModel _languageViewModel = Get.find();
   final AuthViewModel _authViewModel = Get.find();
-  final SalonProfileViewModel _salonProfileViewModel = Get.find();
+  final CartViewModel _cartViewModel = Get.find();
   @override
   void initState() {
     _appointmentHistoryViewModel.fetchAppointmentHistory(_authViewModel);
@@ -285,14 +286,25 @@ class _AppointmentHIstoreyPageState extends State<AppointmentHIstoreyPage> {
                                                   children: [
                                                     Expanded(
                                                         flex: 5,
-                                                        child: TextHeading(
-                                                            title:
-                                                                "View Orders >",
-                                                            fontweight:
-                                                                FontWeight.w400,
-                                                            fontsize: 10.sp,
-                                                            fontcolor: AppColors
-                                                                .primaryColor)),
+                                                        child: InkWell(
+                                                          onTap: () {
+                                                            _cartViewModel
+                                                                .fetchOrderDetails(
+                                                                    order.orderNumber ??
+                                                                        "");
+                                                            Get.toNamed(Routes
+                                                                .appointmentDetailRoute);
+                                                          },
+                                                          child: TextHeading(
+                                                              title:
+                                                                  "View Orders >",
+                                                              fontweight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                              fontsize: 10.sp,
+                                                              fontcolor: AppColors
+                                                                  .primaryColor),
+                                                        )),
                                                     Expanded(
                                                       child: Container(
                                                         height: 24,
