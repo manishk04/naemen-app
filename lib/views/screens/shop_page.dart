@@ -571,7 +571,7 @@ class _ShopPageState extends State<ShopPage> {
                                 height: 10.h,
                               ),
                               Container(
-                                height: 152.h,
+                                height: 155.h,
                                 width: 340.w,
                                 decoration: BoxDecoration(
                                     color: AppColors.searchFieldsColor,
@@ -592,13 +592,13 @@ class _ShopPageState extends State<ShopPage> {
                                               fontsize: 12.sp,
                                               fontcolor: Colors.white),
                                           SizedBox(
-                                            width: 3.w,
+                                            width: 5.w,
                                           ),
                                           SizedBox(
                                               height: 5,
                                               width: 180.w,
                                               child:
-                                                  ProgressIndicatorExample()),
+                                                  LinearProgressIndicatorApp()),
 
                                           SizedBox(
                                             width: 10.w,
@@ -630,13 +630,13 @@ class _ShopPageState extends State<ShopPage> {
                                               fontsize: 12.sp,
                                               fontcolor: Colors.white),
                                           SizedBox(
-                                            width: 3.w,
+                                            width: 5.w,
                                           ),
                                           SizedBox(
                                               height: 5,
                                               width: 180.w,
                                               child:
-                                                  ProgressIndicatorExample()),
+                                                  LinearProgressIndicatorApp()),
                                           SizedBox(
                                             width: 10.w,
                                           ),
@@ -647,6 +647,9 @@ class _ShopPageState extends State<ShopPage> {
                                               fontcolor: Colors.white),
                                         ],
                                       ),
+                                      SizedBox(
+                                        height: 5.h,
+                                      ),
                                       Row(
                                         children: [
                                           TextHeading(
@@ -655,13 +658,13 @@ class _ShopPageState extends State<ShopPage> {
                                               fontsize: 12.sp,
                                               fontcolor: Colors.white),
                                           SizedBox(
-                                            width: 3.w,
+                                            width: 5.w,
                                           ),
                                           SizedBox(
                                               height: 5,
                                               width: 180.w,
                                               child:
-                                                  ProgressIndicatorExample()),
+                                                  LinearProgressIndicatorApp()),
                                           SizedBox(
                                             width: 10.w,
                                           ),
@@ -675,13 +678,13 @@ class _ShopPageState extends State<ShopPage> {
                                               fontsize: 12.sp,
                                               fontcolor: Colors.white),
                                           SizedBox(
-                                            width: 3.w,
+                                            width: 5.w,
                                           ),
                                           SizedBox(
                                               height: 5,
                                               width: 180.w,
                                               child:
-                                                  ProgressIndicatorExample()),
+                                                  LinearProgressIndicatorApp()),
                                           SizedBox(
                                             width: 10.w,
                                           ),
@@ -703,13 +706,13 @@ class _ShopPageState extends State<ShopPage> {
                                               fontsize: 12.sp,
                                               fontcolor: Colors.white),
                                           SizedBox(
-                                            width: 3.w,
+                                            width: 5.w,
                                           ),
                                           SizedBox(
                                               height: 5,
                                               width: 180.w,
                                               child:
-                                                  ProgressIndicatorExample()),
+                                                  LinearProgressIndicatorApp()),
                                           SizedBox(
                                             width: 10.w,
                                           ),

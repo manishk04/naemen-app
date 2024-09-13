@@ -37,10 +37,10 @@ class LoginPasswordView extends StatelessWidget {
                 child: Column(
                   children: [
                     SizedBox(
-                      height: 80.h,
+                      height: 180.h,
                     ),
                     Image.asset(
-                      "assets/images/Namen Logo (1).png",
+                      "assets/images/new_new_new_logo.png",
                       height: 136,
                       width: 1360,
                     ),
