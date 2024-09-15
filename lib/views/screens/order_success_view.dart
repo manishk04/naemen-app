@@ -85,7 +85,7 @@ class OrderSuccessView extends StatelessWidget {
                   ),
                   TextHeading(
                     title:
-                        "Congratulations! Your appointment has been successfully booked.Thank you for choosing us looking forward to see you on time on your appointment. Drive safe",
+                        "Congratulations! Your appointment has been successfully booked.Thank you for choosing us looking forward to see you on time of your appointment. Drive Safe",
                     fontweight: FontWeight.w400,
                     fontsize: 12.sp,
                     fontcolor: Colors.white,

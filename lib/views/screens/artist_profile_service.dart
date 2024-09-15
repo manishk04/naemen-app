@@ -91,7 +91,8 @@ class _ArtistProfileServiceState extends State<ArtistProfileService> {
                           width: 340.w,
                           decoration: BoxDecoration(
                             color: AppColors.searchFieldsColor,
-                            border: Border.all(color: AppColors.signUpColor),
+                            border: Border.all(
+                                color: AppColors.signUpColor, width: 0.2),
                             borderRadius: BorderRadius.circular(16.r),
                           ),
                           child: Padding(

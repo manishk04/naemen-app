@@ -10,7 +10,7 @@ import 'package:naemen/view_models/auth_view_model.dart';
 import 'package:naemen/view_models/cart_view_model.dart';
 import 'package:naemen/view_models/language_view_model.dart';
 import 'package:naemen/view_models/salon_profile_view_model.dart';
-import 'package:naemen/views/components/liner_progress_indicator.dart';
+
 import 'package:naemen/views/components/rating_bar.dart';
 import 'package:naemen/utils/color_constant.dart';
 
@@ -555,7 +555,7 @@ class _ShopPageState extends State<ShopPage> {
                                 child: InAppWebView(
                                   initialUrlRequest: URLRequest(
                                     url: WebUri(
-                                        "https://www.youtube.com/embed/2pxbAZtEhuM?controls=0&modestbranding=1&showinfo=0&rel=0&autoplay=1"),
+                                        "https://www.youtube.com/embed/2pxbAZtEhuM?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0"),
                                   ),
                                 ),
                               ),
@@ -577,7 +577,8 @@ class _ShopPageState extends State<ShopPage> {
                                     color: AppColors.searchFieldsColor,
                                     borderRadius: BorderRadius.circular(16.r),
                                     border: Border.all(
-                                        color: AppColors.signUpColor)),
+                                        color: AppColors.signUpColor,
+                                        width: 0.2)),
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Column(
@@ -597,11 +598,15 @@ class _ShopPageState extends State<ShopPage> {
                                           SizedBox(
                                               height: 5,
                                               width: 180.w,
-                                              child:
-                                                  LinearProgressIndicatorApp()),
+                                              child: LinearProgressIndicator(
+                                                borderRadius:
+                                                    BorderRadius.circular(2.r),
+                                                value: 1,
+                                                color: AppColors.primaryColor,
+                                              )),
 
                                           SizedBox(
-                                            width: 10.w,
+                                            width: 20.w,
                                           ),
                                           const Row(
                                             children: [
@@ -635,10 +640,14 @@ class _ShopPageState extends State<ShopPage> {
                                           SizedBox(
                                               height: 5,
                                               width: 180.w,
-                                              child:
-                                                  LinearProgressIndicatorApp()),
+                                              child: LinearProgressIndicator(
+                                                borderRadius:
+                                                    BorderRadius.circular(2.r),
+                                                value: 0.8,
+                                                color: AppColors.primaryColor,
+                                              )),
                                           SizedBox(
-                                            width: 10.w,
+                                            width: 20.w,
                                           ),
                                           TextHeading(
                                               title: "273 Reviews",
@@ -663,8 +672,12 @@ class _ShopPageState extends State<ShopPage> {
                                           SizedBox(
                                               height: 5,
                                               width: 180.w,
-                                              child:
-                                                  LinearProgressIndicatorApp()),
+                                              child: LinearProgressIndicator(
+                                                borderRadius:
+                                                    BorderRadius.circular(2.r),
+                                                value: 0.6,
+                                                color: AppColors.primaryColor,
+                                              )),
                                           SizedBox(
                                             width: 10.w,
                                           ),
@@ -683,10 +696,14 @@ class _ShopPageState extends State<ShopPage> {
                                           SizedBox(
                                               height: 5,
                                               width: 180.w,
-                                              child:
-                                                  LinearProgressIndicatorApp()),
+                                              child: LinearProgressIndicator(
+                                                borderRadius:
+                                                    BorderRadius.circular(2.r),
+                                                value: 0.4,
+                                                color: AppColors.primaryColor,
+                                              )),
                                           SizedBox(
-                                            width: 10.w,
+                                            width: 20.w,
                                           ),
                                           TextHeading(
                                               title: "88%",
@@ -711,10 +728,14 @@ class _ShopPageState extends State<ShopPage> {
                                           SizedBox(
                                               height: 5,
                                               width: 180.w,
-                                              child:
-                                                  LinearProgressIndicatorApp()),
+                                              child: LinearProgressIndicator(
+                                                borderRadius:
+                                                    BorderRadius.circular(2.r),
+                                                value: 0.2,
+                                                color: AppColors.primaryColor,
+                                              )),
                                           SizedBox(
-                                            width: 10.w,
+                                            width: 20.w,
                                           ),
                                           TextHeading(
                                               title: "Recommended",
@@ -742,7 +763,7 @@ class _ShopPageState extends State<ShopPage> {
                                           115,
                                           1,
                                         ),
-                                        width: 0.3),
+                                        width: 0.2),
                                     borderRadius: BorderRadius.circular(16.r)),
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
@@ -858,7 +879,8 @@ class _ShopPageState extends State<ShopPage> {
                                     color: AppColors.searchFieldsColor,
                                     border: Border.all(
                                         color: const Color.fromRGBO(
-                                            115, 115, 115, 1)),
+                                            115, 115, 115, 1),
+                                        width: 0.2),
                                     borderRadius: BorderRadius.circular(16.r)),
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
@@ -974,7 +996,8 @@ class _ShopPageState extends State<ShopPage> {
                                       color: AppColors.searchFieldsColor,
                                       border: Border.all(
                                           color: const Color.fromRGBO(
-                                              115, 115, 115, 1)),
+                                              115, 115, 115, 1),
+                                          width: 0.2),
                                       borderRadius:
                                           BorderRadius.circular(16.r)),
                                   child: Padding(

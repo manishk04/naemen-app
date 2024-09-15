@@ -65,7 +65,8 @@ class _NewelyWidgetState extends State<NewelyWidget> {
                     decoration: BoxDecoration(
                         color: AppColors.searchFieldsColor,
                         borderRadius: BorderRadius.circular(16.r),
-                        border: Border.all(color: AppColors.signUpColor)),
+                        border: Border.all(
+                            color: AppColors.signUpColor, width: 0.2)),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 5),

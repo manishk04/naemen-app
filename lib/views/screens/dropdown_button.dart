@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:naemen/utils/app_url.dart';
 import 'package:naemen/view_models/artist_profile_view_model.dart';
 import 'package:naemen/view_models/cart_view_model.dart';
@@ -26,6 +27,7 @@ class _ExpansionTileControllerAppState
   final ArtistProfileViewModel artistProfileViewModel = Get.find();
   final CartViewModel cartViewModel = Get.find();
   final LanguageViewModel languageViewModel = Get.find();
+  final formatCurrency = new NumberFormat.simpleCurrency();
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +48,7 @@ class _ExpansionTileControllerAppState
                   // height: 123.h,
                   width: 340.w,
                   decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
+                      border: Border.all(color: Colors.grey, width: 0.2),
                       borderRadius: BorderRadius.circular(16.r)),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -131,7 +133,8 @@ class _ExpansionTileControllerAppState
                                   ),
                                   Expanded(
                                     child: TextHeading(
-                                      title: "\$ ${service.serviceAmount ?? 0}",
+                                      title:
+                                          "\SAR ${service.serviceAmount ?? 0}",
                                       fontweight: FontWeight.w600,
                                       fontsize: 14.sp,
                                       fontcolor: Colors.white,

@@ -49,7 +49,7 @@ class BookingDateTimeWidget extends StatelessWidget {
                   title:
                       "${date.isEmpty ? "" : DateFormat("EEEE, dd MMM").format(DateFormat("dd-MM-yyyy").parse(date))} - ${time ?? ""}",
                   fontweight: FontWeight.w400,
-                  fontsize: 12,
+                  fontsize: 11,
                   fontcolor: AppColors.primaryColor,
                 ),
               ],
