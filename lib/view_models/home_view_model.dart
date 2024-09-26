@@ -19,9 +19,10 @@ class HomeViewModel extends GetxController {
   final RxList<CategoryModel> _homeCategories = <CategoryModel>[].obs;
   final RxList<CategoryModel> _allCategories = <CategoryModel>[].obs;
 
-  final Rx<TagModel> _tag = TagModel().obs;
+  final RxList<TagModel> _tags = <TagModel>[].obs;
 
   final RxBool _isStoresByCategoryLoading = false.obs;
+  final RxBool _isHomeLoading = false.obs;
 
   CategoryModel _selectedCategory = CategoryModel();
 
@@ -32,9 +33,10 @@ class HomeViewModel extends GetxController {
   List<CategoryModel> get getHomeCategories => _homeCategories;
   List<CategoryModel> get getAllCategories => _allCategories;
 
-  TagModel get getTag => _tag.value;
+  List<TagModel> get getTags => _tags;
 
   bool get getIsStoresByCategoryLoading => _isStoresByCategoryLoading.value;
+  bool get getIsHomeLoading => _isHomeLoading.value;
 
   CategoryModel get getSelectedCategory => _selectedCategory;
 
@@ -46,10 +48,11 @@ class HomeViewModel extends GetxController {
       _homeCategories.value = list;
   set setAllCategories(List<CategoryModel> list) => _allCategories.value = list;
 
-  set setTag(TagModel tag) => _tag.value = tag;
+  set setTags(List<TagModel> tag) => _tags.value = tag;
 
   set setIsStoreByCategoryLoading(bool value) =>
       _isStoresByCategoryLoading.value = value;
+  set setIsHomeLoading(bool value) => _isHomeLoading.value = value;
 
   set setSelectedCategory(CategoryModel category) =>
       _selectedCategory = category;
@@ -128,31 +131,37 @@ class HomeViewModel extends GetxController {
   }
 
   void fetchHomeTagData() async {
+    List<TagModel> tags = <TagModel>[];
     try {
+      setIsHomeLoading = true;
       String lat = await StorageData.getLatitude();
       String lng = await StorageData.getLongitude();
       Map<String, String> data = {
-        "lat": "26.88535240",
-        "lng": "80.94372100",
-        // "lat": lat,
-        // "lng": lng,
+        // "lat": "26.88535240",
+        // "lng": "80.94372100",
+        "lat": lat,
+        "lng": lng,
       }; // TODO: Uncomment for current location
       Map<String, dynamic> response = await _homeRepo.fetchHomeTagData(data);
       log(response.toString());
       if (response["code"] == 200) {
         var data = response["data"];
         if (data != null && data is List && data.isNotEmpty) {
-          if (data[0]["tag"] != null) {
-            setTag = TagModel.fromMap(data[0]["tag"]);
-            log(getTag.toString());
+          for (var element in data) {
+            tags.add(TagModel.fromMap(element["tag"]));
           }
+          setTags = tags;
+          setIsHomeLoading = false;
         } else {
+          setIsHomeLoading = false;
           Utils.toastMessage(response["msg"] ?? "Something went wrong!");
         }
       } else {
+        setIsHomeLoading = false;
         Utils.toastMessage(response["msg"] ?? "Something went wrong!");
       }
     } catch (e) {
+      setIsHomeLoading = false;
       Utils.toastMessage(e.toString());
       log("fetchHomeTagData Error => $e");
     }
@@ -173,10 +182,10 @@ class HomeViewModel extends GetxController {
       String lng = await StorageData.getLongitude();
       Map<String, String> data = {
         "category_id": "${getSelectedCategory.id ?? ""}",
-        "lat": "26.88535240",
-        "lng": "80.94372100",
-        // "lat": lat,
-        // "lng": lng,
+        // "lat": "26.88535240",
+        // "lng": "80.94372100",
+        "lat": lat,
+        "lng": lng,
       }; // TODO: Uncomment for current location
       Map<String, dynamic> response =
           await _homeRepo.fetchStoresByCategory(data);
