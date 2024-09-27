@@ -147,7 +147,7 @@ class _HomeViewState extends State<HomeView> {
                       // ),
                       Obx(
                         () => homeViewModel.getBanners.isNotEmpty
-                            ? HomePageSlider(
+                            ? ShopPageSlider(
                                 pageController1: pageController1,
                                 banners: homeViewModel.getBanners,
                               )
@@ -357,7 +357,7 @@ class _HomeViewState extends State<HomeView> {
                       SizedBox(
                         height: 20.h,
                       ),
-                      Recommended(
+                      const Recommended(
                         status: "Status:",
                         description: 'Chameleon salon',
                         type: 'Saloon Type:',

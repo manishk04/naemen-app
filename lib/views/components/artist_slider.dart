@@ -52,7 +52,7 @@ class _ArtistSliderState extends State<ArtistSlider> {
                   Container(
                     margin: EdgeInsets.only(right: 10),
                     height: 252.h,
-                    width: 200.w,
+                    width: 164.w,
                     decoration: BoxDecoration(
                         color: AppColors.searchFieldsColor,
                         borderRadius: BorderRadius.circular(16.r),
@@ -70,7 +70,7 @@ class _ArtistSliderState extends State<ArtistSlider> {
                         Expanded(
                           flex: 4,
                           child: Container(
-                            width: 190.w,
+                            width: 154.w,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15.r),
                                 image: DecorationImage(
@@ -95,10 +95,14 @@ class _ArtistSliderState extends State<ArtistSlider> {
                                     fontsize: 12.sp,
                                     fontcolor: Colors.white,
                                   ),
+                                  SizedBox(
+                                    width: 20.w,
+                                  ),
                                   Row(
                                     children: [
-                                      Icon(
+                                      const Icon(
                                         Icons.star,
+                                        size: 16,
                                         color: AppColors.primaryColor,
                                       ),
                                       SizedBox(width: 3),
@@ -176,7 +180,7 @@ class _ArtistSliderState extends State<ArtistSlider> {
                                   ),
                                   Container(
                                       height: 34.h,
-                                      width: 102.w,
+                                      width: 70.w,
                                       decoration: BoxDecoration(
                                           color: AppColors.bookmarkColor,
                                           borderRadius:
@@ -185,7 +189,7 @@ class _ArtistSliderState extends State<ArtistSlider> {
                                           child: TextHeading(
                                               title: "View Profile",
                                               fontweight: FontWeight.w400,
-                                              fontsize: 12.sp,
+                                              fontsize: 10.sp,
                                               fontcolor: Colors.white)))
                                 ],
                               )

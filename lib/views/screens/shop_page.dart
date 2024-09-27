@@ -8,8 +8,10 @@ import 'package:naemen/utils/app_url.dart';
 import 'package:naemen/view_models/artist_profile_view_model.dart';
 import 'package:naemen/view_models/auth_view_model.dart';
 import 'package:naemen/view_models/cart_view_model.dart';
+import 'package:naemen/view_models/home_view_model.dart';
 import 'package:naemen/view_models/language_view_model.dart';
 import 'package:naemen/view_models/salon_profile_view_model.dart';
+import 'package:naemen/views/components/crousel_slider.dart';
 
 import 'package:naemen/views/components/rating_bar.dart';
 import 'package:naemen/utils/color_constant.dart';
@@ -24,11 +26,16 @@ class ShopPage extends StatefulWidget {
 }
 
 class _ShopPageState extends State<ShopPage> {
+  PageController pageController2 = PageController();
+// late final PageController   pageController2;
   final SalonProfileViewModel _salonProfileViewModel = Get.find();
   final LanguageViewModel _languageViewModel = Get.find();
   final ArtistProfileViewModel _artistProfileViewModel = Get.find();
   final CartViewModel _cartViewModel = Get.find();
   final AuthViewModel _authViewModel = Get.find();
+  AuthViewModel authViewModel = Get.find();
+  HomeViewModel homeViewModel = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,35 +59,47 @@ class _ShopPageState extends State<ShopPage> {
                       ),
                       Stack(
                         children: [
-                          Container(
-                            height: 360.h,
-                            width: 340.w,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: NetworkImage(
-                                      "${AppUrl.baseUrl}/${_salonProfileViewModel.getStore.salonImage ?? ""}"),
-                                  fit: BoxFit.fitWidth),
-                              borderRadius: BorderRadius.circular(16.r),
-                              border: Border.all(
-                                color: AppColors.signUpColor,
-                                width: 0.5.w,
-                              ),
-                            ),
+                          // HomePageSlider(
+                          //   pageController: pageController2,
+                          // ),
+                          // Container(
+                          //   height: 360.h,
+                          //   width: 340.w,
+                          //   decoration: BoxDecoration(
+                          //     image: DecorationImage(
+                          //         image: NetworkImage(
+                          //             "${AppUrl.baseUrl}/${_salonProfileViewModel.getStore.salonImage ?? ""}"),
+                          //         fit: BoxFit.cover),
+                          //     borderRadius: BorderRadius.circular(16.r),
+                          //     border: Border.all(
+                          //       color: AppColors.signUpColor,
+                          //       width: 0.5.w,
+                          //     ),
+                          //   ),
+                          // ),
+
+                          Obx(
+                            () => homeViewModel.getBanners.isNotEmpty
+                                ? HomePageSlider(
+                                    pageController2: pageController2,
+                                    banners: homeViewModel.getBanners)
+                                : const SizedBox(),
                           ),
+
                           Container(
                             height: 360.h,
-                            width: 340.w,
+                            width: double.infinity,
                             decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: <Color>[
-                                  Color(0xff000000).withOpacity(0.1),
-                                  Color(0xff000000),
-                                ], // Gradient from https://learnui.design/tools/gradient-generator.html
-                                tileMode: TileMode.mirror,
-                              ),
-                            ),
+                                // gradient: LinearGradient(
+                                //   begin: Alignment.topCenter,
+                                //   end: Alignment.bottomCenter,
+                                //   colors: <Color>[
+                                //     Color(0xff000000).withOpacity(0.1),
+                                //     Color(0xff000000),
+                                //   ], // Gradient from https://learnui.design/tools/gradient-generator.html
+                                //   tileMode: TileMode.mirror,
+                                // ),
+                                ),
                             // gradient: LinearGradient(
                             //   begin: Alignment.topCenter,
                             //   end: Alignment.center,
