@@ -247,75 +247,351 @@ class _HomeViewState extends State<HomeView> {
                         height: 20.h,
                       ),
                       Obx(
-                        () {
-                          TagModel tag = homeViewModel.getTag;
-                          return tag.salons != null && tag.salons!.isNotEmpty
-                              ? TextHeading(
-                                  title:
-                                      languageViewModel.getSelectedLanguage ==
-                                              "English"
-                                          ? tag.titleEng ?? ""
-                                          : tag.titleArb ?? "",
-                                  fontweight: FontWeight.w600,
-                                  fontsize: 12.sp,
-                                  fontcolor: Colors.white,
-                                )
-                              : const SizedBox();
-                        },
+                        () => homeViewModel.getIsHomeLoading
+                            ? const Center(
+                                child: CircularProgressIndicator(),
+                              )
+                            : ListView.separated(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: homeViewModel.getTags.length,
+                                separatorBuilder: (context, index) => SizedBox(
+                                  height: 15.h,
+                                ),
+                                itemBuilder: (context, index) {
+                                  TagModel tag = homeViewModel.getTags[index];
+                                  return Column(
+                                    children: [
+                                      if (tag.salons != null &&
+                                          tag.salons!.isNotEmpty)
+                                        TextHeading(
+                                          title: languageViewModel
+                                                      .getSelectedLanguage ==
+                                                  "English"
+                                              ? tag.titleEng ?? ""
+                                              : tag.titleArb ?? "",
+                                          fontweight: FontWeight.w600,
+                                          fontsize: 12.sp,
+                                          fontcolor: Colors.white,
+                                        ),
+                                      if (tag.salons != null &&
+                                          tag.salons!.isNotEmpty)
+                                        SizedBox(
+                                          height: 25.h,
+                                        ),
+                                      if (tag.salons != null &&
+                                          tag.salons!.isNotEmpty &&
+                                          tag.titleEng == "Newly Added Saloons")
+                                        SizedBox(
+                                          height: 255.h,
+                                          width: double.infinity,
+                                          child: ListView.builder(
+                                            shrinkWrap: true,
+                                            itemCount: tag.salons!.length,
+                                            scrollDirection: Axis.horizontal,
+                                            itemBuilder: (context, index) {
+                                              SalonModel salon =
+                                                  tag.salons![index];
+                                              return WinterSpecialItems(
+                                                image: salon.salonImage ?? "",
+                                                status: languageViewModel
+                                                            .getSelectedLanguage ==
+                                                        "English"
+                                                    ? "Status:"
+                                                    : "Status:",
+                                                statusValue:
+                                                    (salon.salonStatus ?? "")
+                                                        .toString(),
+                                                description: languageViewModel
+                                                            .getSelectedLanguage ==
+                                                        "English"
+                                                    ? salon.salonNameEng ?? ""
+                                                    : salon.salonNameArb ?? "",
+                                                type: languageViewModel
+                                                            .getSelectedLanguage ==
+                                                        "English"
+                                                    ? "Saloon Type:"
+                                                    : "Saloon Type:",
+                                                typeValue:
+                                                    salon.salonType ?? "NA",
+                                                distance:
+                                                    salon.distance ?? 0.00,
+                                                salon: salon,
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      if (tag.salons != null &&
+                                          tag.salons!.isNotEmpty &&
+                                          tag.titleEng == "Top Rated Artist")
+                                        SizedBox(
+                                            height: 255.h,
+                                            width: double.infinity,
+                                            child: ListView.builder(
+                                                shrinkWrap: true,
+                                                itemCount: artistImages.length,
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                                itemBuilder: (context, index) {
+                                                  return Stack(
+                                                    children: [
+                                                      Container(
+                                                        margin: EdgeInsets.only(
+                                                            right: 10),
+                                                        height: 252.h,
+                                                        width: 200.w,
+                                                        decoration: BoxDecoration(
+                                                            color: AppColors
+                                                                .searchFieldsColor,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        16.r),
+                                                            border: Border.all(
+                                                                color: AppColors
+                                                                    .signUpColor,
+                                                                width: 0.2)),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .symmetric(
+                                                                horizontal: 5),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            SizedBox(
+                                                              height: 5.h,
+                                                            ),
+                                                            Expanded(
+                                                              flex: 4,
+                                                              child: Container(
+                                                                width: 190.w,
+                                                                decoration: BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(15
+                                                                            .r),
+                                                                    image: DecorationImage(
+                                                                        image: AssetImage(artistImages[
+                                                                            index]),
+                                                                        fit: BoxFit
+                                                                            .cover)),
+                                                              ),
+                                                            ),
+                                                            Expanded(
+                                                              flex: 6,
+                                                              child: Column(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  //SizedBox(height: 5.h,),
+                                                                  Row(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .spaceBetween,
+                                                                    children: [
+                                                                      TextHeading(
+                                                                        title: artistNames[
+                                                                            index],
+                                                                        fontweight:
+                                                                            FontWeight.w600,
+                                                                        fontsize:
+                                                                            12.sp,
+                                                                        fontcolor:
+                                                                            Colors.white,
+                                                                      ),
+                                                                      Row(
+                                                                        children: [
+                                                                          Icon(
+                                                                            Icons.star,
+                                                                            color:
+                                                                                AppColors.primaryColor,
+                                                                          ),
+                                                                          SizedBox(
+                                                                              width: 3),
+                                                                          TextHeading(
+                                                                            title:
+                                                                                "4.3/5",
+                                                                            fontweight:
+                                                                                FontWeight.w600,
+                                                                            fontsize:
+                                                                                12.sp,
+                                                                            fontcolor:
+                                                                                Colors.white,
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    ],
+                                                                  ),
+
+                                                                  SizedBox(
+                                                                    height: 3.h,
+                                                                  ),
+
+                                                                  Row(
+                                                                    children: [
+                                                                      TextHeading(
+                                                                        title:
+                                                                            "Work at",
+                                                                        fontweight:
+                                                                            FontWeight.w400,
+                                                                        fontsize:
+                                                                            12.sp,
+                                                                        fontcolor:
+                                                                            Colors.white,
+                                                                      ),
+                                                                      SizedBox(
+                                                                          width:
+                                                                              3.w),
+                                                                      TextHeading(
+                                                                        title: artistWorkat[
+                                                                            index],
+                                                                        fontweight:
+                                                                            FontWeight.w400,
+                                                                        fontsize:
+                                                                            12.sp,
+                                                                        fontcolor:
+                                                                            AppColors.primaryColor,
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                  SizedBox(
+                                                                      height:
+                                                                          3.h),
+                                                                  Row(
+                                                                    children: [
+                                                                      Image
+                                                                          .asset(
+                                                                        "assets/images/location-svgrepo-com 1.png",
+                                                                        color: AppColors
+                                                                            .primaryColor,
+                                                                      ),
+                                                                      TextHeading(
+                                                                          title:
+                                                                              "0.4 km",
+                                                                          fontweight: FontWeight
+                                                                              .w400,
+                                                                          fontsize: 12
+                                                                              .sp,
+                                                                          fontcolor:
+                                                                              Colors.white)
+                                                                    ],
+                                                                  ),
+
+                                                                  SizedBox(
+                                                                    height: 5.h,
+                                                                  ),
+                                                                  Row(
+                                                                    //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                    children: [
+                                                                      Container(
+                                                                        height:
+                                                                            34.h,
+                                                                        width:
+                                                                            34.w,
+                                                                        decoration: BoxDecoration(
+                                                                            border:
+                                                                                Border.all(color: AppColors.signUpColor, width: 0.2),
+                                                                            color: Colors.black,
+                                                                            borderRadius: BorderRadius.circular(8.r)),
+                                                                        child: Center(
+                                                                            child: Icon(
+                                                                          Icons
+                                                                              .bookmark_add_outlined,
+                                                                          color:
+                                                                              Colors.white,
+                                                                        )),
+                                                                      ),
+                                                                      SizedBox(
+                                                                        width:
+                                                                            50.w,
+                                                                      ),
+                                                                      Container(
+                                                                          height: 34
+                                                                              .h,
+                                                                          width: 102
+                                                                              .w,
+                                                                          decoration: BoxDecoration(
+                                                                              color: AppColors.bookmarkColor,
+                                                                              borderRadius: BorderRadius.circular(8.r)),
+                                                                          child: Center(child: TextHeading(title: "View Profile", fontweight: FontWeight.w400, fontsize: 12.sp, fontcolor: Colors.white)))
+                                                                    ],
+                                                                  )
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      )
+                                                    ],
+                                                  );
+                                                })),
+                                      if (tag.salons != null &&
+                                          tag.salons!.isNotEmpty &&
+                                          tag.titleEng == "Recommendation")
+                                        const Recommended(
+                                          status: "Status:",
+                                          description: 'Chameleon salon',
+                                          type: 'Saloon Type:',
+                                          image: 'assets/images/newly.png',
+                                          statuValue: 'ONLINE',
+                                          typeValue: 'Unisex',
+                                        ),
+                                    ],
+                                  );
+                                },
+                              ),
                       ),
-                      Obx(
-                        () {
-                          TagModel tag = homeViewModel.getTag;
-                          return SizedBox(
-                            height: tag.salons != null && tag.salons!.isNotEmpty
-                                ? 25.h
-                                : 0.h,
-                          );
-                        },
-                      ),
-                      Obx(
-                        () {
-                          TagModel tag = homeViewModel.getTag;
-                          return tag.salons != null && tag.salons!.isNotEmpty
-                              ? SizedBox(
-                                  height: 255.h,
-                                  width: double.infinity,
-                                  child: ListView.builder(
-                                    shrinkWrap: true,
-                                    itemCount: tag.salons!.length,
-                                    scrollDirection: Axis.horizontal,
-                                    itemBuilder: (context, index) {
-                                      SalonModel salon = tag.salons![index];
-                                      return WinterSpecialItems(
-                                        image: salon.salonImage ?? "",
-                                        status: languageViewModel
-                                                    .getSelectedLanguage ==
-                                                "English"
-                                            ? "Status:"
-                                            : "Status:",
-                                        statusValue: (salon.salonStatus ?? "")
-                                            .toString(),
-                                        description: languageViewModel
-                                                    .getSelectedLanguage ==
-                                                "English"
-                                            ? salon.salonNameEng ?? ""
-                                            : salon.salonNameArb ?? "",
-                                        type: languageViewModel
-                                                    .getSelectedLanguage ==
-                                                "English"
-                                            ? "Saloon Type:"
-                                            : "Saloon Type:",
-                                        typeValue: salon.salonType ?? "NA",
-                                        distance: salon.distance ?? 0.00,
-                                        salon: salon,
-                                      );
-                                    },
-                                  ),
-                                )
-                              : const SizedBox();
-                        },
-                      ),
-                      // NewelyWidget(
+
+                      // // NewelyWidget(
+                      // //   status: "Status:",
+                      // //   description: 'Chameleon salon',
+                      // //   type: 'Saloon Type:',
+                      // //   image: 'assets/images/newly.png',
+                      // //   statuValue: 'ONLINE',
+                      // //   typeValue: 'Unisex',
+                      // // ),
+                      // SizedBox(height: 20.h),
+                      // TextHeading(
+                      //     title: "Top Rated Artist",
+                      //     fontweight: FontWeight.w600,
+                      //     fontsize: 12.sp,
+                      //     fontcolor: Colors.white),
+                      // SizedBox(
+                      //   height: 25.h,
+                      // ),
+                      // ArtistSlider(),
+
+                      // // const NewelyWidget(
+                      // //   status: "Status:",
+                      // //   description: 'Chameleon salon',
+                      // //   type: 'Saloon Type:',
+                      // //   image: 'assets/images/newly.png',
+                      // //   statuValue: 'ONLINE',
+                      // //   typeValue: 'Unisex',
+                      // // ),
+                      // // ArtistSlider(status: 'Status', statuValue: 'Online', description: '2q4qrw', type: 'rewrwr', typeValue: 'wdad', image: 'assets/images/newly.png',),
+
+                      // //ArtistSliderWidget( ),
+
+                      // SizedBox(
+                      //   height: 20.h,
+                      // ),
+                      // TextHeading(
+                      //     title: "Recommended",
+                      //     fontweight: FontWeight.w600,
+                      //     fontsize: 12.sp,
+                      //     fontcolor: Colors.white),
+                      // SizedBox(
+                      //   height: 20.h,
+                      // ),
+                      // Recommended(
                       //   status: "Status:",
                       //   description: 'Chameleon salon',
                       //   type: 'Saloon Type:',
@@ -323,48 +599,6 @@ class _HomeViewState extends State<HomeView> {
                       //   statuValue: 'ONLINE',
                       //   typeValue: 'Unisex',
                       // ),
-                      SizedBox(height: 20.h),
-                      TextHeading(
-                          title: "Top Rated Artist",
-                          fontweight: FontWeight.w600,
-                          fontsize: 12.sp,
-                          fontcolor: Colors.white),
-                      SizedBox(
-                        height: 25.h,
-                      ),
-                      ArtistSlider(),
-
-                      // const NewelyWidget(
-                      //   status: "Status:",
-                      //   description: 'Chameleon salon',
-                      //   type: 'Saloon Type:',
-                      //   image: 'assets/images/newly.png',
-                      //   statuValue: 'ONLINE',
-                      //   typeValue: 'Unisex',
-                      // ),
-                      // ArtistSlider(status: 'Status', statuValue: 'Online', description: '2q4qrw', type: 'rewrwr', typeValue: 'wdad', image: 'assets/images/newly.png',),
-
-                      //ArtistSliderWidget( ),
-
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                      TextHeading(
-                          title: "Recommended",
-                          fontweight: FontWeight.w600,
-                          fontsize: 12.sp,
-                          fontcolor: Colors.white),
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                      const Recommended(
-                        status: "Status:",
-                        description: 'Chameleon salon',
-                        type: 'Saloon Type:',
-                        image: 'assets/images/newly.png',
-                        statuValue: 'ONLINE',
-                        typeValue: 'Unisex',
-                      ),
                       SizedBox(
                         height: 20.h,
                       ),
