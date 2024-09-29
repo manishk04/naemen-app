@@ -17,6 +17,7 @@ import '../routes/app_routes.dart';
 import '../utils/color_constant.dart';
 import '../utils/storage_data.dart';
 import '../utils/utils.dart';
+import '../views/components/location_search_dialog.dart';
 import 'google_map_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -357,15 +358,88 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
   //final GoogleMapViewModel2 _googleMapViewModel2 = Get.find();
 
   AuthViewModel authViewModel = Get.find();
+  GoogleMapViewModel googleMapViewModel = Get.find();
+
+  Completer<GoogleMapController> googleMapController = Completer();
 
   // static const LatLng _pGooglePlex = LatLng(28.6407533, 76.3790116);
 
   @override
   void initState() {
+    init();
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      //_showBottomSheet();
+  }
+
+  init() async {
+    // Map will redirect to users current location when loaded
+    _googleMapViewModel.setIsMapLoading = true;
+    await gotoUserCurrentPosition().then((_) {
+      _googleMapViewModel.setIsMapLoading = false;
     });
+  }
+
+  Future getAddress(LatLng position) async {
+    // This will list down all address around the position
+    List<Placemark> placemarks =
+        await placemarkFromCoordinates(position.latitude, position.longitude);
+    Placemark address = placemarks[0];
+    String addressStr =
+        "${address.street}, ${address.subLocality}, ${address.locality}, ${address.subAdministrativeArea}, ${address.administrativeArea}, ${address.country}";
+    _googleMapViewModel.setDraggedAddress = addressStr;
+  }
+
+  Future determineUsersCurrentPosition() async {
+    LocationPermission locationPermission;
+    bool isLocationServiceEnabled = await Geolocator.isLocationServiceEnabled();
+    // Check if user enable service for location permission
+    if (!isLocationServiceEnabled) {
+      log("User don't enable location permission");
+    }
+    locationPermission = await Geolocator.checkPermission();
+    // check if user denied location and retyr requesting for permission
+    if (locationPermission == LocationPermission.denied) {
+      locationPermission = await Geolocator.requestPermission();
+      if (locationPermission == LocationPermission.denied) {
+        log("User denied location permission!");
+      }
+    }
+
+    // Check if user denied permission forever
+    if (locationPermission == LocationPermission.deniedForever) {
+      log("User denied permission forever");
+    }
+
+    return await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.best);
+  }
+
+  // get Users current Location and set the Map's camera position to That Location
+  Future gotoUserCurrentPosition() async {
+    Position currentPosition = await determineUsersCurrentPosition();
+    // gotoSpecificPosition(
+    //     LatLng(18.574061, 73.773638));
+    gotoSpecificPosition(
+        LatLng(currentPosition.latitude, currentPosition.longitude));
+  }
+
+  // Go to specific position by LatLng
+  Future gotoSpecificPosition(LatLng position) async {
+    GoogleMapController mapController = await googleMapController.future;
+    mapController.animateCamera(CameraUpdate.newCameraPosition(
+        CameraPosition(target: position, zoom: 15.5)));
+    // Every time user drag pin will get address
+    getAddress(position);
+  }
+
+  backClick() {
+    _googleMapViewModel.setDraggedLatLng = const LatLng(0.0, 0.0);
+    // if (_locationViewModel.getIsChangeClicked) {
+    //   Get.offNamed(Routes.addAddressRoute);
+    // } else {
+    //   Get.offNamed(Routes.selectLocationRoute);
+    // }
+    // _locationViewModel.setIsChangeClicked(true);
+    // Get.offNamed(Routes.selectLocationRoute);
   }
 
   // void _showBottomSheet() {
@@ -490,29 +564,53 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
             Column(
               children: [
                 Expanded(
-                  child: GoogleMap(
-                    initialCameraPosition: CameraPosition(
-                      target: _googleMapViewModel.getInitialPosition,
-                      zoom: 14.0,
-                    ),
-                    markers: {
-                      Marker(
-                        markerId: MarkerId("_currentLocation"),
-                        icon: BitmapDescriptor.defaultMarker,
-                        position: _googleMapViewModel.getInitialPosition,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      GoogleMap(
+                        initialCameraPosition:
+                            _googleMapViewModel.getCameraPosition,
+                        onCameraIdle: () {
+                          // This Function will trigger when user stop dragging on Map
+                          getAddress(googleMapViewModel.getDraggedLatLng);
+                        },
+                        onCameraMove: (cameraPosition) {
+                          // This Function will trigger when user kepp dragging on Map
+                          googleMapViewModel.setDraggedLatLng =
+                              cameraPosition.target;
+                        },
+                        onMapCreated: (GoogleMapController controller) {
+                          // This function will trigger when the Map is fully Loaded
+                          if (!googleMapController.isCompleted) {
+                            // Set controller to google map when it is fully loaded
+                            googleMapController.complete(controller);
+                          }
+                        },
+                        // markers: {
+                        //   Marker(
+                        //     markerId: MarkerId("_currentLocation"),
+                        //     icon: BitmapDescriptor.defaultMarker,
+                        //     position: _googleMapViewModel.getInitialPosition,
+                        //   ),
+                        //   // Marker(
+                        //   //   markerId: MarkerId("_sourceLocation"),
+                        //   //   icon: BitmapDescriptor.defaultMarker,
+                        //   //   position: _pGooglePlex
+                        //   //   //_googleMapViewModel.getInitialPosition,
+                        //   // ),
+                        // },
+                        // myLocationEnabled: true,
+                        // myLocationButtonEnabled: true,
+                        // onMapCreated: (GoogleMapController controller) {
+                        //   _googleMapViewModel.setMapController = controller;
+                        // },
                       ),
-                      // Marker(
-                      //   markerId: MarkerId("_sourceLocation"),
-                      //   icon: BitmapDescriptor.defaultMarker,
-                      //   position: _pGooglePlex
-                      //   //_googleMapViewModel.getInitialPosition,
-                      // ),
-                    },
-                    myLocationEnabled: true,
-                    myLocationButtonEnabled: true,
-                    onMapCreated: (GoogleMapController controller) {
-                      _googleMapViewModel.setMapController = controller;
-                    },
+                      Icon(
+                        Icons.location_on,
+                        size: 18.sp,
+                        color: AppColors.primaryColor,
+                      ),
+                    ],
                   ),
                 ),
                 Container(
@@ -577,15 +675,25 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
                         SizedBox(height: 10),
                         Obx(
                           () => TextHeading(
-                            title: authViewModel.getAddress,
+                            // title: authViewModel.getAddress,
+                            title: googleMapViewModel.getDraggedAddress,
                             fontweight: FontWeight.w400,
                             fontsize: 11.sp,
                             fontcolor: Colors.white,
+                            maxLines: 3,
                           ),
                         ),
                         SizedBox(height: 50.h),
                         InkWell(
-                          onTap: () {
+                          onTap: () async {
+                            authViewModel.setAddress =
+                                googleMapViewModel.getDraggedAddress;
+                            Utils.startLoading();
+                            await StorageData.setLatitude(
+                                "${googleMapViewModel.getDraggedLatLng.latitude}");
+                            await StorageData.setLongitude(
+                                "${googleMapViewModel.getDraggedLatLng.longitude}");
+                            Get.back();
                             Get.offAllNamed(Routes.bottomBarRoute);
                           },
                           child: Container(
@@ -624,26 +732,54 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
               top: 20,
               left: 8,
               child: InkWell(
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SearchPage()));
-                },
+                // onTap: () {
+                //   Navigator.push(context,
+                //       MaterialPageRoute(builder: (context) => SearchPage()));
+                // },
+                onTap: () => Get.dialog(
+                  LocationSearchDialog(
+                    onSelection: (suggestion) async {
+                      log("My location is ${suggestion.description ?? "NA"}");
+                      FocusScope.of(context).unfocus();
+                      List<Location> locations = await locationFromAddress(
+                          suggestion.description ?? "");
+                      log(locations.toString());
+                      googleMapViewModel.setDraggedLatLng = LatLng(
+                        locations[0].latitude,
+                        locations[0].longitude,
+                      );
+                      gotoSpecificPosition(
+                        LatLng(
+                          locations[0].latitude,
+                          locations[0].longitude,
+                        ),
+                      );
+                      //Get.find<LocationController>().setLocation(suggestion.placeId!, suggestion.description!, mapController);
+                      Get.back();
+                    },
+                  ),
+                ),
                 child: Container(
                   height: 50.h,
                   width: 340.w,
+                  padding: EdgeInsets.symmetric(horizontal: 10.w),
                   decoration: BoxDecoration(
                     color: Colors.black87,
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(8.r),
                   ),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Icon(Icons.search, color: AppColors.primaryColor),
-                      TextHeading(
-                        title: "Search Your favorite hair expert...",
-                        fontweight: FontWeight.w400,
-                        fontsize: 12.sp,
-                        fontcolor: Colors.grey.shade200,
+                      SizedBox(
+                        width: 10.w,
+                      ),
+                      Expanded(
+                        child: TextHeading(
+                          title: "Search Location...",
+                          fontweight: FontWeight.w400,
+                          fontsize: 12.sp,
+                          fontcolor: Colors.grey.shade200,
+                        ),
                       ),
                       Icon(Icons.mic, color: AppColors.primaryColor),
                     ],
