@@ -379,13 +379,17 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
   }
 
   Future getAddress(LatLng position) async {
-    // This will list down all address around the position
-    List<Placemark> placemarks =
-        await placemarkFromCoordinates(position.latitude, position.longitude);
-    Placemark address = placemarks[0];
-    String addressStr =
-        "${address.street}, ${address.subLocality}, ${address.locality}, ${address.subAdministrativeArea}, ${address.administrativeArea}, ${address.country}";
-    _googleMapViewModel.setDraggedAddress = addressStr;
+    try {
+      // This will list down all address around the position
+      List<Placemark> placemarks =
+          await placemarkFromCoordinates(position.latitude, position.longitude);
+      Placemark address = placemarks[0];
+      String addressStr =
+          "${address.street}, ${address.subLocality}, ${address.locality}, ${address.subAdministrativeArea}, ${address.administrativeArea}, ${address.country}";
+      _googleMapViewModel.setDraggedAddress = addressStr;
+    } catch (e) {
+      log(e.toString());
+    }
   }
 
   Future determineUsersCurrentPosition() async {
@@ -690,8 +694,10 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
                                 googleMapViewModel.getDraggedAddress;
                             Utils.startLoading();
                             await StorageData.setLatitude(
+                                // "26.8604");
                                 "${googleMapViewModel.getDraggedLatLng.latitude}");
                             await StorageData.setLongitude(
+                                // "81.0033");
                                 "${googleMapViewModel.getDraggedLatLng.longitude}");
                             Get.back();
                             Get.offAllNamed(Routes.bottomBarRoute);

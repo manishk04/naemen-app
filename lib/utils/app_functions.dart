@@ -21,17 +21,17 @@ List<String> generateTimeSlots({
       startTime, // Start time in 'HH:mm a' format (e.g., '10:52 AM')
   required String selectedDate, // Selected date in 'dd-MM-yyyy' format
   String endTime =
-      '11:59 PM', // End time in 'HH:mm a' format (e.g., '0:00 AM' means '11:59 PM')
+      '11:59:59', // End time in 'HH:mm a' format (e.g., '0:00 AM' means '11:59 PM')
 }) {
   // Parse selected date using the provided format 'dd-MM-yyyy'
   DateTime date = DateFormat('dd-MM-yyyy').parse(selectedDate);
 
   // Parse start and end times using the provided format 'HH:mm a'
-  DateTime startDateTime = DateFormat('HH:mm a').parse(startTime);
+  DateTime startDateTime = DateFormat('HH:mm:ss').parse(startTime);
   DateTime endDateTime = endTime == '0:00 AM'
-      ? DateTime(date.year, date.month, date.day, 23,
+      ? DateTime(date.year, date.month, date.day, 23, 59,
           59) // Treat '0:00 AM' as '11:59 PM'
-      : DateFormat('HH:mm a').parse(endTime);
+      : DateFormat('HH:mm:ss').parse(endTime);
 
   // Adjust start and end times to the selected date
   startDateTime = DateTime(date.year, date.month, date.day, startDateTime.hour,
