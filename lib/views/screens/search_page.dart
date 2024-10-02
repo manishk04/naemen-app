@@ -1,11 +1,16 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:get/get.dart';
 import 'package:naemen/utils/color_constant.dart';
 import 'package:naemen/view_models/auth_view_model.dart';
 import 'package:naemen/views/components/search_bar.dart';
 import 'package:naemen/views/screens/add_location.dart';
 
+import '../components/location_search_dialog.dart';
 import '../components/text_heading.dart';
 
 class SearchPage extends StatefulWidget {
@@ -61,58 +66,86 @@ class _SearchPageState extends State<SearchPage> {
                           height: 30.h,
                         ),
                         SearchBarWidget(
-                          hinttexttitle: "Search your favorite hair expert...",
+                          hinttexttitle: "Search Location...",
                         ),
                         SizedBox(
                           height: 25.h,
                         ),
-
-
                         InkWell(
-                          onTap: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>GoogleMapScreen()));
-
-
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => GoogleMapScreen()));
                           },
                           child: Row(
                             children: [
-                              Icon(Icons.route,size: 20,color: AppColors.primaryColor, ),
-                              SizedBox(width: 3.w,),
+                              Icon(
+                                Icons.route,
+                                size: 20,
+                                color: AppColors.primaryColor,
+                              ),
+                              SizedBox(
+                                width: 3.w,
+                              ),
                               Expanded(
-                                flex: 10,
-                                  child: TextHeading(title: "Use my current location", fontweight: FontWeight.w500, fontsize: 16.sp, fontcolor: AppColors.primaryColor)),
+                                  flex: 10,
+                                  child: TextHeading(
+                                      title: "Use my current location",
+                                      fontweight: FontWeight.w500,
+                                      fontsize: 16.sp,
+                                      fontcolor: AppColors.primaryColor)),
                               Expanded(
-
-                                  child: Icon(Icons.arrow_forward_ios_outlined,color: Colors.grey,size: 15,))
-
+                                  child: Icon(
+                                Icons.arrow_forward_ios_outlined,
+                                color: Colors.grey,
+                                size: 15,
+                              ))
                             ],
                           ),
                         ),
-                        Divider(color: Colors.grey,thickness: 0.2,height: 30,),
+                        Divider(
+                          color: Colors.grey,
+                          thickness: 0.2,
+                          height: 30,
+                        ),
                         SizedBox(
                           height: 15.h,
                         ),
                         InkWell(
-                          onTap: (){
-                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>AddLocationPage()
-                                //GoogleMapScreen()
-                            ));
-
-
+                          onTap: () {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AddLocationPage()
+                                    //GoogleMapScreen()
+                                    ));
                           },
                           child: Row(
                             children: [
-                              Icon(Icons.add,size: 20,color: AppColors.primaryColor, ),
-                              SizedBox(width: 3.w,),
+                              Icon(
+                                Icons.add,
+                                size: 20,
+                                color: AppColors.primaryColor,
+                              ),
+                              SizedBox(
+                                width: 3.w,
+                              ),
                               Expanded(
                                   flex: 10,
-                                  child: TextHeading(title: "Add new address", fontweight: FontWeight.w500, fontsize: 16.sp, fontcolor: AppColors.primaryColor)),
-
-
+                                  child: TextHeading(
+                                      title: "Add new address",
+                                      fontweight: FontWeight.w500,
+                                      fontsize: 16.sp,
+                                      fontcolor: AppColors.primaryColor)),
                             ],
                           ),
                         ),
-                        Divider(color: Colors.grey,thickness: 0.2,height: 30,)
+                        Divider(
+                          color: Colors.grey,
+                          thickness: 0.2,
+                          height: 30,
+                        )
                       ]),
                 ),
               )),

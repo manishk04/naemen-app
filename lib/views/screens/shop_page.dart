@@ -57,213 +57,220 @@ class _ShopPageState extends State<ShopPage> {
                       const SizedBox(
                         height: 40,
                       ),
-                      Stack(
-                        children: [
-                          // HomePageSlider(
-                          //   pageController: pageController2,
-                          // ),
-                          // Container(
-                          //   height: 360.h,
-                          //   width: 340.w,
-                          //   decoration: BoxDecoration(
-                          //     image: DecorationImage(
-                          //         image: NetworkImage(
-                          //             "${AppUrl.baseUrl}/${_salonProfileViewModel.getStore.salonImage ?? ""}"),
-                          //         fit: BoxFit.cover),
-                          //     borderRadius: BorderRadius.circular(16.r),
-                          //     border: Border.all(
-                          //       color: AppColors.signUpColor,
-                          //       width: 0.5.w,
-                          //     ),
-                          //   ),
-                          // ),
-
-                          Obx(
-                            () => homeViewModel.getBanners.isNotEmpty
-                                ? HomePageSlider(
-                                    pageController2: pageController2,
-                                    banners: homeViewModel.getBanners)
-                                : const SizedBox(),
-                          ),
-
-                          Container(
-                            height: 360.h,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                                // gradient: LinearGradient(
-                                //   begin: Alignment.topCenter,
-                                //   end: Alignment.bottomCenter,
-                                //   colors: <Color>[
-                                //     Color(0xff000000).withOpacity(0.1),
-                                //     Color(0xff000000),
-                                //   ], // Gradient from https://learnui.design/tools/gradient-generator.html
-                                //   tileMode: TileMode.mirror,
-                                // ),
-                                ),
-                            // gradient: LinearGradient(
-                            //   begin: Alignment.topCenter,
-                            //   end: Alignment.center,
-                            //   colors: <Color>[
-                            //     Color(0xff000000).withOpacity(0.1),
-                            //     Color(0xff000000),
-                            //   ], // Gradient from https://learnui.design/tools/gradient-generator.html
-                            //   tileMode: TileMode.mirror,
+                      SizedBox(
+                        height: 360.h,
+                        width: double.infinity,
+                        child: Stack(
+                          children: [
+                            // HomePageSlider(
+                            //   pageController: pageController2,
                             // ),
+                            // Container(
+                            //   height: 360.h,
+                            //   width: 340.w,
+                            //   decoration: BoxDecoration(
+                            //     image: DecorationImage(
+                            //         image: NetworkImage(
+                            //             "${AppUrl.baseUrl}/${_salonProfileViewModel.getStore.salonImage ?? ""}"),
+                            //         fit: BoxFit.cover),
+                            //     borderRadius: BorderRadius.circular(16.r),
+                            //     border: Border.all(
+                            //       color: AppColors.signUpColor,
+                            //       width: 0.5.w,
+                            //     ),
+                            //   ),
                             // ),
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 15),
-                              child: Column(
-                                children: [
-                                  SizedBox(
-                                    height: 10.h,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      InkWell(
-                                        onTap: () {
-                                          Navigator.pop(context);
-                                        },
-                                        child: CircleAvatar(
-                                          radius: 15,
-                                          backgroundColor:
-                                              Colors.yellow.withOpacity(0.3),
-                                          child: Center(
-                                            child: Icon(
-                                              Icons.arrow_back_ios,
-                                              size: 15,
-                                              color: Colors.white,
+
+                            Obx(
+                              () => homeViewModel.getBanners.isNotEmpty
+                                  ? HomePageSlider(
+                                      pageController2: pageController2,
+                                      banners: homeViewModel.getBanners)
+                                  : const SizedBox(),
+                            ),
+
+                            SizedBox(
+                              width: double.infinity,
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 15),
+                                child: Column(
+                                  children: [
+                                    SizedBox(
+                                      height: 10.h,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        InkWell(
+                                          onTap: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: CircleAvatar(
+                                            radius: 15,
+                                            backgroundColor:
+                                                Colors.yellow.withOpacity(0.3),
+                                            child: Center(
+                                              child: Icon(
+                                                Icons.arrow_back_ios,
+                                                size: 15,
+                                                color: Colors.white,
+                                              ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                      CircleAvatar(
-                                        radius: 15,
-                                        backgroundColor:
-                                            Colors.yellow.withOpacity(0.3),
-                                        child: Icon(
-                                          Icons.bookmark_outline,
-                                          color: Colors.white,
-                                          size: 15,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 184.h,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                        CircleAvatar(
+                                          radius: 15,
+                                          backgroundColor:
+                                              Colors.yellow.withOpacity(0.3),
+                                          child: Icon(
+                                            Icons.bookmark_outline,
+                                            color: Colors.white,
+                                            size: 15,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              bottom: 0,
+                              left: 0,
+                              right: 0,
+                              child: SizedBox(
+                                height: _salonProfileViewModel
+                                            .getStore.kidsSalonService !=
+                                        null
+                                    ? 175
+                                    : 155,
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 15),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      TextHeading(
-                                        title:
-                                            _languageViewModel.getSelectedLanguage ==
-                                                    "English"
-                                                ? _salonProfileViewModel
-                                                        .getStore
-                                                        .salonNameEng ??
-                                                    "NA"
-                                                : _salonProfileViewModel
-                                                        .getStore
-                                                        .salonNameArb ??
-                                                    "NA",
-                                        fontweight: FontWeight.w600,
-                                        fontsize: 20.sp,
-                                        fontcolor: Colors.white,
+                                      SizedBox(
+                                        height: 10.h,
                                       ),
                                       Row(
                                         children: [
+                                          Expanded(
+                                            child: TextHeading(
+                                              title: _languageViewModel
+                                                          .getSelectedLanguage ==
+                                                      "English"
+                                                  ? _salonProfileViewModel
+                                                          .getStore
+                                                          .salonNameEng ??
+                                                      "NA"
+                                                  : _salonProfileViewModel
+                                                          .getStore
+                                                          .salonNameArb ??
+                                                      "NA",
+                                              fontweight: FontWeight.w600,
+                                              fontsize: 20.sp,
+                                              fontcolor: Colors.white,
+                                              maxLines: 2,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Row(
+                                            children: [
+                                              const Icon(
+                                                Icons.star,
+                                                color: AppColors.primaryColor,
+                                              ),
+                                              SizedBox(
+                                                width: 3.w,
+                                              ),
+                                              TextHeading(
+                                                title: "4.3/5",
+                                                fontweight: FontWeight.w700,
+                                                fontsize: 10.sp,
+                                                fontcolor: Colors.white,
+                                              )
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 5.h,
+                                      ),
+                                      Row(
+                                        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Image.asset(
+                                              "assets/images/mark_Location.png"),
+                                          SizedBox(
+                                            width: 3.w,
+                                          ),
+                                          TextHeading(
+                                            title:
+                                                "${(_salonProfileViewModel.getStore.distance ?? 0.0).toStringAsFixed(2)} Km From you",
+                                            fontweight: FontWeight.w400,
+                                            fontsize: 12.sp,
+                                            fontcolor: Colors.white,
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 5.h,
+                                      ),
+                                      Row(
+                                        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
                                           const Icon(
-                                            Icons.star,
+                                            Icons.alarm,
                                             color: AppColors.primaryColor,
                                           ),
                                           SizedBox(
                                             width: 3.w,
                                           ),
                                           TextHeading(
-                                            title: "4.3/5",
-                                            fontweight: FontWeight.w700,
-                                            fontsize: 10.sp,
+                                            title:
+                                                "${_salonProfileViewModel.getStore.salonStartTime} - ${_salonProfileViewModel.getStore.salonEndTime}",
+                                            fontweight: FontWeight.w400,
+                                            fontsize: 12.sp,
                                             fontcolor: Colors.white,
-                                          )
+                                          ),
                                         ],
-                                      )
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 5.h,
-                                  ),
-                                  Row(
-                                    //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Image.asset(
-                                          "assets/images/mark_Location.png"),
-                                      SizedBox(
-                                        width: 3.w,
-                                      ),
-                                      TextHeading(
-                                        title:
-                                            "${(_salonProfileViewModel.getStore.distance ?? 0.0).toStringAsFixed(2)} Km From you",
-                                        fontweight: FontWeight.w400,
-                                        fontsize: 12.sp,
-                                        fontcolor: Colors.white,
-                                      )
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 5.h,
-                                  ),
-                                  Row(
-                                    //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      const Icon(
-                                        Icons.alarm,
-                                        color: AppColors.primaryColor,
                                       ),
                                       SizedBox(
-                                        width: 3.w,
+                                        height: 5.h,
                                       ),
-                                      TextHeading(
-                                        title:
-                                            "${_salonProfileViewModel.getStore.salonStartTime} - ${_salonProfileViewModel.getStore.salonEndTime}",
-                                        fontweight: FontWeight.w400,
-                                        fontsize: 12.sp,
-                                        fontcolor: Colors.white,
-                                      ),
+                                      if (_salonProfileViewModel
+                                              .getStore.kidsSalonService !=
+                                          null)
+                                        Row(
+                                          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            const Icon(
+                                              Icons.child_care,
+                                              color: AppColors.primaryColor,
+                                            ),
+                                            SizedBox(
+                                              width: 3.w,
+                                            ),
+                                            TextHeading(
+                                              title: "Child Service available",
+                                              fontweight: FontWeight.w400,
+                                              fontsize: 12.sp,
+                                              fontcolor: AppColors.primaryColor,
+                                            )
+                                          ],
+                                        ),
                                     ],
                                   ),
-                                  SizedBox(
-                                    height: 5.h,
-                                  ),
-                                  if (_salonProfileViewModel
-                                          .getStore.kidsSalonService !=
-                                      null)
-                                    Row(
-                                      //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        const Icon(
-                                          Icons.child_care,
-                                          color: AppColors.primaryColor,
-                                        ),
-                                        SizedBox(
-                                          width: 3.w,
-                                        ),
-                                        TextHeading(
-                                          title: "Child Service available",
-                                          fontweight: FontWeight.w400,
-                                          fontsize: 12.sp,
-                                          fontcolor: AppColors.primaryColor,
-                                        )
-                                      ],
-                                    )
-                                ],
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -289,6 +296,7 @@ class _ShopPageState extends State<ShopPage> {
                                 fontweight: FontWeight.w400,
                                 fontsize: 12.sp,
                                 fontcolor: Colors.white,
+                                maxLines: 100,
                               ),
                               SizedBox(
                                 height: 20.h,

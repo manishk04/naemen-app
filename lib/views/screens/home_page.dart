@@ -56,675 +56,692 @@ class _HomeViewState extends State<HomeView> {
     bool isDark = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       body: SafeArea(
-        child: Stack(
-          children: [
-            Container(
-              height: double.infinity,
-              width: double.infinity,
-              decoration: const BoxDecoration(color: Colors.black
-                  // image: DecorationImage(
-                  //     image: AssetImage(
-                  //         "assets/images/abstract-geometric-background-shapes-texture 1.png"),
-                  //     fit: BoxFit.cover)
-                  ),
-            ),
-            SizedBox(
-              height: double.infinity,
-              width: double.infinity,
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: 30.h,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SearchPage()));
-                            },
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Image.asset("assets/images/Location.png"),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+        child: SizedBox(
+          width: 390.w,
+          child: Stack(
+            children: [
+              Container(
+                height: double.infinity,
+                width: double.infinity,
+                decoration: const BoxDecoration(color: Colors.black
+                    // image: DecorationImage(
+                    //     image: AssetImage(
+                    //         "assets/images/abstract-geometric-background-shapes-texture 1.png"),
+                    //     fit: BoxFit.cover)
+                    ),
+              ),
+              SizedBox(
+                height: double.infinity,
+                width: double.infinity,
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 30.h,
+                        ),
+                        Row(
+                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => SearchPage()));
+                                },
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    SizedBox(width: 3.w),
-                                    TextHeading(
-                                      title: "Home",
-                                      fontweight: FontWeight.w600,
-                                      fontsize: 12.sp,
-                                      fontcolor:
-                                          isDark ? Colors.white : Colors.white,
-                                    ),
-                                    Obx(
-                                      () => TextHeading(
-                                        title: authViewModel.getAddress,
-                                        fontweight: FontWeight.w400,
-                                        fontsize: 11.sp,
-                                        fontcolor: Colors.white,
-                                      ),
+                                    Image.asset("assets/images/Location.png"),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        SizedBox(width: 3.w),
+                                        TextHeading(
+                                          title: "Home",
+                                          fontweight: FontWeight.w600,
+                                          fontsize: 12.sp,
+                                          fontcolor: isDark
+                                              ? Colors.white
+                                              : Colors.white,
+                                          maxLines: 1,
+                                        ),
+                                        SizedBox(
+                                          width: 280.w,
+                                          child: Obx(
+                                            () => TextHeading(
+                                              title: authViewModel.getAddress,
+                                              fontweight: FontWeight.w400,
+                                              fontsize: 11.sp,
+                                              fontcolor: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
-                              ],
+                              ),
                             ),
-                          ),
 
-                          //       Switch(
-                          //   value: AdaptiveTheme.of(context).mode.isDark,
-                          //   onChanged: (value) {
-                          //     if (value) {
-                          //       AdaptiveTheme.of(context).setDark();
-                          //     } else {
-                          //       AdaptiveTheme.of(context).setLight();
-                          //     }
-                          //   },
-                          // ),
-                          //SizedBox(width: 85.w),
-                          const CircleAvatar(
-                            radius: 17.5,
-                            backgroundImage:
-                                AssetImage("assets/images/profile_image.png"),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 30.h),
-                      // SearchBarWidget(
-                      //   hinttexttitle: "Search your favorite hair expert...",
-                      // ),
-                      // SizedBox(
-                      //   height: 20.h,
-                      // ),
-                      Obx(
-                        () => homeViewModel.getBanners.isNotEmpty
-                            ? ShopPageSlider(
-                                pageController1: pageController1,
-                                banners: homeViewModel.getBanners,
-                              )
-                            : const SizedBox(),
-                      ),
-                      // SizedBox(
-                      //   height: 20.h,
-                      // ),
-                      // Container(
-                      //   height: 490.h,
-                      //   width: double.infinity,
-                      //   child: ListView.builder(
-                      //     itemCount: imagesHome.length,
-                      //     physics: const NeverScrollableScrollPhysics(),
-                      //     itemBuilder: (context, index) {
-                      //       return Padding(
-                      //         padding: const EdgeInsets.all(8.0),
-                      //         child: Stack(
-                      //           children: [
-                      //             Container(
-                      //                 height: 150.h,
-                      //                 width: 341.w,
-                      //                 decoration: BoxDecoration(
-                      //                     image: DecorationImage(
-                      //                         image:
-                      //                             AssetImage(imagesHome[index]),
-                      //                         fit: BoxFit.cover),
-                      //                     color: Colors.grey,
-                      //                     borderRadius:
-                      //                         BorderRadius.circular(10.r))),
-                      //             Container(
-                      //                 height: 150.h,
-                      //                 width: 341.w,
-                      //                 decoration: BoxDecoration(
-                      //                     gradient: LinearGradient(
-                      //                       begin: Alignment.bottomCenter,
-                      //                       end: Alignment.centerLeft,
-                      //                       colors: <Color>[
-                      //                         Color(0xff000000)
-                      //                             .withOpacity(0.1),
-                      //                         Color(0xff000000)
-                      //                             .withOpacity(0.8),
-                      //                       ],
-                      //                     ),
-                      //                     borderRadius:
-                      //                         BorderRadius.circular(10.r))),
-                      //             Positioned(
-                      //               left: 15,
-                      //               top: 65,
-                      //               child: TextHeading(
-                      //                   title: serviceName[index],
-                      //                   fontweight: FontWeight.w700,
-                      //                   fontsize: 30.sp,
-                      //                   fontcolor: Colors.yellow.shade300),
-                      //             )
-                      //           ],
-                      //         ),
-                      //       );
-                      //     },
-                      //   ),
-                      // ),
-                      // SizedBox(
-                      //   height: 20.h,
-                      // ),
-                      // Obx(
-                      //   () => homeViewModel.getHomeCategories.isNotEmpty
-                      //       ? InkWell(
-                      //           onTap: () => Get.toNamed(Routes.categoryRoute),
-                      //           child: Row(
-                      //             mainAxisAlignment:
-                      //                 MainAxisAlignment.spaceBetween,
-                      //             children: [
-                      //               TextHeading(
-                      //                   title: "Categories",
-                      //                   fontweight: FontWeight.w600,
-                      //                   fontsize: 12.sp,
-                      //                   fontcolor: Colors.white),
-                      //               TextHeading(
-                      //                   title: "View all",
-                      //                   fontweight: FontWeight.w400,
-                      //                   fontsize: 10.sp,
-                      //                   fontcolor: Colors.white)
-                      //             ],
-                      //           ),
-                      //         )
-                      //       : SizedBox(),
-                      // ),
-                      // SizedBox(
-                      //   height: 20.h,
-                      // ),
-                      // CategoryListWidget(
-                      //   homeViewModel: homeViewModel,
-                      //   languageViewModel: languageViewModel,
-                      //   canNavigate: true,
-                      // ),
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                      Obx(
-                        () => homeViewModel.getIsHomeLoading
-                            ? const Center(
-                                child: CircularProgressIndicator(),
-                              )
-                            : ListView.separated(
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemCount: homeViewModel.getTags.length,
-                                separatorBuilder: (context, index) => SizedBox(
-                                  height: 15.h,
-                                ),
-                                itemBuilder: (context, index) {
-                                  TagModel tag = homeViewModel.getTags[index];
-                                  return Column(
-                                    children: [
-                                      if (tag.salons != null &&
-                                          tag.salons!.isNotEmpty)
-                                        TextHeading(
-                                          title: languageViewModel
-                                                      .getSelectedLanguage ==
-                                                  "English"
-                                              ? tag.titleEng ?? ""
-                                              : tag.titleArb ?? "",
-                                          fontweight: FontWeight.w600,
-                                          fontsize: 12.sp,
-                                          fontcolor: Colors.white,
-                                        ),
-                                      if (tag.salons != null &&
-                                          tag.salons!.isNotEmpty)
-                                        SizedBox(
-                                          height: 25.h,
-                                        ),
-                                      if (tag.salons != null &&
-                                          tag.salons!.isNotEmpty &&
-                                          tag.titleEng == "Newly Added Saloons")
-                                        SizedBox(
-                                          height: 255.h,
-                                          width: double.infinity,
-                                          child: ListView.builder(
-                                            shrinkWrap: true,
-                                            itemCount: tag.salons!.length,
-                                            scrollDirection: Axis.horizontal,
-                                            itemBuilder: (context, index) {
-                                              SalonModel salon =
-                                                  tag.salons![index];
-                                              return WinterSpecialItems(
-                                                image: salon.salonImage ?? "",
-                                                status: languageViewModel
-                                                            .getSelectedLanguage ==
-                                                        "English"
-                                                    ? "Status:"
-                                                    : "Status:",
-                                                statusValue:
-                                                    (salon.salonStatus ?? "")
-                                                        .toString(),
-                                                description: languageViewModel
-                                                            .getSelectedLanguage ==
-                                                        "English"
-                                                    ? salon.salonNameEng ?? ""
-                                                    : salon.salonNameArb ?? "",
-                                                type: languageViewModel
-                                                            .getSelectedLanguage ==
-                                                        "English"
-                                                    ? "Saloon Type:"
-                                                    : "Saloon Type:",
-                                                typeValue:
-                                                    salon.salonType ?? "NA",
-                                                distance:
-                                                    salon.distance ?? 0.00,
-                                                salon: salon,
-                                              );
-                                            },
+                            //       Switch(
+                            //   value: AdaptiveTheme.of(context).mode.isDark,
+                            //   onChanged: (value) {
+                            //     if (value) {
+                            //       AdaptiveTheme.of(context).setDark();
+                            //     } else {
+                            //       AdaptiveTheme.of(context).setLight();
+                            //     }
+                            //   },
+                            // ),
+                            //SizedBox(width: 85.w),
+                            const CircleAvatar(
+                              radius: 17.5,
+                              backgroundImage:
+                                  AssetImage("assets/images/profile_image.png"),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 30.h),
+                        // SearchBarWidget(
+                        //   hinttexttitle: "Search your favorite hair expert...",
+                        // ),
+                        // SizedBox(
+                        //   height: 20.h,
+                        // ),
+                        Obx(
+                          () => homeViewModel.getBanners.isNotEmpty
+                              ? ShopPageSlider(
+                                  pageController1: pageController1,
+                                  banners: homeViewModel.getBanners,
+                                )
+                              : const SizedBox(),
+                        ),
+                        // SizedBox(
+                        //   height: 20.h,
+                        // ),
+                        // Container(
+                        //   height: 490.h,
+                        //   width: double.infinity,
+                        //   child: ListView.builder(
+                        //     itemCount: imagesHome.length,
+                        //     physics: const NeverScrollableScrollPhysics(),
+                        //     itemBuilder: (context, index) {
+                        //       return Padding(
+                        //         padding: const EdgeInsets.all(8.0),
+                        //         child: Stack(
+                        //           children: [
+                        //             Container(
+                        //                 height: 150.h,
+                        //                 width: 341.w,
+                        //                 decoration: BoxDecoration(
+                        //                     image: DecorationImage(
+                        //                         image:
+                        //                             AssetImage(imagesHome[index]),
+                        //                         fit: BoxFit.cover),
+                        //                     color: Colors.grey,
+                        //                     borderRadius:
+                        //                         BorderRadius.circular(10.r))),
+                        //             Container(
+                        //                 height: 150.h,
+                        //                 width: 341.w,
+                        //                 decoration: BoxDecoration(
+                        //                     gradient: LinearGradient(
+                        //                       begin: Alignment.bottomCenter,
+                        //                       end: Alignment.centerLeft,
+                        //                       colors: <Color>[
+                        //                         Color(0xff000000)
+                        //                             .withOpacity(0.1),
+                        //                         Color(0xff000000)
+                        //                             .withOpacity(0.8),
+                        //                       ],
+                        //                     ),
+                        //                     borderRadius:
+                        //                         BorderRadius.circular(10.r))),
+                        //             Positioned(
+                        //               left: 15,
+                        //               top: 65,
+                        //               child: TextHeading(
+                        //                   title: serviceName[index],
+                        //                   fontweight: FontWeight.w700,
+                        //                   fontsize: 30.sp,
+                        //                   fontcolor: Colors.yellow.shade300),
+                        //             )
+                        //           ],
+                        //         ),
+                        //       );
+                        //     },
+                        //   ),
+                        // ),
+                        // SizedBox(
+                        //   height: 20.h,
+                        // ),
+                        // Obx(
+                        //   () => homeViewModel.getHomeCategories.isNotEmpty
+                        //       ? InkWell(
+                        //           onTap: () => Get.toNamed(Routes.categoryRoute),
+                        //           child: Row(
+                        //             mainAxisAlignment:
+                        //                 MainAxisAlignment.spaceBetween,
+                        //             children: [
+                        //               TextHeading(
+                        //                   title: "Categories",
+                        //                   fontweight: FontWeight.w600,
+                        //                   fontsize: 12.sp,
+                        //                   fontcolor: Colors.white),
+                        //               TextHeading(
+                        //                   title: "View all",
+                        //                   fontweight: FontWeight.w400,
+                        //                   fontsize: 10.sp,
+                        //                   fontcolor: Colors.white)
+                        //             ],
+                        //           ),
+                        //         )
+                        //       : SizedBox(),
+                        // ),
+                        // SizedBox(
+                        //   height: 20.h,
+                        // ),
+                        // CategoryListWidget(
+                        //   homeViewModel: homeViewModel,
+                        //   languageViewModel: languageViewModel,
+                        //   canNavigate: true,
+                        // ),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        Obx(
+                          () => homeViewModel.getIsHomeLoading
+                              ? const Center(
+                                  child: CircularProgressIndicator(),
+                                )
+                              : ListView.separated(
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: homeViewModel.getTags.length,
+                                  separatorBuilder: (context, index) =>
+                                      SizedBox(
+                                    height: 15.h,
+                                  ),
+                                  itemBuilder: (context, index) {
+                                    TagModel tag = homeViewModel.getTags[index];
+                                    return Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        if (tag.salons != null &&
+                                            tag.salons!.isNotEmpty)
+                                          TextHeading(
+                                            title: languageViewModel
+                                                        .getSelectedLanguage ==
+                                                    "English"
+                                                ? tag.titleEng ?? ""
+                                                : tag.titleArb ?? "",
+                                            fontweight: FontWeight.w600,
+                                            fontsize: 12.sp,
+                                            fontcolor: Colors.white,
                                           ),
-                                        ),
-                                      if (tag.salons != null &&
-                                          tag.salons!.isNotEmpty &&
-                                          tag.titleEng == "Top Rated Artist")
-                                        SizedBox(
+                                        if (tag.salons != null &&
+                                            tag.salons!.isNotEmpty)
+                                          SizedBox(
+                                            height: 25.h,
+                                          ),
+                                        if (tag.salons != null &&
+                                            tag.salons!.isNotEmpty &&
+                                            tag.titleEng ==
+                                                "Newly Added Saloons")
+                                          SizedBox(
                                             height: 255.h,
                                             width: double.infinity,
                                             child: ListView.builder(
-                                                shrinkWrap: true,
-                                                itemCount: artistImages.length,
-                                                scrollDirection:
-                                                    Axis.horizontal,
-                                                itemBuilder: (context, index) {
-                                                  return Stack(
-                                                    children: [
-                                                      Container(
-                                                        margin: EdgeInsets.only(
-                                                            right: 10),
-                                                        height: 252.h,
-                                                        width: 200.w,
-                                                        decoration: BoxDecoration(
-                                                            color: AppColors
-                                                                .searchFieldsColor,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        16.r),
-                                                            border: Border.all(
-                                                                color: AppColors
-                                                                    .signUpColor,
-                                                                width: 0.2)),
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                                horizontal: 5),
-                                                        child: Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            SizedBox(
-                                                              height: 5.h,
-                                                            ),
-                                                            Expanded(
-                                                              flex: 4,
-                                                              child: Container(
-                                                                width: 190.w,
-                                                                decoration: BoxDecoration(
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(15
-                                                                            .r),
-                                                                    image: DecorationImage(
-                                                                        image: AssetImage(artistImages[
-                                                                            index]),
-                                                                        fit: BoxFit
-                                                                            .cover)),
-                                                              ),
-                                                            ),
-                                                            Expanded(
-                                                              flex: 6,
-                                                              child: Column(
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .center,
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  //SizedBox(height: 5.h,),
-                                                                  Row(
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .spaceBetween,
-                                                                    children: [
-                                                                      TextHeading(
-                                                                        title: artistNames[
-                                                                            index],
-                                                                        fontweight:
-                                                                            FontWeight.w600,
-                                                                        fontsize:
-                                                                            12.sp,
-                                                                        fontcolor:
-                                                                            Colors.white,
-                                                                      ),
-                                                                      Row(
-                                                                        children: [
-                                                                          Icon(
-                                                                            Icons.star,
-                                                                            color:
-                                                                                AppColors.primaryColor,
-                                                                          ),
-                                                                          SizedBox(
-                                                                              width: 3),
-                                                                          TextHeading(
-                                                                            title:
-                                                                                "4.3/5",
-                                                                            fontweight:
-                                                                                FontWeight.w600,
-                                                                            fontsize:
-                                                                                12.sp,
-                                                                            fontcolor:
-                                                                                Colors.white,
-                                                                          ),
-                                                                        ],
-                                                                      ),
-                                                                    ],
-                                                                  ),
-
-                                                                  SizedBox(
-                                                                    height: 3.h,
-                                                                  ),
-
-                                                                  Row(
-                                                                    children: [
-                                                                      TextHeading(
-                                                                        title:
-                                                                            "Work at",
-                                                                        fontweight:
-                                                                            FontWeight.w400,
-                                                                        fontsize:
-                                                                            12.sp,
-                                                                        fontcolor:
-                                                                            Colors.white,
-                                                                      ),
-                                                                      SizedBox(
-                                                                          width:
-                                                                              3.w),
-                                                                      TextHeading(
-                                                                        title: artistWorkat[
-                                                                            index],
-                                                                        fontweight:
-                                                                            FontWeight.w400,
-                                                                        fontsize:
-                                                                            12.sp,
-                                                                        fontcolor:
-                                                                            AppColors.primaryColor,
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                  SizedBox(
-                                                                      height:
-                                                                          3.h),
-                                                                  Row(
-                                                                    children: [
-                                                                      Image
-                                                                          .asset(
-                                                                        "assets/images/location-svgrepo-com 1.png",
-                                                                        color: AppColors
-                                                                            .primaryColor,
-                                                                      ),
-                                                                      TextHeading(
-                                                                          title:
-                                                                              "0.4 km",
-                                                                          fontweight: FontWeight
-                                                                              .w400,
-                                                                          fontsize: 12
-                                                                              .sp,
-                                                                          fontcolor:
-                                                                              Colors.white)
-                                                                    ],
-                                                                  ),
-
-                                                                  SizedBox(
-                                                                    height: 5.h,
-                                                                  ),
-                                                                  Row(
-                                                                    //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                    children: [
-                                                                      Container(
-                                                                        height:
-                                                                            34.h,
-                                                                        width:
-                                                                            34.w,
-                                                                        decoration: BoxDecoration(
-                                                                            border:
-                                                                                Border.all(color: AppColors.signUpColor, width: 0.2),
-                                                                            color: Colors.black,
-                                                                            borderRadius: BorderRadius.circular(8.r)),
-                                                                        child: Center(
-                                                                            child: Icon(
-                                                                          Icons
-                                                                              .bookmark_add_outlined,
-                                                                          color:
-                                                                              Colors.white,
-                                                                        )),
-                                                                      ),
-                                                                      SizedBox(
-                                                                        width:
-                                                                            50.w,
-                                                                      ),
-                                                                      Container(
-                                                                          height: 34
-                                                                              .h,
-                                                                          width: 102
-                                                                              .w,
-                                                                          decoration: BoxDecoration(
-                                                                              color: AppColors.bookmarkColor,
-                                                                              borderRadius: BorderRadius.circular(8.r)),
-                                                                          child: Center(child: TextHeading(title: "View Profile", fontweight: FontWeight.w400, fontsize: 12.sp, fontcolor: Colors.white)))
-                                                                    ],
-                                                                  )
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      )
-                                                    ],
-                                                  );
-                                                })),
-                                      if (tag.salons != null &&
-                                          tag.salons!.isNotEmpty &&
-                                          tag.titleEng == "Recommendation")
-                                        const Recommended(
-                                          status: "Status:",
-                                          description: 'Chameleon salon',
-                                          type: 'Saloon Type:',
-                                          image: 'assets/images/newly.png',
-                                          statuValue: 'ONLINE',
-                                          typeValue: 'Unisex',
-                                        ),
-                                    ],
-                                  );
-                                },
-                              ),
-                      ),
-
-                      // // NewelyWidget(
-                      // //   status: "Status:",
-                      // //   description: 'Chameleon salon',
-                      // //   type: 'Saloon Type:',
-                      // //   image: 'assets/images/newly.png',
-                      // //   statuValue: 'ONLINE',
-                      // //   typeValue: 'Unisex',
-                      // // ),
-                      // SizedBox(height: 20.h),
-                      // TextHeading(
-                      //     title: "Top Rated Artist",
-                      //     fontweight: FontWeight.w600,
-                      //     fontsize: 12.sp,
-                      //     fontcolor: Colors.white),
-                      // SizedBox(
-                      //   height: 25.h,
-                      // ),
-                      // ArtistSlider(),
-
-                      // // const NewelyWidget(
-                      // //   status: "Status:",
-                      // //   description: 'Chameleon salon',
-                      // //   type: 'Saloon Type:',
-                      // //   image: 'assets/images/newly.png',
-                      // //   statuValue: 'ONLINE',
-                      // //   typeValue: 'Unisex',
-                      // // ),
-                      // // ArtistSlider(status: 'Status', statuValue: 'Online', description: '2q4qrw', type: 'rewrwr', typeValue: 'wdad', image: 'assets/images/newly.png',),
-
-                      // //ArtistSliderWidget( ),
-
-                      // SizedBox(
-                      //   height: 20.h,
-                      // ),
-                      // TextHeading(
-                      //     title: "Recommended",
-                      //     fontweight: FontWeight.w600,
-                      //     fontsize: 12.sp,
-                      //     fontcolor: Colors.white),
-                      // SizedBox(
-                      //   height: 20.h,
-                      // ),
-                      // Recommended(
-                      //   status: "Status:",
-                      //   description: 'Chameleon salon',
-                      //   type: 'Saloon Type:',
-                      //   image: 'assets/images/newly.png',
-                      //   statuValue: 'ONLINE',
-                      //   typeValue: 'Unisex',
-                      // ),
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                      Obx(
-                        () => homeViewModel.getAllCategories.isNotEmpty
-                            ? TextHeading(
-                                title: "Categories",
-                                fontweight: FontWeight.w600,
-                                fontsize: 12.sp,
-                                fontcolor: Colors.white)
-                            : const SizedBox(),
-                      ),
-                      Obx(
-                        () => SizedBox(
-                          height: homeViewModel.getAllCategories.isNotEmpty
-                              ? 20.h
-                              : 0.h,
-                        ),
-                      ),
-                      Obx(
-                        () => homeViewModel.getAllCategories.isNotEmpty
-                            ? SizedBox(
-                                height: 200.h,
-                                width: double.infinity,
-                                child: GridView.builder(
-                                  shrinkWrap: false,
-                                  itemCount:
-                                      homeViewModel.getAllCategories.length,
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  gridDelegate:
-                                      SliverGridDelegateWithFixedCrossAxisCount(
-                                    childAspectRatio: 1.5,
-                                    crossAxisCount: 2,
-                                    crossAxisSpacing: 10,
-                                    mainAxisSpacing: 10,
-                                  ),
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    CategoryModel category =
-                                        homeViewModel.getAllCategories[index];
-                                    return InkWell(
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => VendersPage(),
-                                          ),
-                                        );
-                                      },
-                                      child: Stack(
-                                        children: [
-                                          Container(
-                                            height: 87.h,
-                                            width: 165.w,
-                                            decoration: BoxDecoration(
-                                                color:
-                                                    AppColors.searchFieldsColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        10.r)),
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 10, top: 35),
-                                              child: TextHeading(
-                                                title: languageViewModel
-                                                            .getSelectedLanguage ==
-                                                        "English"
-                                                    ? category.categoryTitle ??
-                                                        "NA"
-                                                    : category.categoryArb ??
-                                                        "NA",
-                                                fontweight: FontWeight.w600,
-                                                fontsize: 14.sp,
-                                                fontcolor:
-                                                    AppColors.primaryColor,
-                                              ),
+                                              shrinkWrap: true,
+                                              itemCount: tag.salons!.length,
+                                              scrollDirection: Axis.horizontal,
+                                              itemBuilder: (context, index) {
+                                                SalonModel salon =
+                                                    tag.salons![index];
+                                                return WinterSpecialItems(
+                                                  image: salon.salonImage ?? "",
+                                                  status: languageViewModel
+                                                              .getSelectedLanguage ==
+                                                          "English"
+                                                      ? "Status:"
+                                                      : "Status:",
+                                                  statusValue:
+                                                      (salon.salonStatus ?? "")
+                                                          .toString(),
+                                                  description: languageViewModel
+                                                              .getSelectedLanguage ==
+                                                          "English"
+                                                      ? salon.salonNameEng ?? ""
+                                                      : salon.salonNameArb ??
+                                                          "",
+                                                  type: languageViewModel
+                                                              .getSelectedLanguage ==
+                                                          "English"
+                                                      ? "Saloon Type:"
+                                                      : "Saloon Type:",
+                                                  typeValue:
+                                                      salon.salonType ?? "NA",
+                                                  distance:
+                                                      salon.distance ?? 0.00,
+                                                  salon: salon,
+                                                );
+                                              },
                                             ),
                                           ),
-                                          Positioned(
-                                            right: -8,
-                                            top: 7.6,
-                                            child: Transform.rotate(
-                                              angle: -pi / 10,
-                                              child: Container(
-                                                height: 72.h,
-                                                width: 80.w,
-                                                decoration: BoxDecoration(
+                                        if (tag.salons != null &&
+                                            tag.salons!.isNotEmpty &&
+                                            tag.titleEng == "Top Rated Artist")
+                                          SizedBox(
+                                              height: 255.h,
+                                              width: double.infinity,
+                                              child: ListView.builder(
+                                                  shrinkWrap: true,
+                                                  itemCount:
+                                                      artistImages.length,
+                                                  scrollDirection:
+                                                      Axis.horizontal,
+                                                  itemBuilder:
+                                                      (context, index) {
+                                                    return Stack(
+                                                      children: [
+                                                        Container(
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  right: 10),
+                                                          height: 252.h,
+                                                          width: 200.w,
+                                                          decoration: BoxDecoration(
+                                                              color: AppColors
+                                                                  .searchFieldsColor,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          16.r),
+                                                              border: Border.all(
+                                                                  color: AppColors
+                                                                      .signUpColor,
+                                                                  width: 0.2)),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .symmetric(
+                                                                  horizontal:
+                                                                      5),
+                                                          child: Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              SizedBox(
+                                                                height: 5.h,
+                                                              ),
+                                                              Expanded(
+                                                                flex: 4,
+                                                                child:
+                                                                    Container(
+                                                                  width: 190.w,
+                                                                  decoration: BoxDecoration(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(15
+                                                                              .r),
+                                                                      image: DecorationImage(
+                                                                          image: AssetImage(artistImages[
+                                                                              index]),
+                                                                          fit: BoxFit
+                                                                              .cover)),
+                                                                ),
+                                                              ),
+                                                              Expanded(
+                                                                flex: 6,
+                                                                child: Column(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    //SizedBox(height: 5.h,),
+                                                                    Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .spaceBetween,
+                                                                      children: [
+                                                                        TextHeading(
+                                                                          title:
+                                                                              artistNames[index],
+                                                                          fontweight:
+                                                                              FontWeight.w600,
+                                                                          fontsize:
+                                                                              12.sp,
+                                                                          fontcolor:
+                                                                              Colors.white,
+                                                                        ),
+                                                                        Row(
+                                                                          children: [
+                                                                            Icon(
+                                                                              Icons.star,
+                                                                              color: AppColors.primaryColor,
+                                                                            ),
+                                                                            SizedBox(width: 3),
+                                                                            TextHeading(
+                                                                              title: "4.3/5",
+                                                                              fontweight: FontWeight.w600,
+                                                                              fontsize: 12.sp,
+                                                                              fontcolor: Colors.white,
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ],
+                                                                    ),
+
+                                                                    SizedBox(
+                                                                      height:
+                                                                          3.h,
+                                                                    ),
+
+                                                                    Row(
+                                                                      children: [
+                                                                        TextHeading(
+                                                                          title:
+                                                                              "Work at",
+                                                                          fontweight:
+                                                                              FontWeight.w400,
+                                                                          fontsize:
+                                                                              12.sp,
+                                                                          fontcolor:
+                                                                              Colors.white,
+                                                                        ),
+                                                                        SizedBox(
+                                                                            width:
+                                                                                3.w),
+                                                                        TextHeading(
+                                                                          title:
+                                                                              artistWorkat[index],
+                                                                          fontweight:
+                                                                              FontWeight.w400,
+                                                                          fontsize:
+                                                                              12.sp,
+                                                                          fontcolor:
+                                                                              AppColors.primaryColor,
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                    SizedBox(
+                                                                        height:
+                                                                            3.h),
+                                                                    Row(
+                                                                      children: [
+                                                                        Image
+                                                                            .asset(
+                                                                          "assets/images/location-svgrepo-com 1.png",
+                                                                          color:
+                                                                              AppColors.primaryColor,
+                                                                        ),
+                                                                        TextHeading(
+                                                                            title:
+                                                                                "0.4 km",
+                                                                            fontweight:
+                                                                                FontWeight.w400,
+                                                                            fontsize: 12.sp,
+                                                                            fontcolor: Colors.white)
+                                                                      ],
+                                                                    ),
+
+                                                                    SizedBox(
+                                                                      height:
+                                                                          5.h,
+                                                                    ),
+                                                                    Row(
+                                                                      //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                      children: [
+                                                                        Container(
+                                                                          height:
+                                                                              34.h,
+                                                                          width:
+                                                                              34.w,
+                                                                          decoration: BoxDecoration(
+                                                                              border: Border.all(color: AppColors.signUpColor, width: 0.2),
+                                                                              color: Colors.black,
+                                                                              borderRadius: BorderRadius.circular(8.r)),
+                                                                          child: Center(
+                                                                              child: Icon(
+                                                                            Icons.bookmark_add_outlined,
+                                                                            color:
+                                                                                Colors.white,
+                                                                          )),
+                                                                        ),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              50.w,
+                                                                        ),
+                                                                        Container(
+                                                                            height:
+                                                                                34.h,
+                                                                            width: 102.w,
+                                                                            decoration: BoxDecoration(color: AppColors.bookmarkColor, borderRadius: BorderRadius.circular(8.r)),
+                                                                            child: Center(child: TextHeading(title: "View Profile", fontweight: FontWeight.w400, fontsize: 12.sp, fontcolor: Colors.white)))
+                                                                      ],
+                                                                    )
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        )
+                                                      ],
+                                                    );
+                                                  })),
+                                        if (tag.salons != null &&
+                                            tag.salons!.isNotEmpty &&
+                                            tag.titleEng == "Recommendation")
+                                          const Recommended(
+                                            status: "Status:",
+                                            description: 'Chameleon salon',
+                                            type: 'Saloon Type:',
+                                            image: 'assets/images/newly.png',
+                                            statuValue: 'ONLINE',
+                                            typeValue: 'Unisex',
+                                          ),
+                                      ],
+                                    );
+                                  },
+                                ),
+                        ),
+
+                        // // NewelyWidget(
+                        // //   status: "Status:",
+                        // //   description: 'Chameleon salon',
+                        // //   type: 'Saloon Type:',
+                        // //   image: 'assets/images/newly.png',
+                        // //   statuValue: 'ONLINE',
+                        // //   typeValue: 'Unisex',
+                        // // ),
+                        // SizedBox(height: 20.h),
+                        // TextHeading(
+                        //     title: "Top Rated Artist",
+                        //     fontweight: FontWeight.w600,
+                        //     fontsize: 12.sp,
+                        //     fontcolor: Colors.white),
+                        // SizedBox(
+                        //   height: 25.h,
+                        // ),
+                        // ArtistSlider(),
+
+                        // // const NewelyWidget(
+                        // //   status: "Status:",
+                        // //   description: 'Chameleon salon',
+                        // //   type: 'Saloon Type:',
+                        // //   image: 'assets/images/newly.png',
+                        // //   statuValue: 'ONLINE',
+                        // //   typeValue: 'Unisex',
+                        // // ),
+                        // // ArtistSlider(status: 'Status', statuValue: 'Online', description: '2q4qrw', type: 'rewrwr', typeValue: 'wdad', image: 'assets/images/newly.png',),
+
+                        // //ArtistSliderWidget( ),
+
+                        // SizedBox(
+                        //   height: 20.h,
+                        // ),
+                        // TextHeading(
+                        //     title: "Recommended",
+                        //     fontweight: FontWeight.w600,
+                        //     fontsize: 12.sp,
+                        //     fontcolor: Colors.white),
+                        // SizedBox(
+                        //   height: 20.h,
+                        // ),
+                        // Recommended(
+                        //   status: "Status:",
+                        //   description: 'Chameleon salon',
+                        //   type: 'Saloon Type:',
+                        //   image: 'assets/images/newly.png',
+                        //   statuValue: 'ONLINE',
+                        //   typeValue: 'Unisex',
+                        // ),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        Obx(
+                          () => homeViewModel.getAllCategories.isNotEmpty
+                              ? TextHeading(
+                                  title: "Categories",
+                                  fontweight: FontWeight.w600,
+                                  fontsize: 12.sp,
+                                  fontcolor: Colors.white)
+                              : const SizedBox(),
+                        ),
+                        Obx(
+                          () => SizedBox(
+                            height: homeViewModel.getAllCategories.isNotEmpty
+                                ? 20.h
+                                : 0.h,
+                          ),
+                        ),
+                        Obx(
+                          () => homeViewModel.getAllCategories.isNotEmpty
+                              ? SizedBox(
+                                  height: 200.h,
+                                  width: double.infinity,
+                                  child: GridView.builder(
+                                    shrinkWrap: false,
+                                    itemCount:
+                                        homeViewModel.getAllCategories.length,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    gridDelegate:
+                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                      childAspectRatio: 1.5,
+                                      crossAxisCount: 2,
+                                      crossAxisSpacing: 10,
+                                      mainAxisSpacing: 10,
+                                    ),
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      CategoryModel category =
+                                          homeViewModel.getAllCategories[index];
+                                      return InkWell(
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  VendersPage(),
+                                            ),
+                                          );
+                                        },
+                                        child: Stack(
+                                          children: [
+                                            Container(
+                                              height: 87.h,
+                                              width: 165.w,
+                                              decoration: BoxDecoration(
+                                                  color: AppColors
+                                                      .searchFieldsColor,
                                                   borderRadius:
-                                                      BorderRadius.only(
-                                                          topLeft: Radius
-                                                              .circular(10.r),
-                                                          topRight: Radius
-                                                              .circular(10.r),
-                                                          bottomLeft:
-                                                              Radius.circular(
-                                                                  10.r),
-                                                          bottomRight:
-                                                              Radius.circular(
-                                                                  10.r)),
-                                                  image: DecorationImage(
-                                                    image: NetworkImage(
-                                                        "${AppUrl.baseUrl}/${category.categoryImage}"),
-                                                    fit: BoxFit.cover,
+                                                      BorderRadius.circular(
+                                                          10.r)),
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 10, top: 35),
+                                                child: TextHeading(
+                                                  title: languageViewModel
+                                                              .getSelectedLanguage ==
+                                                          "English"
+                                                      ? category
+                                                              .categoryTitle ??
+                                                          "NA"
+                                                      : category.categoryArb ??
+                                                          "NA",
+                                                  fontweight: FontWeight.w600,
+                                                  fontsize: 14.sp,
+                                                  fontcolor:
+                                                      AppColors.primaryColor,
+                                                ),
+                                              ),
+                                            ),
+                                            Positioned(
+                                              right: -8,
+                                              top: 7.6,
+                                              child: Transform.rotate(
+                                                angle: -pi / 10,
+                                                child: Container(
+                                                  height: 72.h,
+                                                  width: 80.w,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius
+                                                        .only(
+                                                            topLeft:
+                                                                Radius.circular(
+                                                                    10.r),
+                                                            topRight:
+                                                                Radius
+                                                                    .circular(
+                                                                        10.r),
+                                                            bottomLeft:
+                                                                Radius.circular(
+                                                                    10.r),
+                                                            bottomRight:
+                                                                Radius.circular(
+                                                                    10.r)),
+                                                    image: DecorationImage(
+                                                      image: NetworkImage(
+                                                          "${AppUrl.baseUrl}/${category.categoryImage}"),
+                                                      fit: BoxFit.cover,
+                                                    ),
                                                   ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                ),
-                              )
-                            : const SizedBox(),
-                      ),
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                )
+                              : const SizedBox(),
+                        ),
 
-                      SizedBox(
-                        height: 30.h,
-                      )
-                    ],
+                        SizedBox(
+                          height: 30.h,
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

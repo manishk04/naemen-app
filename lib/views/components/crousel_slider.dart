@@ -28,53 +28,55 @@ class _HomePageSliderState extends State<HomePageSlider> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          height: 350.h,
-          width: 350.w,
-          child: PageView.builder(
-            controller: widget.pageController2,
-            itemCount: widget.banners.length,
-            onPageChanged: (value) {
-              currentindex = value;
-              setState(() {
-                currentindex;
-              });
-            },
-            itemBuilder: (context, index) => Container(
-              decoration: BoxDecoration(
-                // borderRadius: BorderRadius.circular(16.r),
-                border: Border.all(
-                  color: AppColors.signUpColor,
-                  width: 0.5.w,
-                ),
-                borderRadius: BorderRadius.circular(16.r),
-                image: DecorationImage(
-                  image: NetworkImage(
-                      "${AppUrl.baseUrl}/${widget.banners[index].bannerImageUrl}"),
-                  fit: BoxFit.cover,
+    return SizedBox(
+      height: 360.h,
+      child: Column(
+        children: [
+          SizedBox(
+            height: 350.h,
+            child: PageView.builder(
+              controller: widget.pageController2,
+              itemCount: widget.banners.length,
+              onPageChanged: (value) {
+                currentindex = value;
+                setState(() {
+                  currentindex;
+                });
+              },
+              itemBuilder: (context, index) => Container(
+                decoration: BoxDecoration(
+                  // borderRadius: BorderRadius.circular(16.r),
+                  border: Border.all(
+                    color: AppColors.signUpColor,
+                    width: 0.5.w,
+                  ),
+                  borderRadius: BorderRadius.circular(16.r),
+                  image: DecorationImage(
+                    image: NetworkImage(
+                        "${AppUrl.baseUrl}/${widget.banners[index].bannerImageUrl}"),
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-        SizedBox(
-          height: 5.h,
-        ),
-        Center(
-          child: SmoothPageIndicator(
-            controller: widget.pageController2,
-            count: widget.banners.length,
-            effect: WormEffect(
-              activeDotColor: AppColors.primaryColor,
-              dotColor: Colors.grey,
-              dotHeight: 5.h,
-              dotWidth: 5.w,
+          SizedBox(
+            height: 5.h,
+          ),
+          Center(
+            child: SmoothPageIndicator(
+              controller: widget.pageController2,
+              count: widget.banners.length,
+              effect: WormEffect(
+                activeDotColor: AppColors.primaryColor,
+                dotColor: Colors.grey,
+                dotHeight: 5.h,
+                dotWidth: 5.w,
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
