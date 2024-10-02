@@ -7,6 +7,8 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../models/banner_model.dart';
 
+///--->>> ShaopPage Slider  <----
+
 class HomePageSlider extends StatefulWidget {
   const HomePageSlider({
     super.key,
@@ -30,6 +32,7 @@ class _HomePageSliderState extends State<HomePageSlider> {
       children: [
         SizedBox(
           height: 350.h,
+          width: 350.w,
           child: PageView.builder(
             controller: widget.pageController2,
             itemCount: widget.banners.length,
@@ -76,7 +79,7 @@ class _HomePageSliderState extends State<HomePageSlider> {
   }
 }
 
-//----->>>>shop page slider <<<<--------
+//----->>>>Homepage slider <<<<--------
 
 class ShopPageSlider extends StatefulWidget {
   const ShopPageSlider({

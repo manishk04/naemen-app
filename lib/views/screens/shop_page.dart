@@ -499,7 +499,7 @@ class _ShopPageState extends State<ShopPage> {
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(8.r)),
-                                                    child: Center(
+                                                    child: const Center(
                                                       child: Icon(
                                                         Icons
                                                             .bookmark_add_outlined,
