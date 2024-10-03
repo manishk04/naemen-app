@@ -7,6 +7,8 @@ import 'package:get/get.dart';
 import 'package:naemen/models/salon_model.dart';
 import 'package:naemen/models/tag_model.dart';
 import 'package:naemen/views/components/crousel_slider.dart';
+import 'package:naemen/views/screens/ProfilePage2.dart';
+import 'package:naemen/views/screens/profile_page.dart';
 import 'package:naemen/views/screens/search_page.dart';
 import 'package:naemen/views/screens/venders_list.dart';
 
@@ -142,10 +144,18 @@ class _HomeViewState extends State<HomeView> {
                             //   },
                             // ),
                             //SizedBox(width: 85.w),
-                            const CircleAvatar(
-                              radius: 17.5,
-                              backgroundImage:
-                                  AssetImage("assets/images/profile_image.png"),
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ProfilePage()));
+                              },
+                              child: const CircleAvatar(
+                                radius: 17.5,
+                                backgroundImage: AssetImage(
+                                    "assets/images/profile_image.png"),
+                              ),
                             ),
                           ],
                         ),

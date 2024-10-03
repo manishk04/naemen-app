@@ -9,6 +9,7 @@ import 'package:naemen/view_models/cart_view_model.dart';
 import 'package:naemen/view_models/language_view_model.dart';
 
 import 'package:naemen/utils/color_constant.dart';
+import 'package:naemen/views/screens/ProfilePage2.dart';
 import 'package:naemen/views/screens/user_profile.dart';
 
 import '../components/text_heading.dart';
@@ -51,13 +52,11 @@ class _ProfilePageState extends State<ProfilePage> {
           child: Column(
             children: [
               InkWell(
-                // onTap: () {
-                //   Navigator.push(
-                //       context,
-                //       MaterialPageRoute(
-                //           builder: (context) => UserProfilePage()));
-                // },
-                child: ListTile(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => MyProfilePage()));
+                },
+                child: const ListTile(
                   leading: Icon(
                     Icons.person_outline,
                     color: AppColors.primaryColor,
