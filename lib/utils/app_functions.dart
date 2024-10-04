@@ -1,6 +1,11 @@
+import 'dart:io';
 import 'dart:math';
 
+import 'dart:developer' as developer;
+
 import 'package:intl/intl.dart';
+import 'package:naemen/utils/utils.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 List<String> getNextSevenDays() {
   List<String> dates = [];
@@ -152,4 +157,34 @@ double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
       cos((lat2 - lat1) * p) / 2 +
       cos(lat1 * p) * cos(lat2 * p) * (1 - cos((lon2 - lon1) * p)) / 2;
   return R * 2 * asin(sqrt(a));
+}
+
+Future<void> openMap(
+    {required String destinationLat, required String destinationLng}) async {
+  try {
+    if (Platform.isAndroid) {
+      final String googleMapsUrl =
+          "https://www.google.com/maps/dir/?api=1&destination=$destinationLat,$destinationLng&travelmode=driving";
+
+      if (await canLaunchUrl(Uri.parse(googleMapsUrl))) {
+        await launchUrl(Uri.parse(googleMapsUrl));
+      } else {
+        throw 'Could not launch map';
+      }
+    } else if (Platform.isIOS) {
+      final String appleMapsUrl =
+          "https://maps.apple.com/?daddr=$destinationLat,$destinationLng&dirflg=d";
+
+      if (await canLaunchUrl(Uri.parse(appleMapsUrl))) {
+        await launchUrl(Uri.parse(appleMapsUrl));
+      } else {
+        throw 'Could not launch map';
+      }
+    } else {
+      throw 'Could not launch map';
+    }
+  } catch (e) {
+    developer.log(e.toString());
+    Utils.toastMessage(e.toString());
+  }
 }

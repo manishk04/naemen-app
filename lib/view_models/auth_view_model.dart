@@ -673,7 +673,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
                                   ),
                                 ),
                               ),
-                            )
+                            ),
                           ],
                         ),
                         SizedBox(height: 10),

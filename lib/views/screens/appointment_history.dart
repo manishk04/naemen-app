@@ -285,43 +285,53 @@ class _AppointmentHIstoreyPageState extends State<AppointmentHIstoreyPage> {
                                                 child: Row(
                                                   children: [
                                                     Expanded(
-                                                        flex: 5,
-                                                        child: InkWell(
-                                                          onTap: () {
-                                                            _cartViewModel
-                                                                .fetchOrderDetails(
-                                                                    order.orderNumber ??
-                                                                        "");
-                                                            Get.toNamed(Routes
-                                                                .appointmentDetailRoute);
-                                                          },
-                                                          child: TextHeading(
-                                                              title:
-                                                                  "View Orders >",
-                                                              fontweight:
-                                                                  FontWeight
-                                                                      .w400,
-                                                              fontsize: 10.sp,
-                                                              fontcolor: AppColors
-                                                                  .primaryColor),
-                                                        )),
-                                                    Expanded(
-                                                      child: Container(
-                                                        height: 24,
-                                                        width: 20,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      5.r),
-                                                          border: Border.all(
-                                                              width: 0.5,
-                                                              color: AppColors
-                                                                  .signUpColor),
+                                                      flex: 5,
+                                                      child: InkWell(
+                                                        onTap: () {
+                                                          _cartViewModel
+                                                              .fetchOrderDetails(
+                                                                  order.orderNumber ??
+                                                                      "");
+                                                          Get.toNamed(Routes
+                                                              .appointmentDetailRoute);
+                                                        },
+                                                        child: TextHeading(
+                                                          title:
+                                                              "View Orders >",
+                                                          fontweight:
+                                                              FontWeight.w400,
+                                                          fontsize: 10.sp,
+                                                          fontcolor: const Color
+                                                              .fromRGBO(
+                                                              180, 138, 0, 1),
                                                         ),
-                                                        child: Image.asset(
-                                                            "assets/images/location3.png"),
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      child: InkWell(
+                                                        onTap: () => openMap(
+                                                            destinationLat:
+                                                                order.lat ?? "",
+                                                            destinationLng:
+                                                                order.lng ??
+                                                                    ""),
+                                                        child: Container(
+                                                          height: 24,
+                                                          width: 20,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5.r),
+                                                            border: Border.all(
+                                                                width: 0.5,
+                                                                color: AppColors
+                                                                    .signUpColor),
+                                                          ),
+                                                          child: Image.asset(
+                                                              "assets/images/location3.png"),
+                                                        ),
                                                       ),
                                                     ),
                                                     SizedBox(
