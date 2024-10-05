@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:naemen/models/salon_model.dart';
 import 'package:naemen/utils/app_url.dart';
@@ -247,15 +248,27 @@ class WinterSpecialItems extends StatelessWidget {
               ),
               Expanded(
                 flex: 4,
-                child: Container(
-                  width: 190.w,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.r),
-                    image: DecorationImage(
-                      image: NetworkImage("${AppUrl.baseUrl}/$image"),
-                      fit: BoxFit.cover,
+                child: Stack(
+                  children: [
+                    Container(
+                      width: 190.w,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15.r),
+                        image: DecorationImage(
+                          image: NetworkImage("${AppUrl.baseUrl}/$image"),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
-                  ),
+                    Positioned(
+                      top: 5.h,
+                      right: 5.w,
+                      child: SalonGenderWidget(
+                        salonGender: salon.storeGender ?? "",
+                        color: AppColors.searchFieldsColor,
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Expanded(
@@ -405,6 +418,53 @@ class WinterSpecialItems extends StatelessWidget {
           ),
         )
       ],
+    );
+  }
+}
+
+class SalonGenderWidget extends StatelessWidget {
+  const SalonGenderWidget({
+    super.key,
+    required this.salonGender,
+    this.color = Colors.transparent,
+  });
+
+  final String salonGender;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 5.w),
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(8.r),
+        border: Border.all(
+          color: AppColors.primaryColor,
+          width: 2.w,
+        ),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (salonGender == "male" || salonGender == "unisex")
+            SvgPicture.asset(
+              "assets/images/male_salon.svg",
+              width: 20.w,
+              height: 20.h,
+            ),
+          if (salonGender == "unisex")
+            SizedBox(
+              width: 10.w,
+            ),
+          if (salonGender == "female")
+            SvgPicture.asset(
+              "assets/images/female_salon.svg",
+              width: 20.w,
+              height: 20.h,
+            ),
+        ],
+      ),
     );
   }
 }

@@ -10,6 +10,7 @@ import 'package:naemen/view_models/salon_profile_view_model.dart';
 import 'package:naemen/views/components/search_bar.dart';
 import 'package:naemen/utils/color_constant.dart';
 
+import '../components/newely_added.dart';
 import '../components/text_heading.dart';
 import 'home_page.dart';
 
@@ -317,22 +318,29 @@ class _VendersPageState extends State<VendersPage> {
                                                       ],
                                                     ),
                                                     SizedBox(
-                                                      width: 20.w,
+                                                      width: 10.w,
                                                     ),
-                                                    Container(
-                                                      height: 24.h,
-                                                      width: 24.w,
-                                                      decoration: BoxDecoration(
-                                                          border: Border.all(
-                                                              color: AppColors
-                                                                  .primaryColor),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      5.r)),
-                                                      child: Image.asset(
-                                                          "assets/images/venderImage.png"),
-                                                    )
+                                                    SalonGenderWidget(
+                                                      salonGender:
+                                                          salon.storeGender ??
+                                                              "",
+                                                      color: AppColors
+                                                          .searchFieldsColor,
+                                                    ),
+                                                    // Container(
+                                                    //   height: 24.h,
+                                                    //   width: 24.w,
+                                                    //   decoration: BoxDecoration(
+                                                    //       border: Border.all(
+                                                    //           color: AppColors
+                                                    //               .primaryColor),
+                                                    //       borderRadius:
+                                                    //           BorderRadius
+                                                    //               .circular(
+                                                    //                   5.r)),
+                                                    //   child: Image.asset(
+                                                    //       "assets/images/venderImage.png"),
+                                                    // )
                                                   ],
                                                 ),
                                               ],

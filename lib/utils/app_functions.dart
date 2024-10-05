@@ -26,7 +26,7 @@ List<String> generateTimeSlots({
       startTime, // Start time in 'HH:mm a' format (e.g., '10:52 AM')
   required String selectedDate, // Selected date in 'dd-MM-yyyy' format
   String endTime =
-      '11:59:59', // End time in 'HH:mm a' format (e.g., '0:00 AM' means '11:59 PM')
+      '23:59:59', // End time in 'HH:mm a' format (e.g., '0:00 AM' means '11:59 PM')
 }) {
   // Parse selected date using the provided format 'dd-MM-yyyy'
   DateTime date = DateFormat('dd-MM-yyyy').parse(selectedDate);
@@ -71,8 +71,10 @@ List<String> generateTimeSlots({
         startDateTime.add(Duration(minutes: slotDurationMinutes));
 
     // Format time in HH:mm
-    String startTimeString = DateFormat('HH:mm a').format(startDateTime);
-    String endTimeString = DateFormat('HH:mm a').format(slotEndTime);
+    // String startTimeString = DateFormat('hh:mm a').format(startDateTime);
+    // String endTimeString = DateFormat('hh:mm a').format(slotEndTime);
+    String startTimeString = DateFormat('HH:mm').format(startDateTime);
+    String endTimeString = DateFormat('HH:mm').format(slotEndTime);
 
     // Add the slot to the list
     timeSlots.add('$startTimeString - $endTimeString');
@@ -82,6 +84,22 @@ List<String> generateTimeSlots({
   }
 
   return timeSlots;
+}
+
+String convertTimeRangeFormat(String timeRange24) {
+  // Split the time range into start and end times
+  List<String> times = timeRange24.split(" - ");
+
+  // Parse both times in the 24-hour format
+  DateTime startTime = DateFormat("HH:mm").parse(times[0]);
+  DateTime endTime = DateFormat("HH:mm").parse(times[1]);
+
+  // Convert both times to 12-hour format with AM/PM
+  String formattedStartTime = DateFormat("hh:mm a").format(startTime);
+  String formattedEndTime = DateFormat("hh:mm a").format(endTime);
+
+  // Return the formatted time range
+  return "$formattedStartTime - $formattedEndTime";
 }
 
 DateTime getRoundedTime(DateTime currentTime, int intervalMinutes) {

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 class SalonModel {
   String? salonNameEng;
+  String? storeGender;
   int? salonId;
   String? salonType;
   String? salonNameArb;
@@ -26,6 +27,7 @@ class SalonModel {
   num? distance;
   SalonModel({
     this.salonNameEng,
+    this.storeGender,
     this.salonId,
     this.salonType,
     this.salonNameArb,
@@ -52,6 +54,7 @@ class SalonModel {
 
   SalonModel copyWith({
     String? salonNameEng,
+    String? storeGender,
     int? salonId,
     String? salonType,
     String? salonNameArb,
@@ -77,6 +80,7 @@ class SalonModel {
   }) {
     return SalonModel(
       salonNameEng: salonNameEng ?? this.salonNameEng,
+      storeGender: storeGender ?? this.storeGender,
       salonId: salonId ?? this.salonId,
       salonType: salonType ?? this.salonType,
       salonNameArb: salonNameArb ?? this.salonNameArb,
@@ -105,6 +109,7 @@ class SalonModel {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'salonNameEng': salonNameEng,
+      'storeGender': storeGender,
       'salonId': salonId,
       'salonType': salonType,
       'salonNameArb': salonNameArb,
@@ -134,6 +139,9 @@ class SalonModel {
     return SalonModel(
       salonNameEng: map['salon_name_eng'] != null
           ? map['salon_name_eng'] as String
+          : null,
+      storeGender: map['store_gender'] != null
+          ? map['store_gender'] as String
           : null,
       salonId: map['salon_id'] != null ? map['salon_id'] as int : null,
       salonType: map['salon_type'] != null ? map['salon_type'] as String : null,
@@ -182,7 +190,7 @@ class SalonModel {
 
   @override
   String toString() {
-    return 'SalonModel(salonNameEng: $salonNameEng, salonId: $salonId, salonType: $salonType, salonNameArb: $salonNameArb, email: $email, contactNumber: $contactNumber, salonImage: $salonImage, kidsSalonService: $kidsSalonService, salonStatus: $salonStatus, storeStatus: $storeStatus, buildingAddress: $buildingAddress, address: $address, cityId: $cityId, districtId: $districtId, latAddress: $latAddress, logAddress: $logAddress, categoryId: $categoryId, categoryTitle: $categoryTitle, district: $district, cityName: $cityName, tagTitleEng: $tagTitleEng, tagTitleAr: $tagTitleAr, distance: $distance)';
+    return 'SalonModel(salonNameEng: $salonNameEng, storeGender:$storeGender, salonId: $salonId, salonType: $salonType, salonNameArb: $salonNameArb, email: $email, contactNumber: $contactNumber, salonImage: $salonImage, kidsSalonService: $kidsSalonService, salonStatus: $salonStatus, storeStatus: $storeStatus, buildingAddress: $buildingAddress, address: $address, cityId: $cityId, districtId: $districtId, latAddress: $latAddress, logAddress: $logAddress, categoryId: $categoryId, categoryTitle: $categoryTitle, district: $district, cityName: $cityName, tagTitleEng: $tagTitleEng, tagTitleAr: $tagTitleAr, distance: $distance)';
   }
 
   @override
@@ -190,6 +198,7 @@ class SalonModel {
     if (identical(this, other)) return true;
 
     return other.salonNameEng == salonNameEng &&
+        other.storeGender == storeGender &&
         other.salonId == salonId &&
         other.salonType == salonType &&
         other.salonNameArb == salonNameArb &&
@@ -217,6 +226,7 @@ class SalonModel {
   @override
   int get hashCode {
     return salonNameEng.hashCode ^
+        storeGender.hashCode ^
         salonId.hashCode ^
         salonType.hashCode ^
         salonNameArb.hashCode ^

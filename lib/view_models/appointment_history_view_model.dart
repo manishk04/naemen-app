@@ -38,11 +38,6 @@ class AppointmentHistoryViewModel extends GetxController {
   set setFilter(AppointmentFilterEnum filter) => _filter.value = filter;
 
   // =============================== Methods ===================================
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
   init() async {
     _latitude = double.parse(await StorageData.getLatitude());
     _longitude = double.parse(await StorageData.getLongitude());
@@ -53,7 +48,7 @@ class AppointmentHistoryViewModel extends GetxController {
     OrdersModel ordersData = OrdersModel();
     Map<String, String> params = {
       "customer_id": authViewModel.getCustomer.id.toString(),
-      "order_status": fetchOrderStatusString(getFilter),
+      "status": fetchOrderStatusString(getFilter),
     };
     setIsLoading = true;
     try {
@@ -102,4 +97,88 @@ class AppointmentHistoryViewModel extends GetxController {
     setFilter = filter;
     fetchAppointmentHistory(authViewModel);
   }
+
+  var data = {
+    "order": {
+      "orderId": 10,
+      "order_number": "NMNO#A0001",
+      "service_date": "2024-09-30",
+      "customer_id": 26,
+      "store_id": "INLUA0005",
+      "customer_address":
+          "6478,Mahalaxmi Nagar, Ambernath, Konkan Division, Maharashtra,India",
+      "lat": "26.86040000",
+      "lng": "81.00330000",
+      "order_amount": 5300,
+      "coupon_id": null,
+      "coupon_code": null,
+      "service_start_time": "20:00:00",
+      "service_end_time": "21:30:00",
+      "artist_id": 31,
+      "discount_amount": 0,
+      "final_pay_amount": 5300,
+      "payment_status": "cod",
+      "payment_id": "",
+      "order_status": "new",
+      "is_active": "1",
+      "order_generate_time": "2024-09-30 19:42:36",
+      "customer_name": "Roshan",
+      "email": "roshan@gmail.com",
+      "contact_number": "7028362775",
+      "profile_pic": null,
+      "salon_name_eng": "GloabSalon",
+      "salon_name_arb":
+          "\u0635\u0627\u0644\u0648\u0646\u062c\u0644\u0648\u0628",
+      "salon_image": "assets\/images\/salon-img\/66f2b0142a7f5.webp",
+      "cr_no": "",
+      "vat_no": "",
+      "log_address": "80.94372100",
+      "lat_address": "26.88535240",
+      "city_iso": "LU",
+      "address_2": "Jankipuram",
+      "artist_name_eng": "NainaSharma",
+      "artist_name_arb":
+          "\u0646\u064a\u0646\u0627\u0634\u0627\u0631\u0645\u0627",
+      "artist_contact_number": "1212122322213"
+    },
+    "order_item": [
+      {
+        "id": 15,
+        "order_id": 10,
+        "store_id": "28",
+        "artist_id": 31,
+        "customer_id": 26,
+        "order_number": "NMNO#A0001",
+        "service_id": 36,
+        "service_title": "Smoothening",
+        "service_title_arb": "\u062a\u0646\u0639\u064a\u0645",
+        "service_duraction": 30,
+        "service_amount": 300,
+        "artist_start_time": null,
+        "artist_end_time": null,
+        "is_active": "1",
+        "service_status": "new",
+        "date_time": "2024-09-30 19:42:36"
+      },
+      {
+        "id": 16,
+        "order_id": 10,
+        "store_id": "28",
+        "artist_id": 31,
+        "customer_id": 26,
+        "order_number": "NMNO#A0001",
+        "service_id": 37,
+        "service_title": "Keratin Magic",
+        "service_title_arb":
+            "\u0627\u0644\u0643\u064a\u0631\u0627\u062a\u064a\u0646\u0627\u0644\u0633\u062d\u0631\u064a",
+        "service_duraction": 60,
+        "service_amount": 5000,
+        "artist_start_time": null,
+        "artist_end_time": null,
+        "is_active": "1",
+        "service_status": "new",
+        "date_time": "2024-09-3019:42:36"
+      }
+    ]
+  };
 }

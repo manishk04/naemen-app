@@ -661,15 +661,8 @@ class _HomeViewState extends State<HomeView> {
                                       CategoryModel category =
                                           homeViewModel.getAllCategories[index];
                                       return InkWell(
-                                        onTap: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  VendersPage(),
-                                            ),
-                                          );
-                                        },
+                                        onTap: () => homeViewModel
+                                            .onCategorySelect(category, true),
                                         child: Stack(
                                           children: [
                                             Container(

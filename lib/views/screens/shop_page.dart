@@ -16,6 +16,7 @@ import 'package:naemen/views/components/crousel_slider.dart';
 import 'package:naemen/views/components/rating_bar.dart';
 import 'package:naemen/utils/color_constant.dart';
 
+import '../components/newely_added.dart';
 import '../components/text_heading.dart';
 
 class ShopPage extends StatefulWidget {
@@ -264,6 +265,15 @@ class _ShopPageState extends State<ShopPage> {
                                             )
                                           ],
                                         ),
+                                      Align(
+                                        alignment: Alignment.centerRight,
+                                        child: SalonGenderWidget(
+                                          salonGender: _salonProfileViewModel
+                                                  .getStore.storeGender ??
+                                              "",
+                                          color: AppColors.searchFieldsColor,
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -465,7 +475,8 @@ class _ShopPageState extends State<ShopPage> {
                                               Row(
                                                 children: [
                                                   TextHeading(
-                                                    title: "Expertize: ",
+                                                    title: "",
+                                                    // title: "Expertize: ",
                                                     fontweight: FontWeight.w600,
                                                     fontsize: 12.sp,
                                                     fontcolor: Colors.white,
@@ -474,12 +485,13 @@ class _ShopPageState extends State<ShopPage> {
                                                     width: 2.w,
                                                   ),
                                                   TextHeading(
-                                                    title: (artist.artistCategories ??
-                                                                "")
-                                                            .isEmpty
-                                                        ? "ALL"
-                                                        : artist.artistCategories ??
-                                                            "",
+                                                    title: "",
+                                                    // title: (artist.artistCategories ??
+                                                    //             "")
+                                                    //         .isEmpty
+                                                    //     ? "ALL"
+                                                    //     : artist.artistCategories ??
+                                                    //         "",
                                                     fontweight: FontWeight.w600,
                                                     fontsize: 12.sp,
                                                     fontcolor:

@@ -68,7 +68,7 @@ class CartViewModel extends GetxController {
       ArtistProfileViewModel artistProfileViewModel) async {
     try {
       String startTime = artistProfileViewModel.getSelectedTime.substring(0, 5);
-      String endTime = artistProfileViewModel.getSelectedTime.substring(11, 16);
+      String endTime = artistProfileViewModel.getSelectedTime.substring(8, 13);
       Utils.startLoading();
       String lat = await StorageData.getLatitude();
       String lng = await StorageData.getLongitude();

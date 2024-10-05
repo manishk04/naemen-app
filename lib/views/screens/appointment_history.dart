@@ -307,33 +307,38 @@ class _AppointmentHIstoreyPageState extends State<AppointmentHIstoreyPage> {
                                                         ),
                                                       ),
                                                     ),
-                                                    Expanded(
-                                                      child: InkWell(
-                                                        onTap: () => openMap(
-                                                            destinationLat:
-                                                                order.lat ?? "",
-                                                            destinationLng:
-                                                                order.lng ??
-                                                                    ""),
-                                                        child: Container(
-                                                          height: 24,
-                                                          width: 20,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        5.r),
-                                                            border: Border.all(
-                                                                width: 0.5,
-                                                                color: AppColors
-                                                                    .signUpColor),
+                                                    if (_appointmentHistoryViewModel
+                                                            .getFilter ==
+                                                        AppointmentFilterEnum
+                                                            .upcoming)
+                                                      Expanded(
+                                                        child: InkWell(
+                                                          onTap: () => openMap(
+                                                              destinationLat:
+                                                                  order.lat ??
+                                                                      "",
+                                                              destinationLng:
+                                                                  order.lng ??
+                                                                      ""),
+                                                          child: Container(
+                                                            height: 24,
+                                                            width: 20,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5.r),
+                                                              border: Border.all(
+                                                                  width: 0.5,
+                                                                  color: AppColors
+                                                                      .signUpColor),
+                                                            ),
+                                                            child: Image.asset(
+                                                                "assets/images/location3.png"),
                                                           ),
-                                                          child: Image.asset(
-                                                              "assets/images/location3.png"),
                                                         ),
                                                       ),
-                                                    ),
                                                     SizedBox(
                                                       width: 10.w,
                                                     ),

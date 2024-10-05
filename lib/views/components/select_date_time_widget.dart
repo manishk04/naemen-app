@@ -313,7 +313,7 @@ class SelectDateTimeWidget extends StatelessWidget {
                             ),
                             child: Center(
                               child: TextHeading(
-                                title: time,
+                                title: convertTimeRangeFormat(time),
                                 fontweight: FontWeight.w400,
                                 fontsize: 10.sp,
                                 fontcolor: isBooked

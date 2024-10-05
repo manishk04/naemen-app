@@ -356,8 +356,8 @@ class ArtistProfileViewModel extends GetxController {
           DateTime endTime = DateFormat('HH:mm:ss').parse(times[1]);
 
           // Format the DateTime objects to the desired format
-          String formattedStartTime = DateFormat('HH:mm a').format(startTime);
-          String formattedEndTime = DateFormat('HH:mm a').format(endTime);
+          String formattedStartTime = DateFormat('HH:mm').format(startTime);
+          String formattedEndTime = DateFormat('HH:mm').format(endTime);
 
           // Combine the formatted times into a single string
           appointedSlots.add("$formattedStartTime - $formattedEndTime");
