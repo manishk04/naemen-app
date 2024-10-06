@@ -420,21 +420,21 @@ class _ShopPageState extends State<ShopPage> {
                                                     fontsize: 12.sp,
                                                     fontcolor: Colors.white,
                                                   ),
-                                                  SizedBox(
-                                                    width: 2.w,
-                                                  ),
-                                                  TextHeading(
-                                                    title: _languageViewModel
-                                                                .getSelectedLanguage ==
-                                                            "English"
-                                                        ? artist.artistNameEng ??
-                                                            ""
-                                                        : artist.artistNameArb ??
-                                                            "",
-                                                    fontweight: FontWeight.w600,
-                                                    fontsize: 12.sp,
-                                                    fontcolor:
-                                                        AppColors.primaryColor,
+                                                  Flexible(
+                                                    child: TextHeading(
+                                                      title: _languageViewModel
+                                                                  .getSelectedLanguage ==
+                                                              "English"
+                                                          ? artist.artistNameEng ??
+                                                              ""
+                                                          : artist.artistNameArb ??
+                                                              "",
+                                                      fontweight:
+                                                          FontWeight.w600,
+                                                      fontsize: 12.sp,
+                                                      fontcolor: AppColors
+                                                          .primaryColor,
+                                                    ),
                                                   ),
                                                 ],
                                               ),
@@ -582,19 +582,22 @@ class _ShopPageState extends State<ShopPage> {
                                   fontsize: 12.sp,
                                   fontcolor: Colors.white),
                               SizedBox(
-                                height: 10.h,
+                                height: 15.h,
                               ),
-                              Container(
-                                height: 158.h,
-                                width: double.infinity,
-                                clipBehavior: Clip.hardEdge,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15.r),
-                                ),
-                                child: InAppWebView(
-                                  initialUrlRequest: URLRequest(
-                                    url: WebUri(
-                                        "https://www.youtube.com/embed/2pxbAZtEhuM?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0"),
+                              AspectRatio(
+                                aspectRatio: 16 / 9,
+                                child: Container(
+                                  height: 158.h,
+                                  width: double.infinity,
+                                  clipBehavior: Clip.hardEdge,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15.r),
+                                  ),
+                                  child: InAppWebView(
+                                    initialUrlRequest: URLRequest(
+                                      url: WebUri(
+                                          "https://www.youtube.com/embed/2pxbAZtEhuM?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0"),
+                                    ),
                                   ),
                                 ),
                               ),

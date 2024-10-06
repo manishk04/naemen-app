@@ -189,29 +189,47 @@ class _VendersPageState extends State<VendersPage> {
                                                         Positioned(
                                                           bottom: 10,
                                                           right: 20,
-                                                          child: Row(
-                                                            children: [
-                                                              Icon(
-                                                                Icons.star,
-                                                                color: AppColors
-                                                                    .primaryColor,
-                                                                size: 20,
-                                                              ),
-                                                              SizedBox(
-                                                                width: 3.w,
-                                                              ),
-                                                              TextHeading(
-                                                                  title:
-                                                                      "4.3/5",
-                                                                  fontweight:
-                                                                      FontWeight
-                                                                          .w400,
-                                                                  fontsize:
-                                                                      12.sp,
-                                                                  fontcolor:
-                                                                      Colors
-                                                                          .white)
-                                                            ],
+                                                          child: Container(
+                                                            height: 30.h,
+                                                            width: 60.w,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color: Colors
+                                                                  .black
+                                                                  .withOpacity(
+                                                                      0.7),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8.r),
+                                                            ),
+                                                            child: Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
+                                                              children: [
+                                                                Icon(
+                                                                  Icons.star,
+                                                                  color: AppColors
+                                                                      .primaryColor,
+                                                                  size: 18,
+                                                                ),
+                                                                SizedBox(
+                                                                  width: 3.w,
+                                                                ),
+                                                                TextHeading(
+                                                                    title:
+                                                                        "4.3/5",
+                                                                    fontweight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    fontsize:
+                                                                        12.sp,
+                                                                    fontcolor:
+                                                                        Colors
+                                                                            .white)
+                                                              ],
+                                                            ),
                                                           ),
                                                         )
                                                       ],
@@ -234,18 +252,18 @@ class _VendersPageState extends State<VendersPage> {
                                                                     "",
                                                             fontweight:
                                                                 FontWeight.w400,
-                                                            fontsize: 12.sp,
+                                                            fontsize: 14.sp,
                                                             fontcolor: AppColors
                                                                 .primaryColor),
                                                         SizedBox(
-                                                          height: 10.w,
+                                                          height: 15.w,
                                                         ),
                                                         Row(
                                                           children: [
                                                             Image.asset(
                                                                 "assets/images/mark_Location.png"),
                                                             SizedBox(
-                                                              width: 4.w,
+                                                              width: 5.w,
                                                             ),
                                                             TextHeading(
                                                                 title:
@@ -317,9 +335,7 @@ class _VendersPageState extends State<VendersPage> {
                                                         )
                                                       ],
                                                     ),
-                                                    SizedBox(
-                                                      width: 10.w,
-                                                    ),
+
                                                     SalonGenderWidget(
                                                       salonGender:
                                                           salon.storeGender ??
