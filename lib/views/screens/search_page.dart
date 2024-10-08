@@ -10,6 +10,7 @@ import 'package:naemen/view_models/auth_view_model.dart';
 import 'package:naemen/views/components/search_bar.dart';
 import 'package:naemen/views/screens/add_location.dart';
 
+import '../../routes/app_routes.dart';
 import '../components/location_search_dialog.dart';
 import '../components/text_heading.dart';
 
@@ -73,10 +74,11 @@ class _SearchPageState extends State<SearchPage> {
                         ),
                         InkWell(
                           onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => GoogleMapScreen()));
+                            Get.offAllNamed(Routes.googleMapRoute);
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //         builder: (context) => GoogleMapScreen()));
                           },
                           child: Row(
                             children: [
@@ -114,12 +116,13 @@ class _SearchPageState extends State<SearchPage> {
                         ),
                         InkWell(
                           onTap: () {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => AddLocationPage()
-                                    //GoogleMapScreen()
-                                    ));
+                            Get.toNamed(Routes.addLocationRoute);
+                            // Navigator.pushReplacement(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //         builder: (context) => AddLocationPage()
+                            //         //GoogleMapScreen()
+                            //         ));
                           },
                           child: Row(
                             children: [

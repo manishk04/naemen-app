@@ -5,6 +5,7 @@ import '../views/auth/login_password_view.dart';
 import '../views/auth/verify_mobile_view.dart';
 import '../views/auth/sign_up_screen.dart';
 import '../views/onboarding_screen.dart/onboarding_view.dart';
+import '../views/screens/add_location.dart';
 import '../views/screens/appointment_detail_page.dart';
 import '../views/screens/artist_profile_service.dart';
 import '../views/screens/booking_detail_page.dart';
@@ -38,5 +39,6 @@ class AppPages {
     Routes.googleMapRoute: (context) => const GoogleMapScreen(),
     Routes.orderSuccessRoute: (context) => const OrderSuccessView(),
     Routes.appointmentDetailRoute: (context) => const AppointmentDetailPage(),
+    Routes.addLocationRoute: (context) => const AddLocationPage(),
   };
 }

@@ -693,10 +693,12 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
                             authViewModel.setAddress =
                                 googleMapViewModel.getDraggedAddress;
                             Utils.startLoading();
-                            await StorageData.setLatitude("26.8604");
-                            // "${googleMapViewModel.getDraggedLatLng.latitude}");
-                            await StorageData.setLongitude("81.0033");
-                            // "${googleMapViewModel.getDraggedLatLng.longitude}");
+                            await StorageData.setLatitude(
+                                "${googleMapViewModel.getDraggedLatLng.latitude}");
+                            // "26.8604");
+                            await StorageData.setLongitude(
+                                "${googleMapViewModel.getDraggedLatLng.longitude}");
+                            // "81.0033");
                             Get.back();
                             Get.offAllNamed(Routes.bottomBarRoute);
                           },

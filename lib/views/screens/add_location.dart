@@ -24,8 +24,9 @@ class _AddLocationPageState extends State<AddLocationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          leading: const BackButton(
+          leading: BackButton(
             color: Colors.white, // <-- SEE HERE
+            onPressed: () => Get.back(),
           ),
           backgroundColor: Colors.black,
           title: Text(
@@ -156,10 +157,10 @@ class _AddLocationPageState extends State<AddLocationPage> {
                         ),
                         InkWell(
                           onTap: () {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => BottomBarView()));
+                            // Navigator.pushReplacement(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //         builder: (context) => BottomBarView()));
                           },
                           child: Container(
                             height: 40.h,
