@@ -40,7 +40,7 @@ class LoginPasswordView extends StatelessWidget {
                       height: 180.h,
                     ),
                     Image.asset(
-                      "assets/images/new_new_new_logo.png",
+                      "assets/images/latest_logo.png",
                       height: 136,
                       width: 1360,
                     ),

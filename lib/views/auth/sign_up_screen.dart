@@ -38,7 +38,7 @@ class SignUpView extends StatelessWidget {
                   children: [
                     SizedBox(height: 180.h),
                     Image.asset(
-                      "assets/images/new_new_new_logo.png",
+                      "assets/images/latest_logo.png",
                       height: 136,
                       width: 136,
                     ),

@@ -794,7 +794,7 @@ class _ShopPageState extends State<ShopPage> {
                                 height: 20.h,
                               ),
                               Container(
-                                height: 260.h,
+                                height: 170.h,
                                 width: 340.w,
                                 decoration: BoxDecoration(
                                     color: AppColors.searchFieldsColor,
@@ -915,7 +915,7 @@ class _ShopPageState extends State<ShopPage> {
                                 height: 20.h,
                               ),
                               Container(
-                                height: 260.h,
+                                height: 170.h,
                                 width: 340.w,
                                 decoration: BoxDecoration(
                                     color: AppColors.searchFieldsColor,
@@ -1032,7 +1032,7 @@ class _ShopPageState extends State<ShopPage> {
                                 height: 20.h,
                               ),
                               Container(
-                                  height: 260.h,
+                                  height: 170.h,
                                   width: 340.w,
                                   decoration: BoxDecoration(
                                       color: AppColors.searchFieldsColor,

@@ -9,6 +9,7 @@ import 'package:naemen/view_models/cart_view_model.dart';
 import 'package:naemen/view_models/language_view_model.dart';
 import 'package:naemen/views/components/appointment_filter.dart';
 import 'package:naemen/views/components/booking_dattime_widget.dart';
+import 'package:naemen/views/components/bottomsheet_appointment.dart';
 import 'package:naemen/views/components/search_bar.dart';
 import 'package:naemen/views/screens/profile_page.dart';
 import 'package:naemen/views/screens/shop_page.dart';
@@ -261,30 +262,29 @@ class _AppointmentDetailPageState extends State<AppointmentDetailPage> {
                                 height: 40.h,
                               ),
                               Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  InkWell(
-                                    onTap: () => Get.back(),
-                                    child: Container(
-                                      height: 38.h,
-                                      width: 110.w,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: AppColors.primaryColor,
-                                            width: 1),
-                                        borderRadius:
-                                            BorderRadius.circular(8.r),
-                                      ),
-                                      child: Center(
-                                        child: TextHeading(
-                                            title: "Back",
-                                            fontweight: FontWeight.w600,
-                                            fontsize: 12.sp,
-                                            fontcolor: AppColors.primaryColor),
-                                      ),
-                                    ),
-                                  ),
+                                  // InkWell(
+                                  //   onTap: () => Get.back(),
+                                  //   child: Container(
+                                  //     height: 38.h,
+                                  //     width: 110.w,
+                                  //     decoration: BoxDecoration(
+                                  //       border: Border.all(
+                                  //           color: AppColors.primaryColor,
+                                  //           width: 1),
+                                  //       borderRadius:
+                                  //           BorderRadius.circular(8.r),
+                                  //     ),
+                                  //     child: Center(
+                                  //       child: TextHeading(
+                                  //           title: "Back",
+                                  //           fontweight: FontWeight.w600,
+                                  //           fontsize: 12.sp,
+                                  //           fontcolor: AppColors.primaryColor),
+                                  //     ),
+                                  //   ),
+                                  // ),
                                   InkWell(
                                     onTap: () => Get.until((route) =>
                                         route.settings.name ==
@@ -302,7 +302,7 @@ class _AppointmentDetailPageState extends State<AppointmentDetailPage> {
                                       ),
                                       child: Center(
                                         child: TextHeading(
-                                          title: "Back at Home",
+                                          title: "Processing",
                                           fontweight: FontWeight.w600,
                                           fontsize: 12.sp,
                                           fontcolor: Colors.white,
@@ -313,18 +313,24 @@ class _AppointmentDetailPageState extends State<AppointmentDetailPage> {
                                 ],
                               ),
                               SizedBox(
-                                height: 160.h,
+                                height: 280.h,
                               ),
 
-                              //Spacer(),
+                              // Spacer(),
                               InkWell(
                                 onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => ProfilePage(),
-                                    ),
+                                  showModalBottomSheet(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return BottomSheetContent();
+                                    },
                                   );
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //     builder: (context) => ProfilePage(),
+                                  //   ),
+                                  // );
                                 },
                                 child: Container(
                                   height: 35.h,
