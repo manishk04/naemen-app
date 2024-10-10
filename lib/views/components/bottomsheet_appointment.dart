@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:naemen/utils/color_constant.dart';
+import 'package:naemen/views/components/text_heading.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class BottomSheetContent extends StatelessWidget {
@@ -7,13 +10,21 @@ class BottomSheetContent extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(16.0),
       height: 200,
+      color: Colors.black,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           // Email Button
           ListTile(
-            leading: Icon(Icons.email),
-            title: Text('Send Gmail'),
+            leading: Icon(
+              Icons.email,
+              color: AppColors.primaryColor,
+            ),
+            title: TextHeading(
+                title: "send emai",
+                fontweight: FontWeight.w500,
+                fontsize: 14.sp,
+                fontcolor: AppColors.primaryColor),
             onTap: () async {
               print("Attempting to send email...");
               await _launchURL('shuklanitin2000@gmail.com');
@@ -21,8 +32,15 @@ class BottomSheetContent extends StatelessWidget {
           ),
           // Call Button
           ListTile(
-            leading: Icon(Icons.call),
-            title: Text('Make Call'),
+            leading: Icon(
+              Icons.call,
+              color: AppColors.primaryColor,
+            ),
+            title: TextHeading(
+                title: "Make Call",
+                fontweight: FontWeight.w500,
+                fontsize: 14.sp,
+                fontcolor: AppColors.primaryColor),
             onTap: () async {
               print("Attempting to make a call...");
               await _launchURL('tel:8953092693');
@@ -30,8 +48,15 @@ class BottomSheetContent extends StatelessWidget {
           ),
           // SMS Button
           ListTile(
-            leading: Icon(Icons.message),
-            title: Text('Send Message'),
+            leading: Icon(
+              Icons.message,
+              color: AppColors.primaryColor,
+            ),
+            title: TextHeading(
+                title: "send Message",
+                fontweight: FontWeight.w500,
+                fontsize: 14.sp,
+                fontcolor: AppColors.primaryColor),
             onTap: () async {
               print("Attempting to send SMS...");
               await _launchURL('sms:8953092693');

@@ -125,7 +125,9 @@ class _AppointmentHIstoreyPageState extends State<AppointmentHIstoreyPage> {
                                                 CrossAxisAlignment.center,
                                             children: [
                                               Row(
-                                                //mainAxisAlignment: MainAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceAround,
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
@@ -162,28 +164,54 @@ class _AppointmentHIstoreyPageState extends State<AppointmentHIstoreyPage> {
                                                       ),
                                                     ],
                                                   ),
-                                                  SizedBox(
-                                                    width: 10.w,
-                                                  ),
                                                   Column(
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
                                                             .start,
                                                     // mainAxisAlignment: MainAxisAlignment.start,
                                                     children: [
-                                                      TextHeading(
-                                                          title: _languageViewModel
-                                                                      .getSelectedLanguage ==
-                                                                  "English"
-                                                              ? order.salonNameEng ??
-                                                                  "NA"
-                                                              : order.salonNameArb ??
-                                                                  "NA",
-                                                          fontweight:
-                                                              FontWeight.w400,
-                                                          fontsize: 12.sp,
-                                                          fontcolor: AppColors
-                                                              .primaryColor),
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          TextHeading(
+                                                              title: _languageViewModel
+                                                                          .getSelectedLanguage ==
+                                                                      "English"
+                                                                  ? order.salonNameEng ??
+                                                                      "NA"
+                                                                  : order.salonNameArb ??
+                                                                      "NA",
+                                                              fontweight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                              fontsize: 12.sp,
+                                                              fontcolor: AppColors
+                                                                  .primaryColor),
+                                                          Row(
+                                                            children: [
+                                                              Icon(
+                                                                Icons.star,
+                                                                color: AppColors
+                                                                    .primaryColor,
+                                                                size: 15,
+                                                              ),
+                                                              TextHeading(
+                                                                  title:
+                                                                      "4.3/5",
+                                                                  fontweight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  fontsize:
+                                                                      10.sp,
+                                                                  fontcolor:
+                                                                      Colors
+                                                                          .white)
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
                                                       SizedBox(
                                                         height: 10.w,
                                                       ),
@@ -248,26 +276,6 @@ class _AppointmentHIstoreyPageState extends State<AppointmentHIstoreyPage> {
                                                                   .bookmarkColor)
                                                         ],
                                                       )
-                                                    ],
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      Icon(
-                                                        Icons.star,
-                                                        color: AppColors
-                                                            .primaryColor,
-                                                        size: 15,
-                                                      ),
-                                                      SizedBox(
-                                                        width: 3.w,
-                                                      ),
-                                                      TextHeading(
-                                                          title: "4.3/5",
-                                                          fontweight:
-                                                              FontWeight.w400,
-                                                          fontsize: 10.sp,
-                                                          fontcolor:
-                                                              Colors.white)
                                                     ],
                                                   ),
                                                 ],
