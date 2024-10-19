@@ -89,36 +89,38 @@ class _HomePageSliderState extends State<HomePageSlider> {
 class ShopPageSlider extends StatefulWidget {
   const ShopPageSlider({
     super.key,
-    required this.pageController1,
-    required this.banners,
   });
-
-  final PageController pageController1;
-  final List<BannerModel> banners;
 
   @override
   State<ShopPageSlider> createState() => _ShopPageSliderState();
 }
 
 class _ShopPageSliderState extends State<ShopPageSlider> {
-  int currentindex = 0;
+  final PageController _pageController = PageController();
+  int currentIndex = 0;
   final SalonProfileViewModel _salonProfileViewModel = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 360.h,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16.r),
+        border: Border.all(
+          color: Colors.grey,
+          width: 0.5.w,
+        ),
+      ),
       child: Column(
         children: [
           SizedBox(
-            height: 345.h,
+            height: 340.h,
             child: PageView.builder(
-              controller: widget.pageController1,
-              itemCount: widget.banners.length,
+              controller: _pageController,
+              itemCount: _salonProfileViewModel.getMedia.length,
               onPageChanged: (value) {
-                currentindex = value;
                 setState(() {
-                  currentindex;
+                  currentIndex = value;
                 });
               },
               itemBuilder: (context, index) => Container(
@@ -126,8 +128,20 @@ class _ShopPageSliderState extends State<ShopPageSlider> {
                   borderRadius: BorderRadius.circular(16.r),
                   image: DecorationImage(
                     image: NetworkImage(
-                        "${AppUrl.baseUrl}/${_salonProfileViewModel.getStore.salonImage ?? ""}"),
+                        "${AppUrl.baseUrl}/${_salonProfileViewModel.getMedia[index].mediaUrl ?? ""}"),
                     fit: BoxFit.cover,
+                  ),
+                ),
+                child: Container(
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Colors.transparent,
+                        Colors.black,
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -138,8 +152,8 @@ class _ShopPageSliderState extends State<ShopPageSlider> {
           ),
           Center(
             child: SmoothPageIndicator(
-              controller: widget.pageController1,
-              count: widget.banners.length,
+              controller: _pageController,
+              count: _salonProfileViewModel.getMedia.length,
               effect: WormEffect(
                 activeDotColor: AppColors.primaryColor,
                 dotColor: Colors.grey,
@@ -147,6 +161,9 @@ class _ShopPageSliderState extends State<ShopPageSlider> {
                 dotWidth: 5.w,
               ),
             ),
+          ),
+          SizedBox(
+            height: 5.h,
           ),
         ],
       ),

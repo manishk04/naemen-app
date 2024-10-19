@@ -434,7 +434,7 @@ class SalonGenderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 5.w),
+      padding: EdgeInsets.symmetric(horizontal: 6.h, vertical: 2.w),
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(8.r),
@@ -449,8 +449,8 @@ class SalonGenderWidget extends StatelessWidget {
           if (salonGender == "male" || salonGender == "unisex")
             SvgPicture.asset(
               "assets/images/male_salon.svg",
-              width: 20.w,
-              height: 20.h,
+              width: 10.w,
+              height: 18.69.h,
             ),
           if (salonGender == "unisex")
             SizedBox(

@@ -55,11 +55,11 @@ class _ShopPageState extends State<ShopPage> {
                     // crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(
-                        height: 40,
+                        height: 60,
                       ),
                       SizedBox(
                         height: 360.h,
-                        width: double.infinity,
+                        width: 340.w,
                         child: Stack(
                           children: [
                             // HomePageSlider(
@@ -82,11 +82,8 @@ class _ShopPageState extends State<ShopPage> {
                             // ),
 
                             Obx(
-                              () => homeViewModel.getBanners.isNotEmpty
-                                  ? ShopPageSlider(
-                                      banners: homeViewModel.getBanners,
-                                      pageController1: PageController(),
-                                    )
+                              () => _salonProfileViewModel.getMedia.isNotEmpty
+                                  ? const ShopPageSlider()
                                   : const SizedBox(),
                             ),
 
@@ -226,21 +223,33 @@ class _ShopPageState extends State<ShopPage> {
                                         height: 5.h,
                                       ),
                                       Row(
-                                        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
-                                          const Icon(
-                                            Icons.alarm,
-                                            color: AppColors.primaryColor,
+                                          Row(
+                                            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              const Icon(
+                                                Icons.alarm,
+                                                color: AppColors.primaryColor,
+                                              ),
+                                              SizedBox(
+                                                width: 3.w,
+                                              ),
+                                              TextHeading(
+                                                title:
+                                                    "${_salonProfileViewModel.getStore.salonStartTime} - ${_salonProfileViewModel.getStore.salonEndTime}",
+                                                fontweight: FontWeight.w400,
+                                                fontsize: 12.sp,
+                                                fontcolor: Colors.white,
+                                              ),
+                                            ],
                                           ),
-                                          SizedBox(
-                                            width: 3.w,
-                                          ),
-                                          TextHeading(
-                                            title:
-                                                "${_salonProfileViewModel.getStore.salonStartTime} - ${_salonProfileViewModel.getStore.salonEndTime}",
-                                            fontweight: FontWeight.w400,
-                                            fontsize: 12.sp,
-                                            fontcolor: Colors.white,
+                                          SalonGenderWidget(
+                                            salonGender: _salonProfileViewModel
+                                                    .getStore.storeGender ??
+                                                "",
+                                            color: AppColors.searchFieldsColor,
                                           ),
                                         ],
                                       ),
@@ -268,15 +277,10 @@ class _ShopPageState extends State<ShopPage> {
                                             )
                                           ],
                                         ),
-                                      Align(
-                                        alignment: Alignment.centerRight,
-                                        child: SalonGenderWidget(
-                                          salonGender: _salonProfileViewModel
-                                                  .getStore.storeGender ??
-                                              "",
-                                          color: AppColors.searchFieldsColor,
-                                        ),
-                                      ),
+                                      // Align(
+                                      //   alignment: Alignment.centerRight,
+                                      //   child:
+                                      // ),
                                     ],
                                   ),
                                 ),

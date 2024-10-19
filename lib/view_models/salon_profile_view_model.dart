@@ -5,6 +5,7 @@ import 'package:naemen/view_models/cart_view_model.dart';
 
 import '../models/artist_model.dart';
 import '../models/salon_model.dart';
+import '../models/store_media_model.dart';
 import '../models/store_model.dart';
 import '../repo/salon_repo.dart';
 import '../routes/app_routes.dart';
@@ -20,6 +21,8 @@ class SalonProfileViewModel extends GetxController {
 
   final RxList<ArtistModel> _artists = <ArtistModel>[].obs;
 
+  final RxList<StoreMediaModel> _media = <StoreMediaModel>[].obs;
+
   final RxBool _isLoading = false.obs;
 
   // =============================== Getters ===================================
@@ -29,6 +32,8 @@ class SalonProfileViewModel extends GetxController {
 
   List<ArtistModel> get getArtists => _artists;
 
+  List<StoreMediaModel> get getMedia => _media;
+
   bool get getIsLoading => _isLoading.value;
 
   // =============================== Setters ===================================
@@ -37,6 +42,8 @@ class SalonProfileViewModel extends GetxController {
   set setStore(StoreModel store) => _store.value = store;
 
   set setArtists(List<ArtistModel> list) => _artists.value = list;
+
+  set setMedia(List<StoreMediaModel> list) => _media.value = list;
 
   set setIsLoading(bool value) => _isLoading.value = value;
 
@@ -63,13 +70,20 @@ class SalonProfileViewModel extends GetxController {
             setStore = StoreModel.fromMap(data["store"]);
             cartViewModel.setSelectedStore = getStore;
           }
+          List<ArtistModel> list = <ArtistModel>[];
           if (data["store_artist"] != null && data["store_artist"] is List) {
-            List<ArtistModel> list = <ArtistModel>[];
             for (var element in data["store_artist"]) {
               list.add(ArtistModel.fromMap(element));
             }
-            setArtists = list;
           }
+          setArtists = list;
+          List<StoreMediaModel> list1 = <StoreMediaModel>[];
+          if (data["store_media"] != null && data["store_media"] is List) {
+            for (var element in data["store_media"]) {
+              list1.add(StoreMediaModel.fromMap(element));
+            }
+          }
+          setMedia = list1;
         } else {
           Utils.toastMessage(response["msg"] ?? "Something went wrong!");
         }
