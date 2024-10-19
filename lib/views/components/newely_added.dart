@@ -179,7 +179,7 @@ class _NewelyWidgetState extends State<NewelyWidget> {
                                       height: 34.h,
                                       width: 102.w,
                                       decoration: BoxDecoration(
-                                          color: AppColors.bookmarkColor,
+                                          color: AppColors.primaryColor,
                                           borderRadius:
                                               BorderRadius.circular(8.r)),
                                       child: Center(
@@ -260,14 +260,6 @@ class WinterSpecialItems extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Positioned(
-                      top: 5.h,
-                      right: 5.w,
-                      child: SalonGenderWidget(
-                        salonGender: salon.storeGender ?? "",
-                        color: AppColors.searchFieldsColor,
-                      ),
-                    ),
                   ],
                 ),
               ),
@@ -328,7 +320,14 @@ class WinterSpecialItems extends StatelessWidget {
                                     : "",
                             fontweight: FontWeight.w400,
                             fontsize: 12.sp,
-                            fontcolor: AppColors.primaryColor)
+                            fontcolor: AppColors.primaryColor),
+                        SizedBox(
+                          width: 80.w,
+                        ),
+                        SalonGenderWidget(
+                          salonGender: salon.storeGender ?? "",
+                          color: AppColors.searchFieldsColor,
+                        ),
                       ],
                     ),
                     Row(
@@ -396,7 +395,7 @@ class WinterSpecialItems extends StatelessWidget {
                             height: 34.h,
                             width: 102.w,
                             decoration: BoxDecoration(
-                              color: AppColors.bookmarkColor,
+                              color: AppColors.buttonColor,
                               borderRadius: BorderRadius.circular(8.r),
                             ),
                             child: Center(

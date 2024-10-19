@@ -55,14 +55,13 @@ class _ArtistProfileServiceState extends State<ArtistProfileService> {
                                 Navigator.pop(context);
                               },
                               child: CircleAvatar(
-                                backgroundColor: Colors.yellow.withOpacity(0.6),
+                                backgroundColor:
+                                    AppColors.primaryColor.withOpacity(0.5),
                                 radius: 15,
-                                child: const Center(
-                                  child: Icon(
-                                    Icons.arrow_back_ios,
-                                    size: 15,
-                                    color: Colors.white,
-                                  ),
+                                child: Icon(
+                                  Icons.arrow_back_ios,
+                                  size: 13,
+                                  color: Colors.white,
                                 ),
                               ),
                             ),
@@ -74,7 +73,8 @@ class _ArtistProfileServiceState extends State<ArtistProfileService> {
                             ),
                             CircleAvatar(
                               radius: 15,
-                              backgroundColor: Colors.yellow.withOpacity(0.6),
+                              backgroundColor:
+                                  AppColors.primaryColor.withOpacity(0.5),
                               child: const Icon(
                                 Icons.bookmark,
                                 color: Colors.white,
@@ -87,6 +87,7 @@ class _ArtistProfileServiceState extends State<ArtistProfileService> {
                           height: 18.h,
                         ),
                         Container(
+                          clipBehavior: Clip.hardEdge,
                           // height: 134.h,
                           width: 340.w,
                           decoration: BoxDecoration(
@@ -261,21 +262,20 @@ class _ArtistProfileServiceState extends State<ArtistProfileService> {
                                           () => _artistProfileViewModel
                                                   .getIsBooking
                                               ? const CircularProgressIndicator(
-                                                  color: Colors.orange,
-                                                )
+                                                  color: AppColors.primaryColor)
                                               : Container(
                                                   height: 32.h,
                                                   width: 148.w,
                                                   decoration: BoxDecoration(
-                                                      color: Colors.yellow
-                                                          .withOpacity(0.5),
+                                                      color: AppColors
+                                                          .primaryColor,
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               8.r)),
                                                   child: Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
-                                                            .spaceAround,
+                                                            .center,
                                                     children: [
                                                       TextHeading(
                                                           title:
@@ -285,9 +285,12 @@ class _ArtistProfileServiceState extends State<ArtistProfileService> {
                                                           fontsize: 12.sp,
                                                           fontcolor:
                                                               Colors.white),
+                                                      SizedBox(
+                                                        width: 2.w,
+                                                      ),
                                                       const Icon(
                                                         Icons.arrow_forward_ios,
-                                                        size: 15,
+                                                        size: 13,
                                                         color: Colors.white,
                                                       )
                                                     ],

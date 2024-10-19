@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'dart:math';
 
@@ -11,6 +13,7 @@ import 'package:naemen/views/screens/ProfilePage2.dart';
 import 'package:naemen/views/screens/profile_page.dart';
 import 'package:naemen/views/screens/search_page.dart';
 import 'package:naemen/views/screens/venders_list.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../components/artist_slider.dart';
 import '../components/recommended.dart';
@@ -46,9 +49,21 @@ class _HomeViewState extends State<HomeView> {
   AuthViewModel authViewModel = Get.find();
   HomeViewModel homeViewModel = Get.find();
   LanguageViewModel languageViewModel = Get.find();
-  @override
+  File? _image;
+
+  Future<void> _loadImageFromPreferences() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? imagePath = prefs.getString('profile_image');
+    if (imagePath != null && File(imagePath).existsSync()) {
+      setState(() {
+        _image = File(imagePath); // Convert path to File object
+      });
+    }
+  }
+
   void initState() {
     super.initState();
+    _loadImageFromPreferences();
     homeViewModel.init();
   }
 
@@ -96,16 +111,16 @@ class _HomeViewState extends State<HomeView> {
                                           builder: (context) => SearchPage()));
                                 },
                                 child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Image.asset("assets/images/Location.png"),
+                                    SizedBox(
+                                      width: 3.w,
+                                    ),
                                     Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        SizedBox(width: 3.w),
                                         TextHeading(
                                           title: "Home",
                                           fontweight: FontWeight.w600,
@@ -115,15 +130,19 @@ class _HomeViewState extends State<HomeView> {
                                               : Colors.white,
                                           maxLines: 1,
                                         ),
-                                        SizedBox(
-                                          width: 280.w,
-                                          child: Obx(
-                                            () => TextHeading(
-                                              title: authViewModel.getAddress,
-                                              fontweight: FontWeight.w400,
-                                              fontsize: 11.sp,
-                                              fontcolor: Colors.white,
+                                        SizedBox(height: 3.h),
+                                        Obx(
+                                          () => Text(
+                                            authViewModel.getAddress,
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.w300,
+                                              fontSize: 10.sp,
+                                              color: Colors.white,
+                                              overflow: TextOverflow.ellipsis,
                                             ),
+                                            // fontweight: FontWeight.w300,
+                                            // fontsize: 10.sp,
+                                            // fontcolor: Colors.white,
                                           ),
                                         ),
                                       ],
@@ -151,10 +170,15 @@ class _HomeViewState extends State<HomeView> {
                                     MaterialPageRoute(
                                         builder: (context) => ProfilePage()));
                               },
-                              child: const CircleAvatar(
-                                radius: 17.5,
-                                backgroundImage: AssetImage(
-                                    "assets/images/profile_image.png"),
+                              child: CircleAvatar(
+                                radius: 17,
+                                backgroundImage: _image != null
+                                    ? FileImage(_image!)
+                                    : AssetImage(
+                                            "assets/images/profile_image.png")
+                                        as ImageProvider,
+                                // AssetImage(
+                                //     "assets/images/profile_image.png"),
                               ),
                             ),
                           ],
@@ -168,9 +192,9 @@ class _HomeViewState extends State<HomeView> {
                         // ),
                         Obx(
                           () => homeViewModel.getBanners.isNotEmpty
-                              ? ShopPageSlider(
-                                  pageController1: pageController1,
+                              ? HomePageSlider(
                                   banners: homeViewModel.getBanners,
+                                  pageController2: PageController(),
                                 )
                               : const SizedBox(),
                         ),
@@ -619,9 +643,9 @@ class _HomeViewState extends State<HomeView> {
                         //   statuValue: 'ONLINE',
                         //   typeValue: 'Unisex',
                         // ),
-                        SizedBox(
-                          height: 20.h,
-                        ),
+                        // SizedBox(
+                        //   height: 10.h,
+                        // ),
                         Obx(
                           () => homeViewModel.getAllCategories.isNotEmpty
                               ? TextHeading(

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pannable_rating_bar/flutter_pannable_rating_bar.dart';
+import 'package:naemen/utils/color_constant.dart';
 
-class BasicExample extends StatefulWidget {
-  const BasicExample({Key? key}) : super(key: key);
+class BasicRevieq extends StatefulWidget {
+  const BasicRevieq({Key? key}) : super(key: key);
 
   @override
-  State<BasicExample> createState() => _BasicExampleState();
+  State<BasicRevieq> createState() => _BasicRevieqState();
 }
 
-class _BasicExampleState extends State<BasicExample> {
+class _BasicRevieqState extends State<BasicRevieq> {
   double rating = 0;
 
   @override
@@ -24,7 +25,7 @@ class _BasicExampleState extends State<BasicExample> {
               5,
               (index) => const RatingWidget(
                 // selectedColor: Colors.yellow,
-                unSelectedColor: Colors.yellow,
+                unSelectedColor: AppColors.primaryColor,
                 child: Icon(
                   Icons.star,
                   size: 18,

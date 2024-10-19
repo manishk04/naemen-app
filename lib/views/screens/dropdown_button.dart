@@ -100,7 +100,7 @@ class _ExpansionTileControllerAppState
                                     ? service.serviceDesEng ?? "NA"
                                     : service.serviceDesArb ?? "NA",
                                 fontweight: FontWeight.w400,
-                                fontsize: 14.sp,
+                                fontsize: 11.sp,
                                 fontcolor: Colors.white,
                                 maxLines: 2,
                               ),
@@ -151,13 +151,13 @@ class _ExpansionTileControllerAppState
                                               .onServiceAdd(service),
                                       child: CircleAvatar(
                                         radius: 15,
-                                        backgroundColor:
-                                            Colors.yellow.withOpacity(0.6),
+                                        backgroundColor: AppColors.primaryColor,
                                         child: Icon(
                                           cartViewModel.getAddedServiceList
                                                   .contains(service)
                                               ? Icons.remove
                                               : Icons.add,
+                                          size: 14.sp,
                                           color: Colors.white,
                                         ),
                                       ),

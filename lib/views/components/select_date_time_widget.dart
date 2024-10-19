@@ -307,7 +307,9 @@ class SelectDateTimeWidget extends StatelessWidget {
                                       ? Colors.red
                                       : time == viewModel.getSelectedTime
                                           ? AppColors.primaryColor
-                                          : Colors.green)
+                                              .withOpacity(0.2)
+                                          : AppColors.timeslotContainerColor
+                                              .withOpacity(0.2))
                                   .withOpacity(0.5),
                               borderRadius: BorderRadius.circular(8.r),
                             ),
@@ -320,7 +322,7 @@ class SelectDateTimeWidget extends StatelessWidget {
                                     ? Colors.red
                                     : time == viewModel.getSelectedTime
                                         ? AppColors.primaryColor
-                                        : Colors.green,
+                                        : AppColors.timeslotContainerColor,
                               ),
                             ),
                           ),

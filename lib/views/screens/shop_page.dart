@@ -84,9 +84,10 @@ class _ShopPageState extends State<ShopPage> {
 
                             Obx(
                               () => homeViewModel.getBanners.isNotEmpty
-                                  ? HomePageSlider(
-                                      pageController2: pageController2,
-                                      banners: homeViewModel.getBanners)
+                                  ? ShopPageSlider(
+                                      banners: homeViewModel.getBanners,
+                                      pageController1: PageController(),
+                                    )
                                   : const SizedBox(),
                             ),
 
@@ -110,9 +111,10 @@ class _ShopPageState extends State<ShopPage> {
                                           },
                                           child: CircleAvatar(
                                             radius: 15,
-                                            backgroundColor:
-                                                Colors.yellow.withOpacity(0.3),
-                                            child: Center(
+                                            backgroundColor: AppColors
+                                                .primaryColor
+                                                .withOpacity(0.5),
+                                            child: const Center(
                                               child: Icon(
                                                 Icons.arrow_back_ios,
                                                 size: 15,
@@ -123,9 +125,10 @@ class _ShopPageState extends State<ShopPage> {
                                         ),
                                         CircleAvatar(
                                           radius: 15,
-                                          backgroundColor:
-                                              Colors.yellow.withOpacity(0.3),
-                                          child: Icon(
+                                          backgroundColor: AppColors
+                                              .primaryColor
+                                              .withOpacity(0.5),
+                                          child: const Icon(
                                             Icons.bookmark_outline,
                                             color: Colors.white,
                                             size: 15,
@@ -182,7 +185,8 @@ class _ShopPageState extends State<ShopPage> {
                                           ),
                                           Row(
                                             children: [
-                                              const Icon(
+                                              Icon(
+                                                size: 14.sp,
                                                 Icons.star,
                                                 color: AppColors.primaryColor,
                                               ),
@@ -430,10 +434,10 @@ class _ShopPageState extends State<ShopPage> {
                                                           : artist.artistNameArb ??
                                                               "",
                                                       fontweight:
-                                                          FontWeight.w600,
+                                                          FontWeight.w400,
                                                       fontsize: 12.sp,
-                                                      fontcolor: AppColors
-                                                          .primaryColor,
+                                                      fontcolor:
+                                                          AppColors.textColor,
                                                     ),
                                                   ),
                                                 ],
@@ -462,10 +466,10 @@ class _ShopPageState extends State<ShopPage> {
                                                                 "2"
                                                             ? "Inactive"
                                                             : "",
-                                                    fontweight: FontWeight.w600,
+                                                    fontweight: FontWeight.w400,
                                                     fontsize: 12.sp,
                                                     fontcolor:
-                                                        AppColors.primaryColor,
+                                                        AppColors.textColor,
                                                   ),
                                                 ],
                                               ),
@@ -492,10 +496,10 @@ class _ShopPageState extends State<ShopPage> {
                                                     //     ? "ALL"
                                                     //     : artist.artistCategories ??
                                                     //         "",
-                                                    fontweight: FontWeight.w600,
+                                                    fontweight: FontWeight.w400,
                                                     fontsize: 12.sp,
                                                     fontcolor:
-                                                        AppColors.primaryColor,
+                                                        AppColors.textColor,
                                                   ),
                                                 ],
                                               ),
@@ -539,7 +543,7 @@ class _ShopPageState extends State<ShopPage> {
                                                       width: 90.w,
                                                       decoration: BoxDecoration(
                                                           color: AppColors
-                                                              .bookmarkColor,
+                                                              .buttonColor,
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(
@@ -635,10 +639,10 @@ class _ShopPageState extends State<ShopPage> {
                                               fontsize: 12.sp,
                                               fontcolor: Colors.white),
                                           SizedBox(
-                                            width: 5.w,
+                                            width: 6.w,
                                           ),
                                           SizedBox(
-                                              height: 5,
+                                              height: 8,
                                               width: 180.w,
                                               child: LinearProgressIndicator(
                                                 borderRadius:
@@ -680,7 +684,7 @@ class _ShopPageState extends State<ShopPage> {
                                             width: 5.w,
                                           ),
                                           SizedBox(
-                                              height: 5,
+                                              height: 8.h,
                                               width: 180.w,
                                               child: LinearProgressIndicator(
                                                 borderRadius:
@@ -712,7 +716,7 @@ class _ShopPageState extends State<ShopPage> {
                                             width: 5.w,
                                           ),
                                           SizedBox(
-                                              height: 5,
+                                              height: 8.h,
                                               width: 180.w,
                                               child: LinearProgressIndicator(
                                                 borderRadius:
@@ -736,7 +740,7 @@ class _ShopPageState extends State<ShopPage> {
                                             width: 5.w,
                                           ),
                                           SizedBox(
-                                              height: 5,
+                                              height: 8.h,
                                               width: 180.w,
                                               child: LinearProgressIndicator(
                                                 borderRadius:
@@ -768,7 +772,7 @@ class _ShopPageState extends State<ShopPage> {
                                             width: 5.w,
                                           ),
                                           SizedBox(
-                                              height: 5,
+                                              height: 8.h,
                                               width: 180.w,
                                               child: LinearProgressIndicator(
                                                 borderRadius:
@@ -846,7 +850,7 @@ class _ShopPageState extends State<ShopPage> {
                                               fontweight: FontWeight.w400,
                                               fontsize: 12.sp,
                                               fontcolor: Colors.white),
-                                          BasicExample()
+                                          BasicRevieq()
                                         ],
                                       ),
                                       SizedBox(
@@ -963,7 +967,7 @@ class _ShopPageState extends State<ShopPage> {
                                               fontweight: FontWeight.w400,
                                               fontsize: 12.sp,
                                               fontcolor: Colors.white),
-                                          BasicExample()
+                                          BasicRevieq()
                                         ],
                                       ),
                                       SizedBox(
@@ -1082,7 +1086,7 @@ class _ShopPageState extends State<ShopPage> {
                                                 fontweight: FontWeight.w400,
                                                 fontsize: 12.sp,
                                                 fontcolor: Colors.white),
-                                            BasicExample()
+                                            BasicRevieq()
                                           ],
                                         ),
                                         SizedBox(

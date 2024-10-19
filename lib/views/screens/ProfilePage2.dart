@@ -112,14 +112,12 @@ class _MyProfilePageState extends State<MyProfilePage> {
                                   image: FileImage(_image!),
                                   fit: BoxFit.cover,
                                 )
-                              : null, // Show the picked image
-                          color: _image == null
-                              ? Colors.amber
-                              : null, // Default color when no image is selected
+                              : null,
+                          color: _image == null ? Colors.amber : null,
                         ),
                         child: _image == null
                             ? const Icon(Icons.camera_alt, color: Colors.white)
-                            : null, // Camera icon when no image is selected
+                            : null,
                       ),
                     ],
                   ),

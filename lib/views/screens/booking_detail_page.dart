@@ -49,7 +49,8 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
                       },
                       child: CircleAvatar(
                         radius: 15.h,
-                        backgroundColor: Colors.yellow.withOpacity(0.6),
+                        backgroundColor:
+                            AppColors.primaryColor.withOpacity(0.5),
                         child: Icon(
                           Icons.arrow_back_ios,
                           color: Colors.white,
@@ -58,7 +59,7 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
                       ),
                     ),
                     SizedBox(
-                      width: 80.w,
+                      width: 73.w,
                     ),
                     TextHeading(
                         title: "Your Booking Details",
@@ -222,7 +223,7 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   decoration: BoxDecoration(
-                    color: AppColors.searchFieldsColor,
+                    color: AppColors.strolColor,
                     border: Border.all(color: AppColors.signUpColor),
                     borderRadius: BorderRadius.circular(16.r),
                   ),
