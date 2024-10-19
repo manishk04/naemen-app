@@ -1,0 +1,106 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+
+import '../../utils/color_constant.dart';
+import '../../view_models/cart_view_model.dart';
+import '../../view_models/language_view_model.dart';
+import 'text_heading.dart';
+
+class BookingDateTimeWidget extends StatelessWidget {
+  const BookingDateTimeWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    CartViewModel cartViewModel = Get.find();
+    LanguageViewModel languageViewModel = Get.find();
+    return Container(
+      // height: 84.h,
+      width: 340.w,
+      decoration: BoxDecoration(
+        color: AppColors.searchFieldsColor,
+        border: Border.all(
+          color: AppColors.signUpColor,
+        ),
+        borderRadius: BorderRadius.circular(16.r),
+      ),
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: 10.w,
+          vertical: 10.h,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              children: [
+                TextHeading(
+                  title: "Date & Timing: ",
+                  fontweight: FontWeight.w400,
+                  fontsize: 12,
+                  fontcolor: Colors.white,
+                ),
+                TextHeading(
+                  title:
+                      "${cartViewModel.getOrderDetail.orderItems != null && cartViewModel.getOrderDetail.orderItems![0].serviceDate != null ? DateFormat("EEEE, dd MMM").format(DateFormat("dd-MM-yyyy").parse(cartViewModel.getOrderDetail.orderItems?[0].serviceDate ?? "")) : ""} - ${cartViewModel.getOrderDetail.order?.serviceStartTime ?? ""} to ${cartViewModel.getOrderDetail.order?.serviceEndTime ?? ""}",
+                  fontweight: FontWeight.w400,
+                  fontsize: 12,
+                  fontcolor: AppColors.primaryColor,
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 5.h,
+            ),
+            Row(
+              children: [
+                TextHeading(
+                  title: "Artist: ",
+                  fontweight: FontWeight.w400,
+                  fontsize: 12,
+                  fontcolor: Colors.white,
+                ),
+                TextHeading(
+                  title: languageViewModel.getSelectedLanguage == "English"
+                      ? cartViewModel.getOrderDetail.order?.artistNameEng ??
+                          "NA"
+                      : cartViewModel.getOrderDetail.order?.artistNameArb ??
+                          "NA",
+                  fontweight: FontWeight.w400,
+                  fontsize: 12,
+                  fontcolor: AppColors.primaryColor,
+                ),
+              ],
+            ),
+            // SizedBox(
+            //   height: 5.h,
+            // ),
+            // const Row(
+            //   children: [
+            //     TextHeading(
+            //       title: "Gender: ",
+            //       fontweight: FontWeight.w400,
+            //       fontsize: 12,
+            //       fontcolor: Colors.white,
+            //     ),
+            //     TextHeading(
+            //       title: "Male",
+            //       fontweight: FontWeight.w400,
+            //       fontsize: 12,
+            //       fontcolor: AppColors.primaryColor,
+            //     ),
+            //   ],
+            // ),
+            // SizedBox(
+            //   height: 5.h,
+            // )
+          ],
+        ),
+      ),
+    );
+  }
+}
