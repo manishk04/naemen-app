@@ -51,10 +51,13 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
                         radius: 15.h,
                         backgroundColor:
                             AppColors.primaryColor.withOpacity(0.5),
-                        child: Icon(
-                          Icons.arrow_back_ios,
-                          color: Colors.white,
-                          size: 15,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 4),
+                          child: Icon(
+                            Icons.arrow_back_ios,
+                            color: Colors.white,
+                            size: 15,
+                          ),
                         ),
                       ),
                     ),
@@ -328,7 +331,7 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
                   height: 170.h,
                   width: 340.w,
                   decoration: BoxDecoration(
-                      color: AppColors.searchFieldsColor,
+                      color: AppColors.stroklColor,
                       border: Border.all(color: AppColors.signUpColor),
                       borderRadius: BorderRadius.circular(16.r)),
                   child: Padding(
@@ -414,6 +417,7 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
                           child: TextField(
                             style: TextStyle(color: Colors.white),
                             decoration: InputDecoration(
+                                filled: true,
                                 fillColor: Colors.black,
                                 contentPadding: EdgeInsets.all(8),
                                 hintText: "Enter Coupon Code",
@@ -423,19 +427,22 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
                                 suffixIcon: Align(
                                   widthFactor: 1.0,
                                   heightFactor: 1.0,
-                                  child: Container(
-                                    height: 23.h,
-                                    width: 55.w,
-                                    decoration: BoxDecoration(
-                                        color: AppColors.primaryColor,
-                                        borderRadius:
-                                            BorderRadius.circular(4.r)),
-                                    child: Center(
-                                      child: TextHeading(
-                                          title: "Apply",
-                                          fontweight: FontWeight.w400,
-                                          fontsize: 12.sp,
-                                          fontcolor: Colors.white),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8),
+                                    child: Container(
+                                      height: 23.h,
+                                      width: 55.w,
+                                      decoration: BoxDecoration(
+                                          color: AppColors.primaryColor,
+                                          borderRadius:
+                                              BorderRadius.circular(4.r)),
+                                      child: Center(
+                                        child: TextHeading(
+                                            title: "Apply",
+                                            fontweight: FontWeight.w400,
+                                            fontsize: 12.sp,
+                                            fontcolor: Colors.white),
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -454,7 +461,7 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
                   width: 340.w,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16.r),
-                      color: AppColors.searchFieldsColor,
+                      color: AppColors.stroklColor,
                       border:
                           Border.all(color: AppColors.signUpColor, width: 0.5)),
                   child: Padding(
@@ -510,7 +517,7 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
                   width: 340.w,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16.r),
-                      color: AppColors.searchFieldsColor,
+                      color: AppColors.stroklColor,
                       border:
                           Border.all(color: AppColors.signUpColor, width: 0.5)),
                   child: Padding(

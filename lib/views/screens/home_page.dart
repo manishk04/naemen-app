@@ -142,17 +142,20 @@ class _HomeViewState extends State<HomeView> {
                                         ),
                                         SizedBox(height: 3.h),
                                         Obx(
-                                          () => Text(
-                                            authViewModel.getAddress,
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.w300,
-                                              fontSize: 10.sp,
-                                              color: Colors.white,
-                                              overflow: TextOverflow.ellipsis,
+                                          () => Container(
+                                            width: 170.w,
+                                            child: Text(
+                                              authViewModel.getAddress,
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 12.sp,
+                                                color: Colors.white,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                              // fontweight: FontWeight.w300,
+                                              // fontsize: 10.sp,
+                                              // fontcolor: Colors.white,
                                             ),
-                                            // fontweight: FontWeight.w300,
-                                            // fontsize: 10.sp,
-                                            // fontcolor: Colors.white,
                                           ),
                                         ),
                                       ],
@@ -304,7 +307,9 @@ class _HomeViewState extends State<HomeView> {
                         Obx(
                           () => homeViewModel.getIsHomeLoading
                               ? const Center(
-                                  child: CircularProgressIndicator(),
+                                  child: CircularProgressIndicator(
+                                    color: AppColors.primaryColor,
+                                  ),
                                 )
                               : ListView.separated(
                                   shrinkWrap: true,
@@ -592,7 +597,7 @@ class _HomeViewState extends State<HomeView> {
                                                                             width:
                                                                                 102.w,
                                                                             decoration:
-                                                                                BoxDecoration(color: AppColors.bookmarkColor, borderRadius: BorderRadius.circular(8.r)),
+                                                                                BoxDecoration(color: AppColors.primaryColor, borderRadius: BorderRadius.circular(8.r)),
                                                                             child:
                                                                                 Center(
                                                                               child: TextHeading(

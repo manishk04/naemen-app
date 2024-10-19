@@ -644,6 +644,8 @@ class _ShopPageState extends State<ShopPage> {
                                               height: 8,
                                               width: 180.w,
                                               child: LinearProgressIndicator(
+                                                backgroundColor: AppColors
+                                                    .progressIndicatorColor,
                                                 borderRadius:
                                                     BorderRadius.circular(2.r),
                                                 value: 1,
@@ -686,6 +688,8 @@ class _ShopPageState extends State<ShopPage> {
                                               height: 8.h,
                                               width: 180.w,
                                               child: LinearProgressIndicator(
+                                                backgroundColor: AppColors
+                                                    .progressIndicatorColor,
                                                 borderRadius:
                                                     BorderRadius.circular(2.r),
                                                 value: 0.8,
@@ -718,6 +722,8 @@ class _ShopPageState extends State<ShopPage> {
                                               height: 8.h,
                                               width: 180.w,
                                               child: LinearProgressIndicator(
+                                                backgroundColor: AppColors
+                                                    .progressIndicatorColor,
                                                 borderRadius:
                                                     BorderRadius.circular(2.r),
                                                 value: 0.6,
@@ -742,6 +748,8 @@ class _ShopPageState extends State<ShopPage> {
                                               height: 8.h,
                                               width: 180.w,
                                               child: LinearProgressIndicator(
+                                                backgroundColor: AppColors
+                                                    .progressIndicatorColor,
                                                 borderRadius:
                                                     BorderRadius.circular(2.r),
                                                 value: 0.4,
@@ -774,6 +782,8 @@ class _ShopPageState extends State<ShopPage> {
                                               height: 8.h,
                                               width: 180.w,
                                               child: LinearProgressIndicator(
+                                                backgroundColor: AppColors
+                                                    .progressIndicatorColor,
                                                 borderRadius:
                                                     BorderRadius.circular(2.r),
                                                 value: 0.2,

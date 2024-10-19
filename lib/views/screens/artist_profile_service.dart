@@ -58,10 +58,13 @@ class _ArtistProfileServiceState extends State<ArtistProfileService> {
                                 backgroundColor:
                                     AppColors.primaryColor.withOpacity(0.5),
                                 radius: 15,
-                                child: Icon(
-                                  Icons.arrow_back_ios,
-                                  size: 13,
-                                  color: Colors.white,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 4),
+                                  child: Icon(
+                                    Icons.arrow_back_ios,
+                                    size: 13,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
                             ),
@@ -100,10 +103,14 @@ class _ArtistProfileServiceState extends State<ArtistProfileService> {
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
                               children: [
-                                Image.network(
-                                  "${AppUrl.baseUrl}/${_artistProfileViewModel.getSelectedArtist.artistImage ?? ""}",
-                                  height: 134.h,
-                                  width: 134.w,
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: Image.network(
+                                    "${AppUrl.baseUrl}/${_artistProfileViewModel.getSelectedArtist.artistImage ?? ""}",
+                                    height: 134.h,
+                                    width: 134.w,
+                                    fit: BoxFit.fill,
+                                  ),
                                 ),
                                 SizedBox(
                                   width: 10.w,

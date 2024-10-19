@@ -17,4 +17,5 @@ class AppColors {
   static const Color timeslotContainerColor = Color(0xff008000);
   static const Color timeslotContainerColor2 = Color(0xFF0000);
   static const Color CoupanborderColor = Color(0xffD9D9D9);
+  static const Color CoupancodeColor = Color(0xff737373);
 }

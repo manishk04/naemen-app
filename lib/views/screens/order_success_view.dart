@@ -50,11 +50,15 @@ class OrderSuccessView extends StatelessWidget {
                         children: [
                           CircleAvatar(
                             radius: 15.h,
-                            backgroundColor: Colors.yellow.withOpacity(0.6),
-                            child: const Icon(
-                              Icons.arrow_back_ios,
-                              color: Colors.white,
-                              size: 15,
+                            backgroundColor:
+                                AppColors.primaryColor.withOpacity(0.5),
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 4),
+                              child: const Icon(
+                                Icons.arrow_back_ios,
+                                color: Colors.white,
+                                size: 15,
+                              ),
                             ),
                           ),
                         ],
@@ -101,7 +105,7 @@ class OrderSuccessView extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: AppColors.searchFieldsColor,
                         border: Border.all(color: AppColors.signUpColor),
-                        borderRadius: BorderRadius.circular(16.r)),
+                        borderRadius: BorderRadius.circular(15.r)),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 10, vertical: 10),

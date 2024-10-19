@@ -106,7 +106,7 @@ class _ShopPageSliderState extends State<ShopPageSlider> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       height: 360.h,
       child: Column(
         children: [
