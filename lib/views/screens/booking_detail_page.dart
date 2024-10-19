@@ -223,7 +223,7 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   decoration: BoxDecoration(
-                    color: AppColors.strolColor,
+                    color: AppColors.stroklColor,
                     border: Border.all(color: AppColors.signUpColor),
                     borderRadius: BorderRadius.circular(16.r),
                   ),
