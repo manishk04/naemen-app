@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:naemen/views/screens/google_map_view.dart';
+import 'package:path/path.dart';
 
 import '../views/auth/login_otp_view.dart';
 import '../views/auth/login_password_view.dart';
@@ -32,7 +33,10 @@ class AppPages {
     Routes.signUpRoute: (context) => const SignUpView(),
     Routes.verifyMobileViewRoute: (context) => const VerifyMobileView(),
     Routes.loginOtpRoute: (context) => const LoginOtpView(),
-    Routes.bottomBarRoute: (context) => const BottomBarView(),
+    //Routes.bottomBarRoute: (context) => const BottomBarView(),
+
+    Routes.exampleNavBarRoute: (context) => ExampleNavbarView(),
+
     Routes.categoryRoute: (context) => const CategoryPage(),
     Routes.shopRoute: (context) => const ShopPage(),
     Routes.vendersRoute: (context) => const VendersPage(),

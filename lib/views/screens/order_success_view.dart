@@ -52,9 +52,9 @@ class OrderSuccessView extends StatelessWidget {
                             radius: 15.h,
                             backgroundColor:
                                 AppColors.primaryColor.withOpacity(0.5),
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 4),
-                              child: const Icon(
+                            child: const Padding(
+                              padding: EdgeInsets.only(left: 4),
+                              child: Icon(
                                 Icons.arrow_back_ios,
                                 color: Colors.white,
                                 size: 15,
@@ -104,7 +104,9 @@ class OrderSuccessView extends StatelessWidget {
                     width: 340.w,
                     decoration: BoxDecoration(
                         color: AppColors.searchFieldsColor,
-                        border: Border.all(color: AppColors.signUpColor),
+                        border: Border.all(
+                            color: AppColors.progressIndicatorColor,
+                            width: 1.5),
                         borderRadius: BorderRadius.circular(15.r)),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
@@ -199,7 +201,9 @@ class OrderSuccessView extends StatelessWidget {
                     width: 340.w,
                     decoration: BoxDecoration(
                         color: AppColors.searchFieldsColor,
-                        border: Border.all(color: AppColors.signUpColor),
+                        border: Border.all(
+                            color: AppColors.progressIndicatorColor,
+                            width: 1.5),
                         borderRadius: BorderRadius.circular(16.r)),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -286,7 +290,7 @@ class OrderSuccessView extends StatelessWidget {
                       cartViewModel.clearServices();
                       artistProfileViewModel.resetOrderData();
                       Get.until((route) =>
-                          route.settings.name == Routes.bottomBarRoute);
+                          route.settings.name == Routes.exampleNavBarRoute);
                     },
                     child: Container(
                       height: 40.h,

@@ -23,9 +23,10 @@ class BookingDateTimeWidget extends StatelessWidget {
       height: 84.h,
       width: 340.w,
       decoration: BoxDecoration(
-        color: AppColors.stroklColor,
+        color: AppColors.searchFieldsColor,
         border: Border.all(
-          color: AppColors.signUpColor,
+          width: 1.5,
+          color: AppColors.progressIndicatorColor,
         ),
         borderRadius: BorderRadius.circular(16.r),
       ),

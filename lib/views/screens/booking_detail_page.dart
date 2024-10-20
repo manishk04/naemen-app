@@ -226,8 +226,9 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   decoration: BoxDecoration(
-                    color: AppColors.stroklColor,
-                    border: Border.all(color: AppColors.signUpColor),
+                    color: AppColors.searchFieldsColor,
+                    border: Border.all(
+                        color: AppColors.progressIndicatorColor, width: 1.5),
                     borderRadius: BorderRadius.circular(16.r),
                   ),
                   child: Column(
@@ -331,8 +332,9 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
                   height: 170.h,
                   width: 340.w,
                   decoration: BoxDecoration(
-                      color: AppColors.stroklColor,
-                      border: Border.all(color: AppColors.signUpColor),
+                      color: AppColors.searchFieldsColor,
+                      border: Border.all(
+                          color: AppColors.progressIndicatorColor, width: 1.5),
                       borderRadius: BorderRadius.circular(16.r)),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -461,9 +463,9 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
                   width: 340.w,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16.r),
-                      color: AppColors.stroklColor,
+                      color: AppColors.searchFieldsColor,
                       border:
-                          Border.all(color: AppColors.signUpColor, width: 0.5)),
+                          Border.all(color: AppColors.progressIndicatorColor)),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: Column(
@@ -517,9 +519,10 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
                   width: 340.w,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16.r),
-                      color: AppColors.stroklColor,
-                      border:
-                          Border.all(color: AppColors.signUpColor, width: 0.5)),
+                      color: AppColors.searchFieldsColor,
+                      border: Border.all(
+                        color: AppColors.progressIndicatorColor,
+                      )),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: Column(

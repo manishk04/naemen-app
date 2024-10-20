@@ -286,7 +286,8 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
                             Get.back();
                             _homeViewModel.init();
                             Get.until((route) =>
-                                route.settings.name == Routes.bottomBarRoute);
+                                route.settings.name ==
+                                Routes.exampleNavBarRoute);
                           },
                           child: Container(
                             height: 40.h,

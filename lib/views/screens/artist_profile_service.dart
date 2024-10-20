@@ -58,8 +58,8 @@ class _ArtistProfileServiceState extends State<ArtistProfileService> {
                                 backgroundColor:
                                     AppColors.primaryColor.withOpacity(0.5),
                                 radius: 15,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 4),
+                                child: const Padding(
+                                  padding: EdgeInsets.only(left: 4),
                                   child: Icon(
                                     Icons.arrow_back_ios,
                                     size: 13,

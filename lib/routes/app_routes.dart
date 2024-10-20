@@ -6,7 +6,8 @@ abstract class Routes {
   static const signUpRoute = Paths.signUpPath;
   static const verifyMobileViewRoute = Paths.verifyMobilePath;
   static const loginOtpRoute = Paths.loginOtpPath;
-  static const bottomBarRoute = Paths.bottomBarPath;
+  // static const bottomBarRoute = Paths.bottomBarPath;
+  static const exampleNavBarRoute = Paths.exampleNavBarPath;
   static const categoryRoute = Paths.categoryPath;
   static const shopRoute = Paths.shopPath;
   static const vendersRoute = Paths.vendersPath;
@@ -28,6 +29,9 @@ abstract class Paths {
   static const verifyMobilePath = "/VerifyMobileView";
   static const loginOtpPath = "/LoginOtpView";
   static const bottomBarPath = "/BottomBarView";
+
+  static const exampleNavBarPath = "/ExampleNavbarView";
+
   static const categoryPath = "/CategoryPage";
   static const shopPath = "/ShopPage";
   static const vendersPath = "/VendersPage";

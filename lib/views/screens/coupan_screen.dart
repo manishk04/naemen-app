@@ -154,7 +154,7 @@ class _CoupanPageState extends State<CoupanPage> {
                                               fontcolor:
                                                   AppColors.primaryColor),
                                           SizedBox(
-                                            width: 100.w,
+                                            width: 110.w,
                                           ),
                                           InkWell(
                                             onTap: () {

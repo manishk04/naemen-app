@@ -9,7 +9,8 @@ class AppColors {
   static const Color searchFieldsColor = Color(0xff121212);
   static const Color upcomingColor = Color(0xff008000);
   static const Color mapBottomColor = Color(0xff2B2B2B);
-  static const Color bottomBarColor = Color(0xff343434);
+  static const Color bottomBarColor = Color.fromARGB(255, 50, 47, 47);
+  static const Color bottomBar2Color = Color(0xff343434);
   static const Color progressIndicatorColor = Color(0xff2B2B2B);
   static const Color buttonColor = Color(0xffB48A00);
   static const Color textColor = Color(0xffF7DF5E);

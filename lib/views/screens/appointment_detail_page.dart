@@ -288,7 +288,7 @@ class _AppointmentDetailPageState extends State<AppointmentDetailPage> {
                                   InkWell(
                                     onTap: () => Get.until((route) =>
                                         route.settings.name ==
-                                        Routes.bottomBarRoute),
+                                        Routes.exampleNavBarRoute),
                                     child: Container(
                                       height: 38.h,
                                       width: 110.w,

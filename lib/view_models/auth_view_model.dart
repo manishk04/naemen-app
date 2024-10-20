@@ -116,7 +116,7 @@ class AuthViewModel extends GetxController {
           );
           fetchLocation(googleMapViewModel);
         } else {
-          Get.offNamed(Routes.bottomBarRoute);
+          Get.offNamed(Routes.exampleNavBarRoute);
         }
       } else {
         Timer(const Duration(seconds: 2), () {
@@ -236,7 +236,7 @@ class AuthViewModel extends GetxController {
       StorageData.setAddress(getAddress);
       Get.back();
       // Get.toNamed(Routes.googleMapRoute);
-      Get.offAllNamed(Routes.bottomBarRoute);
+      Get.offAllNamed(Routes.exampleNavBarRoute);
     } catch (e) {
       Get.back();
       log("fetchLocation => ${e.toString()}");
