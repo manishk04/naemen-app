@@ -385,7 +385,9 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
                             )
                           ],
                         ),
-                        Divider(),
+                        Divider(
+                          color: AppColors.bottomBarColor,
+                        ),
                         Row(
                           children: [
                             Expanded(
@@ -409,7 +411,9 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
                             ))
                           ],
                         ),
-                        Divider(),
+                        Divider(
+                          color: AppColors.bottomBarColor,
+                        ),
                         SizedBox(
                           height: 12.h,
                         ),

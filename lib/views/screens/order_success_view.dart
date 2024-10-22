@@ -132,7 +132,7 @@ class OrderSuccessView extends StatelessWidget {
                               ),
                             ],
                           ),
-                          Divider(),
+                          Divider(color: AppColors.bottomBarColor),
                           ListView.separated(
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),

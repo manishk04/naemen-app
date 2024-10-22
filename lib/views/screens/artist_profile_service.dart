@@ -330,9 +330,9 @@ class _ArtistProfileServiceState extends State<ArtistProfileService> {
                                 width: 340.w,
                                 decoration: BoxDecoration(
                                   color: AppColors.searchFieldsColor,
-                                  // border: Border.all(
-                                  //     color: AppColors.signUpColor),
-                                  // borderRadius: BorderRadius.circular(16.r),
+                                  border: Border.all(
+                                      color: AppColors.bottomBarColor),
+                                  borderRadius: BorderRadius.circular(16.r),
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
@@ -342,32 +342,37 @@ class _ArtistProfileServiceState extends State<ArtistProfileService> {
                                       // SizedBox(
                                       //   height: 10.h,
                                       // ),
-                                      ExpansionTile(
-                                          initiallyExpanded: true,
-                                          iconColor: Colors.white,
-                                          controller: _artistProfileViewModel
-                                              .getControllers[index],
-                                          title: TextHeading(
-                                              title:
-                                                  "${_languageViewModel.getSelectedLanguage == "English" ? storeService.category?.categoryTitle ?? "NA" : storeService.category?.categoryArb ?? "NA"} (${storeService.category?.totalServices ?? "0"})",
-                                              fontweight: FontWeight.w600,
-                                              fontsize: 12,
-                                              fontcolor: Colors.white),
-                                          children: [
-                                        SizedBox(
-                                          height: 10.h,
-                                        ),
-                                        ExpansionTileControllerApp(
-                                          services: storeService.services ?? [],
-                                        ),
-                                        SizedBox(
-                                          height: 10.h,
-                                        ),
-                                      ]
-
-                                          // DropdownButtonPage()
-
+                                      Theme(
+                                    data: Theme.of(context).copyWith(
+                                        dividerColor: Colors.transparent),
+                                    child: ExpansionTile(
+                                        initiallyExpanded: true,
+                                        iconColor: Colors.white,
+                                        controller: _artistProfileViewModel
+                                            .getControllers[index],
+                                        title: TextHeading(
+                                            title:
+                                                "${_languageViewModel.getSelectedLanguage == "English" ? storeService.category?.categoryTitle ?? "NA" : storeService.category?.categoryArb ?? "NA"} (${storeService.category?.totalServices ?? "0"})",
+                                            fontweight: FontWeight.w600,
+                                            fontsize: 12,
+                                            fontcolor: Colors.white),
+                                        children: [
+                                          SizedBox(
+                                            height: 10.h,
                                           ),
+                                          ExpansionTileControllerApp(
+                                            services:
+                                                storeService.services ?? [],
+                                          ),
+                                          SizedBox(
+                                            height: 10.h,
+                                          ),
+                                        ]
+
+                                        // DropdownButtonPage()
+
+                                        ),
+                                  ),
                                 ),
                               );
                             }),

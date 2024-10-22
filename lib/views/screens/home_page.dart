@@ -107,7 +107,7 @@ class _HomeViewState extends State<HomeView> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                          height: 30.h,
+                          height: 10.h,
                         ),
                         Row(
                           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -196,7 +196,7 @@ class _HomeViewState extends State<HomeView> {
                             ),
                           ],
                         ),
-                        SizedBox(height: 30.h),
+                        SizedBox(height: 15.h),
                         // SearchBarWidget(
                         //   hinttexttitle: "Search your favorite hair expert...",
                         // ),
@@ -302,7 +302,7 @@ class _HomeViewState extends State<HomeView> {
                         //   canNavigate: true,
                         // ),
                         SizedBox(
-                          height: 20.h,
+                          height: 15.h,
                         ),
                         Obx(
                           () => homeViewModel.getIsHomeLoading
@@ -317,7 +317,7 @@ class _HomeViewState extends State<HomeView> {
                                   itemCount: homeViewModel.getTags.length,
                                   separatorBuilder: (context, index) =>
                                       SizedBox(
-                                    height: 15.h,
+                                    height: 8.h,
                                   ),
                                   itemBuilder: (context, index) {
                                     TagModel tag = homeViewModel.getTags[index];
@@ -340,7 +340,7 @@ class _HomeViewState extends State<HomeView> {
                                         if (tag.salons != null &&
                                             tag.salons!.isNotEmpty)
                                           SizedBox(
-                                            height: 25.h,
+                                            height: 15.h,
                                           ),
                                         if (tag.salons != null &&
                                             tag.salons!.isNotEmpty &&
@@ -935,7 +935,7 @@ class _HomeViewState extends State<HomeView> {
                         Obx(
                           () => SizedBox(
                             height: homeViewModel.getAllCategories.isNotEmpty
-                                ? 20.h
+                                ? 15.h
                                 : 0.h,
                           ),
                         ),
