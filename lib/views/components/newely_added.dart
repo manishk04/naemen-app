@@ -202,7 +202,7 @@ class _NewelyWidgetState extends State<NewelyWidget> {
   }
 }
 
-class WinterSpecialItems extends StatelessWidget {
+class WinterSpecialItems extends StatefulWidget {
   const WinterSpecialItems(
       {super.key,
       required this.image,
@@ -222,6 +222,13 @@ class WinterSpecialItems extends StatelessWidget {
   final String typeValue;
   final num distance;
   final SalonModel salon;
+
+  @override
+  State<WinterSpecialItems> createState() => _WinterSpecialItemsState();
+}
+
+class _WinterSpecialItemsState extends State<WinterSpecialItems> {
+  bool isViewAllEnabled = false;
 
   @override
   Widget build(BuildContext context) {
@@ -255,7 +262,8 @@ class WinterSpecialItems extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.r),
                         image: DecorationImage(
-                          image: NetworkImage("${AppUrl.baseUrl}/$image"),
+                          image:
+                              NetworkImage("${AppUrl.baseUrl}/${widget.image}"),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -297,15 +305,15 @@ class WinterSpecialItems extends StatelessWidget {
                     ),
 
                     TextHeading(
-                        title: description[0].toUpperCase() +
-                            description.substring(1),
+                        title: widget.description[0].toUpperCase() +
+                            widget.description.substring(1),
                         fontweight: FontWeight.w600,
                         fontsize: 12.sp,
                         fontcolor: Colors.white),
                     Row(
                       children: [
                         TextHeading(
-                            title: status,
+                            title: widget.status,
                             fontweight: FontWeight.w600,
                             fontsize: 12.sp,
                             fontcolor: Colors.white),
@@ -313,9 +321,9 @@ class WinterSpecialItems extends StatelessWidget {
                           width: 3.w,
                         ),
                         TextHeading(
-                            title: statusValue == "2"
+                            title: widget.statusValue == "2"
                                 ? "OFF"
-                                : statusValue == "1"
+                                : widget.statusValue == "1"
                                     ? "ON"
                                     : "",
                             fontweight: FontWeight.w400,
@@ -325,7 +333,7 @@ class WinterSpecialItems extends StatelessWidget {
                           width: 80.w,
                         ),
                         SalonGenderWidget(
-                          salonGender: salon.storeGender ?? "",
+                          salonGender: widget.salon.storeGender ?? "",
                           color: AppColors.searchFieldsColor,
                         ),
                       ],
@@ -333,7 +341,7 @@ class WinterSpecialItems extends StatelessWidget {
                     Row(
                       children: [
                         TextHeading(
-                            title: type,
+                            title: widget.type,
                             fontweight: FontWeight.w400,
                             fontsize: 12.sp,
                             fontcolor: Colors.white),
@@ -341,7 +349,7 @@ class WinterSpecialItems extends StatelessWidget {
                           width: 3.w,
                         ),
                         TextHeading(
-                            title: typeValue,
+                            title: widget.typeValue,
                             fontweight: FontWeight.w400,
                             fontsize: 12.sp,
                             fontcolor: AppColors.primaryColor)
@@ -356,7 +364,7 @@ class WinterSpecialItems extends StatelessWidget {
                         ),
                         TextHeading(
                           title:
-                              "${double.parse(distance.toString()).toStringAsFixed(2)} km",
+                              "${double.parse(widget.distance.toString()).toStringAsFixed(2)} km",
                           fontweight: FontWeight.w400,
                           fontsize: 12.sp,
                           fontcolor: Colors.white,
@@ -390,7 +398,7 @@ class WinterSpecialItems extends StatelessWidget {
                         ),
                         InkWell(
                           onTap: () => salonProfileViewModel.onViewProfileClick(
-                              salon, cartViewModel),
+                              widget.salon, cartViewModel),
                           child: Container(
                             height: 34.h,
                             width: 102.w,
