@@ -87,7 +87,7 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
                           ),
                           borderRadius: BorderRadius.circular(16.r),
                           border: Border.all(
-                              color: AppColors.signUpColor, width: 2)),
+                              color: AppColors.signUpColor, width: 1)),
                     ),
                     Container(
                       height: 340.h,
@@ -104,50 +104,27 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
                         ),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 15,
+                        ),
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(
-                              height: 10.h,
+                              height: 225.h,
                             ),
-                            SizedBox(
-                              height: 184.h,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                TextHeading(
-                                  title:
-                                      _languageViewModel.getSelectedLanguage ==
-                                              "English"
-                                          ? _cartViewModel.getSelectedStore
-                                                  .salonNameEng ??
-                                              "NA"
-                                          : _cartViewModel.getSelectedStore
-                                                  .salonNameArb ??
-                                              "",
-                                  fontweight: FontWeight.w600,
-                                  fontsize: 20.sp,
-                                  fontcolor: Colors.white,
-                                ),
-                                Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.star,
-                                      color: AppColors.primaryColor,
-                                    ),
-                                    SizedBox(
-                                      width: 3.w,
-                                    ),
-                                    TextHeading(
-                                      title: "4.3/5",
-                                      fontweight: FontWeight.w700,
-                                      fontsize: 10.sp,
-                                      fontcolor: Colors.white,
-                                    )
-                                  ],
-                                )
-                              ],
+                            TextHeading(
+                              title: _languageViewModel.getSelectedLanguage ==
+                                      "English"
+                                  ? _cartViewModel
+                                          .getSelectedStore.salonNameEng ??
+                                      "NA"
+                                  : _cartViewModel
+                                          .getSelectedStore.salonNameArb ??
+                                      "",
+                              fontweight: FontWeight.w600,
+                              fontsize: 20.sp,
+                              fontcolor: Colors.white,
                             ),
                             SizedBox(
                               height: 5.h,
@@ -185,7 +162,28 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
                                   fontweight: FontWeight.w400,
                                   fontsize: 12.sp,
                                   fontcolor: Colors.white,
-                                )
+                                ),
+                                SizedBox(
+                                  width: 115.w,
+                                ),
+                                Row(
+                                  children: [
+                                    const Icon(
+                                      size: 15,
+                                      Icons.star,
+                                      color: AppColors.primaryColor,
+                                    ),
+                                    SizedBox(
+                                      width: 4.w,
+                                    ),
+                                    TextHeading(
+                                      title: "4.3/5",
+                                      fontweight: FontWeight.w700,
+                                      fontsize: 10.sp,
+                                      fontcolor: Colors.white,
+                                    )
+                                  ],
+                                ),
                               ],
                             ),
                             SizedBox(
@@ -316,7 +314,7 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
 
                 // Divider(),
                 SizedBox(
-                  height: 10.h,
+                  height: 30.h,
                 ),
                 BookingDateTimeWidget(
                   name: _languageViewModel.getSelectedLanguage == "English"
@@ -535,7 +533,7 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             TextHeading(
                                 title: "Sub Total",
@@ -550,7 +548,7 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
                                 width: 78.w,
                                 decoration: BoxDecoration(
                                   color: AppColors.primaryColor,
-                                  borderRadius: BorderRadius.circular(4.r),
+                                  borderRadius: BorderRadius.circular(8.r),
                                 ),
                                 child: Center(
                                   child: TextHeading(

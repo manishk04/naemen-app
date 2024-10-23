@@ -43,46 +43,7 @@ class _AppointmentHIstoreyPageState extends State<AppointmentHIstoreyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(70.0),
-          child: AppBar(
-            backgroundColor: Colors.black,
-            // leading: IconButton(
-            //   icon: Icon(Icons.arrow_back, color: AppColors.primaryColor),
-            //   onPressed: () => Navigator.of(context).pop(),
-            // ),
-            title: Row(
-              children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.of(context);
-                  },
-                  child: CircleAvatar(
-                    radius: 15.h,
-                    backgroundColor: AppColors.primaryColor.withOpacity(0.5),
-                    child: const Padding(
-                      padding: EdgeInsets.only(left: 5),
-                      child: Icon(
-                        Icons.arrow_back_ios,
-                        color: Colors.white,
-                        size: 15,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: 73.w,
-                ),
-                TextHeading(
-                    title: "Appointment History",
-                    fontweight: FontWeight.w700,
-                    fontsize: 14.sp,
-                    fontcolor: Colors.white),
-              ],
-            ),
-            centerTitle: true,
-          ),
-        ),
+        backgroundColor: Colors.black,
         body: SafeArea(
           child: Container(
             height: double.infinity,
@@ -91,8 +52,39 @@ class _AppointmentHIstoreyPageState extends State<AppointmentHIstoreyPage> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  Divider(
-                    color: AppColors.primaryColor,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Row(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: CircleAvatar(
+                            radius: 15.h,
+                            backgroundColor:
+                                AppColors.primaryColor.withOpacity(0.5),
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 5),
+                              child: Icon(
+                                Icons.arrow_back_ios,
+                                color: Colors.white,
+                                size: 15,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 73.w,
+                        ),
+                        TextHeading(
+                          title: "Appointment History",
+                          fontweight: FontWeight.w400,
+                          fontsize: 12.sp,
+                          fontcolor: Colors.white,
+                        ),
+                      ],
+                    ),
                   ),
                   SizedBox(
                     height: 10.h,

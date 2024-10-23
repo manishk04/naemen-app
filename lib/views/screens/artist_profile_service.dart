@@ -239,73 +239,79 @@ class _ArtistProfileServiceState extends State<ArtistProfileService> {
                         Obx(
                           () => cartViewModel.getAddedServiceList.isNotEmpty
                               ? Container(
-                                  // height: 60.h,
-                                  // width: 340.w,
+                                  height: 56.h,
+                                  width: 340.w,
                                   margin: EdgeInsets.symmetric(vertical: 10.h),
                                   decoration: BoxDecoration(
-                                      // color: Colors.red,
-                                      // border: Border.all(color: Colors.grey),
-                                      // borderRadius:
-                                      //     BorderRadius.circular(16.r)
-                                      ),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      TextHeading(
-                                        title:
-                                            "${cartViewModel.getAddedServiceList.length} ${cartViewModel.getAddedServiceList.length > 1 ? "Services" : "Service"} added",
-                                        fontweight: FontWeight.w600,
-                                        fontsize: 12.sp,
-                                        fontcolor: Colors.white,
-                                      ),
-                                      InkWell(
-                                        onTap: () {
-                                          _artistProfileViewModel
-                                              .showDateTimeDialog();
-                                          // Navigator.push(context, MaterialPageRoute(builder: (context)=>AppointmentScreen()));
-                                        },
-                                        child: Obx(
-                                          () => _artistProfileViewModel
-                                                  .getIsBooking
-                                              ? const CircularProgressIndicator(
-                                                  color: AppColors.primaryColor)
-                                              : Container(
-                                                  height: 32.h,
-                                                  width: 148.w,
-                                                  decoration: BoxDecoration(
-                                                      color: AppColors
-                                                          .primaryColor,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8.r)),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      TextHeading(
-                                                          title:
-                                                              "Book appointment",
-                                                          fontweight:
-                                                              FontWeight.w600,
-                                                          fontsize: 12.sp,
-                                                          fontcolor:
-                                                              Colors.white),
-                                                      SizedBox(
-                                                        width: 2.w,
-                                                      ),
-                                                      const Icon(
-                                                        Icons.arrow_forward_ios,
-                                                        size: 13,
-                                                        color: Colors.white,
-                                                      )
-                                                    ],
-                                                  ),
-                                                ),
+                                      color: AppColors.searchFieldsColor,
+                                      border: Border.all(
+                                          color: AppColors.bottomBarColor),
+                                      borderRadius:
+                                          BorderRadius.circular(16.r)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        TextHeading(
+                                          title:
+                                              "${cartViewModel.getAddedServiceList.length} ${cartViewModel.getAddedServiceList.length > 1 ? "Services" : "Service"} added",
+                                          fontweight: FontWeight.w600,
+                                          fontsize: 12.sp,
+                                          fontcolor: Colors.white,
                                         ),
-                                      ),
-                                    ],
+                                        InkWell(
+                                          onTap: () {
+                                            _artistProfileViewModel
+                                                .showDateTimeDialog();
+                                            // Navigator.push(context, MaterialPageRoute(builder: (context)=>AppointmentScreen()));
+                                          },
+                                          child: Obx(
+                                            () => _artistProfileViewModel
+                                                    .getIsBooking
+                                                ? const CircularProgressIndicator(
+                                                    color:
+                                                        AppColors.primaryColor)
+                                                : Container(
+                                                    height: 32.h,
+                                                    width: 138.w,
+                                                    decoration: BoxDecoration(
+                                                        color: AppColors
+                                                            .primaryColor,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8.r)),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        TextHeading(
+                                                            title:
+                                                                "Book appointment",
+                                                            fontweight:
+                                                                FontWeight.w600,
+                                                            fontsize: 12.sp,
+                                                            fontcolor:
+                                                                Colors.white),
+                                                        SizedBox(
+                                                          width: 2.w,
+                                                        ),
+                                                        const Icon(
+                                                          Icons
+                                                              .arrow_forward_ios,
+                                                          size: 10,
+                                                          color: Colors.white,
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 )
                               : const SizedBox(),
