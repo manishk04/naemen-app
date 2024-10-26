@@ -25,6 +25,8 @@ class SalonProfileViewModel extends GetxController {
 
   final RxBool _isLoading = false.obs;
 
+  String _videoLink = "";
+
   // =============================== Getters ===================================
   int get getSelectedSalonId => _selectedSalonId;
 
@@ -35,6 +37,8 @@ class SalonProfileViewModel extends GetxController {
   List<StoreMediaModel> get getMedia => _media;
 
   bool get getIsLoading => _isLoading.value;
+
+  String get getVideoLink => _videoLink;
 
   // =============================== Setters ===================================
   set setSelectedSalonId(int id) => _selectedSalonId = id;
@@ -47,6 +51,8 @@ class SalonProfileViewModel extends GetxController {
 
   set setIsLoading(bool value) => _isLoading.value = value;
 
+  set setVideoLink(String value) => _videoLink = value;
+
   // =============================== Methods ===================================
   onViewProfileClick(SalonModel salon, CartViewModel cartViewModel) {
     setSelectedSalonId = salon.salonId ?? -1;
@@ -55,6 +61,7 @@ class SalonProfileViewModel extends GetxController {
   }
 
   void fetchShopDetailsById(CartViewModel cartViewModel) async {
+    setVideoLink = "";
     Map<String, String> params = {
       "store_id": getSelectedSalonId.toString(),
     };
@@ -84,6 +91,7 @@ class SalonProfileViewModel extends GetxController {
             }
           }
           setMedia = list1;
+          setVideoLink = data["store_video"] ?? "";
         } else {
           Utils.toastMessage(response["msg"] ?? "Something went wrong!");
         }

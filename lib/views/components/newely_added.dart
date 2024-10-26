@@ -454,7 +454,8 @@ class SalonGenderWidget extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (salonGender == "male" || salonGender == "unisex")
+          if (salonGender.toLowerCase() == "male" ||
+              salonGender.toLowerCase() == "unisex")
             SvgPicture.asset(
               "assets/images/male_salon.svg",
               width: 10.w,
@@ -464,7 +465,8 @@ class SalonGenderWidget extends StatelessWidget {
             SizedBox(
               width: 10.w,
             ),
-          if (salonGender == "female")
+          if (salonGender.toLowerCase() == "female" ||
+              salonGender.toLowerCase() == "unisex")
             SvgPicture.asset(
               "assets/images/female_salon.svg",
               width: 20.w,

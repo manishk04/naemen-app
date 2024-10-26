@@ -1,6 +1,7 @@
 class AppUrl {
   // ============================== Base URL ==================================
-  static String baseUrl = "https://www.naemen.digitalnawab.com";
+  // static String baseUrl = "https://www.naemen.digitalnawab.com";
+  static String baseUrl = "https://software.naemen.com";
 
   // ============================== Other URL =================================
   static String appIntroScreenUrl =

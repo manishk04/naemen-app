@@ -6,6 +6,7 @@ import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import '../../data/local/db_helper.dart';
 import '../../routes/app_routes.dart';
 import '../../utils/color_constant.dart';
 import '../../view_models/google_map_view_model.dart';
@@ -21,6 +22,22 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   final GoogleMapViewModel _googleMapViewModel = Get.find();
+
+  DBHelper? dbHelper;
+  List<Map<String, dynamic>> history = [];
+
+  @override
+  void initState() {
+    super.initState();
+    dbHelper = DBHelper.getInstance;
+    fetchHistory();
+  }
+
+  fetchHistory() async {
+    await dbHelper!.fetchAllLocations();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -166,6 +183,23 @@ class _SearchPageState extends State<SearchPage> {
                           color: Colors.grey,
                           thickness: 0.2,
                           height: 30,
+                        ),
+                        SizedBox(
+                          height: 15.h,
+                        ),
+                        if(history.isNotEmpty) ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: history.length,
+                          itemBuilder: (context, index) {
+                            Map<String, dynamic> location = history[index];
+                            return Text(
+                              location[DBHelper.columnLocation],
+                              style: const TextStyle(
+                                color: Colors.white,
+                              ),
+                            );
+                          },
                         ),
                         // SizedBox(
                         //   height: 15.h,

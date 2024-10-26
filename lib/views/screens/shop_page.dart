@@ -603,7 +603,8 @@ class _ShopPageState extends State<ShopPage> {
                                   child: InAppWebView(
                                     initialUrlRequest: URLRequest(
                                       url: WebUri(
-                                          "https://www.youtube.com/embed/2pxbAZtEhuM?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0"),
+                                          _salonProfileViewModel.getVideoLink),
+                                      // "https://www.youtube.com/embed/2pxbAZtEhuM?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0"),
                                     ),
                                   ),
                                 ),

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -171,17 +172,42 @@ class _VendersPageState extends State<VendersPage> {
                                                               width: 120.w,
                                                               decoration:
                                                                   BoxDecoration(
-                                                                image: DecorationImage(
-                                                                    image: NetworkImage(
-                                                                        "${AppUrl.baseUrl}/${salon.salonImage ?? ""}"),
-                                                                    fit: BoxFit
-                                                                        .cover),
+                                                                // image: DecorationImage(
+                                                                //     image: NetworkImage(
+                                                                //         "${AppUrl.baseUrl}/${salon.salonImage ?? ""}"),
+                                                                //     fit: BoxFit
+                                                                //         .cover),
                                                                 color: Colors
                                                                     .blueGrey,
                                                                 borderRadius:
                                                                     BorderRadius
                                                                         .circular(
                                                                             15.r),
+                                                              ),
+                                                              child:
+                                                                  CachedNetworkImage(
+                                                                height: double
+                                                                    .infinity,
+                                                                width: double
+                                                                    .infinity,
+                                                                imageUrl:
+                                                                    "${AppUrl.baseUrl}/${salon.salonImage ?? ""}",
+                                                                placeholder: (context,
+                                                                        url) =>
+                                                                    const Center(
+                                                                  child:
+                                                                      CircularProgressIndicator(
+                                                                    color: AppColors
+                                                                        .primaryColor,
+                                                                  ),
+                                                                ),
+                                                                errorWidget: (context,
+                                                                        url,
+                                                                        error) =>
+                                                                    const Icon(Icons
+                                                                        .error),
+                                                                fit: BoxFit
+                                                                    .cover,
                                                               ),
                                                             ),
                                                           ),

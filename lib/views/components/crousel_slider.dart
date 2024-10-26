@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -54,11 +55,24 @@ class _HomePageSliderState extends State<HomePageSlider> {
                     width: 0.5.w,
                   ),
                   borderRadius: BorderRadius.circular(16.r),
-                  image: DecorationImage(
-                    image: NetworkImage(
-                        "${AppUrl.baseUrl}/${widget.banners[index].bannerImageUrl}"),
-                    fit: BoxFit.cover,
+                  // image: DecorationImage(
+                  //   image: NetworkImage(
+                  //       "${AppUrl.baseUrl}/${widget.banners[index].bannerImageUrl}"),
+                  //   fit: BoxFit.cover,
+                  // ),
+                ),
+                child: CachedNetworkImage(
+                  height: double.infinity,
+                  width: double.infinity,
+                  imageUrl:
+                      "${AppUrl.baseUrl}/${widget.banners[index].bannerImageUrl}",
+                  placeholder: (context, url) => const Center(
+                    child: CircularProgressIndicator(
+                      color: AppColors.primaryColor,
+                    ),
                   ),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
