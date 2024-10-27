@@ -246,13 +246,10 @@ class _WinterSpecialItemsState extends State<WinterSpecialItems> {
               border: Border.all(color: AppColors.signUpColor, width: 0.2)),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 5),
+          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                height: 5.h,
-              ),
               Expanded(
                 flex: 4,
                 child: Stack(
@@ -386,8 +383,9 @@ class _WinterSpecialItemsState extends State<WinterSpecialItems> {
                             color: Colors.black,
                             borderRadius: BorderRadius.circular(8.r),
                           ),
-                          child: const Center(
+                          child: Center(
                             child: Icon(
+                              size: 30.h,
                               Icons.bookmark_border,
                               color: Colors.white,
                             ),
