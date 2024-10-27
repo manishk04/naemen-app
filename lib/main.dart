@@ -43,7 +43,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    DBHelper db = DBHelper.getInstance;
+    //  DBHelper db = DBHelper.getInstance;
     return ScreenUtilInit(
       designSize: const Size(360, 780),
       minTextAdapt: true,

@@ -23,7 +23,7 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   final GoogleMapViewModel _googleMapViewModel = Get.find();
 
-  DBHelper? dbHelper;
+  // DBHelper? dbHelper;
   List<Map<String, dynamic>> history = [];
 
   @override
@@ -34,7 +34,7 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   fetchHistory() async {
-    await dbHelper!.fetchAllLocations();
+    // await dbHelper!.fetchAllLocations();
     setState(() {});
   }
 
