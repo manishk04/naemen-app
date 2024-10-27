@@ -110,7 +110,8 @@ class _ShopPageState extends State<ShopPage> {
                                             backgroundColor: AppColors
                                                 .primaryColor
                                                 .withOpacity(0.5),
-                                            child: const Center(
+                                            child: const Padding(
+                                              padding: EdgeInsets.only(left: 5),
                                               child: Icon(
                                                 Icons.arrow_back_ios,
                                                 size: 15,
@@ -295,7 +296,7 @@ class _ShopPageState extends State<ShopPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               SizedBox(
-                                height: 10.h,
+                                height: 6.h,
                               ),
                               TextHeading(
                                 title: "About Us",
@@ -304,7 +305,7 @@ class _ShopPageState extends State<ShopPage> {
                                 fontcolor: Colors.white,
                               ),
                               SizedBox(
-                                height: 15.h,
+                                height: 5.h,
                               ),
                               TextHeading(
                                 title: _salonProfileViewModel
@@ -325,7 +326,7 @@ class _ShopPageState extends State<ShopPage> {
                                 fontcolor: Colors.white,
                               ),
                               SizedBox(
-                                height: 5.h,
+                                height: 10.h,
                               ),
                               Container(
                                 height: 300.h,
@@ -353,12 +354,12 @@ class _ShopPageState extends State<ShopPage> {
                                                 BorderRadius.circular(16.r)),
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(
-                                              horizontal: 5),
+                                              horizontal: 5, vertical: 5),
                                           child: Column(
                                             children: [
-                                              SizedBox(
-                                                height: 10.h,
-                                              ),
+                                              // SizedBox(
+                                              //   height: 10.h,
+                                              // ),
                                               Stack(
                                                 children: [
                                                   Container(

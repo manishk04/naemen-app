@@ -141,7 +141,8 @@ class _ExampleNavbarViewState extends State<ExampleNavbarView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      extendBody: true,
+      // backgroundColor: Colors.black,
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
@@ -159,7 +160,7 @@ class _ExampleNavbarViewState extends State<ExampleNavbarView> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
           child: GNav(
-            rippleColor: AppColors.primaryColor!,
+            // rippleColor: AppColors.primaryColor!,
             hoverColor: AppColors.primaryColor!,
             gap: 8,
             activeColor: AppColors.primaryColor,

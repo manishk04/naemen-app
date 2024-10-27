@@ -53,7 +53,8 @@ class _AppointmentHIstoreyPageState extends State<AppointmentHIstoreyPage> {
               child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10, vertical: 10),
                     child: Row(
                       children: [
                         InkWell(
@@ -130,8 +131,9 @@ class _AppointmentHIstoreyPageState extends State<AppointmentHIstoreyPage> {
                                               color:
                                                   AppColors.searchFieldsColor,
                                               border: Border.all(
-                                                  color: AppColors.signUpColor,
-                                                  width: 0.5),
+                                                  color: AppColors
+                                                      .progressIndicatorColor,
+                                                  width: 1.5),
                                               borderRadius:
                                                   BorderRadius.circular(20)),
                                           child: Column(
@@ -300,7 +302,9 @@ class _AppointmentHIstoreyPageState extends State<AppointmentHIstoreyPage> {
                                                 height: 15.h,
                                               ),
                                               Divider(
-                                                thickness: 0.5,
+                                                color: AppColors
+                                                    .progressIndicatorColor,
+                                                thickness: 1,
                                               ),
                                               Padding(
                                                 padding:
@@ -308,6 +312,9 @@ class _AppointmentHIstoreyPageState extends State<AppointmentHIstoreyPage> {
                                                         horizontal: 10),
                                                 child: Row(
                                                   children: [
+                                                    SizedBox(
+                                                      height: 10.h,
+                                                    ),
                                                     Expanded(
                                                       flex: 5,
                                                       child: InkWell(
@@ -354,9 +361,9 @@ class _AppointmentHIstoreyPageState extends State<AppointmentHIstoreyPage> {
                                                                       .circular(
                                                                           5.r),
                                                               border: Border.all(
-                                                                  width: 0.5,
                                                                   color: AppColors
-                                                                      .signUpColor),
+                                                                      .progressIndicatorColor,
+                                                                  width: 1.5),
                                                             ),
                                                             child: Image.asset(
                                                                 "assets/images/location3.png"),
@@ -423,66 +430,6 @@ class _AppointmentHIstoreyPageState extends State<AppointmentHIstoreyPage> {
               ),
             ),
           ),
-        )
-
-        // Row(
-        //   children: [
-        //     SearchBarWidget(hinttexttitle: 'Search Your Favorite hair expert...',),
-        //     Icon(Icons.filter,color: AppColors.primarycolor,)
-        //   ],
-        // ),
-        // SizedBox(height: 20.h,),
-        // const  ReUsableRow(),
-        // SizedBox(height: 20.h,),
-        //
-        // Container(height: 500.h,
-        // width: double.infinity,
-        //   child: ListView.builder(
-        //     itemCount: 10,
-        //     itemBuilder: (BuildContext context, int index) {
-        //       return  Container(
-        //         height: 150.h,
-        //         width: double.infinity,
-        //         decoration: BoxDecoration(
-        //             color: AppColors.SignupColor,
-        //             border: Border.all(color: AppColors.primarycolor),
-        //             borderRadius: BorderRadius.circular(20)),
-        //         child: Row(
-        //           children: [
-        //             Stack(
-        //               children: [
-        //                 Container(
-        //                   height: 70.h,
-        //                   decoration: BoxDecoration(borderRadius: BorderRadius.circular(15.r)),
-        //                 ),
-        //
-        //                 Row(
-        //                   children: [
-        //                     Icon(Icons.star,color: AppColors.primarycolor,),
-        //                     SizedBox(width: 3.w,),
-        //                     TextHeading(title: "4.3/5", fontweight: FontWeight.w400, fontsize: 12.sp, fontcolor: Colors.white)
-        //
-        //                   ],
-        //                 )
-        //               ],
-        //             )
-        //
-        //           ],
-        //         ),
-        //       );
-        //     },
-        //   ),
-        //
-        //
-        //
-        //
-        //
-        //
-        //
-        //
-        //
-        // ),
-
-        );
+        ));
   }
 }

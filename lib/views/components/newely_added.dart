@@ -372,27 +372,31 @@ class _WinterSpecialItemsState extends State<WinterSpecialItems> {
                       height: 5.h,
                     ),
                     Row(
+                      //  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          height: 34.h,
-                          width: 34.w,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                                color: AppColors.signUpColor, width: 0.2),
-                            color: Colors.black,
-                            borderRadius: BorderRadius.circular(8.r),
-                          ),
-                          child: Center(
-                            child: Icon(
-                              size: 30.h,
-                              Icons.bookmark_border,
-                              color: Colors.white,
+                        Padding(
+                          padding: const EdgeInsets.only(left: 7),
+                          child: Container(
+                            height: 34.h,
+                            width: 34.w,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: AppColors.signUpColor, width: 0.2),
+                              color: Colors.black,
+                              borderRadius: BorderRadius.circular(8.r),
+                            ),
+                            child: Center(
+                              child: Icon(
+                                size: 26.h,
+                                Icons.bookmark_border,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                         ),
                         SizedBox(
-                          width: 50.w,
+                          width: 38.w,
                         ),
                         InkWell(
                           onTap: () => salonProfileViewModel.onViewProfileClick(

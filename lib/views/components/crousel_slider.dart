@@ -124,10 +124,7 @@ class _ShopPageSliderState extends State<ShopPageSlider> {
       height: 360.h,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16.r),
-        border: Border.all(
-          color: Colors.grey,
-          width: 0.5.w,
-        ),
+        border: Border.all(color: AppColors.progressIndicatorColor, width: 1.5),
       ),
       child: Column(
         children: [
@@ -143,7 +140,7 @@ class _ShopPageSliderState extends State<ShopPageSlider> {
               },
               itemBuilder: (context, index) => Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16.r),
+                  borderRadius: BorderRadius.circular(15.r),
                   image: DecorationImage(
                     image: NetworkImage(
                         "${AppUrl.baseUrl}/${_salonProfileViewModel.getMedia[index].mediaUrl ?? ""}"),
@@ -151,6 +148,7 @@ class _ShopPageSliderState extends State<ShopPageSlider> {
                   ),
                 ),
                 child: Container(
+                  width: 360.w,
                   decoration: const BoxDecoration(
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,

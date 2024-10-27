@@ -97,7 +97,7 @@ class AppointmentCardWidget extends StatelessWidget {
             side: isSelected
                 ? BorderSide.none
                 : const BorderSide(
-                    color: AppColors.signUpColor,
+                    color: AppColors.progressIndicatorColor,
                     width: 1.0,
                   ),
           ),

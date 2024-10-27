@@ -24,7 +24,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: AppColors.signUpColor, width: 0.5),
+        border: Border.all(color: AppColors.progressIndicatorColor, width: 1.5),
         color: AppColors.searchFieldsColor,
       ),
       child: TextFormField(
