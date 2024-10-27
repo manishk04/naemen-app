@@ -29,7 +29,7 @@ class _SearchPageState extends State<SearchPage> {
   @override
   void initState() {
     super.initState();
-    dbHelper = DBHelper.getInstance;
+    // dbHelper = DBHelper.getInstance;
     fetchHistory();
   }
 
@@ -187,20 +187,21 @@ class _SearchPageState extends State<SearchPage> {
                         SizedBox(
                           height: 15.h,
                         ),
-                        if(history.isNotEmpty) ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: history.length,
-                          itemBuilder: (context, index) {
-                            Map<String, dynamic> location = history[index];
-                            return Text(
-                              location[DBHelper.columnLocation],
-                              style: const TextStyle(
-                                color: Colors.white,
-                              ),
-                            );
-                          },
-                        ),
+                        if (history.isNotEmpty)
+                          ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: history.length,
+                            itemBuilder: (context, index) {
+                              Map<String, dynamic> location = history[index];
+                              // return Text(
+                              //   location[DBHelper.columnLocation],
+                              //   style: const TextStyle(
+                              //     color: Colors.white,
+                              //   ),
+                              // );
+                            },
+                          ),
                         // SizedBox(
                         //   height: 15.h,
                         // ),

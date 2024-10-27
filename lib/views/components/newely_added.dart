@@ -388,7 +388,7 @@ class _WinterSpecialItemsState extends State<WinterSpecialItems> {
                           ),
                           child: const Center(
                             child: Icon(
-                              Icons.bookmark_add_outlined,
+                              Icons.bookmark_border,
                               color: Colors.white,
                             ),
                           ),
