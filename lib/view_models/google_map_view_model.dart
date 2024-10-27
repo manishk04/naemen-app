@@ -49,7 +49,7 @@ class GoogleMapViewModel extends GetxController {
   // =============================== Setters ===================================
   set setInitialPosition(LatLng latLng) => _initialPosition = latLng;
 
-  set setMapController(GoogleMapController controller) =>
+  set setMapController(GoogleMapController? controller) =>
       _mapController = controller;
 
   set setPredictionList(List<Prediction> value) =>
@@ -88,7 +88,7 @@ class GoogleMapViewModel extends GetxController {
   init() async {
     // Map will redirect to users current location when loaded
     setIsMapLoading = true;
-    await gotoUserCurrentPosition().then((_) {
+    gotoUserCurrentPosition().then((_) {
       setIsMapLoading = false;
     });
   }
@@ -143,13 +143,17 @@ class GoogleMapViewModel extends GetxController {
   }
 
   // Go to specific position by LatLng
-  Future gotoSpecificPosition(LatLng position) async {
-    GoogleMapController mapController = await googleMapController.future;
-    mapController.animateCamera(CameraUpdate.newCameraPosition(
-        CameraPosition(target: position, zoom: 15.5)));
-    // Every time user drag pin will get address
-    setDraggedLatLng = position;
-    getAddress();
+  Future<void> gotoSpecificPosition(LatLng position) async {
+    try {
+      GoogleMapController mapController = await googleMapController.future;
+      mapController.animateCamera(CameraUpdate.newCameraPosition(
+          CameraPosition(target: position, zoom: 15.5)));
+      // Every time user drag pin will get address
+      setDraggedLatLng = position;
+      getAddress();
+    } catch (e) {
+      log(e.toString());
+    }
   }
 
   backClick() {

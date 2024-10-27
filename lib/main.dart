@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:naemen/data/local/db_helper.dart';
 
 import 'binding/app_binding.dart';
 import 'routes/app_pages.dart';
@@ -43,7 +42,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    DBHelper db = DBHelper.getInstance;
     return ScreenUtilInit(
       designSize: const Size(360, 780),
       minTextAdapt: true,
