@@ -50,10 +50,10 @@ class _HomePageSliderState extends State<HomePageSlider> {
               itemBuilder: (context, index) => Container(
                 decoration: BoxDecoration(
                   // borderRadius: BorderRadius.circular(16.r),
-                  border: Border.all(
-                    color: AppColors.signUpColor,
-                    width: 0.5.w,
-                  ),
+                  // border: Border.all(
+                  //   color: AppColors.signUpColor,
+                  //   width: 0.5.w,
+                  // ),
                   borderRadius: BorderRadius.circular(16.r),
                   // image: DecorationImage(
                   //   image: NetworkImage(
@@ -61,18 +61,22 @@ class _HomePageSliderState extends State<HomePageSlider> {
                   //   fit: BoxFit.cover,
                   // ),
                 ),
-                child: CachedNetworkImage(
-                  height: double.infinity,
-                  width: double.infinity,
-                  imageUrl:
-                      "${AppUrl.baseUrl}/${widget.banners[index].bannerImageUrl}",
-                  placeholder: (context, url) => const Center(
-                    child: CircularProgressIndicator(
-                      color: AppColors.primaryColor,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16.r),
+                  child: CachedNetworkImage(
+                    height: double.infinity,
+                    width: double.infinity,
+                    imageUrl:
+                        "${AppUrl.baseUrl}/${widget.banners[index].bannerImageUrl}",
+                    placeholder: (context, url) => const Center(
+                      child: CircularProgressIndicator(
+                        color: AppColors.primaryColor,
+                      ),
                     ),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
+                    fit: BoxFit.cover,
                   ),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
-                  fit: BoxFit.cover,
                 ),
               ),
             ),
@@ -86,7 +90,7 @@ class _HomePageSliderState extends State<HomePageSlider> {
               count: widget.banners.length,
               effect: WormEffect(
                 activeDotColor: AppColors.primaryColor,
-                dotColor: Colors.grey,
+                dotColor: AppColors.CoupancodeColor,
                 dotHeight: 5.h,
                 dotWidth: 5.w,
               ),

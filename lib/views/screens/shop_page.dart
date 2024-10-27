@@ -295,7 +295,7 @@ class _ShopPageState extends State<ShopPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               SizedBox(
-                                height: 15.h,
+                                height: 10.h,
                               ),
                               TextHeading(
                                 title: "About Us",
@@ -304,7 +304,7 @@ class _ShopPageState extends State<ShopPage> {
                                 fontcolor: Colors.white,
                               ),
                               SizedBox(
-                                height: 20.h,
+                                height: 15.h,
                               ),
                               TextHeading(
                                 title: _salonProfileViewModel
@@ -316,13 +316,16 @@ class _ShopPageState extends State<ShopPage> {
                                 maxLines: 100,
                               ),
                               SizedBox(
-                                height: 20.h,
+                                height: 15.h,
                               ),
                               TextHeading(
                                 title: "Our Expert Artists",
                                 fontweight: FontWeight.w600,
                                 fontsize: 12.sp,
                                 fontcolor: Colors.white,
+                              ),
+                              SizedBox(
+                                height: 5.h,
                               ),
                               Container(
                                 height: 300.h,
@@ -512,7 +515,7 @@ class _ShopPageState extends State<ShopPage> {
                                               Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
-                                                        .spaceBetween,
+                                                        .spaceAround,
                                                 children: [
                                                   Container(
                                                     height: 34.h,
@@ -528,8 +531,7 @@ class _ShopPageState extends State<ShopPage> {
                                                                 .circular(8.r)),
                                                     child: const Center(
                                                       child: Icon(
-                                                        Icons
-                                                            .bookmark_add_outlined,
+                                                        Icons.bookmark_border,
                                                         color: Colors.white,
                                                       ),
                                                     ),
